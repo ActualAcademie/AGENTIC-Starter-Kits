@@ -1,0 +1,11 @@
+name = "backend"
+description = "Implémente API, données, logique métier, tests serveur et observabilité."
+model = "gpt-5.6-terra"
+reasoning_effort = "medium"
+model_profile = "coding"
+skills = ["implementation"]
+escalate = ["migration irréversible", "autorisation", "contrat public"]
+can_approve_own_work = false
+must_read = [".codex/PROJECT-CONTEXT.md", ".codex/project-profile.toml", ".codex/models.toml", ".codex/RISK-MATRIX.md"]
+must_produce = ["contrat", "tests serveur", "plan de retour si nécessaire"]
+forbidden = ["migration irréversible non autorisée", "exposition de secret"]
