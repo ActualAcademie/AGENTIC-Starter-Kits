@@ -1,43 +1,45 @@
 ---
 name: conception
-description: Conçoit ou révise un contrat fonctionnel et technique testable avant toute implémentation.
+description: Produit et maintient un dossier de conception détaillé et traçable après le cahier des charges.
 ---
 
 # Skill conception
 
 ## Objectif
 
-Définir une solution simple, cohérente et réversible avant une modification moyenne, élevée ou critique.
+Produire et maintenir un dossier de conception détaillé, exploitable par une équipe de développement, de test, de sécurité et de livraison. Le dossier traduit le cahier des charges en règles vérifiables, sans inventer de besoins métier.
 
-## Quand l'utiliser
+## Quand l utiliser
 
-Obligatoire lorsque le contrat, les données, l'architecture, l'API, les permissions ou le déploiement changent. Facultatif pour un correctif local à risque faible.
+Obligatoire juste après acceptation du cahier des charges et avant toute implémentation. Obligatoire de nouveau quand changent le périmètre, les stories, les données, l architecture, une interface, les permissions, le déploiement ou un risque significatif.
 
-## Entrées requises
+## Entrées
 
-Brief, profil projet, système existant, critères d'acceptation, contraintes de compatibilité et matrice de risque.
+Cahier accepté, profil technique, inventaire existant, contraintes, critères d acceptation, matrice de risque, work item et décisions déjà enregistrées.
 
 ## Procédure
 
-1. Décrire le problème et les utilisateurs affectés.
-2. Identifier les contrats entrants, sortants et les erreurs attendues.
-3. Étudier les données, dépendances, observabilité, performance et sécurité utiles.
-4. Comparer au moins l'option minimale et une alternative lorsque la décision est significative.
-5. Décrire réversibilité, migration et plan de retour si nécessaire.
-6. Définir des critères testables, puis créer les tâches spécialisées.
-
-## Contrôles
-
-Ne pas confondre hypothèse et fait vérifié. Ne pas modifier le produit avant que le contrat soit suffisamment clair. Ne pas imposer un choix métier non autorisé.
+1. Exécuter `initialize-project-design.sh` sans écraser les documents existants.
+2. Lire tous les éléments du cahier et distinguer faits, hypothèses, inconnues et décisions nécessaires.
+3. Compléter `docs/product/vision-and-scope.md` avec acteurs, problème, objectifs mesurables, périmètre, hors périmètre et contraintes.
+4. Écrire des user stories priorisées avec règles métier, critères observables, erreurs, permissions, cas limites et référence de test.
+5. Décrire les parcours nominaux, erreurs, annulations et reprises. Ajouter des diagrammes Mermaid pour les parcours à décision multiple.
+6. Décrire architecture, responsabilités, flux, dépendances, résilience, observabilité et exigences non fonctionnelles. Ajouter un diagramme de contexte réel.
+7. Décrire modèle de données, classification, relations, invariants, rétention, migrations, restauration et diagramme de données lorsque pertinent.
+8. Décrire les contrats API, événements ou interfaces partagées avec validation, réponses, erreurs, autorisations, compatibilité et versionnement.
+9. Réaliser la conception de sécurité : actifs, menaces, contrôles, identité, permissions, secrets, détection et risque résiduel.
+10. Construire une roadmap incrémentale, un plan de validation et rollback, puis inscrire les arbitrages dans le journal de décisions.
+11. Remplacer tous les marqueurs `[[A_COMPLETER]]`. Écrire `Non applicable` avec justification au lieu de laisser une section vide.
+12. Relier chaque document au work item, aux tests ou aux fichiers concernés et demander une relecture de sécurité ou métier lorsque le risque le requiert.
 
 ## Sortie
 
-Contrat technique, options, recommandation, risques, critères et décision documentée si le choix est durable. Créer ou mettre à jour les documents concernés dans `docs/` : vision, user stories, parcours, architecture, données, contrats, sécurité, roadmap, décisions et diagrammes.
+Un dossier `docs/` complet, cohérent et traçable. Un développeur externe doit pouvoir comprendre ce qui est attendu, comment le construire, comment le tester, quels risques éviter et quels changements restent hors périmètre.
 
 ## Mesures
 
-Décisions reprises, défauts de conception détectés en audit, changements de périmètre et migrations annulées.
+Stories avec critères testables, documents sans marqueur, décisions tracées, écarts détectés en audit, changements de périmètre, couverture des flux critiques et corrections après revue.
 
 ## Arrêt
 
-Arrêter pour décision humaine si une option engage de la conformité, des coûts importants, des données sensibles ou une action irréversible.
+Arrêter et demander une décision humaine si le cahier reste ambigu, si une règle métier, une conformité, un coût, une donnée sensible ou une action irréversible ne peut pas être justifiée.

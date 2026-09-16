@@ -19,7 +19,7 @@ Work item, critères, diff, preuves de l'implémenteur, profil projet, résultat
 3. Rejouer les contrôles pertinents ou vérifier leurs résultats observables.
 4. Vérifier documentation, messages d erreur, comportements négatifs et compatibilité nécessaire.
 5. Vérifier que les documents `docs/` concernés reflètent le code, les contrats, les risques et le périmètre. Signaler tout écart comme bloquant.
-5. Distinguer explicitement le vérifié, le non vérifié et l'inconnu.
+6. Distinguer explicitement le vérifié, le non vérifié et l'inconnu.
 
 ## Contrôles
 

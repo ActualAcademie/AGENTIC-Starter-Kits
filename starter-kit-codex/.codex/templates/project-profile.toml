@@ -55,6 +55,10 @@ ci = false
 [tracking]
 mode = "local"
 provider = ""
+trello_choice = "pending"
+trello_execution = "plan-only"
+trello_board_name = ""
+trello_workspace = ""
 
 [delivery]
 uses_pull_requests = true
