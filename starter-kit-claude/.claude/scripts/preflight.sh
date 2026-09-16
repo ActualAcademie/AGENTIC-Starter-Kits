@@ -3,7 +3,7 @@ set -euo pipefail
 
 script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 config="$(cd "$script_dir/.." && pwd)"
-root="$(git -C "$config/.." rev-parse --show-toplevel 2>/dev/null || cd "$config/.." && pwd)"
+root="$(git -C "$config/.." rev-parse --show-toplevel 2>/dev/null || (cd "$config/.." && pwd))"
 fail=0
 
 for file in KIT.toml START-HERE.md ORCHESTRATION.md CONVERSATION-MODES.md PROJECT-CONTEXT.md PROJECT-DATA-BOUNDARY.md FILE-MANIFEST.md GOVERNANCE.md RISK-MATRIX.md COST-AND-EVALUATION.md ADAPTERS.md MODEL-POLICY.md models.toml project-profile.toml PROJECT-BRIEF.md; do

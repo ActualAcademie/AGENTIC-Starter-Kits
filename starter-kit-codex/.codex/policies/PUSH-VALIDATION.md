@@ -1,0 +1,17 @@
+# Validation avant push
+
+## Règle absolue
+
+Avant chaque `git push` vers GitHub, l'agent responsable exécute `bash .codex/scripts/verify-before-push.sh`. Un échec interdit le push. `git push --no-verify` est interdit.
+
+## Contrôles exigés
+
+Le contrôle exécute le preflight, le socle cybersécurité, lint, les tests déclarés, le build déclaré et la vérification du diff. Lorsqu'un projet active `frontend` ou `backend`, les commandes `commands.lint` et `commands.test` sont obligatoires dans le profil technique.
+
+## Responsabilités
+
+L'agent qui modifie le code exécute les contrôles et fournit les résultats. L'Auditeur vérifie les preuves avant fusion lorsque la matrice de risque l'exige. Aucun agent ne présente un contrôle non exécuté comme réussi.
+
+## Hook local
+
+`init-project.sh` installe le hook `pre-push` quand Git est disponible. Le hook relance la validation et bloque l'envoi local en cas d'échec.
