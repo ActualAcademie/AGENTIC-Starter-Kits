@@ -1,0 +1,61 @@
+schema_version = 1
+project_name = "à compléter"
+project_type = "unknown"
+risk_tolerance = "standard"
+integration_branch = "develop"
+
+[stack]
+languages = []
+package_manager = ""
+runtime = ""
+
+[stack.frontend]
+enabled = false
+framework = ""
+ui_library = ""
+test_framework = ""
+
+[stack.backend]
+enabled = false
+framework = ""
+api_style = ""
+test_framework = ""
+
+[stack.database]
+enabled = false
+engine = ""
+orm_or_query_layer = ""
+migrations = ""
+
+[stack.infrastructure]
+containerization = ""
+deployment = ""
+ci_provider = ""
+
+[stack.security]
+authentication = ""
+authorization = ""
+secrets_provider = ""
+
+[commands]
+install = ""
+lint = ""
+test = ""
+build = ""
+security = ""
+
+[capabilities]
+frontend = false
+backend = false
+database = false
+authentication = false
+deployment = false
+ci = false
+
+[tracking]
+mode = "local"
+provider = ""
+
+[delivery]
+uses_pull_requests = true
+requires_human_approval_for_critical = true
