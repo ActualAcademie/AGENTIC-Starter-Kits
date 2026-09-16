@@ -71,6 +71,10 @@ missing_design = [path for path in design_files if not (root / path).is_file()]
 if missing_design:
     print(f"CONCEPTION INCOMPLETE: initialiser et compléter docs/: {chr(44).join(missing_design)}")
     raise SystemExit(1)
+incomplete_design = [path for path in design_files if "[[A_COMPLETER" in (root / path).read_text(errors="ignore")]
+if incomplete_design:
+    print(f"CONCEPTION INCOMPLETE: remplacer les marqueurs de modèle dans : {chr(44).join(incomplete_design)}")
+    raise SystemExit(1)
 models = tomllib.loads((config / 'models.toml').read_text())
 allowed_models = {'opus', 'sonnet'}
 for profile_name, profile_data in models.get('profiles', {}).items():

@@ -143,3 +143,7 @@ Le Concepteur complète ensuite `docs/` avec vision, user stories, parcours, arc
 ## Gitflow obligatoire
 
 Chaque feature, correctif ou tâche documentaire se fait sur une branche dédiée. Les agents ne committent ni ne poussent directement vers `main`, `master` ou la branche dintégration. Les commits sont atomiques, limités par défaut à 75 fichiers et 1200 lignes, et ne mélangent jamais plusieurs features. `verify-before-push.sh` bloque les écarts.
+
+## Dossier de conception de niveau CDA
+
+Le générateur de conception produit des documents structurés, mais aucun marqueur `[[A_COMPLETER]]` ne peut rester avant le preflight. Après le cahier accepté, le Concepteur transforme chaque modèle en dossier complet : contexte, objectifs mesurables, acteurs, user stories et critères, règles métier, scénarios d erreur, parcours, diagrammes Mermaid, architecture, données, contrats, sécurité, roadmap, stratégie de validation, rollback et décisions. Un simple squelette ne valide pas le projet.

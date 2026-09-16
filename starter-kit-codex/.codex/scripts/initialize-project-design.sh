@@ -14,100 +14,272 @@ write_if_missing() {
 }
 
 write_if_missing "$docs/README.md" <<'DOC'
-# Documentation de conception
+# Dossier de conception du projet
 
-Ce dossier est la source de vérité du produit. Le Coordinateur crée et maintient le plan, le Concepteur maintient les contrats et l'architecture, les agents Frontend et Backend maintiennent les parcours et interfaces concernés, l'agent Cybersécurité maintient la conception de sécurité et l'Auditeur contrôle les écarts code documentation.
+## Statut
 
-Un document non applicable doit le dire explicitement et justifier pourquoi. Toute modification qui change le produit, les données, les interfaces, les permissions, le déploiement ou le périmètre met à jour les documents concernés dans le même work item.
+[[A_COMPLETER: indiquer `draft`, `review`, `approved` ou `updated`, avec date et responsable.]]
+
+## Rôle
+
+Ce dossier est la source de vérité entre le besoin métier, la conception et le code. Il doit permettre à un développeur, un testeur, un auditeur ou un nouveau membre de comprendre le projet sans déduire des règles implicites.
+
+## Règles de qualité
+
+- Toute affirmation distingue fait vérifié, hypothèse, décision et élément à valider.
+- Toute user story possède des critères testables et une priorité.
+- Toute interface, donnée sensible, permission, dépendance externe et erreur significative est documentée.
+- Chaque diagramme est en Mermaid ou possède une source éditable versionnée.
+- Toute évolution modifie, dans le même work item, le code, les tests et les documents touchés.
+- Un document non applicable indique `Non applicable` avec une justification contextualisée.
+
+## Index et traçabilité
+
+| Artefact | Finalité | Référence de code ou test | Dernière mise à jour |
+| --- | --- | --- | --- |
+| Vision et périmètre | besoin, acteurs, limites | [[A_COMPLETER]] | [[A_COMPLETER]] |
+| User stories | comportements attendus | [[A_COMPLETER]] | [[A_COMPLETER]] |
+| Parcours | étapes et erreurs utilisateur | [[A_COMPLETER]] | [[A_COMPLETER]] |
+| Architecture | composants et flux | [[A_COMPLETER]] | [[A_COMPLETER]] |
+| Données | entités, règles, rétention | [[A_COMPLETER]] | [[A_COMPLETER]] |
+| Contrats | API, événements, interfaces | [[A_COMPLETER]] | [[A_COMPLETER]] |
+| Sécurité | menaces et protections | [[A_COMPLETER]] | [[A_COMPLETER]] |
+| Roadmap et décisions | plan et arbitrages | [[A_COMPLETER]] | [[A_COMPLETER]] |
 DOC
+
 write_if_missing "$docs/product/vision-and-scope.md" <<'DOC'
-# Vision et périmètre
+# Vision, objectifs et périmètre
 
-## Problème
+## Contexte et problème
 
-À compléter après acceptation du cahier des charges.
+[[A_COMPLETER: décrire le problème observé, ses conséquences, la situation actuelle et la valeur recherchée.]]
 
-## Utilisateurs et résultats attendus
+## Parties prenantes et utilisateurs
 
-À compléter après acceptation du cahier des charges.
+| Acteur | Besoin | Fréquence | Niveau d accès | Attente de réussite |
+| --- | --- | --- | --- | --- |
+| [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] |
 
-## Périmètre et hors périmètre
+## Objectifs mesurables
 
-À compléter après acceptation du cahier des charges.
+| Objectif | Indicateur | Valeur cible | Méthode de mesure | Horizon |
+| --- | --- | --- | --- | --- |
+| [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] |
+
+## Périmètre de la première version
+
+[[A_COMPLETER: lister les capacités incluses, leurs limites et les dépendances nécessaires.]]
+
+## Hors périmètre et hypothèses
+
+[[A_COMPLETER: lister explicitement ce qui ne sera pas réalisé et les hypothèses à confirmer.]]
+
+## Contraintes et critères de réussite
+
+[[A_COMPLETER: budget, délai, plateformes, accessibilité, performance, conformité, intégrations et définition de terminé.]]
 DOC
+
 write_if_missing "$docs/product/user-stories.md" <<'DOC'
-# User stories et critères d'acceptation
+# User stories, règles métier et critères d acceptation
 
-Chaque story utilise le format : En tant que, je veux, afin de. Les critères sont testables et reliés aux tests ou à une preuve observable.
+## Convention
 
-## Stories priorisées
+Chaque story suit la forme : En tant que `<acteur>`, je veux `<action>`, afin de `<valeur>`. Les critères couvrent le succès, les validations, les erreurs, les permissions et les cas limites.
 
-À compléter après acceptation du cahier des charges.
+## Backlog priorisé
+
+| ID | Priorité | User story | Règles métier | Critères d acceptation vérifiables | Tests ou preuve | Statut |
+| --- | --- | --- | --- | --- | --- | --- |
+| US-001 | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] |
+
+## Scénarios d erreur et cas limites
+
+| Référence | Situation | Comportement attendu | Message ou retour | Test associé |
+| --- | --- | --- | --- | --- |
+| [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] |
+
+## Exigences non fonctionnelles liées
+
+[[A_COMPLETER: accessibilité, performance, sécurité, confidentialité, compatibilité et disponibilité liées aux stories.]]
 DOC
+
 write_if_missing "$docs/product/user-flows.md" <<'DOC'
 # Parcours utilisateur
 
-Décrire les chemins nominal, erreur, annulation et reprise. Ajouter un diagramme Mermaid lorsque le parcours comporte plusieurs décisions.
+## Inventaire des parcours
 
-## Parcours
+| ID | Déclencheur | Acteur | Résultat attendu | Échecs et reprises | Stories liées |
+| --- | --- | --- | --- | --- | --- |
+| FLOW-001 | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] |
 
-À compléter après acceptation du cahier des charges.
+## Diagramme des parcours critiques
+
+```mermaid
+flowchart TD
+    A[Arrivée utilisateur] --> B{Condition à documenter}
+    B -->|Succès| C[Résultat attendu]
+    B -->|Erreur| D[Message, reprise ou support]
+```
+
+[[A_COMPLETER: remplacer le diagramme générique par les parcours réels ou indiquer Non applicable avec justification.]]
+
+## Détails par parcours
+
+### FLOW-001
+
+- Préconditions : [[A_COMPLETER]]
+- Étapes nominales : [[A_COMPLETER]]
+- Validations et erreurs : [[A_COMPLETER]]
+- Annulation, reprise et persistance : [[A_COMPLETER]]
+- Critères de sortie : [[A_COMPLETER]]
 DOC
+
 write_if_missing "$docs/design/architecture.md" <<'DOC'
-# Architecture
+# Architecture technique
 
-Décrire composants, responsabilités, frontières, dépendances externes, flux principaux, contraintes et observabilité. Ajouter un diagramme Mermaid ou justifier son absence.
+## Décisions et contraintes structurantes
 
-## Architecture cible
+[[A_COMPLETER: technologies retenues, motifs, alternatives écartées, contraintes existantes et conséquences.]]
 
-À compléter après acceptation du cahier des charges.
+## Composants et responsabilités
+
+| Composant | Responsabilité | Entrées | Sorties | Dépendances | Observabilité |
+| --- | --- | --- | --- | --- | --- |
+| [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] |
+
+## Diagramme de contexte et conteneurs
+
+```mermaid
+flowchart LR
+    U[Utilisateur ou système externe] --> A[Application]
+    A --> D[(Données)]
+    A --> X[Système externe]
+```
+
+[[A_COMPLETER: remplacer par le diagramme réel, nommer les flux et les responsabilités.]]
+
+## Flux critiques et résilience
+
+[[A_COMPLETER: décrire synchronisme, asynchronisme, timeouts, retries, idempotence, dégradations, journalisation et alertes.]]
+
+## Qualité technique
+
+[[A_COMPLETER: sécurité, performance, scalabilité, disponibilité, accessibilité, dette technique et stratégie de tests.]]
 DOC
+
 write_if_missing "$docs/design/data-model.md" <<'DOC'
 # Modèle de données
 
-Décrire entités, relations, propriétés sensibles, rétention, migrations et intégrité. Indiquer Non applicable avec justification si le projet ne stocke aucune donnée.
+## Classification et cycle de vie
 
-## Modèle
+| Donnée ou entité | Sensibilité | Source | Usage | Rétention | Suppression | Responsable |
+| --- | --- | --- | --- | --- | --- | --- |
+| [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] |
 
-À compléter après acceptation du cahier des charges.
+## Entités, attributs et règles
+
+| Entité | Attributs clés | Identifiant | Relations | Contraintes et invariants |
+| --- | --- | --- | --- | --- |
+| [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] |
+
+## Diagramme de données
+
+```mermaid
+erDiagram
+    ENTITY_A ||--o{ ENTITY_B : relation
+```
+
+[[A_COMPLETER: remplacer par les entités réelles ou indiquer Non applicable avec justification.]]
+
+## Migrations, intégrité et sauvegarde
+
+[[A_COMPLETER: décrire stratégie de migration, validation, rollback, sauvegarde et restauration.]]
 DOC
+
 write_if_missing "$docs/design/api-contracts.md" <<'DOC'
-# Contrats d interface
+# Contrats d interfaces
 
-Décrire API, événements, interfaces utilisateur partagées, authentification, erreurs, versions et compatibilité. Indiquer Non applicable avec justification si nécessaire.
+## Conventions communes
 
-## Contrats
+[[A_COMPLETER: versionnement, authentification, encodage, pagination, erreurs, idempotence, limites et compatibilité.]]
 
-À compléter après acceptation du cahier des charges.
+## API, événements et interfaces partagées
+
+| ID | Consommateur | Opération ou événement | Entrée validée | Sortie ou erreur | Autorisation | Tests |
+| --- | --- | --- | --- | --- | --- | --- |
+| [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] |
+
+## Exemple de contrat critique
+
+```json
+{
+  "[[A_COMPLETER: champ]]": "[[A_COMPLETER: valeur ou type]]"
+}
+```
+
+## Compatibilité et dépréciation
+
+[[A_COMPLETER: clients affectés, stratégie de version, période de compatibilité, migration et retrait.]]
 DOC
+
 write_if_missing "$docs/design/security-design.md" <<'DOC'
 # Conception de sécurité
 
-Décrire actifs, acteurs, authentification, autorisation, secrets, menaces, mesures et risques résiduels. Les secrets ne sont jamais inscrits ici.
+## Périmètre et actifs à protéger
 
-## Analyse
+| Actif | Propriétaire | Sensibilité | Menace principale | Protection | Preuve |
+| --- | --- | --- | --- | --- | --- |
+| [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] |
 
-À compléter après acceptation du cahier des charges.
+## Authentification, autorisation et secrets
+
+[[A_COMPLETER: identité, sessions ou tokens, rôles, permissions, moindre privilège, rotation et stockage hors dépôt.]]
+
+## Analyse de menaces
+
+| Menace | Vecteur | Impact | Probabilité | Mesure préventive | Détection | Risque résiduel |
+| --- | --- | --- | --- | --- | --- | --- |
+| [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] |
+
+## Exigences de sécurité vérifiables
+
+[[A_COMPLETER: validation des entrées, protections réseau, journalisation, dépendances, chiffrement, sauvegardes et tests sécurité.]]
 DOC
-write_if_missing "$docs/delivery/roadmap.md" <<'DOC'
-# Roadmap
 
-Découper en incréments livrables avec dépendances, critères de sortie et risques. Mettre à jour la roadmap à chaque changement de périmètre.
+write_if_missing "$docs/delivery/roadmap.md" <<'DOC'
+# Roadmap et plan de livraison
 
 ## Incréments
 
-À compléter après acceptation du cahier des charges.
+| Incrément | Objectif | Stories incluses | Dépendances | Risques | Critères de sortie | État |
+| --- | --- | --- | --- | --- | --- | --- |
+| [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] |
+
+## Plan de validation et retour
+
+[[A_COMPLETER: environnements, tests, approbations, déploiement, monitoring, rollback et communication.]]
+
+## Écarts de périmètre
+
+[[A_COMPLETER: décisions de report, dette assumée et raison.]]
 DOC
+
 write_if_missing "$docs/delivery/decision-log.md" <<'DOC'
 # Journal des décisions
 
-| Date | Décision | Contexte | Conséquence | Propriétaire |
-| --- | --- | --- | --- | --- |
+| ID | Date | Décision | Contexte et options | Conséquence | Propriétaire | Révision |
+| --- | --- | --- | --- | --- | --- | --- |
+| ADR-001 | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] |
 DOC
+
 write_if_missing "$docs/diagrams/README.md" <<'DOC'
 # Diagrammes
 
-Conserver ici les diagrammes Mermaid ou les sources éditables. Chaque diagramme indique son objectif, sa date de mise à jour et le document qui le référence.
+Conserver ici les sources Mermaid ou éditables. Chaque diagramme est référencé depuis un document de conception, possède un objectif, une date, un propriétaire et une légende. Ne jamais déposer seulement une image sans source modifiable.
+
+| Fichier | Type | Objectif | Document référent | Statut |
+| --- | --- | --- | --- | --- |
+| [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] |
 DOC
 
-echo "Documentation de conception initialisée dans $docs"
+echo "Documentation de conception initialisée dans $docs. Remplacer tous les marqueurs [[A_COMPLETER]] par une conception issue du cahier des charges avant le preflight."
