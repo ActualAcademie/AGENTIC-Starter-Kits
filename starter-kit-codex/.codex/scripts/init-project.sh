@@ -3,7 +3,7 @@ set -euo pipefail
 
 script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 config_root="$(cd "$script_dir/.." && pwd)"
-project_root="$(git -C "$config_root/.." rev-parse --show-toplevel 2>/dev/null || cd "$config_root/.." && pwd)"
+project_root="$(git -C "$config_root/.." rev-parse --show-toplevel 2>/dev/null || (cd "$config_root/.." && pwd))"
 
 if [ ! -f "$config_root/ORCHESTRATION.md" ]; then
   echo "Kit Codex introuvable dans $config_root"

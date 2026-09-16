@@ -7,9 +7,9 @@ if [ "${1:-}" != "" ] && [ "${1:-}" != "--execute" ]; then echo "Usage: $0 [--ex
 
 script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 config="$(cd "$script_dir/.." && pwd)"
-root="$(git -C "$config/.." rev-parse --show-toplevel 2>/dev/null || cd "$config/.." && pwd)"
+root="$(git -C "$config/.." rev-parse --show-toplevel 2>/dev/null || (cd "$config/.." && pwd))"
 
-python3 - "$config/project-profile.toml" "$root" "$mode" <<'PY'
+"$script_dir/python.sh" - "$config/project-profile.toml" "$root" "$mode" <<'PY'
 import pathlib, subprocess, sys, tomllib
 profile = pathlib.Path(sys.argv[1])
 root = pathlib.Path(sys.argv[2])

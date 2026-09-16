@@ -11,7 +11,7 @@ risk="${2:-normal}"
 script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 config="$(cd "$script_dir/.." && pwd)"
 
-python3 - "$config/models.toml" "$role" "$risk" <<'PY'
+"$script_dir/python.sh" - "$config/models.toml" "$role" "$risk" <<'PY'
 import pathlib, sys, tomllib
 models = tomllib.loads(pathlib.Path(sys.argv[1]).read_text())
 role, risk = sys.argv[2:]
