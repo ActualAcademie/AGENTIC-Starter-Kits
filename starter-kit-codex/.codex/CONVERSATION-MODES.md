@@ -1,0 +1,25 @@
+# Modes de conversation
+
+## Mode projet
+
+Mode par défaut dans un workspace qui contient ce kit. Les instructions de `AGENTS.md` s'appliquent. Si le cahier des charges est absent, Codex demande le cahier puis s'arrête.
+
+## Mode général
+
+L'utilisateur démarre son message par :
+
+```text
+Mode général :
+```
+
+Codex répond à la demande sans déclencher le cahier des charges, sans lire le dépôt, sans créer de work item et sans modifier le workspace. Ce mode est adapté aux questions, explications, apprentissage, brainstorming ou rédaction indépendante du projet.
+
+## Mode maintenance
+
+L'utilisateur démarre son message par :
+
+```text
+Mode maintenance :
+```
+
+Codex peut traiter une tâche d'entretien explicitement autorisée, comme réparer le kit, mettre à jour son profil ou expliquer une erreur, sans lancer la construction du produit. Toute modification du produit reste soumise au cahier des charges.
