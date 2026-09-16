@@ -1,0 +1,98 @@
+name: Validate starter kits
+
+on:
+  pull_request:
+    branches: [develop, main]
+  push:
+    branches: [develop, main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: starter-kits-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Validate imports and quality gates
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install validation dependency
+        run: sudo apt-get update && sudo apt-get install --yes ripgrep
+
+      - name: Check shell syntax and repository hygiene
+        shell: bash
+        run: |
+          set -euo pipefail
+          while IFS= read -r -d '' script; do
+            bash -n "$script"
+          done < <(find starter-kit-codex starter-kit-claude -type f -name '*.sh' -print0)
+          em_dash="$(printf '\342\200\224')"
+          marker_left="$(printf '<%.0s' {1..7})"
+          marker_mid="$(printf '=%.0s' {1..7})"
+          marker_right="$(printf '>%.0s' {1..7})"
+          ! rg -n --hidden --glob '!.git/**' -- "$em_dash|$marker_left|$marker_mid|$marker_right" .
+
+      - name: Validate portable imports
+        shell: bash
+        run: |
+          set -euo pipefail
+          for kit in codex claude; do
+            temp_root="$(mktemp -d)"
+            project_root="$temp_root/project"
+            config_dir=".$kit"
+            [ "$kit" = "codex" ] && config_dir=".codex"
+            [ "$kit" = "claude" ] && config_dir=".claude"
+
+            mkdir -p "$project_root"
+            git init --quiet "$project_root"
+            cp -R "starter-kit-$kit/$config_dir" "$project_root/$config_dir"
+            [ "$kit" = "codex" ] && cp starter-kit-codex/AGENTS.md "$project_root/AGENTS.md"
+            [ "$kit" = "claude" ] && cp starter-kit-claude/CLAUDE.md "$project_root/CLAUDE.md"
+
+            bash "$project_root/$config_dir/scripts/init-project.sh"
+
+            if bash "$project_root/$config_dir/scripts/preflight.sh"; then
+              echo "Le preflight devait bloquer sans cahier des charges accepté."
+              exit 1
+            fi
+
+            cp "$project_root/$config_dir/templates/project-brief.md" "$project_root/$config_dir/PROJECT-BRIEF.md"
+            cp "$project_root/$config_dir/templates/project-profile.toml" "$project_root/$config_dir/project-profile.toml"
+            perl -0pi -e 's/## Statut\n\npending/## Statut\n\naccepted/' "$project_root/$config_dir/PROJECT-BRIEF.md"
+            perl -0pi -e 's/project_name = "à compléter"/project_name = "ci-validation"/' "$project_root/$config_dir/project-profile.toml"
+            perl -0pi -e 's/project_type = "unknown"/project_type = "service"/' "$project_root/$config_dir/project-profile.toml"
+            bash "$project_root/$config_dir/scripts/initialize-project-design.sh"
+
+            bash "$project_root/$config_dir/scripts/preflight.sh"
+            bash "$project_root/$config_dir/scripts/verify-before-push.sh"
+          done
+
+  validate-windows-wrapper:
+    name: Validate PowerShell wrappers
+    runs-on: windows-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Parse PowerShell wrappers
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          Get-ChildItem -Path starter-kit-codex, starter-kit-claude -Recurse -Filter run.ps1 |
+            ForEach-Object {
+              $tokens = $null
+              $errors = $null
+              [System.Management.Automation.Language.Parser]::ParseFile($_.FullName, [ref]$tokens, [ref]$errors) | Out-Null
+              if ($errors.Count -gt 0) {
+                throw "Syntaxe PowerShell invalide dans $($_.FullName): $($errors.Extent.Text -join ', ')"
+              }
+            }

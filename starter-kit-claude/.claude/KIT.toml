@@ -1,0 +1,19 @@
+kit_name = "claude-premium-starter"
+kit_version = "1.0.0"
+schema_version = 1
+minimum_python = "3.11"
+
+[compatibility]
+orchestrator = "claude"
+requires_root_agents_file = true
+external_services_required = false
+
+[quality_gates]
+require_project_profile = true
+require_work_item = true
+require_independent_audit = true
+require_security_for_high_risk = true
+require_security_baseline = true
+require_explicit_deployment_plan = true
+forbid_em_dash = true
+forbid_detected_secrets = true

@@ -1,0 +1,137 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+config="$(cd "$script_dir/.." && pwd)"
+root="$(git -C "$config/.." rev-parse --show-toplevel 2>/dev/null || (cd "$config/.." && pwd))"
+fail=0
+
+for file in KIT.toml START-HERE.md ORCHESTRATION.md CONVERSATION-MODES.md PROJECT-CONTEXT.md PROJECT-DATA-BOUNDARY.md FILE-MANIFEST.md GOVERNANCE.md RISK-MATRIX.md COST-AND-EVALUATION.md ADAPTERS.md MODEL-POLICY.md models.toml project-profile.toml PROJECT-BRIEF.md; do
+  [ -f "$config/$file" ] || { echo "MANQUANT: .codex/$file"; fail=1; }
+done
+
+if rg -n --hidden --glob '!.git/**' --glob '!node_modules/**' -- '-----BEGIN (RSA|OPENSSH|EC|PRIVATE) KEY-----|AKIA[0-9A-Z]{16}|ghp_[A-Za-z0-9]{20,}|sk-[A-Za-z0-9]{20,}' "$root"; then
+  echo "SECRET POTENTIEL DETECTE"; fail=1
+fi
+
+if "$script_dir/python.sh" - "$root" <<'PY'
+import pathlib, sys, tomllib
+root = pathlib.Path(sys.argv[1])
+config = root / '.codex'
+found = []
+for path in root.rglob('*'):
+    if path.is_file() and '.git' not in path.parts and 'node_modules' not in path.parts:
+        if chr(0x2014) in path.read_text(errors='ignore'):
+            found.append(str(path))
+if found:
+    print('\n'.join(found))
+    raise SystemExit(1)
+kit = config / 'KIT.toml'
+try:
+    kit_data = tomllib.loads(kit.read_text())
+    if kit_data.get('kit_name') != 'codex-premium-starter':
+        print('KIT INVALIDE: nom inattendu')
+        raise SystemExit(1)
+except Exception as exc:
+    print(f'KIT INVALIDE: {exc}')
+    raise SystemExit(1)
+profile = config / 'project-profile.toml'
+brief = config / 'PROJECT-BRIEF.md'
+if '## Statut\n\naccepted' not in brief.read_text(errors='ignore'):
+    print('CAHIER DES CHARGES INCOMPLET: PROJECT-BRIEF.md doit être accepted')
+    raise SystemExit(1)
+try:
+    data = tomllib.loads(profile.read_text())
+    for field in ('schema_version', 'project_name', 'project_type', 'integration_branch'):
+        if field not in data:
+            print(f'PROFIL INCOMPLET: {field}')
+            raise SystemExit(1)
+    if data['project_name'] == 'à compléter' or data['project_type'] == 'unknown':
+        print('PROFIL INCOMPLET: appliquer le Skill project-onboarding')
+        raise SystemExit(1)
+    if not isinstance(data.get('stack'), dict):
+        print('PROFIL INCOMPLET: section stack absente')
+        raise SystemExit(1)
+except Exception as exc:
+    print(f'PROFIL INVALIDE: {exc}')
+    raise SystemExit(1)
+design_files = (
+    "docs/README.md", "docs/product/vision-and-scope.md", "docs/product/user-stories.md",
+    "docs/product/user-flows.md", "docs/design/architecture.md", "docs/design/data-model.md",
+    "docs/design/api-contracts.md", "docs/design/security-design.md", "docs/delivery/roadmap.md",
+    "docs/delivery/decision-log.md", "docs/diagrams/README.md",
+)
+missing_design = [path for path in design_files if not (root / path).is_file()]
+if missing_design:
+    print(f"CONCEPTION INCOMPLETE: initialiser et compléter docs/: {chr(44).join(missing_design)}")
+    raise SystemExit(1)
+models = tomllib.loads((config / 'models.toml').read_text())
+allowed_models = {'gpt-5.6-sol', 'gpt-5.6-terra', 'gpt-5.6-luna'}
+for profile_name, profile_data in models.get('profiles', {}).items():
+    for field in ('model', 'reasoning_effort', 'fallback_model', 'fallback_reasoning_effort', 'purpose'):
+        if not profile_data.get(field):
+            print(f'MODELE INCOMPLET: {profile_name}: {field}')
+            raise SystemExit(1)
+    if profile_data['model'] not in allowed_models or profile_data['fallback_model'] not in allowed_models:
+        print(f'MODELE INTERDIT: {profile_name}')
+        raise SystemExit(1)
+required_sections = ('## Objectif', '## Entrées', '## Procédure', '## Sortie', '## Mesures', '## Arrêt')
+for skill in (config / 'skills').glob('*/SKILL.md'):
+    content = skill.read_text(errors='ignore')
+    for section in required_sections:
+        if section not in content:
+            print(f'SKILL INCOMPLET: {skill}: {section}')
+            raise SystemExit(1)
+required_agents = {'coordinateur', 'concepteur', 'frontend', 'backend', 'cybersecurite', 'auditeur'}
+seen = set()
+for agent in (config / 'agents').glob('*.toml'):
+    data = tomllib.loads(agent.read_text())
+    seen.add(data.get('name'))
+    for field in ('name', 'description', 'model', 'model_profile', 'reasoning_effort', 'skills', 'escalate', 'must_read', 'must_produce', 'forbidden'):
+        if not data.get(field):
+            print(f'AGENT INCOMPLET: {agent}: {field}')
+            raise SystemExit(1)
+    profile_data = models.get('profiles', {}).get(data['model_profile'])
+    if not profile_data or data['model'] != profile_data['model']:
+        print(f'MODELE AGENT INCOHERENT: {agent}')
+        raise SystemExit(1)
+if seen != required_agents:
+    print(f'AGENTS INCOMPLETS: attendus={sorted(required_agents)} obtenus={sorted(seen)}')
+    raise SystemExit(1)
+for prompt in ('coordinateur', 'concepteur', 'implementation', 'cybersecurite', 'auditeur'):
+    prompt_path = config / 'prompts' / f'{prompt}.md'
+    if not prompt_path.is_file():
+        print(f'PROMPT MANQUANT: {prompt}')
+        raise SystemExit(1)
+    if len(prompt_path.read_text(errors='ignore')) < 300:
+        print(f'PROMPT INSUFFISANT: {prompt}')
+        raise SystemExit(1)
+for path in (
+    config / 'policies' / 'QUALITY-GATES.md',
+    config / 'policies' / 'CONTEXT-POLICY.md',
+    config / 'policies' / 'INCIDENT-POLICY.md',
+    config / 'policies' / 'VALIDATION-POLICY.md',
+    config / 'policies' / 'GIT-FLOW.md',
+    config / 'templates' / 'project-brief.md',
+    config / 'templates' / 'project-profile.toml',
+    config / 'templates' / 'work-item.md',
+    config / 'templates' / 'decision.md',
+    config / 'templates' / 'delivery-report.md',
+):
+    if not path.is_file():
+        print(f'COMPOSANT MANQUANT: {path.relative_to(config)}')
+        raise SystemExit(1)
+active = 0
+for brief in (config / 'work-items').glob('*/brief.md'):
+    if '| Statut | in-progress |' in brief.read_text(errors='ignore'):
+        active += 1
+if active > 1:
+    print(f'PLUSIEURS WORK ITEMS ACTIFS: {active}')
+    raise SystemExit(1)
+PY
+then :; else
+  echo "CONTROLE PYTHON ECHEC: style, profil, Skills ou agents"; fail=1
+fi
+
+if [ "$fail" -eq 0 ]; then echo "Preflight OK"; fi
+exit "$fail"

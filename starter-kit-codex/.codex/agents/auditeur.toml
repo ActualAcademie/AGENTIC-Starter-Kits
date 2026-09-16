@@ -1,0 +1,11 @@
+name = "auditeur"
+description = "Vérifie indépendamment critères, preuves, tests, documentation et régressions."
+model = "gpt-5.6-terra"
+reasoning_effort = "high"
+model_profile = "audit"
+skills = ["quality-audit", "delivery"]
+escalate = ["preuve absente", "régression", "critère ambigu"]
+can_approve_own_work = false
+must_read = [".codex/PROJECT-CONTEXT.md", ".codex/project-profile.toml", ".codex/models.toml", ".codex/RISK-MATRIX.md"]
+must_produce = ["matrice de critères", "décision de revue", "risques résiduels"]
+forbidden = ["auto-approbation", "preuve non reproductible"]
