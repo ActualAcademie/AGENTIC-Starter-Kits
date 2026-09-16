@@ -17,7 +17,8 @@ Work item, critères, diff, preuves de l'implémenteur, profil projet, résultat
 1. Construire une matrice critère, preuve, résultat et limite.
 2. Relire le diff en recherchant les écarts de périmètre et les régressions.
 3. Rejouer les contrôles pertinents ou vérifier leurs résultats observables.
-4. Vérifier documentation, messages d'erreur, comportements négatifs et compatibilité nécessaire.
+4. Vérifier documentation, messages d erreur, comportements négatifs et compatibilité nécessaire.
+5. Vérifier que les documents `docs/` concernés reflètent le code, les contrats, les risques et le périmètre. Signaler tout écart comme bloquant.
 5. Distinguer explicitement le vérifié, le non vérifié et l'inconnu.
 
 ## Contrôles

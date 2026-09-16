@@ -129,3 +129,13 @@ Windows : installer Git for Windows et Python 3.11 ou plus récent. Utiliser Git
 ```
 
 Les commandes disponibles dans le wrapper sont `init-project`, `preflight`, `verify-before-push`, `run-project-checks`, `generate-github-ci`, `show-project-context` et `doctor`.
+
+## Conception obligatoire
+
+Après le cahier accepté et avant toute implémentation, le Coordinateur exécute :
+
+```bash
+bash .claude/scripts/initialize-project-design.sh
+```
+
+Le Concepteur complète ensuite `docs/` avec vision, user stories, parcours, architecture, diagrammes, données, contrats, sécurité, roadmap et décisions. Tout document non applicable contient une justification. Chaque work item met à jour les documents touchés et l Auditeur bloque une livraison si le code diverge de la conception.
