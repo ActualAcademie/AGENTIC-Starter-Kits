@@ -1,16 +1,24 @@
 # Git Flow universel
 
-## Branches
+## Branches obligatoires
 
-La branche d'intégration est définie dans `project-profile.toml`. Les branches de travail suivent la forme `feature/<id>-<sujet>`, `fix/<id>-<sujet>`, `hotfix/<id>-<sujet>` ou `chore/<id>-<sujet>`.
+La branche d intégration est définie dans `project-profile.toml`, habituellement `develop`. Toute modification produit commence sur une branche dédiée : `feature/<id>-<sujet>`, `fix/<id>-<sujet>`, `hotfix/<id>-<sujet>`, `chore/<id>-<sujet>`, `docs/<id>-<sujet>`, `refactor/<id>-<sujet>` ou `test/<id>-<sujet>`.
 
-## Commits
+Ne jamais développer, committer ou pousser directement vers `main`, `master` ou la branche d intégration. La promotion vers ces branches passe par une Pull Request validée. Une branche ne porte qu un objectif cohérent et un seul work item actif.
 
-Un commit correspond à une intention vérifiable. Format recommandé : `type(scope): description`. Les types admis sont `feat`, `fix`, `docs`, `test`, `refactor`, `perf`, `security` et `chore`.
+## Commits atomiques
+
+Un commit correspond à une intention vérifiable : une étape de conception, une migration, une modification fonctionnelle, des tests, une documentation liée ou une correction ciblée. Il contient le minimum de fichiers nécessaire, un message `type(scope): description` et des contrôles adaptés.
+
+Les limites par défaut sont `75` fichiers et `1200` lignes modifiées par commit. Elles sont configurables dans `[delivery]` de `project-profile.toml` seulement après décision explicite et documentée. Un commit massif, par exemple plusieurs centaines ou milliers de fichiers, est interdit : découper la feature, isoler les fichiers générés ou demander une décision avant le push.
 
 ## Promotion
 
-Une branche ne passe vers l'intégration qu'avec tests proportionnés, preflight vert, preuves, audit indépendant et rapport sécurité lorsque la matrice l'exige. `main` reçoit seulement des livraisons validées. Ne pas réécrire l'historique des branches protégées.
+Une branche ne passe vers l intégration qu avec work item, conception à jour, tests proportionnés, preflight vert, preuves, audit indépendant et rapport sécurité lorsque la matrice l exige. `main` reçoit seulement des livraisons validées. Ne pas réécrire l historique des branches protégées.
+
+## Contrôle automatisé
+
+`verify-before-push.sh` bloque le push direct vers une branche protégée, les noms de branche non conformes et les commits dépassant les limites déclarées. Ne jamais contourner ce contrôle avec `--no-verify`.
 
 ## État inconnu
 

@@ -131,3 +131,7 @@ bash .codex/scripts/initialize-project-design.sh
 ```
 
 Le Concepteur complète ensuite `docs/` avec vision, user stories, parcours, architecture, diagrammes, données, contrats, sécurité, roadmap et décisions. Tout document non applicable contient une justification. Chaque work item met à jour les documents touchés et l Auditeur bloque une livraison si le code diverge de la conception.
+
+## Gitflow obligatoire
+
+Chaque feature, correctif ou tâche documentaire se fait sur une branche dédiée. Les agents ne committent ni ne poussent directement vers `main`, `master` ou la branche dintégration. Les commits sont atomiques, limités par défaut à 75 fichiers et 1200 lignes, et ne mélangent jamais plusieurs features. `verify-before-push.sh` bloque les écarts.
