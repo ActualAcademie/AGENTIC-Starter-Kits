@@ -9,6 +9,12 @@ script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 config="$(cd "$script_dir/.." && pwd)"
 root="$(git -C "$config/.." rev-parse --show-toplevel 2>/dev/null || cd "$config/.." && pwd)"
 
+if [ "$mode" = "execute" ]; then
+  bash "$script_dir/security-baseline.sh" --execute
+else
+  bash "$script_dir/security-baseline.sh"
+fi
+
 python3 - "$config/project-profile.toml" "$root" "$mode" <<'PY'
 import pathlib, subprocess, sys, tomllib
 profile = pathlib.Path(sys.argv[1])
@@ -16,7 +22,7 @@ root = pathlib.Path(sys.argv[2])
 mode = sys.argv[3]
 commands = tomllib.loads(profile.read_text()).get('commands', {})
 failed = False
-for name in ('install', 'lint', 'test', 'build', 'security'):
+for name in ('install', 'lint', 'test', 'build'):
     command = commands.get(name, '').strip()
     if not command:
         print(f'SKIP: {name} non configuré')
