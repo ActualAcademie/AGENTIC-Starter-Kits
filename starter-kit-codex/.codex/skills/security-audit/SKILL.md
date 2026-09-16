@@ -22,6 +22,7 @@ Vérifier secrets, entrées non fiables, authentification, autorisation métier,
 2. Associer chaque risque à un scénario concret, un impact et une preuve.
 3. Vérifier les contrôles déjà présents, puis proposer le correctif minimal.
 4. Revoir le correctif et les tests négatifs lorsque celui-ci est appliqué.
+5. Enregistrer chaque risque ou vulnérabilité dans `docs/quality/quality-journal.md`, avec preuve, gravité, propriétaire, correction et vérification. Référencer l identifiant dans le rapport sécurité.
 5. Classer le risque résiduel et son propriétaire.
 
 ## Sortie

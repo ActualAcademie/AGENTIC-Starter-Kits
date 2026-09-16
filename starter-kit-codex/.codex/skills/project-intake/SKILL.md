@@ -18,8 +18,10 @@ Un cahier des charges fourni par l'utilisateur dans le chat. Il peut être struc
 2. Ne pas analyser le dépôt, choisir de technologies, créer de code, créer de work item ou lancer de contrôle avant réception.
 3. À réception, reformuler seulement les éléments nécessaires dans `.codex/PROJECT-BRIEF.md`.
 4. Marquer le statut `accepted` uniquement si vision, utilisateurs, objectifs, périmètre, contraintes et critères de réussite sont présents.
-5. Lister les inconnues qui demandent une décision humaine, sans bloquer les détails secondaires.
-6. Passer ensuite au Skill `project-onboarding` pour adapter le profil technique.
+5. Demander explicitement : `Veux-tu que je prépare un Trello complet avec toutes les tâches détaillées du projet ? Réponds oui ou non.` Ne jamais déduire la réponse.
+6. Enregistrer `tracking.trello_choice = "enabled"` si la réponse est oui, ou `tracking.trello_choice = "disabled"` si la réponse est non. Si oui, demander aussi le nom du tableau et le mode `plan-only` ou création via une intégration autorisée.
+7. Lister les inconnues qui demandent une décision humaine, sans bloquer les détails secondaires.
+8. Passer ensuite au Skill `project-onboarding` pour adapter le profil technique.
 
 ## Contrôles
 
