@@ -117,3 +117,17 @@ Les scripts Bash fonctionnent sur macOS et Linux avec Git, Bash, ripgrep et Pyth
 # Claude Code
 .\.claude\scripts\run.ps1 preflight
 ```
+
+## Conception obligatoire du projet
+
+Dès que le cahier des charges est accepté, le Coordinateur exécute le générateur adapté au kit puis le Concepteur complète le dossier `docs/` avant toute implémentation :
+
+```bash
+# Codex
+bash .codex/scripts/initialize-project-design.sh
+
+# Claude Code
+bash .claude/scripts/initialize-project-design.sh
+```
+
+Le dossier contient la vision, les user stories et critères, les parcours, architecture et diagrammes, modèle de données, contrats, conception de sécurité, roadmap et journal des décisions. Un document non applicable doit être justifié. Les agents mettent à jour les documents touchés dans le même work item. L'Auditeur bloque une livraison lorsque le code et la conception divergent.

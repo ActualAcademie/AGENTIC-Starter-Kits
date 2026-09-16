@@ -6,7 +6,8 @@
 | Work item | toute modification | brief et critères |
 | Tests ciblés | faible et supérieur | commande et résultat |
 | Socle cybersécurité | toute livraison | `security-baseline.sh` |
-| Conception | moyen et supérieur | contrat ou décision |
+| Dossier de conception initial | toute implémentation | `docs/` initialisé et complété |
+| Conception | moyen et supérieur | contrat, décision et documents `docs/` à jour |
 | Cybersécurité | élevé et critique | rapport de risque |
 | CI | capacité `ci` activée | workflow et résultat observable |
 | CD | capacité `deployment` activée | plan explicite, retour et approbation |

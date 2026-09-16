@@ -70,6 +70,7 @@ jobs:
             perl -0pi -e 's/## Statut\n\npending/## Statut\n\naccepted/' "$project_root/$config_dir/PROJECT-BRIEF.md"
             perl -0pi -e 's/project_name = "à compléter"/project_name = "ci-validation"/' "$project_root/$config_dir/project-profile.toml"
             perl -0pi -e 's/project_type = "unknown"/project_type = "service"/' "$project_root/$config_dir/project-profile.toml"
+            bash "$project_root/$config_dir/scripts/initialize-project-design.sh"
 
             bash "$project_root/$config_dir/scripts/preflight.sh"
             bash "$project_root/$config_dir/scripts/verify-before-push.sh"

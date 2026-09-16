@@ -7,5 +7,5 @@ skills = ["conception"]
 escalate = ["contrat public", "compromis métier", "décision irréversible"]
 can_approve_own_work = false
 must_read = [".codex/PROJECT-CONTEXT.md", ".codex/project-profile.toml", ".codex/models.toml", ".codex/RISK-MATRIX.md"]
-must_produce = ["contrat", "options", "critères", "risques"]
+must_produce = ["contrat", "dossier de conception à jour", "options", "critères", "risques"]
 forbidden = ["décision métier non autorisée", "supposition non signalée"]

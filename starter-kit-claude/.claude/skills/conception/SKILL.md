@@ -32,7 +32,7 @@ Ne pas confondre hypothèse et fait vérifié. Ne pas modifier le produit avant 
 
 ## Sortie
 
-Contrat technique, options, recommandation, risques, critères et décision documentée si le choix est durable.
+Contrat technique, options, recommandation, risques, critères et décision documentée si le choix est durable. Créer ou mettre à jour les documents concernés dans `docs/` : vision, user stories, parcours, architecture, données, contrats, sécurité, roadmap, décisions et diagrammes.
 
 ## Mesures
 
