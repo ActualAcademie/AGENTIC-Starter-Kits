@@ -1,0 +1,93 @@
+# Kit d'orchestration Codex portable
+
+Ce kit installe une gouvernance projet pour Codex. Il ne construit rien tant que le cahier des charges n'a pas été fourni et formalisé.
+
+## Prérequis
+
+- Codex est installé et ouvert sur le dossier du projet.
+- Le projet possède une racine dédiée. Un dépôt Git est recommandé, mais l'initialisation fonctionne avant `git init`.
+- Le cahier des charges est prêt ou peut être envoyé dans le chat au premier échange.
+
+## Installation pas à pas
+
+1. Ouvrir un terminal dans le nouveau projet.
+
+2. Définir le chemin du kit source :
+
+```bash
+KIT_SOURCE="/chemin/vers/Agentic-Project/starter-kit-codex"
+```
+
+3. Copier le point d'entrée obligatoire et toute la configuration :
+
+```bash
+cp "$KIT_SOURCE/AGENTS.md" .
+cp -R "$KIT_SOURCE/.codex" .
+```
+
+4. Lancer l'initialisation non destructive :
+
+```bash
+bash .codex/scripts/init-project.sh
+```
+
+Cette commande crée `project-profile.toml` s'il est absent et génère un inventaire des fichiers détectés. Elle ne modifie pas le code du produit.
+
+5. Ouvrir Codex à la racine du projet. Envoyer une demande projet normale, par exemple :
+
+```text
+Je veux construire une application de réservation pour des associations locales.
+```
+
+6. Codex doit répondre uniquement par une demande de cahier des charges. Envoyer alors le cahier dans le chat. Il peut être rédigé naturellement, mais doit préciser le besoin, les utilisateurs, le périmètre, les contraintes, les critères de réussite et le hors périmètre.
+
+7. Après acceptation, Codex remplit `.codex/PROJECT-BRIEF.md`, applique le Skill `project-onboarding` et complète `.codex/project-profile.toml` avec les technologies réellement présentes ou validées.
+
+8. Vérifier que le projet est prêt :
+
+```bash
+bash .codex/scripts/preflight.sh
+```
+
+`Preflight OK` confirme que le cahier est accepté, que le profil est complet et que les contrôles structurels du kit passent.
+
+## Utilisation quotidienne
+
+Après l'onboarding, décrire une tâche avec son résultat attendu et ses critères d'acceptation. Le Coordinateur attribue ensuite les rôles, demande des preuves et impose l'audit avant clôture.
+
+Pour ne pas déclencher la porte projet dans une conversation générale, commencer le message par :
+
+```text
+Mode général : explique-moi la différence entre REST et GraphQL.
+```
+
+Pour entretenir le kit sans démarrer le produit :
+
+```text
+Mode maintenance : vérifie les Skills du kit.
+```
+
+## Arborescence importée
+
+```text
+AGENTS.md                         Instructions permanentes chargées par Codex
+.codex/agents/                    Profils des six rôles
+.codex/skills/                    Procédures réutilisables
+.codex/project-profile.toml       Technologies et commandes du projet
+.codex/PROJECT-BRIEF.md           Cahier des charges formalisé après réception
+.codex/policies/                  Qualité, Gitflow, incidents et validation
+.codex/scripts/                   Initialisation et contrôles
+.codex/work-items/                Tâches suivies et archives
+.codex/decisions/                 Décisions traçables
+.codex/metrics/                   Mesures coût et qualité
+.codex/reports/                   Rapports d'audit et de livraison
+```
+
+Les dossiers initialement vides contiennent un `.gitkeep`, afin qu'ils restent présents dans Git après import ou clonage.
+
+## À ne pas faire
+
+- Ne pas importer le kit Claude dans le même projet.
+- Ne pas modifier `PROJECT-BRIEF.md` pour simuler son acceptation sans cahier réel.
+- Ne pas lancer le preflight avant l'onboarding en attendant un succès : son blocage est intentionnel.
+- Ne pas copier une CI générique sans adapter les commandes à `project-profile.toml`.
