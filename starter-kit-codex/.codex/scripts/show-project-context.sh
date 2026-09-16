@@ -4,7 +4,7 @@ set -euo pipefail
 script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 config="$(cd "$script_dir/.." && pwd)"
 
-python3 - "$config/project-profile.toml" <<'PY'
+"$script_dir/python.sh" - "$config/project-profile.toml" <<'PY'
 import pathlib, sys, tomllib
 profile = tomllib.loads(pathlib.Path(sys.argv[1]).read_text())
 stack = profile.get('stack', {})

@@ -3,7 +3,7 @@ set -euo pipefail
 
 script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 config_root="$(cd "$script_dir/.." && pwd)"
-project_root="$(git -C "$config_root/.." rev-parse --show-toplevel 2>/dev/null || cd "$config_root/.." && pwd)"
+project_root="$(git -C "$config_root/.." rev-parse --show-toplevel 2>/dev/null || (cd "$config_root/.." && pwd))"
 
 if [ ! -f "$config_root/ORCHESTRATION.md" ]; then
   echo "Kit Claude introuvable dans $config_root"
@@ -33,5 +33,9 @@ inventory="$config_root/project-inventory.md"
     [ -f "$project_root/$file" ] && echo "- $file"
   done
 } > "$inventory"
+
+if git -C "$project_root" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+  bash "$config_root/scripts/install-git-hooks.sh"
+fi
 
 echo "Initialisation terminée: compléter $config_root/project-profile.toml avec le Skill project-onboarding."

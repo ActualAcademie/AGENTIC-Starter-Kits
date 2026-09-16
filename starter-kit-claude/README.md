@@ -15,7 +15,7 @@ Ce kit installe une gouvernance projet native pour Claude Code. Il ne construit 
 2. Définir le chemin du kit source :
 
 ```bash
-KIT_SOURCE="/chemin/vers/Agentic-Project/starter-kit-claude"
+KIT_SOURCE="/chemin/vers/agentic-starter-kits/starter-kit-claude"
 ```
 
 3. Copier le point d'entrée obligatoire et toute la configuration :
@@ -99,3 +99,33 @@ Les dossiers initialement vides contiennent un `.gitkeep`, afin qu'ils restent p
 - Ne pas modifier `PROJECT-BRIEF.md` pour simuler son acceptation sans cahier réel.
 - Ne pas lancer le preflight avant l'onboarding en attendant un succès : son blocage est intentionnel.
 - Ne pas copier une CI générique sans adapter les commandes à `project-profile.toml`.
+
+## Validation avant GitHub
+
+`init-project.sh` installe un hook Git pre-push lorsque le projet est un dépôt. Avant chaque push, le rôle responsable exécute :
+
+```bash
+bash .claude/scripts/verify-before-push.sh
+```
+
+Le contrôle lance le preflight, le socle cybersécurité et les commandes configurées dans `project-profile.toml`. Pour un projet frontend ou backend, les commandes `lint` et `test` sont obligatoires. Un échec bloque le push. Ne jamais utiliser `--no-verify`.
+
+Après onboarding, générer si nécessaire le workflow GitHub Actions du projet :
+
+```bash
+bash .claude/scripts/generate-github-ci.sh
+```
+
+Le générateur refuse de remplacer un workflow existant. Relire le fichier produit, définir les secrets dans GitHub et garder tout déploiement soumis aux validations décrites dans les politiques.
+
+## Compatibilité machine
+
+macOS et Linux : utiliser Bash avec Git, ripgrep et Python 3.11 ou plus récent.
+
+Windows : installer Git for Windows et Python 3.11 ou plus récent. Utiliser Git Bash, ou PowerShell avec le wrapper suivant :
+
+```powershell
+.\.claude\scripts\run.ps1 preflight
+```
+
+Les commandes disponibles dans le wrapper sont `init-project`, `preflight`, `verify-before-push`, `run-project-checks`, `generate-github-ci`, `show-project-context` et `doctor`.

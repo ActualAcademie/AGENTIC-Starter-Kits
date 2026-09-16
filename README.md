@@ -19,7 +19,7 @@ Deux kits portables pour démarrer un projet avec une orchestration IA structur�
 Depuis la racine du nouveau projet, définir le chemin de ce dépôt puis copier le point d'entrée et la configuration cachée :
 
 ```bash
-KIT_SOURCE="/chemin/vers/Agentic-Project/starter-kit-codex"
+KIT_SOURCE="/chemin/vers/agentic-starter-kits/starter-kit-codex"
 cp "$KIT_SOURCE/AGENTS.md" .
 cp -R "$KIT_SOURCE/.codex" .
 bash .codex/scripts/init-project.sh
@@ -34,7 +34,7 @@ Guide complet : [starter-kit-codex/README.md](starter-kit-codex/README.md).
 Depuis la racine du nouveau projet, définir le chemin de ce dépôt puis copier le point d'entrée et la configuration cachée :
 
 ```bash
-KIT_SOURCE="/chemin/vers/Agentic-Project/starter-kit-claude"
+KIT_SOURCE="/chemin/vers/agentic-starter-kits/starter-kit-claude"
 cp "$KIT_SOURCE/CLAUDE.md" .
 cp -R "$KIT_SOURCE/.claude" .
 bash .claude/scripts/init-project.sh
@@ -77,3 +77,43 @@ Les dossiers de production de décisions, métriques, rapports, archives et mod�
 ## Limites volontaires
 
 Le kit donne un cadre et des contrôles. Il ne valide jamais seul une exigence non démontrée, ne choisit pas une technologie sans information suffisante et ne remplace pas l'approbation humaine exigée par le risque, la sécurité ou le processus de livraison.
+
+## Qualité, sécurité et livraison
+
+Le dépôt valide les deux kits dans GitHub Actions à chaque pull request vers `develop` ou `main`. La validation vérifie la syntaxe Bash, les wrappers PowerShell, le refus initial sans cahier des charges et un import réel de chaque kit dans un dépôt temporaire.
+
+Après import, le projet cible applique ses propres contrôles. Avant tout push, exécuter :
+
+```bash
+# Codex
+bash .codex/scripts/verify-before-push.sh
+
+# Claude Code
+bash .claude/scripts/verify-before-push.sh
+```
+
+Cette commande bloque le push si le cahier des charges n'est pas accepté, si le profil est incomplet, si les commandes obligatoires lint et test manquent pour un projet applicatif, ou si les contrôles configurés échouent. Le hook Git est installé automatiquement par `init-project.sh`. Ne jamais contourner ce contrôle avec `--no-verify`.
+
+Pour créer un workflow GitHub Actions pour le projet cible après onboarding :
+
+```bash
+# Codex
+bash .codex/scripts/generate-github-ci.sh
+
+# Claude Code
+bash .claude/scripts/generate-github-ci.sh
+```
+
+Le fichier est généré une seule fois et ne remplace jamais un workflow existant. Adapter ensuite les commandes de `project-profile.toml` et faire relire les règles de déploiement par le rôle Cybersécurité.
+
+## Compatibilité machine
+
+Les scripts Bash fonctionnent sur macOS et Linux avec Git, Bash, ripgrep et Python 3.11 ou plus récent. Sous Windows, installer Git for Windows et Python 3.11 ou plus récent, puis lancer les commandes depuis Git Bash. Les wrappers PowerShell sont aussi disponibles :
+
+```powershell
+# Codex
+.\.codex\scripts\run.ps1 preflight
+
+# Claude Code
+.\.claude\scripts\run.ps1 preflight
+```
