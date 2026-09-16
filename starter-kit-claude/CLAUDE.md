@@ -24,3 +24,7 @@ Après réception du cahier dans le chat, le formaliser dans `.claude/PROJECT-BR
 Lire `.claude/project-profile.toml` et `.claude/models.toml` avant toute action. Résoudre le modèle du rôle et du risque avec `.claude/scripts/resolve-agent-model.sh`. Utiliser les sous-agents de `.claude/agents/` seulement pour des flux indépendants, avec contexte isolé ou expertise distincte.
 
 Ne jamais utiliser de tiret cadratin. Ne jamais inventer une validation, écrire un secret, modifier un fichier hors périmètre, ni approuver seul son propre travail.
+
+## Avant tout push GitHub
+
+L'agent responsable exécute `bash .claude/scripts/verify-before-push.sh` et rend ses résultats. Un échec bloque le push. Ne jamais contourner le hook avec `--no-verify`.
