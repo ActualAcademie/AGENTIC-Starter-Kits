@@ -14,7 +14,7 @@ if rg -n --hidden --glob '!.git/**' --glob '!node_modules/**' -- '-----BEGIN (RS
   echo "SECRET POTENTIEL DETECTE"; fail=1
 fi
 
-if python3 - "$root" <<'PY'
+if "$script_dir/python.sh" - "$root" <<'PY'
 import pathlib, sys, tomllib
 root = pathlib.Path(sys.argv[1])
 config = root / '.claude'

@@ -15,7 +15,7 @@ else
   bash "$script_dir/security-baseline.sh"
 fi
 
-python3 - "$config/project-profile.toml" "$root" "$mode" <<'PY'
+"$script_dir/python.sh" - "$config/project-profile.toml" "$root" "$mode" <<'PY'
 import pathlib, subprocess, sys, tomllib
 profile = pathlib.Path(sys.argv[1])
 root = pathlib.Path(sys.argv[2])
