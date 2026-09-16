@@ -59,6 +59,7 @@ jobs:
             [ "$kit" = "codex" ] && cp starter-kit-codex/AGENTS.md "$project_root/AGENTS.md"
             [ "$kit" = "claude" ] && cp starter-kit-claude/CLAUDE.md "$project_root/CLAUDE.md"
 
+            bash "$project_root/$config_dir/scripts/lint-kit.sh"
             bash "$project_root/$config_dir/scripts/init-project.sh"
 
             if bash "$project_root/$config_dir/scripts/preflight.sh"; then
