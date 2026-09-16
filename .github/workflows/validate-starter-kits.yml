@@ -54,6 +54,7 @@ jobs:
 
             mkdir -p "$project_root"
             git init --quiet "$project_root"
+            git -C "$project_root" checkout --quiet -b chore/ci-validation
             cp -R "starter-kit-$kit/$config_dir" "$project_root/$config_dir"
             [ "$kit" = "codex" ] && cp starter-kit-codex/AGENTS.md "$project_root/AGENTS.md"
             [ "$kit" = "claude" ] && cp starter-kit-claude/CLAUDE.md "$project_root/CLAUDE.md"

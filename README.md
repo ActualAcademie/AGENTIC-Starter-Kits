@@ -131,3 +131,7 @@ bash .claude/scripts/initialize-project-design.sh
 ```
 
 Le dossier contient la vision, les user stories et critères, les parcours, architecture et diagrammes, modèle de données, contrats, conception de sécurité, roadmap et journal des décisions. Un document non applicable doit être justifié. Les agents mettent à jour les documents touchés dans le même work item. L'Auditeur bloque une livraison lorsque le code et la conception divergent.
+
+## Gitflow obligatoire
+
+Chaque feature, correctif ou tâche documentaire se fait sur une branche dédiée. Les agents ne committent ni ne poussent directement vers `main`, `master` ou la branche dintégration. Les commits sont atomiques, limités par défaut à 75 fichiers et 1200 lignes, et ne mélangent jamais plusieurs features. `verify-before-push.sh` bloque les écarts.

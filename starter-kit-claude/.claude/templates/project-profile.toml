@@ -59,3 +59,6 @@ provider = ""
 [delivery]
 uses_pull_requests = true
 requires_human_approval_for_critical = true
+require_feature_branch = true
+max_files_per_commit = 75
+max_changed_lines_per_commit = 1200
