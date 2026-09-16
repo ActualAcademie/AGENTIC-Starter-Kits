@@ -283,3 +283,85 @@ Conserver ici les sources Mermaid ou éditables. Chaque diagramme est référenc
 DOC
 
 echo "Documentation de conception initialisée dans $docs. Remplacer tous les marqueurs [[A_COMPLETER]] par une conception issue du cahier des charges avant le preflight."
+
+write_if_missing "$docs/quality/quality-journal.md" <<'DOC'
+# Journal qualité, bugs et risques
+
+## Règle de fonctionnement
+
+Ce journal est le registre unique et chronologique des défauts, bugs, vulnérabilités, écarts de conception, régressions, résultats d audit et corrections. Tous les agents concernés lisent le journal avant leur audit et ajoutent ou mettent à jour les entrées dans le même work item. Les rapports spécialisés peuvent détailler une analyse, mais aucune anomalie ne doit exister uniquement dans un rapport isolé.
+
+## Statuts autorisés
+
+`open`, `in-progress`, `fixed`, `verified`, `accepted-risk`, `wont-fix`, `duplicate`, `blocked`.
+
+Une entrée `fixed` n est pas résolue tant qu une preuve de vérification indépendante ne l a pas fait passer à `verified`. Une entrée `accepted-risk` exige une décision humaine identifiée, une échéance de révision et une mesure de réduction du risque.
+
+## Registre principal
+
+| ID | Date | Source | Catégorie | Gravité | Composant | Description et impact | Preuve | Responsable | Work item ou commit | Correction | Vérification | Statut | Date de clôture |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+
+## Fiche détaillée obligatoire pour les niveaux élevé et critique
+
+### [[QJ-XXX]]
+
+- Détecté par : [[A_COMPLETER]]
+- Date et contexte : [[A_COMPLETER]]
+- Catégorie : bug, sécurité, conception, performance, accessibilité, test, documentation ou exploitation
+- Gravité et justification : [[A_COMPLETER]]
+- Actifs, utilisateurs ou composants affectés : [[A_COMPLETER]]
+- Scénario reproductible : [[A_COMPLETER]]
+- Preuves conservées : [[A_COMPLETER]]
+- Cause racine ou hypothèse : [[A_COMPLETER]]
+- Correction choisie et alternatives écartées : [[A_COMPLETER]]
+- Tests de non régression : [[A_COMPLETER]]
+- Vérification indépendante : [[A_COMPLETER]]
+- Risque résiduel et décision humaine éventuelle : [[A_COMPLETER]]
+DOC
+
+echo "Journal qualité initialisé dans $docs/quality/quality-journal.md"
+
+write_if_missing "$docs/project-management/trello-board.md" <<'DOC'
+# Tableau Trello du projet
+
+## Paramétrage
+
+- Nom du tableau : [[A_COMPLETER]]
+- Mode : plan-only ou création via intégration autorisée
+- Responsable du tableau : [[A_COMPLETER]]
+- Dernière synchronisation : [[A_COMPLETER]]
+
+## Règle de synchronisation
+
+Ce document est la source versionnée du tableau. Chaque carte possède un identifiant stable, un objectif, un périmètre, des dépendances, des critères d acceptation, une estimation, un responsable, une preuve attendue et un lien vers le work item. Le Coordinateur met à jour ce document avant toute création ou modification du tableau externe.
+
+## Listes du tableau
+
+1. Backlog validé
+2. Prêt à concevoir
+3. Conception en cours
+4. Prêt à développer
+5. En développement
+6. En revue
+7. En validation
+8. Bloqué
+9. Terminé
+
+## Cartes détaillées
+
+| ID | Liste | Titre | Description | Dépendances | Critères d acceptation | Preuve attendue | Responsable | Estimation | Priorité |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| CARD-001 | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] |
+
+## Checklist de complétude
+
+- Chaque user story du cahier est liée à une ou plusieurs cartes.
+- Chaque carte est assez petite pour une branche et des commits atomiques.
+- Les tâches de conception, développement, tests, sécurité, documentation et livraison sont présentes.
+- Les dépendances et blocages sont explicites.
+- Les critères d acceptation sont vérifiables.
+- Les cartes terminées référencent une preuve et un identifiant du journal qualité.
+DOC
+
+echo "Plan Trello initialisé dans $docs/project-management/trello-board.md"

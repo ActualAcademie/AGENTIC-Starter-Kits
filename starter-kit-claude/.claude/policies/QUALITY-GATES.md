@@ -11,7 +11,8 @@
 | Cybersécurité | élevé et critique | rapport de risque |
 | CI | capacité `ci` activée | workflow et résultat observable |
 | CD | capacité `deployment` activée | plan explicite, retour et approbation |
-| Audit indépendant | toute livraison | matrice de preuves |
+| Journal qualité partagé | toute anomalie ou livraison | entrée, responsable, preuve et statut dans `docs/quality/quality-journal.md` |
+| Audit indépendant | toute livraison | matrice de preuves et identifiants du journal |
 | Plan de retour | élevé et critique | procédure testable |
 | Approbation humaine | critique | décision enregistrée |
 

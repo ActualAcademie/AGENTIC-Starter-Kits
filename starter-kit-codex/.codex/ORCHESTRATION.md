@@ -7,7 +7,7 @@ Ce répertoire s'importe dans tout nouveau projet. Il adapte les contrôles à p
 ## Cycle obligatoire
 
 1. Recevoir et accepter le cahier des charges.
-2. Initialiser le profil du projet.
+2. Recevoir le choix Trello et initialiser le profil du projet.
 3. Créer un work item.
 4. Évaluer le risque.
 5. Choisir rôle et Skill.

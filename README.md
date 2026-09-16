@@ -139,3 +139,11 @@ Chaque feature, correctif ou tâche documentaire se fait sur une branche dédié
 ## Dossier de conception de niveau CDA
 
 Le générateur de conception produit des documents structurés, mais aucun marqueur `[[A_COMPLETER]]` ne peut rester avant le preflight. Après le cahier accepté, le Concepteur transforme chaque modèle en dossier complet : contexte, objectifs mesurables, acteurs, user stories et critères, règles métier, scénarios d erreur, parcours, diagrammes Mermaid, architecture, données, contrats, sécurité, roadmap, stratégie de validation, rollback et décisions. Un simple squelette ne valide pas le projet.
+
+Le journal qualité partagé est `docs/quality/quality-journal.md`. Il est alimenté par tous les audits et toutes les corrections. Une anomalie possède un identifiant stable, une preuve, un propriétaire, une correction et une vérification indépendante.
+
+## Choix Trello obligatoire
+
+Après acceptation du cahier des charges, l agent demande une réponse explicite : `Veux-tu que je prépare un Trello complet avec toutes les tâches détaillées du projet ? Réponds oui ou non.` Le choix est enregistré dans `project-profile.toml`.
+
+Avec `oui`, le Coordinateur et le Skill `trello-planning` construisent `docs/project-management/trello-board.md` avec les listes, cartes, dépendances, responsables, estimations, critères d acceptation, preuves, tâches de sécurité, tests, documentation, audit et livraison. Une création externe nécessite une intégration autorisée. Avec `non`, le projet continue sans tableau Trello, sans ambiguïté.

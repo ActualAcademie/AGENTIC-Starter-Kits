@@ -26,7 +26,8 @@ Après acceptation du cahier des charges, après un changement majeur de stack o
 5. Définir les commandes de validation réellement disponibles.
 6. Conserver les conventions existantes, y compris la branche d'intégration.
 7. Créer une décision locale si une convention est absente ou contradictoire.
-8. Exécuter `bash .claude/scripts/initialize-project-design.sh`, puis appliquer le Skill `conception` pour compléter `docs/` avant toute implémentation.
+8. Si `tracking.trello_choice = "enabled"`, appliquer le Skill `trello-planning` et compléter `docs/project-management/trello-board.md` avec toutes les cartes détaillées avant l implémentation.
+9. Exécuter `bash .claude/scripts/initialize-project-design.sh`, puis appliquer le Skill `conception` pour compléter `docs/` avant toute implémentation.
 
 ## Sortie
 

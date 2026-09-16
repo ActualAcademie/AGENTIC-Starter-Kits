@@ -61,12 +61,22 @@ try:
 except Exception as exc:
     print(f'PROFIL INVALIDE: {exc}')
     raise SystemExit(1)
+tracking_data = data.get("tracking", {})
+trello_choice = tracking_data.get("trello_choice", "pending")
+if trello_choice not in ("enabled", "disabled"):
+    print("CHOIX TRELLO MANQUANT: répondre oui ou non dans le profil")
+    raise SystemExit(1)
+if trello_choice == "enabled" and not str(tracking_data.get("trello_board_name", "")).strip():
+    print("PROFIL INCOMPLET: trello_board_name requis si Trello est activé")
+    raise SystemExit(1)
 design_files = (
     "docs/README.md", "docs/product/vision-and-scope.md", "docs/product/user-stories.md",
     "docs/product/user-flows.md", "docs/design/architecture.md", "docs/design/data-model.md",
     "docs/design/api-contracts.md", "docs/design/security-design.md", "docs/delivery/roadmap.md",
-    "docs/delivery/decision-log.md", "docs/diagrams/README.md",
+    "docs/delivery/decision-log.md", "docs/diagrams/README.md", "docs/quality/quality-journal.md",
 )
+if data.get("tracking", {}).get("trello_choice") == "enabled":
+    design_files = design_files + ("docs/project-management/trello-board.md",)
 missing_design = [path for path in design_files if not (root / path).is_file()]
 if missing_design:
     print(f"CONCEPTION INCOMPLETE: initialiser et compléter docs/: {chr(44).join(missing_design)}")
