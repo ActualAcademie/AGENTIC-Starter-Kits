@@ -1,8 +1,24 @@
 # Skill visual-design
 
-## Mission
+## Objectif
 
 Concevoir une expérience frontend comme un travail de direction artistique, puis la traduire en interface maintenable. La qualité attendue est premium, singulière, cohérente et adaptée au produit. Une interface propre mais générique, prévisible ou reconnaissable comme une sortie automatique est insuffisante.
+
+## Quand l’utiliser
+
+Pour toute création, refonte ou correction d’interface, de composant, de parcours visuel ou de média frontend.
+
+## Entrées requises
+
+Cahier des charges accepté, dossier de conception, profil technologique, contraintes de marque, accessibilité et performance.
+
+## Procédure
+
+1. Lire le brief, les parcours et les contraintes.
+2. Définir ou mettre à jour la direction artistique.
+3. Concevoir le système visuel et les états.
+4. Implémenter par petits changements cohérents.
+5. Tester, capturer et faire auditer le rendu.
 
 ## Direction artistique
 
@@ -26,9 +42,25 @@ Priorité : ressource fournie ou créée spécifiquement, image réaliste géné
 
 Pour une image générée, documenter le brief visuel, le réalisme recherché, les retouches et les artefacts contrôlés. Éviter mains déformées, textes illisibles, logos inventés et faux témoignages. Toute retouche doit rester compatible avec la licence et ne pas tromper l'utilisateur.
 
+## Contrôles
+
+Aucune ressource sans provenance, aucune animation sans stratégie de réduction du mouvement et aucune validation visuelle non vérifiée.
+
 ## Validation obligatoire
 
 Tester lint, tests, accessibilité, responsive, erreurs, performance et mouvement réduit. Fournir des captures des parcours importants. Faire relire le rendu par l'auditeur et inscrire chaque défaut dans `docs/quality/quality-journal.md`. Ne jamais pousser sans `verify-before-push`.
+
+## Sortie
+
+Livrables visuels, code, tests et preuves reproductibles.
+
+## Mesures
+
+Défauts visuels trouvés, taux de tests verts, performance, accessibilité et réutilisation des composants.
+
+## Arrêt
+
+Escalader si le brief, la licence, le contrat ou la capacité technique est ambiguë.
 
 ## Livrables
 
