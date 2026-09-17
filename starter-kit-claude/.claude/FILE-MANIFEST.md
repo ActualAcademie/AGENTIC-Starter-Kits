@@ -3,7 +3,7 @@
 ## Fichiers obligatoires du noyau
 
 - `KIT.toml`, `ORCHESTRATION.md`, `GOVERNANCE.md`, `PROJECT-CONTEXT.md`, `PROJECT-DATA-BOUNDARY.md`
-- `RISK-MATRIX.md`, `MODEL-POLICY.md`, `models.toml`, `COST-AND-EVALUATION.md`, `ADAPTERS.md`
+- `RISK-MATRIX.md`, `RUNTIME-STATE.md`, `MODEL-POLICY.md`, `models.toml`, `COST-AND-EVALUATION.md`, `ADAPTERS.md`
 - `policies/`, `agents/`, `prompts/`, `skills/`, `scripts/`, `templates/`, `evaluations/`
 
 ## Attentes de qualité
