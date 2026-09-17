@@ -393,7 +393,7 @@ write_if_missing "$docs/project-management/trello-board.md" <<'DOC'
 ## Paramétrage
 
 - Nom du tableau : [[A_COMPLETER]]
-- Mode : plan-only ou création via intégration autorisée
+- Mode : tableau complet toujours généré ; synchronisation externe si intégration autorisée
 - Responsable du tableau : [[A_COMPLETER]]
 - Dernière synchronisation : [[A_COMPLETER]]
 
@@ -421,9 +421,21 @@ Ce document est la source versionnée du tableau. Chaque carte possède un ident
 
 ## Cartes détaillées
 
-| ID | Liste | Titre | Description | Dépendances | Critères d acceptation | Preuve attendue | Responsable | Estimation | Priorité |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| CARD-001 | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] |
+| ID | Liste | Feature | Titre | Description détaillée | Dépendances | Critères d acceptation | Preuve | Responsable | Estimation | Priorité |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| CARD-001 | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] |
+
+### Checklist Definition of Done de chaque carte
+
+- [ ] Conception et contrat concernés mis à jour
+- [ ] Code de la feature terminé sur sa branche dédiée
+- [ ] Cas nominal et cas d erreur testés
+- [ ] Sécurité et permissions vérifiées
+- [ ] Accessibilité et responsive vérifiés si frontend
+- [ ] Documentation et journal qualité mis à jour
+- [ ] Revue indépendante effectuée
+- [ ] Preuve reproductible ajoutée
+- [ ] Pull Request validée et prête à fusionner
 
 ## Checklist de complétude
 

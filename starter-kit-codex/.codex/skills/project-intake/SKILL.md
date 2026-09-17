@@ -19,7 +19,7 @@ Un cahier des charges fourni par l'utilisateur dans le chat. Il peut être struc
 3. À réception, reformuler seulement les éléments nécessaires dans `.codex/PROJECT-BRIEF.md`.
 4. Marquer le statut `accepted` uniquement si vision, utilisateurs, objectifs, périmètre, contraintes et critères de réussite sont présents.
 5. Demander explicitement : `Veux-tu que je prépare un Trello complet avec toutes les tâches détaillées du projet ? Réponds oui ou non.` Ne jamais déduire la réponse.
-6. Enregistrer `tracking.trello_choice = "enabled"` si la réponse est oui, ou `tracking.trello_choice = "disabled"` si la réponse est non. Si oui, demander immédiatement, dans la même séquence, le nom du tableau, le mode `plan-only` ou création via une intégration autorisée, puis la liste complète des membres avec pour chacun nom, rôle projet et identifiant Trello si connu. Ne jamais attribuer une carte à un membre dont le rôle n est pas confirmé.
+6. Enregistrer `tracking.trello_choice = "enabled"` si la réponse est oui, ou `tracking.trello_choice = "disabled"` si la réponse est non. Si oui, demander immédiatement le nom du tableau et la liste complète des membres avec pour chacun nom, rôle projet et identifiant Trello si connu. Ne plus proposer `plan-only` ou un choix de mode : le tableau complet est toujours généré localement, puis créé ou synchronisé dans Trello si une intégration autorisée est disponible. Ne jamais attribuer une carte à un membre dont le rôle n est pas confirmé.
 7. Lister les inconnues qui demandent une décision humaine, sans bloquer les détails secondaires.
 8. Passer ensuite au Skill `project-onboarding` pour adapter le profil technique.
 
