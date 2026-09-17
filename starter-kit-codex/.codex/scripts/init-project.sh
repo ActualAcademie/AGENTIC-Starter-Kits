@@ -38,4 +38,16 @@ if git -C "$project_root" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
   bash "$config_root/scripts/install-git-hooks.sh"
 fi
 
+if [ -f "$project_root/.gitignore" ]; then
+  gitignore="$project_root/.gitignore"
+else
+  gitignore="$project_root/.gitignore"
+  touch "$gitignore"
+fi
+for ignored_path in ".codex/" "AGENTS.md"; do
+  if ! grep -Fqx "$ignored_path" "$gitignore"; then
+    printf '%s\n' "$ignored_path" >> "$gitignore"
+  fi
+done
+
 echo "Initialisation terminée: compléter $config_root/project-profile.toml avec le Skill project-onboarding."
