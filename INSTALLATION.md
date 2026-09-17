@@ -6,11 +6,11 @@ Ce guide explique comment importer un kit dans un nouveau projet et démarrer un
 
 Installer :
 
-- Git ;
-- Bash sur macOS ou Linux ;
-- Git for Windows avec Git Bash sur Windows ;
-- Python 3.11 ou plus récent ;
-- ripgrep ;
+- Git.
+- Bash sur macOS ou Linux.
+- Git for Windows avec Git Bash sur Windows.
+- Python 3.11 ou plus récent.
+- Ripgrep.
 - Codex ou Claude Code selon le kit choisi.
 
 Vérifier les outils :
@@ -45,16 +45,16 @@ Pour Codex :
 
 ```bash
 KIT_SOURCE="/chemin/vers/agentic-starter-kits/starter-kit-codex"
-cp "$KIT_SOURCE/AGENTS.md" .
-cp -R "$KIT_SOURCE/.codex" .
+cp "$KIT_SOURCE/AGENTS.md".
+cp -R "$KIT_SOURCE/.codex".
 ```
 
 Pour Claude Code :
 
 ```bash
 KIT_SOURCE="/chemin/vers/agentic-starter-kits/starter-kit-claude"
-cp "$KIT_SOURCE/CLAUDE.md" .
-cp -R "$KIT_SOURCE/.claude" .
+cp "$KIT_SOURCE/CLAUDE.md".
+cp -R "$KIT_SOURCE/.claude".
 ```
 
 Ne pas copier `starter-kit-codex` ou `starter-kit-claude` en tant que dossier dans le projet. Copier leur point d’entrée et leur dossier caché à la racine du projet.
@@ -103,15 +103,15 @@ Tant que le cahier des charges n’est pas reçu et accepté, l’agent ne doit 
 
 Le cahier doit préciser au minimum :
 
-- le problème et la vision ;
-- les utilisateurs et parties prenantes ;
-- les objectifs mesurables ;
-- les fonctionnalités attendues ;
-- le périmètre et le hors périmètre ;
-- les contraintes de délai, budget, plateformes, conformité et sécurité ;
-- les critères de réussite ;
-- les intégrations et données concernées ;
-- les inconnues nécessitant une décision humaine.
+- Le problème et la vision.
+- Les utilisateurs et parties prenantes.
+- Les objectifs mesurables.
+- Les fonctionnalités attendues.
+- Le périmètre et le hors périmètre.
+- Les contraintes de délai, budget, plateformes, conformité et sécurité.
+- Les critères de réussite.
+- Les intégrations et données concernées.
+- Les inconnues nécessitant une décision humaine.
 
 L’agent formalise ensuite le document propre au projet :
 
@@ -134,8 +134,8 @@ Répondre explicitement `oui` ou `non`.
 
 Si la réponse est `oui`, fournir aussi, si possible, le nom du tableau et préciser si l’on veut :
 
-- un plan Trello versionné uniquement dans le dépôt ;
-- une création ou synchronisation externe via une intégration autorisée.
+- Un plan Trello versionné uniquement dans le dépôt.
+- Une création ou synchronisation externe via une intégration autorisée.
 
 Le choix est inscrit dans `project-profile.toml`. Avec `oui`, l’agent génère `docs/project-management/trello-board.md` et le complète avec les listes, cartes, descriptions, dépendances, responsables, estimations, critères, preuves, tests, sécurité, documentation, audit et livraison. Le kit ne fabrique pas de tableau externe sans intégration et autorisation disponibles.
 
@@ -150,14 +150,14 @@ L’agent lit l’inventaire, les manifests et les fichiers de configuration. Il
 
 Ce fichier contient notamment :
 
-- langages ;
-- frameworks frontend et backend ;
-- base de données et ORM ;
-- runtime et gestionnaire de paquets ;
-- commandes install, lint, test, build et sécurité ;
-- CI, déploiement, authentification et capacités ;
-- choix Trello ;
-- limites Gitflow et règles de livraison.
+- Langages.
+- Frameworks frontend et backend.
+- Base de données et ORM.
+- Runtime et gestionnaire de paquets.
+- Commandes install, lint, test, build et sécurité.
+- CI, déploiement, authentification et capacités.
+- Choix Trello.
+- Limites Gitflow et règles de livraison.
 
 Ne pas remplir ce fichier avec une technologie supposée.
 
@@ -201,16 +201,16 @@ Le résultat attendu est `Preflight OK`. Un échec est intentionnel lorsqu’il 
 
 Demander à l’agent de créer une tâche atomique avec :
 
-- objectif ;
-- hors périmètre ;
-- critères d’acceptation ;
-- rôle responsable ;
-- fichiers’autorisés ;
-- dépendances ;
-- niveau de risque ;
-- budget et règle d’arrêt ;
-- preuve attendue ;
-- documents de conception à mettre à jour.
+- Objectif.
+- Hors périmètre.
+- Critères d’acceptation.
+- Rôle responsable.
+- Fichiers’autorisés.
+- Dépendances.
+- Niveau de risque.
+- Budget et règle d’arrêt.
+- Preuve attendue.
+- Documents de conception à mettre à jour.
 
 Chaque feature doit avoir une branche dédiée :
 
