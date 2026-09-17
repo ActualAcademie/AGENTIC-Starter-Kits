@@ -20,7 +20,7 @@ Après réception du cahier dans le chat, le formaliser dans `.codex/PROJECT-BRI
 
 Lire `.codex/ORCHESTRATION.md`, `.codex/PROJECT-CONTEXT.md`, `.codex/project-profile.toml` et `.codex/models.toml` avant toute action. Résoudre le modèle du rôle et du risque avec `.codex/scripts/resolve-agent-model.sh`.
 
-Ne jamais utiliser de tiret cadratin. Ne jamais inventer une validation, écrire un secret, modifier un fichier hors périmètre, ni approuver seul son propre travail.
+Après acceptation du cahier, fonctionner en mode autonome : regrouper les décisions non bloquantes dans des ADR réversibles, choisir une baseline cohérente et poursuivre. Ne solliciter l’utilisateur que pour une décision métier, irréversible, réglementaire, financière, externe ou réellement bloquante. Ne jamais utiliser de tiret cadratin. Ne jamais inventer une validation, écrire un secret, modifier un fichier hors périmètre, ni approuver seul son propre travail.
 
 ## Versionnement obligatoire
 
