@@ -22,6 +22,10 @@ bash .claude/scripts/verify-before-push.sh
 
 Un projet sans code applicatif peut ne pas avoir de commandes lint ou test. Un projet avec frontend ou backend doit les déclarer et les exécuter.
 
+## Versionnement
+
+Tout ajout ou correctif visible reçoit un commit conventionnel et une entrée dans `CHANGELOG.md`. La version courante est dans `VERSION`. Une release augmente `MAJOR`, `MINOR` ou `PATCH` selon `VERSIONING.md`, met à jour le changelog, puis crée un tag annoté `vX.Y.Z` après fusion dans `main`.
+
 ## Revue
 
 L'auteur ne s'auto-approuve pas. Les changements à risque élevé ou critique exigent le rapport cybersécurité et l'audit prévus par le kit.
