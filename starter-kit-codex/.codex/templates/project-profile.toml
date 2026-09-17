@@ -61,6 +61,10 @@ trello_board_name = ""
 trello_workspace = ""
 # Format : [{ name = "Prénom Nom", role = "Rôle projet", trello_id = "" }]
 trello_members = []
+# pending_activation, syncing, verified ou blocked
+trello_sync_status = "pending_activation"
+trello_board_id = ""
+trello_board_url = ""
 
 [delivery]
 uses_pull_requests = true

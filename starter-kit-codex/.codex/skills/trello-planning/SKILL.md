@@ -6,7 +6,7 @@ Transformer le cahier des charges, la conception et les résultats d audit en un
 
 ## Quand l utiliser
 
-Uniquement après une réponse utilisateur positive au choix Trello et après acceptation du cahier des charges. Le tableau complet versionné est toujours créé dans `docs/project-management/trello-board.md`. Après une réponse `oui`, l agent doit aussi créer réellement le tableau sur la plateforme Trello avec l intégration connectée. Il ne doit jamais s arrêter au fichier local si l intégration est disponible. Si elle est indisponible, il doit signaler explicitement le blocage et fournir le fichier prêt à synchroniser.
+Uniquement après une réponse utilisateur positive au choix Trello et après acceptation du cahier des charges. Le tableau complet versionné est toujours créé dans `docs/project-management/trello-board.md`. Après une réponse `oui`, l agent passe par les états `pending_activation`, `syncing`, `verified` ou `blocked`. Il doit créer réellement le tableau sur Trello avec l intégration connectée. Il ne doit jamais s arrêter au fichier local si l intégration est disponible. Si l intégration est absente, il demande son activation, attend la confirmation de l utilisateur et reprend. Si elle reste indisponible, il signale explicitement le blocage et fournit le fichier prêt à synchroniser.
 
 ## Entrées
 
@@ -22,10 +22,12 @@ Cahier, dossier `docs/`, profil, roadmap, journal qualité, work items, contrain
 6. Ajouter à chaque carte une checklist explicite : conception à jour, code, tests, sécurité, accessibilité si applicable, documentation, revue, preuve et Definition of Done.
 7. Ajouter les cartes de correction pour chaque entrée ouverte du journal qualité.
 8. Produire `docs/project-management/trello-board.md` avant toute synchronisation externe.
-9. Avec l intégration Trello disponible, rechercher le workspace cible, créer le tableau avec une visibilité adaptée, puis créer toutes les listes dans l ordre défini.
-10. Créer chaque carte dans sa liste avec son titre, sa description complète, ses critères, dépendances, responsable et Definition of Done. Créer la checklist et chacun de ses items dans Trello.
-11. Relire le tableau, les listes, les cartes et les checklists depuis Trello. Conserver les identifiants et URLs dans `docs/project-management/trello-board.md`.
-12. Synchroniser le statut Trello avec les work items, la roadmap et le journal qualité à chaque livraison.
+9. Lire `tracking.trello_board_id` et `tracking.trello_sync_status`. Si un identifiant existe, reprendre le tableau existant. Sinon, rechercher un tableau de même nom avant toute création afin d’éviter un doublon.
+10. Si les outils Trello sont absents, enregistrer `pending_activation`, demander à l’utilisateur d’activer le plugin et ne pas annoncer de synchronisation.
+11. Avec l’intégration Trello disponible, passer à `syncing`, rechercher le workspace cible, créer ou reprendre le tableau avec une visibilité adaptée, puis créer les listes manquantes dans l’ordre défini.
+12. Créer ou reprendre chaque carte par son identifiant stable ou son titre préfixé, sans doublon, dans sa liste avec son titre, sa description complète, ses critères, dépendances, responsable et Definition of Done. dans sa liste avec son titre, sa description complète, ses critères, dépendances, responsable et Definition of Done. Créer la checklist et chacun de ses items dans Trello.
+13. Relire le tableau, les listes, les cartes et les checklists depuis Trello. Conserver les identifiants et URLs dans `docs/project-management/trello-board.md`, puis passer `trello_sync_status` à `verified` uniquement si le tableau, les listes, les cartes, les checklists et les membres attendus sont relus avec succès.
+14. Synchroniser le statut Trello avec les work items, la roadmap et le journal qualité à chaque livraison.
 
 ## Sortie
 

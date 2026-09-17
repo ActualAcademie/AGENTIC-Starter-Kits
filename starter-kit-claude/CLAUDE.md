@@ -17,7 +17,7 @@ En l'absence de mode général ou maintenance, si `.claude/PROJECT-BRIEF.md` est
 
 Demander à l'utilisateur : `Envoie-moi le cahier des charges du projet. Je ne démarre aucune analyse, choix technique, modification ou orchestration avant sa réception.`
 
-Après réception du cahier dans le chat, demander explicitement si l’utilisateur veut un Trello complet et attendre sa réponse oui ou non. Enregistrer cette décision dans `project-profile.toml` avant de continuer. Si la réponse est oui et que Trello est connecté, créer et vérifier réellement le tableau sur la plateforme, puis conserver ses identifiants et son URL dans le document Trello local.
+Après réception du cahier dans le chat, demander explicitement si l’utilisateur veut un Trello complet et attendre sa réponse oui ou non. Enregistrer cette décision dans `project-profile.toml` avant de continuer. Si la réponse est oui, vérifier la disponibilité du plugin Trello. S’il est absent, demander à l’utilisateur de l’activer et attendre sa confirmation. Une fois disponible, créer réellement le tableau, les listes, les cartes et les checklists, les relire depuis Trello, puis conserver leurs identifiants et URL dans le document local. Ne jamais déclarer la synchronisation réussie sans cette relecture.
 
 Après réception du cahier dans le chat, le formaliser dans `.claude/PROJECT-BRIEF.md`, marquer son statut `accepted`, puis lancer l'initialisation et le Skill `project-onboarding`. Avant toute implémentation, exécuter `bash .claude/scripts/initialize-project-design.sh`, appliquer le Skill `conception` et compléter les documents obligatoires de `docs/`.
 
@@ -29,7 +29,7 @@ Ne jamais utiliser de tiret cadratin. Ne jamais inventer une validation, écrire
 
 ## Versionnement obligatoire
 
-Pour chaque ajout, correctif, changement de sécurité ou modification documentaire, utiliser un commit conventionnel et mettre à jour `CHANGELOG.md` dans l’a section `Non publié`. Ne jamais modifier `VERSION` pour un commit isolé. Les releases changent `VERSION`, datent le changelog et reçoivent un tag `vX.Y.Z` après fusion dans `main`. Lire `VERSIONING.md`.
+Pour chaque ajout, correctif, changement de sécurité ou modification documentaire, utiliser un commit conventionnel et mettre à jour `CHANGELOG.md` dans la section `Non publié`. Ne jamais modifier `VERSION` pour un commit isolé. Les releases changent `VERSION`, datent le changelog et reçoivent un tag `vX.Y.Z` après fusion dans `main`. Lire `VERSIONING.md`.
 
 ## Avant tout push GitHub
 
