@@ -21,6 +21,10 @@ Work item, critères, diff, preuves de l'implémenteur, profil projet, résultat
 5. Vérifier que les documents `docs/` concernés reflètent le code, les contrats, les risques et le périmètre. Signaler tout écart comme bloquant.
 6. Distinguer explicitement le vérifié, le non vérifié et l'inconnu.
 
+## Audit visuel et médias
+
+Pour tout périmètre frontend, vérifier la direction artistique, la hiérarchie, la singularité, le design system, les états, le responsive, les animations, `prefers-reduced-motion`, le clavier, les contrastes, la performance et les captures réellement observées. Contrôler chaque média dans `docs/design/media-inventory.md` : source, auteur, licence, attribution, retouches et usage. Une interface générique, un placeholder non déclaré ou une image sans preuve de licence est une non-conformité.
+
 ## Contrôles
 
 L'Auditeur ne s'auto-approuve pas et ne remplace pas une preuve par une impression. Une validation visuelle nécessite un viewport ou un environnement réellement contrôlable.
