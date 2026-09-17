@@ -26,7 +26,7 @@ Sous Windows, ouvrir Git Bash depuis la racine du projet. PowerShell peut être 
 
 ## 2. Créer ou ouvrir le projet
 
-Créer un dossier dédié au projet, puis l ouvrir dans un terminal :
+Créer un dossier dédié au projet, puis l’ouvrir dans un terminal :
 
 ```bash
 mkdir mon-projet
@@ -57,7 +57,7 @@ cp "$KIT_SOURCE/CLAUDE.md" .
 cp -R "$KIT_SOURCE/.claude" .
 ```
 
-Ne pas copier `starter-kit-codex` ou `starter-kit-claude` en tant que dossier dans le projet. Copier leur point d entrée et leur dossier caché à la racine du projet.
+Ne pas copier `starter-kit-codex` ou `starter-kit-claude` en tant que dossier dans le projet. Copier leur point d’entrée et leur dossier caché à la racine du projet.
 
 ## 4. Initialiser le kit
 
@@ -73,11 +73,11 @@ Claude Code :
 bash .claude/scripts/init-project.sh
 ```
 
-L initialisation crée le profil s il est absent, génère l inventaire du projet et installe le hook Git pre-push. Elle ne modifie pas le code produit.
+L’initialisation crée le profil s’il est absent, génère l’inventaire du projet et installe le hook Git pre-push. Elle ne modifie pas le code produit.
 
 ## 5. Démarrer la première conversation
 
-Ouvrir l outil choisi à la racine du projet.
+Ouvrir l’outil choisi à la racine du projet.
 
 Codex :
 
@@ -97,7 +97,7 @@ Envoyer une demande projet simple, par exemple :
 Je veux construire une application de réservation pour des associations locales.
 ```
 
-Tant que le cahier des charges n est pas reçu et accepté, l agent ne doit pas analyser la stack, écrire du code, créer une tâche ou lancer une orchestration.
+Tant que le cahier des charges n’est pas reçu et accepté, l’agent ne doit pas analyser la stack, écrire du code, créer une tâche ou lancer une orchestration.
 
 ## 6. Fournir le cahier des charges
 
@@ -113,7 +113,7 @@ Le cahier doit préciser au minimum :
 - les intégrations et données concernées ;
 - les inconnues nécessitant une décision humaine.
 
-L agent formalise ensuite le document propre au projet :
+L’agent formalise ensuite le document propre au projet :
 
 ```text
 .codex/PROJECT-BRIEF.md   pour Codex
@@ -124,7 +124,7 @@ Le statut doit devenir `accepted` uniquement lorsque les informations essentiell
 
 ## 7. Répondre au choix Trello
 
-Après le cahier, l agent pose obligatoirement cette question :
+Après le cahier, l’agent pose obligatoirement cette question :
 
 ```text
 Veux-tu que je prépare un Trello complet avec toutes les tâches détaillées du projet ? Réponds oui ou non.
@@ -132,16 +132,16 @@ Veux-tu que je prépare un Trello complet avec toutes les tâches détaillées d
 
 Répondre explicitement `oui` ou `non`.
 
-Si la réponse est `oui`, fournir aussi, si possible, le nom du tableau et préciser si l on veut :
+Si la réponse est `oui`, fournir aussi, si possible, le nom du tableau et préciser si l’on veut :
 
 - un plan Trello versionné uniquement dans le dépôt ;
 - une création ou synchronisation externe via une intégration autorisée.
 
-Le choix est inscrit dans `project-profile.toml`. Avec `oui`, l agent génère `docs/project-management/trello-board.md` et le complète avec les listes, cartes, descriptions, dépendances, responsables, estimations, critères, preuves, tests, sécurité, documentation, audit et livraison. Le kit ne fabrique pas de tableau externe sans intégration et autorisation disponibles.
+Le choix est inscrit dans `project-profile.toml`. Avec `oui`, l’agent génère `docs/project-management/trello-board.md` et le complète avec les listes, cartes, descriptions, dépendances, responsables, estimations, critères, preuves, tests, sécurité, documentation, audit et livraison. Le kit ne fabrique pas de tableau externe sans intégration et autorisation disponibles.
 
-## 8. Laisser l agent détecter la stack
+## 8. Laisser l’agent détecter la stack
 
-L agent lit l inventaire, les manifests et les fichiers de configuration. Il complète uniquement les faits vérifiables dans :
+L’agent lit l’inventaire, les manifests et les fichiers de configuration. Il complète uniquement les faits vérifiables dans :
 
 ```text
 .codex/project-profile.toml
@@ -163,7 +163,7 @@ Ne pas remplir ce fichier avec une technologie supposée.
 
 ## 9. Générer et compléter la conception
 
-Après acceptation du cahier et du choix Trello, l agent exécute le générateur de conception.
+Après acceptation du cahier et du choix Trello, l’agent exécute le générateur de conception.
 
 Codex :
 
@@ -179,9 +179,9 @@ bash .claude/scripts/initialize-project-design.sh
 
 Le Concepteur remplace tous les marqueurs de modèle dans `docs/` et produit une conception exploitable de niveau CDA : vision, acteurs, objectifs, user stories, règles métier, critères, erreurs, parcours, diagrammes Mermaid, architecture, données, contrats, sécurité, roadmap, rollback et décisions.
 
-Aucun document ne doit rester générique. Un document non applicable doit contenir une justification précise. Le preflight bloque tant qu un marqueur `[[A_COMPLETER]]` reste présent.
+Aucun document ne doit rester générique. Un document non applicable doit contenir une justification précise. Le preflight bloque tant qu’un marqueur `[[A_COMPLETER]]` reste présent.
 
-## 10. Vérifier l onboarding
+## 10. Vérifier l’onboarding
 
 Codex :
 
@@ -195,20 +195,20 @@ Claude Code :
 bash .claude/scripts/preflight.sh
 ```
 
-Le résultat attendu est `Preflight OK`. Un échec est intentionnel lorsqu il manque le cahier, le choix Trello, le profil, la conception ou une preuve obligatoire.
+Le résultat attendu est `Preflight OK`. Un échec est intentionnel lorsqu’il manque le cahier, le choix Trello, le profil, la conception ou une preuve obligatoire.
 
 ## 11. Créer un premier work item
 
-Demander à l agent de créer une tâche atomique avec :
+Demander à l’agent de créer une tâche atomique avec :
 
 - objectif ;
 - hors périmètre ;
-- critères d acceptation ;
+- critères d’acceptation ;
 - rôle responsable ;
-- fichiers autorisés ;
+- fichiers’autorisés ;
 - dépendances ;
 - niveau de risque ;
-- budget et règle d arrêt ;
+- budget et règle d’arrêt ;
 - preuve attendue ;
 - documents de conception à mettre à jour.
 
@@ -228,7 +228,7 @@ Le journal est créé ici :
 docs/quality/quality-journal.md
 ```
 
-Tous les agents d audit ou de correction l utilisent. Chaque anomalie doit avoir un identifiant, une source, une catégorie, une gravité, un impact, une preuve, un responsable, une correction et un statut. Une correction passe par `fixed`, puis `verified` après une vérification indépendante.
+Tous les agents d’audit ou de correction l’utilisent. Chaque anomalie doit avoir un identifiant, une source, une catégorie, une gravité, un impact, une preuve, un responsable, une correction et un statut. Une correction passe par `fixed`, puis `verified` après une vérification indépendante.
 
 ## 13. Valider avant chaque push
 
@@ -248,7 +248,7 @@ La commande vérifie la branche, les commits atomiques, le preflight, la sécuri
 
 ## 14. Générer la CI du projet
 
-Après onboarding, si le projet ne possède pas déjà une CI :
+Après l’onboarding, si le projet ne possède pas déjà une CI :
 
 ```bash
 # Codex
@@ -258,7 +258,7 @@ bash .codex/scripts/generate-github-ci.sh
 bash .claude/scripts/generate-github-ci.sh
 ```
 
-Le générateur refuse d écraser un workflow existant. Relire les commandes, configurer les secrets dans GitHub et faire vérifier le déploiement par Cybersécurité.
+Le générateur refuse d’écraser un workflow existant. Relire les commandes, configurer les secrets dans GitHub et faire vérifier le déploiement par Cybersécurité.
 
 ## 15. GitFlow de livraison
 
@@ -268,7 +268,7 @@ Le flux est :
 feature ou fix -> Pull Request -> develop -> Pull Request de release -> main -> tag vX.Y.Z
 ```
 
-Avant promotion, exiger les preuves du Coordinateur, de l agent responsable, de Cybersécurité lorsque nécessaire et de l Auditeur. Le changement visible est inscrit dans `CHANGELOG.md`.
+Avant promotion, exiger les preuves du Coordinateur, de l’agent responsable, de Cybersécurité lorsque nécessaire et de l’Auditeur. Le changement visible est inscrit dans `CHANGELOG.md`.
 
 ## 16. Modes qui évitent le faux démarrage
 
@@ -284,7 +284,7 @@ Pour entretenir le kit sans construire le produit :
 Mode maintenance : vérifie les Skills et les contrôles du kit.
 ```
 
-Sans préfixe, la conversation est considérée comme une demande projet et la porte cahier des charges s applique.
+Sans préfixe, la conversation est considérée comme une demande projet et la porte cahier des charges s’applique.
 
 ## 17. Diagnostic
 
@@ -302,4 +302,4 @@ bash .claude/scripts/doctor.sh
 .\.claude\scripts\run.ps1 doctor
 ```
 
-Sous Windows, utiliser PowerShell pour les wrappers `run.ps1`. Sous macOS et Linux, utiliser Bash. En cas de désaccord entre documentation, code et profil, l agent arrête l action et documente l inconnue.
+Sous Windows, utiliser PowerShell pour les wrappers `run.ps1`. Sous macOS et Linux, utiliser Bash. En cas de désaccord entre documentation, code et profil, l’agent arrête l’action et documente l’inconnue.

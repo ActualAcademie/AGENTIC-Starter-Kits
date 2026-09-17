@@ -102,7 +102,7 @@ bash .codex/scripts/verify-before-push.sh
 
 Le contrôle lance le preflight, le socle cybersécurité et les commandes configurées dans `project-profile.toml`. Pour un projet frontend ou backend, les commandes `lint` et `test` sont obligatoires. Un échec bloque le push. Ne jamais utiliser `--no-verify`.
 
-Après onboarding, générer si nécessaire le workflow GitHub Actions du projet :
+Après l’onboarding, générer si nécessaire le workflow GitHub Actions du projet :
 
 ```bash
 bash .codex/scripts/generate-github-ci.sh
@@ -130,28 +130,28 @@ Après le cahier accepté et avant toute implémentation, le Coordinateur exécu
 bash .codex/scripts/initialize-project-design.sh
 ```
 
-Le Concepteur complète ensuite `docs/` avec vision, user stories, parcours, architecture, diagrammes, données, contrats, sécurité, roadmap et décisions. Tout document non applicable contient une justification. Chaque work item met à jour les documents touchés et l Auditeur bloque une livraison si le code diverge de la conception.
+Le Concepteur complète ensuite `docs/` avec vision, user stories, parcours, architecture, diagrammes, données, contrats, sécurité, roadmap et décisions. Tout document non applicable contient une justification. Chaque work item met à jour les documents touchés et l’Auditeur bloque une livraison si le code diverge de la conception.
 
 ## Gitflow obligatoire
 
-Chaque feature, correctif ou tâche documentaire se fait sur une branche dédiée. Les agents ne committent ni ne poussent directement vers `main`, `master` ou la branche dintégration. Les commits sont atomiques, limités par défaut à 75 fichiers et 1200 lignes, et ne mélangent jamais plusieurs features. `verify-before-push.sh` bloque les écarts.
+Chaque feature, correctif ou tâche documentaire se fait sur une branche dédiée. Les agents ne committent ni ne poussent directement vers `main`, `master` ou la branche d’intégration. Les commits sont atomiques, limités par défaut à 75 fichiers et 1200 lignes, et ne mélangent jamais plusieurs features. `verify-before-push.sh` bloque les écarts.
 
 ## Dossier de conception de niveau CDA
 
-Le générateur de conception produit des documents structurés, mais aucun marqueur `[[A_COMPLETER]]` ne peut rester avant le preflight. Après le cahier accepté, le Concepteur transforme chaque modèle en dossier complet : contexte, objectifs mesurables, acteurs, user stories et critères, règles métier, scénarios d erreur, parcours, diagrammes Mermaid, architecture, données, contrats, sécurité, roadmap, stratégie de validation, rollback et décisions. Un simple squelette ne valide pas le projet.
+Le générateur de conception produit des documents structurés, mais aucun marqueur `[[A_COMPLETER]]` ne peut rester avant le preflight. Après le cahier accepté, le Concepteur transforme chaque modèle en dossier complet : contexte, objectifs mesurables, acteurs, user stories et critères, règles métier, scénarios d’erreur, parcours, diagrammes Mermaid, architecture, données, contrats, sécurité, roadmap, stratégie de validation, rollback et décisions. Un simple squelette ne valide pas le projet.
 
 
 Le journal qualité partagé est `docs/quality/quality-journal.md`. Il est alimenté par tous les audits et toutes les corrections. Une anomalie possède un identifiant stable, une preuve, un propriétaire, une correction et une vérification indépendante.
 
 ## Choix Trello obligatoire
 
-Après acceptation du cahier des charges, l agent demande une réponse explicite : `Veux-tu que je prépare un Trello complet avec toutes les tâches détaillées du projet ? Réponds oui ou non.` Le choix est enregistré dans `project-profile.toml`.
+Après acceptation du cahier des charges, l’agent demande une réponse explicite : `Veux-tu que je prépare un Trello complet avec toutes les tâches détaillées du projet ? Réponds oui ou non.` Le choix est enregistré dans `project-profile.toml`.
 
-Avec `oui`, le Coordinateur et le Skill `trello-planning` construisent `docs/project-management/trello-board.md` avec les listes, cartes, dépendances, responsables, estimations, critères d acceptation, preuves, tâches de sécurité, tests, documentation, audit et livraison. Une création externe nécessite une intégration autorisée. Avec `non`, le projet continue sans tableau Trello, sans ambiguïté.
+Avec `oui`, le Coordinateur et le Skill `trello-planning` construisent toujours `docs/project-management/trello-board.md` avec toutes les petites features, les cartes détaillées, les dépendances, les membres, les responsables, les checklists Definition of Done, les critères, les preuves, les tâches de sécurité, les tests, la documentation, l’audit et la livraison. Le fichier est ensuite synchronisé avec Trello si l’intégration est autorisée. Avec `non`, le projet continue sans tableau Trello.
 
-## Documentation d installation
+## Documentation d’installation
 
-Le tutoriel unique et complet se trouve dans [INSTALLATION.md](../INSTALLATION.md). Il décrit toute la procédure, depuis la copie du kit jusqu à la première livraison.
+Le tutoriel unique et complet se trouve dans [INSTALLATION.md](../INSTALLATION.md). Il décrit toute la procédure, depuis la copie du kit jusqu’à la première livraison.
 
 ## Agents Codex
 
@@ -166,6 +166,6 @@ Le tutoriel unique et complet se trouve dans [INSTALLATION.md](../INSTALLATION.m
 
 ## Skills Codex
 
-Les Skills sont des procédures distinctes et réutilisables dans `.codex/skills/`. Les Skills d entrée, onboarding, conception, coordination, planification Trello, implémentation, audit qualité, audit sécurité, journal qualité, livraison et optimisation coût sont disponibles. Le Coordinateur choisit le Skill adapté et fournit le contexte minimal nécessaire.
+Les Skills sont des procédures distinctes et réutilisables dans `.codex/skills/`. Les Skills d’entrée, onboarding, conception, coordination, planification Trello, implémentation, audit qualité, audit sécurité, journal qualité, livraison et optimisation coût sont disponibles. Le Coordinateur choisit le Skill adapté et fournit le contexte minimal nécessaire.
 
-Codex reste l orchestrateur unique. Les agents spécialisés ne se délèguent pas entre eux sans décision du Coordinateur.
+Codex reste l’orchestrateur unique. Les agents spécialisés ne se délèguent pas entre eux sans décision du Coordinateur.
