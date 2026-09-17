@@ -2,6 +2,8 @@ schema_version = 1
 project_name = "à compléter"
 project_type = "unknown"
 risk_tolerance = "standard"
+# autonomous-after-brief ou approval-per-step
+execution_mode = "autonomous-after-brief"
 integration_branch = "develop"
 
 [stack]

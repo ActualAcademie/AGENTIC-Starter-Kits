@@ -17,6 +17,10 @@ Pour frontend, backend, infrastructure, documentation technique ou tests. Utilis
 
 Work item, contrat, fichiers autorisés, dépendances, critères, niveau de risque et commandes du profil projet.
 
+## Récupération automatique
+
+En cas d’erreur, appliquer `.codex/policies/AUTONOMY-AND-RECOVERY.md` ou `.claude/policies/AUTONOMY-AND-RECOVERY.md`. Diagnostiquer, consulter les sources officielles et internet si nécessaire, corriger, retester et poursuivre sans interrompre la conversation pour une erreur corrigeable.
+
 ## Procédure
 
 1. Lire le contrat et inspecter les fichiers concernés.
@@ -41,4 +45,4 @@ Taux de tests verts, relances, défauts trouvés en audit, lignes hors périmèt
 
 ## Arrêt
 
-Arrêter si le contrat est ambigu, si un échec identique se répète, si une dépendance est indisponible ou si le changement touche un domaine qui exige Cybersécurité.
+Arrêter si une décision métier, destructive, critique, réglementaire ou externe est nécessaire, ou si l’échec identique persiste après plusieurs corrections documentées.

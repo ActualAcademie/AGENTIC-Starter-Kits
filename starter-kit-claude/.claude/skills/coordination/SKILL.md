@@ -17,15 +17,20 @@ Pour toute demande qui modifie le produit, ses documents, sa configuration ou sa
 
 Demande, critères d'acceptation, `.claude/project-profile.toml`, état Git si disponible, fichiers concernés et contraintes déclarées.
 
+## Récupération et recherche
+
+Ne pas transmettre une erreur corrigeable à l’utilisateur comme conclusion. Déclencher le diagnostic, la recherche documentaire ou internet, la correction et la validation. Continuer jusqu’à réussite, limite documentée ou blocage réel.
+
 ## Procédure
 
 1. Créer un work item avec résultat, hors périmètre, critères et budget.
-2. Évaluer le risque avec `.claude/RISK-MATRIX.md`.
-3. Décomposer le résultat en tâches atomiques qui indiquent rôle, Skill, dépendances, fichiers autorisés et preuves.
-4. Ne paralléliser que les tâches sans contrat ni fichier commun.
-5. Transmettre le contexte minimal utile, jamais le dépôt entier par défaut.
-6. Collecter les rapports, preuves et risques résiduels.
-7. Demander l'audit requis, puis clôturer ou faire reprendre le travail.
+2. En mode `autonomous-after-brief`, regrouper les choix non bloquants en décisions réversibles dans un ADR et continuer sans interrompre l’utilisateur. Ne poser qu’une demande consolidée pour les blocages réels.
+3. Évaluer le risque avec `.claude/RISK-MATRIX.md`.
+4. Décomposer le résultat en tâches atomiques qui indiquent rôle, Skill, dépendances, fichiers autorisés et preuves.
+5. Ne paralléliser que les tâches sans contrat ni fichier commun.
+6. Transmettre le contexte minimal utile, jamais le dépôt entier par défaut.
+7. Collecter les rapports, preuves et risques résiduels.
+8. Demander l'audit requis, puis clôturer ou faire reprendre le travail.
 
 ## Contrôles
 
