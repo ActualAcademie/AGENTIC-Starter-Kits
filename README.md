@@ -154,6 +154,19 @@ Le kit ne devine pas les décisions métier, ne crée pas de secret, ne simule p
 - [Versionnement](VERSIONING.md)
 - [Historique des changements](CHANGELOG.md)
 
+## Synchronisation d’un fork d’organisation
+
+Le dépôt personnel constitue la source de référence du starter kit. Un fork placé dans une organisation ne reçoit pas automatiquement les nouvelles versions. Depuis le clone du fork, ajouter le dépôt personnel comme remote `upstream`, puis synchroniser après chaque version validée :
+
+```bash
+git fetch upstream
+git switch main
+git merge upstream/main
+git push origin main
+```
+
+Pour préserver le GitFlow, effectuer cette synchronisation sur une branche dédiée et ouvrir une Pull Request vers `main` lorsque le dépôt de l’organisation contient des adaptations propres.
+
 ## Dépannage rapide
 
 - `Preflight` échoue : lire la première erreur, compléter le profil ou le cahier, puis relancer le contrôle.
