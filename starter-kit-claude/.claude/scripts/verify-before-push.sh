@@ -48,9 +48,21 @@ if [ -n "$base" ]; then
   while IFS= read -r commit; do
     files="$(git -C "$root" diff-tree --no-commit-id --name-only -r "$commit" | wc -l | tr -d ' ')"
     lines="$(git -C "$root" diff-tree --no-commit-id --numstat -r "$commit" | awk '{add += ($1 == "-" ? 0 : $1); del += ($2 == "-" ? 0 : $2)} END {print add + del}')"
+    changed_paths="$(git -C "$root" diff-tree --no-commit-id --name-only -r "$commit")"
+    only_generated=true
+    while IFS= read -r path; do
+      case "$path" in
+        *-lock.yaml|*-lock.yml|package-lock.json|npm-shrinkwrap.json|yarn.lock|Cargo.lock|composer.lock|Gemfile.lock|poetry.lock) ;;
+        *) only_generated=false ;;
+      esac
+    done <<< "$changed_paths"
     if [ "$files" -gt "$max_files" ] || [ "$lines" -gt "$max_lines" ]; then
-      echo "ECHEC GITFLOW: commit $commit touche $files fichiers et $lines lignes. Limites: $max_files fichiers, $max_lines lignes. Découper la feature en commits atomiques ou faire approuver une limite adaptée dans project-profile.toml avant le push."
-      exit 1
+      if [ "$only_generated" = "true" ]; then
+        echo "AVERTISSEMENT GITFLOW: commit $commit contient un artefact généré incompressible ($files fichiers, $lines lignes). Il est accepté uniquement isolé et sans code métier."
+      else
+        echo "ECHEC GITFLOW: commit $commit touche $files fichiers et $lines lignes. Limites: $max_files fichiers, $max_lines lignes. Découper la feature en commits atomiques."
+        exit 1
+      fi
     fi
   done < <(git -C "$root" rev-list "$base"..HEAD)
 fi
