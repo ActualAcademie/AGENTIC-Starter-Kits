@@ -148,3 +148,24 @@ Le journal qualité partagé est `docs/quality/quality-journal.md`. Il est alime
 Après acceptation du cahier des charges, l agent demande une réponse explicite : `Veux-tu que je prépare un Trello complet avec toutes les tâches détaillées du projet ? Réponds oui ou non.` Le choix est enregistré dans `project-profile.toml`.
 
 Avec `oui`, le Coordinateur et le Skill `trello-planning` construisent `docs/project-management/trello-board.md` avec les listes, cartes, dépendances, responsables, estimations, critères d acceptation, preuves, tâches de sécurité, tests, documentation, audit et livraison. Une création externe nécessite une intégration autorisée. Avec `non`, le projet continue sans tableau Trello, sans ambiguïté.
+
+## Documentation d installation
+
+Le tutoriel unique et complet se trouve dans [INSTALLATION.md](../INSTALLATION.md). Il décrit toute la procédure, depuis la copie du kit jusqu à la première livraison.
+
+## Agents Codex
+
+| Fichier | Rôle | Responsabilité |
+| --- | --- | --- |
+| `.codex/agents/coordinateur.toml` | Coordinateur | plan, dépendances, budget, modèles, orchestration et clôture |
+| `.codex/agents/concepteur.toml` | Concepteur | conception CDA, contrats, architecture et décisions |
+| `.codex/agents/frontend.toml` | Frontend | interface, accessibilité, tests client et preuves visuelles |
+| `.codex/agents/backend.toml` | Backend | API, données, logique métier, tests et observabilité |
+| `.codex/agents/cybersecurite.toml` | Cybersécurité | menaces, vulnérabilités, contrôles et blocage critique |
+| `.codex/agents/auditeur.toml` | Auditeur | vérification indépendante, preuves, régressions et décision |
+
+## Skills Codex
+
+Les Skills sont des procédures distinctes et réutilisables dans `.codex/skills/`. Les Skills d entrée, onboarding, conception, coordination, planification Trello, implémentation, audit qualité, audit sécurité, journal qualité, livraison et optimisation coût sont disponibles. Le Coordinateur choisit le Skill adapté et fournit le contexte minimal nécessaire.
+
+Codex reste l orchestrateur unique. Les agents spécialisés ne se délèguent pas entre eux sans décision du Coordinateur.
