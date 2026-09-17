@@ -26,10 +26,10 @@ jobs:
           python-version: "3.11"
 
       - name: Install validation dependency
+        run: sudo apt-get update && sudo apt-get install --yes ripgrep
 
       - name: Validate repository version
         run: bash scripts/check-version.sh
-        run: sudo apt-get update && sudo apt-get install --yes ripgrep
 
       - name: Check shell syntax and repository hygiene
         shell: bash
