@@ -20,6 +20,8 @@ Work item accepté, profil projet, état Git, rapport Auditeur, rapport Cybersé
 
 ## Contrôles
 
+Produire systématiquement un rapport final avec statut, fichiers, tests, erreurs corrigées, sources consultées, limites et prochaine action.
+
 Ne jamais affirmer qu'une CI, une Pull Request ou un déploiement est vert sans résultat observable. Ne jamais fusionner dans `main` sans les autorisations et portes nécessaires.
 
 ## Sortie

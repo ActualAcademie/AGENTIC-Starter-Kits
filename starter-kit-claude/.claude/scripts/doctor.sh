@@ -14,6 +14,15 @@ done
 
 if git --version >/dev/null 2>&1; then echo "OK: git"; else echo "OPTIONNEL INDISPONIBLE: git"; fi
 
+for optional_tool in docker node npm pnpm yarn bun deno cargo go ruby java mvn playwright; do
+  if command -v "$optional_tool" >/dev/null 2>&1; then
+    version="$($optional_tool --version 2>/dev/null | head -n 1 || true)"
+    printf 'DISPONIBLE: %s %s\n' "$optional_tool" "$version"
+  else
+    printf 'NON DISPONIBLE: %s\n' "$optional_tool"
+  fi
+done
+
 if "$script_dir/python.sh" --version >/dev/null 2>&1; then
   echo "OK: Python compatible"
 else
