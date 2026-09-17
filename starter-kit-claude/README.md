@@ -156,3 +156,24 @@ Le journal qualité partagé est `docs/quality/quality-journal.md`. Il est alime
 Après acceptation du cahier des charges, l agent demande une réponse explicite : `Veux-tu que je prépare un Trello complet avec toutes les tâches détaillées du projet ? Réponds oui ou non.` Le choix est enregistré dans `project-profile.toml`.
 
 Avec `oui`, le Coordinateur et le Skill `trello-planning` construisent `docs/project-management/trello-board.md` avec les listes, cartes, dépendances, responsables, estimations, critères d acceptation, preuves, tâches de sécurité, tests, documentation, audit et livraison. Une création externe nécessite une intégration autorisée. Avec `non`, le projet continue sans tableau Trello, sans ambiguïté.
+
+## Documentation d installation
+
+Le tutoriel unique et complet se trouve dans [INSTALLATION.md](../INSTALLATION.md). Il décrit toute la procédure, depuis la copie du kit jusqu à la première livraison.
+
+## Agents Claude Code
+
+| Fichier | Rôle | Responsabilité |
+| --- | --- | --- |
+| `.claude/agents/coordinateur.md` | Coordinateur | plan, dépendances, budget, orchestration et clôture |
+| `.claude/agents/concepteur.md` | Concepteur | conception CDA, contrats, architecture et décisions |
+| `.claude/agents/frontend.md` | Frontend | interface, accessibilité, tests client et preuves visuelles |
+| `.claude/agents/backend.md` | Backend | API, données, logique métier, tests et observabilité |
+| `.claude/agents/cybersecurite.md` | Cybersécurité | menaces, vulnérabilités, contrôles et blocage critique |
+| `.claude/agents/auditeur.md` | Auditeur | vérification indépendante, preuves, régressions et décision |
+
+## Skills Claude Code
+
+Les Skills natifs se trouvent dans `.claude/skills/<nom>/SKILL.md`. Ils couvrent l intake, l onboarding, la conception, la coordination, la planification Trello, l implémentation, l audit qualité, l audit sécurité, le journal qualité, la livraison et l optimisation coût. Les agents utilisent ces procédures avec un contexte limité et traçable.
+
+Claude Code reste l orchestrateur de la session. Les sous-agents ne travaillent que sur des flux autorisés et indépendants.

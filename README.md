@@ -1,154 +1,103 @@
 # Agentic Starter Kits
 
-Deux kits portables pour démarrer un projet avec une orchestration IA structurée : un pour Codex, un pour Claude Code. Choisir un seul kit par projet. Ils couvrent le cadrage obligatoire, la conception, l'implémentation, la sécurité, l'audit, la maîtrise des coûts et le Gitflow.
+Agentic Starter Kits est un système portable de gouvernance et d orchestration pour construire des projets logiciels avec une IA, en utilisant Codex ou Claude Code comme interface de travail. Le dépôt fournit deux kits indépendants et exportables : `starter-kit-codex` pour Codex et `starter-kit-claude` pour Claude Code.
 
-| Outil utilisé dans le projet | Kit à importer | Point d'entrée |
+Le kit ne remplace pas le développeur ou le responsable du produit. Il impose un cadre qui transforme une demande en projet traçable : cahier des charges, profil technologique, conception détaillée, tâches, implémentation, sécurité, tests, audit, corrections, livraison et amélioration continue.
+
+## Ce que le projet propose
+
+Le système fournit :
+
+- une porte obligatoire de démarrage qui refuse toute construction sans cahier des charges accepté ;
+- une détection contrôlée des technologies, commandes, capacités et conventions existantes ;
+- une conception de niveau Concepteur Développeur d Applications avec vision, acteurs, objectifs, user stories, règles métier, parcours, diagrammes Mermaid, architecture, données, contrats, sécurité, roadmap et décisions ;
+- six rôles spécialisés coordonnés par un Agent Coordinateur ;
+- un journal qualité partagé pour les bugs, vulnérabilités, régressions, défauts de conception et corrections ;
+- un choix explicite de création d un plan Trello complet après le cahier des charges ;
+- des modèles de raisonnement et de coût adaptés au risque ;
+- des contrôles lint, tests, sécurité, conception, Gitflow et qualité avant push ;
+- une compatibilité macOS, Linux et Windows via Bash, Git Bash et PowerShell ;
+- un versionnement SemVer, un changelog et des tags Git de release ;
+- une CI GitHub qui valide les kits eux-mêmes.
+
+## Les deux kits
+
+| Kit | Point d entrée | Configuration | Usage |
+| --- | --- | --- | --- |
+| Codex | `AGENTS.md` | `.codex/` | orchestration native Codex |
+| Claude Code | `CLAUDE.md` | `.claude/` | sous-agents et Skills natifs Claude Code |
+
+Choisir un seul kit par projet. Ils ne doivent pas être copiés simultanément dans le même dépôt.
+
+## Les agents
+
+| Agent | Responsabilité principale | Livrables attendus |
 | --- | --- | --- |
-| Codex | `starter-kit-codex/` | `AGENTS.md` et `.codex/` |
-| Claude Code | `starter-kit-claude/` | `CLAUDE.md` et `.claude/` |
+| Coordinateur | pilote le cycle, le périmètre, les dépendances, les budgets et les preuves | plan, work items, décisions, état de livraison, journal synchronisé |
+| Concepteur | transforme le besoin en conception exploitable | architecture, contrats, stories, parcours, données, décisions et diagrammes |
+| Frontend | construit interface, accessibilité et validations client | code ciblé, tests client, preuve visuelle si nécessaire, documentation mise à jour |
+| Backend | construit API, données, logique métier et observabilité | code serveur, contrats, tests, migrations et plan de retour si nécessaire |
+| Cybersécurité | recherche menaces, vulnérabilités et défauts de contrôle | risques qualifiés, preuves, recommandations, journal qualité et décision d escalade |
+| Auditeur | vérifie indépendamment critères, code, tests, conception et documentation | matrice de preuves, anomalies, identifiants du journal et décision de revue |
 
-## Avant de commencer
+Aucun agent ne s auto-approuve. Le Coordinateur orchestre, mais l Auditeur conserve son indépendance. Cybersécurité peut bloquer un risque critique.
 
-1. Créer ou ouvrir le dossier du nouveau projet.
-2. Installer Git et l'outil choisi, Codex ou Claude Code.
-3. Préparer un cahier des charges. Il doit au minimum présenter le besoin, les utilisateurs, les objectifs, le périmètre, les contraintes, les critères de réussite et le hors périmètre.
-4. Ne pas importer les deux kits dans le même projet. Ils ont des conventions d'agents et de configuration différentes.
+## Les Skills
 
-## Installation Codex
+Les Skills sont les procédures réutilisables du kit :
 
-Depuis la racine du nouveau projet, définir le chemin de ce dépôt puis copier le point d'entrée et la configuration cachée :
+- `project-intake` : réception et acceptation du cahier des charges ;
+- `project-onboarding` : détection de stack et adaptation du profil ;
+- `conception` : production et maintenance du dossier de conception ;
+- `coordination` : découpage en work items et orchestration ;
+- `trello-planning` : génération d un tableau Trello détaillé si choisi ;
+- `implementation` : modification contrôlée du produit ;
+- `security-audit` : analyse des menaces et contrôles ;
+- `quality-audit` : revue indépendante et preuves ;
+- `quality-journal` : registre commun des anomalies et corrections ;
+- `delivery` : préparation de la livraison et respect du Gitflow ;
+- `cost-optimization` : amélioration continue du coût et de la performance.
 
-```bash
-KIT_SOURCE="/chemin/vers/agentic-starter-kits/starter-kit-codex"
-cp "$KIT_SOURCE/AGENTS.md" .
-cp -R "$KIT_SOURCE/.codex" .
-bash .codex/scripts/init-project.sh
-```
+## Cycle de fonctionnement
 
-Ouvrir ensuite Codex dans ce dossier et formuler une demande projet normale. Tant que le cahier des charges n'a pas été fourni, Codex doit exclusivement le demander. Après l'avoir reçu, il crée le brief, détecte les technologies, complète le profil et prépare l'orchestration.
+1. L utilisateur ouvre une session à la racine du projet.
+2. L agent demande obligatoirement le cahier des charges.
+3. L agent formalise le cahier et attend une base suffisante avant de continuer.
+4. L agent demande explicitement si un Trello complet doit être préparé.
+5. L agent détecte les technologies et complète `project-profile.toml`.
+6. Le Concepteur génère puis complète la conception détaillée dans `docs/`.
+7. Le Coordinateur crée les work items et assigne les rôles.
+8. Les agents développent sur des branches dédiées avec des commits atomiques.
+9. Les agents enregistrent bugs, failles et corrections dans le journal qualité commun.
+10. Les tests, lint, sécurité, conception et audit sont vérifiés.
+11. Une Pull Request promeut la feature vers `develop`, puis une release promeut `develop` vers `main`.
+12. La release met à jour SemVer, changelog et tag Git annoté.
 
-Guide complet : [starter-kit-codex/README.md](starter-kit-codex/README.md).
+## Documentation d installation
 
-## Installation Claude Code
+Le tutoriel complet, unique et pas à pas se trouve dans [INSTALLATION.md](INSTALLATION.md). Il couvre les prérequis, la copie, l initialisation, la conversation de cadrage, le choix Trello, la configuration des technologies, la conception, les vérifications, le premier work item et le démarrage agentique.
 
-Depuis la racine du nouveau projet, définir le chemin de ce dépôt puis copier le point d'entrée et la configuration cachée :
+Guides spécialisés :
 
-```bash
-KIT_SOURCE="/chemin/vers/agentic-starter-kits/starter-kit-claude"
-cp "$KIT_SOURCE/CLAUDE.md" .
-cp -R "$KIT_SOURCE/.claude" .
-bash .claude/scripts/init-project.sh
-claude
-```
+- [README Codex](starter-kit-codex/README.md)
+- [README Claude Code](starter-kit-claude/README.md)
 
-Dans le nouveau chat Claude, formuler une demande projet normale. Claude doit demander le cahier des charges avant toute analyse, choix technique ou modification. Une fois ce cahier fourni, il adapte le profil du projet puis peut commencer le travail.
+## Gouvernance et preuves
 
-Guide complet : [starter-kit-claude/README.md](starter-kit-claude/README.md).
+Le dossier importé contient les politiques de contexte, risque, sécurité, CI/CD, Gitflow, validation, incidents, coût et livraison. Le profil `project-profile.toml` stocke les technologies et commandes propres au projet. Les inconnues restent explicites et ne sont jamais inventées.
 
-## Après le cahier des charges
+Le journal `docs/quality/quality-journal.md` est créé dans le projet cible. Il constitue le registre de référence pour les anomalies. Une correction reste `fixed` jusqu à une vérification indépendante qui la fait passer à `verified`.
 
-L'agent met à jour deux fichiers propres au projet :
+## Gitflow et versionnement
 
-- `PROJECT-BRIEF.md` : le cahier des charges formalisé et accepté.
-- `project-profile.toml` : les technologies réellement détectées ou explicitement choisies, les commandes et les capacités du projet.
+Chaque feature, correctif ou changement documentaire possède sa branche. Les commits suivent `type(scope): description`. Un commit ne mélange pas plusieurs intentions et ne dépasse pas les limites par défaut de 75 fichiers et 1200 lignes modifiées.
 
-Exécuter le contrôle avant une revue ou une livraison :
+Les releases suivent [VERSIONING.md](VERSIONING.md). La version publiée actuelle du dépôt est dans [VERSION](VERSION), et les changements sont recensés dans [CHANGELOG.md](CHANGELOG.md).
 
-```bash
-# Codex
-bash .codex/scripts/preflight.sh
+## Validation du dépôt
 
-# Claude Code
-bash .claude/scripts/preflight.sh
-```
+La CI vérifie les deux kits, leurs imports temporaires, les portes de cahier des charges, conception et Trello, les scripts Bash, les wrappers PowerShell, les versions SemVer et les règles de format. Les avertissements de plateforme fournis par GitHub Actions ne valent pas échec de validation.
 
-Le contrôle réussit seulement après acceptation du cahier et complétion du profil technique.
+## Limites
 
-## Ce que contient chaque kit
-
-- Les six rôles : Coordinateur, Concepteur, Frontend, Backend, Cybersécurité et Auditeur.
-- Des Skills réutilisables pour le cadrage, l'onboarding, la conception, l'implémentation, l'audit, la sécurité, la livraison et l'optimisation du coût.
-- Une gouvernance détaillée, une matrice de risque, des règles de validation et un Gitflow professionnel.
-- Des modèles de work items, décisions, rapports et évaluations.
-- Des scripts d'initialisation, de contrôle, de résolution des modèles et de préparation CI.
-
-Les dossiers de production de décisions, métriques, rapports, archives et modèles CI contiennent un `.gitkeep`. Ils sont donc conservés par Git même avant leur première utilisation.
-
-## Limites volontaires
-
-Le kit donne un cadre et des contrôles. Il ne valide jamais seul une exigence non démontrée, ne choisit pas une technologie sans information suffisante et ne remplace pas l'approbation humaine exigée par le risque, la sécurité ou le processus de livraison.
-
-## Qualité, sécurité et livraison
-
-Le dépôt valide les deux kits dans GitHub Actions à chaque pull request vers `develop` ou `main`. La validation vérifie la syntaxe Bash, les wrappers PowerShell, le refus initial sans cahier des charges et un import réel de chaque kit dans un dépôt temporaire.
-
-Après import, le projet cible applique ses propres contrôles. Avant tout push, exécuter :
-
-```bash
-# Codex
-bash .codex/scripts/verify-before-push.sh
-
-# Claude Code
-bash .claude/scripts/verify-before-push.sh
-```
-
-Cette commande bloque le push si le cahier des charges n'est pas accepté, si le profil est incomplet, si les commandes obligatoires lint et test manquent pour un projet applicatif, ou si les contrôles configurés échouent. Le hook Git est installé automatiquement par `init-project.sh`. Ne jamais contourner ce contrôle avec `--no-verify`.
-
-Pour créer un workflow GitHub Actions pour le projet cible après onboarding :
-
-```bash
-# Codex
-bash .codex/scripts/generate-github-ci.sh
-
-# Claude Code
-bash .claude/scripts/generate-github-ci.sh
-```
-
-Le fichier est généré une seule fois et ne remplace jamais un workflow existant. Adapter ensuite les commandes de `project-profile.toml` et faire relire les règles de déploiement par le rôle Cybersécurité.
-
-## Compatibilité machine
-
-Les scripts Bash fonctionnent sur macOS et Linux avec Git, Bash, ripgrep et Python 3.11 ou plus récent. Sous Windows, installer Git for Windows et Python 3.11 ou plus récent, puis lancer les commandes depuis Git Bash. Les wrappers PowerShell sont aussi disponibles :
-
-```powershell
-# Codex
-.\.codex\scripts\run.ps1 preflight
-
-# Claude Code
-.\.claude\scripts\run.ps1 preflight
-```
-
-## Conception obligatoire du projet
-
-Dès que le cahier des charges est accepté, le Coordinateur exécute le générateur adapté au kit puis le Concepteur complète le dossier `docs/` avant toute implémentation :
-
-```bash
-# Codex
-bash .codex/scripts/initialize-project-design.sh
-
-# Claude Code
-bash .claude/scripts/initialize-project-design.sh
-```
-
-Le dossier contient la vision, les user stories et critères, les parcours, architecture et diagrammes, modèle de données, contrats, conception de sécurité, roadmap et journal des décisions. Un document non applicable doit être justifié. Les agents mettent à jour les documents touchés dans le même work item. L'Auditeur bloque une livraison lorsque le code et la conception divergent.
-
-## Gitflow obligatoire
-
-Chaque feature, correctif ou tâche documentaire se fait sur une branche dédiée. Les agents ne committent ni ne poussent directement vers `main`, `master` ou la branche dintégration. Les commits sont atomiques, limités par défaut à 75 fichiers et 1200 lignes, et ne mélangent jamais plusieurs features. `verify-before-push.sh` bloque les écarts.
-
-## Dossier de conception de niveau CDA
-
-Le générateur de conception produit des documents structurés, mais aucun marqueur `[[A_COMPLETER]]` ne peut rester avant le preflight. Après le cahier accepté, le Concepteur transforme chaque modèle en dossier complet : contexte, objectifs mesurables, acteurs, user stories et critères, règles métier, scénarios d erreur, parcours, diagrammes Mermaid, architecture, données, contrats, sécurité, roadmap, stratégie de validation, rollback et décisions. Un simple squelette ne valide pas le projet.
-
-Le journal qualité partagé est `docs/quality/quality-journal.md`. Il est alimenté par tous les audits et toutes les corrections. Une anomalie possède un identifiant stable, une preuve, un propriétaire, une correction et une vérification indépendante.
-
-## Choix Trello obligatoire
-
-Après acceptation du cahier des charges, l agent demande une réponse explicite : `Veux-tu que je prépare un Trello complet avec toutes les tâches détaillées du projet ? Réponds oui ou non.` Le choix est enregistré dans `project-profile.toml`.
-
-Avec `oui`, le Coordinateur et le Skill `trello-planning` construisent `docs/project-management/trello-board.md` avec les listes, cartes, dépendances, responsables, estimations, critères d acceptation, preuves, tâches de sécurité, tests, documentation, audit et livraison. Une création externe nécessite une intégration autorisée. Avec `non`, le projet continue sans tableau Trello, sans ambiguïté.
-
-
-## Versionnement et historique
-
-Chaque ajout, correctif, amélioration de sécurité ou changement documentaire est identifié par un commit conventionnel et le changelog. Les releases officielles sont repérées dans l historique par `VERSION` et des tags Git annotés `vX.Y.Z`. Voir [VERSIONING.md](VERSIONING.md).
+Le kit orchestre les décisions et les preuves, mais ne devine pas un besoin métier, ne fournit pas de secrets, ne simule pas un test, ne crée pas automatiquement une ressource externe sans autorisation et ne remplace pas les validations humaines requises pour les décisions critiques.
