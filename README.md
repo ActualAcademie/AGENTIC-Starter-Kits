@@ -2,20 +2,20 @@
 
 ## Construire avec une IA comme avec une équipe senior
 
-Agentic Starter Kits est une base portable de gouvernance, de conception, d orchestration et de contrôle qualité pour construire des projets logiciels avec un agent IA. Le dépôt transforme une conversation en processus de livraison traçable, depuis le cahier des charges jusqu à la Pull Request et à la maintenance.
+Agentic Starter Kits est une base portable de gouvernance, de conception, d’orchestration et de contrôle qualité pour construire des projets logiciels avec un agent IA. Le dépôt transforme une conversation en processus de livraison traçable, depuis le cahier des charges jusqu’à la Pull Request et à la maintenance.
 
 Le kit ne fournit pas une simple collection de prompts. Il fournit une méthode de travail complète : règles, agents spécialisés, Skills réutilisables, configuration technologique, documents de conception, journal qualité, contrôles de sécurité, GitFlow, CI et optimisation continue du coût.
 
 ## Ce que le projet permet de faire
 
-Avec un seul kit importé dans un nouveau dépôt, l IA peut :
+Avec un seul kit importé dans un nouveau dépôt, l’IA peut :
 
-- refuser de commencer tant qu un cahier des charges réel n est pas fourni et accepté ;
+- refuser de commencer tant qu’un cahier des charges réel n’est pas fourni et accepté ;
 - analyser la machine, le dépôt existant, la stack et les commandes disponibles ;
 - adapter son comportement aux technologies déclarées dans `project-profile.toml` ;
-- produire une conception complète de niveau Concepteur Développeur d Applications ;
+- produire une conception complète de niveau Concepteur Développeur d’Applications ;
 - générer vision, objectifs, user stories, parcours, architecture, données, API, sécurité, roadmap et diagrammes ;
-- proposer un Trello complet des tâches, après une réponse explicite de l utilisateur ;
+- proposer un Trello complet des tâches, après une réponse explicite de l’utilisateur ;
 - répartir le travail entre six rôles spécialisés ;
 - construire des interfaces premium avec direction artistique, design system, motion design et validation visuelle ;
 - rechercher ou générer des médias réalistes avec provenance, licence et retouches documentées ;
@@ -24,7 +24,7 @@ Avec un seul kit importé dans un nouveau dépôt, l IA peut :
 - auditer indépendamment chaque livraison avant sa clôture ;
 - bloquer un push si les contrôles, tests, audits ou documents requis échouent ;
 - livrer avec des branches, commits atomiques, Pull Requests et versionnement SemVer ;
-- mesurer et améliorer progressivement la qualité, la performance et le coût d utilisation des agents.
+- mesurer et améliorer progressivement la qualité, la performance et le coût d’utilisation des agents.
 
 ## Architecture générale
 
@@ -58,19 +58,19 @@ Choisir un seul kit par projet. Les deux kits sont fonctionnellement alignés, m
 
 ### Coordinateur
 
-Il est le chef d orchestre. Il contrôle le périmètre, les dépendances, le découpage, les priorités, les budgets de raisonnement, les preuves attendues et la clôture. Il ne remplace pas les spécialistes et ne peut pas transformer une hypothèse en fait vérifié.
+Il est le chef d’orchestre. Il contrôle le périmètre, les dépendances, le découpage, les priorités, les budgets de raisonnement, les preuves attendues et la clôture. Il ne remplace pas les spécialistes et ne peut pas transformer une hypothèse en fait vérifié.
 
 ### Concepteur
 
-Il transforme le besoin accepté en dossier exploitable. Il produit et maintient les user stories, critères d acceptation, parcours, architecture, modèle de données, contrats, sécurité, roadmap, décisions et diagrammes éditables.
+Il transforme le besoin accepté en dossier exploitable. Il produit et maintient les user stories, critères d’acceptation, parcours, architecture, modèle de données, contrats, sécurité, roadmap, décisions et diagrammes éditables.
 
 ### Frontend, artiste digital
 
-Il ne se limite pas à assembler des composants. Il définit une direction artistique singulière, un design system, une hiérarchie visuelle, des états complets, des micro-interactions et des animations utiles. Il vérifie le rendu sur plusieurs viewports, l accessibilité, la performance et `prefers-reduced-motion`. Il documente la provenance et la licence de chaque média.
+Il ne se limite pas à assembler des composants. Il définit une direction artistique singulière, un design system, une hiérarchie visuelle, des états complets, des micro-interactions et des animations utiles. Il vérifie le rendu sur plusieurs viewports, l’accessibilité, la performance et `prefers-reduced-motion`. Il documente la provenance et la licence de chaque média.
 
 ### Backend
 
-Il construit les contrats, la logique métier, les API, les données, les migrations, l observabilité, les erreurs et les tests. Il respecte le principe du changement minimal et escalade tout changement de contrat ou de donnée sensible.
+Il construit les contrats, la logique métier, les API, les données, les migrations, l’observabilité, les erreurs et les tests. Il respecte le principe du changement minimal et escalade tout changement de contrat ou de donnée sensible.
 
 ### Cybersécurité
 
@@ -78,20 +78,20 @@ Il analyse les actifs, menaces, permissions, entrées, secrets, dépendances, se
 
 ### Auditeur
 
-Il ne corrige pas ce qu il vient d approuver. Il vérifie les critères, le diff, les tests, la conception, la sécurité, le rendu visuel, les licences médias et les risques résiduels. Sa décision est `accepted`, `rework` ou `blocked`.
+Il ne corrige pas ce qu’il vient d’approuver. Il vérifie les critères, le diff, les tests, la conception, la sécurité, le rendu visuel, les licences médias et les risques résiduels. Sa décision est `accepted`, `rework` ou `blocked`.
 
 ## Ce qui est généré dans chaque projet
 
-Après le cahier accepté, l initialisation crée un dossier `docs/` structuré :
+Après le cahier accepté, l’initialisation crée un dossier `docs/` structuré :
 
 - `product/` pour la vision, le périmètre, les stories et les parcours ;
-- `design/` pour l architecture, les données, les contrats, la sécurité, la direction artistique et l inventaire médias ;
+- `design/` pour l’architecture, les données, les contrats, la sécurité, la direction artistique et l’inventaire médias ;
 - `diagrams/` pour les sources Mermaid ou éditables ;
 - `delivery/` pour la roadmap et les décisions ;
 - `quality/quality-journal.md` pour les anomalies et vérifications ;
-- `project-management/trello-board.md` si l utilisateur choisit Trello.
+- `project-management/trello-board.md` si l’utilisateur choisit Trello.
 
-Les marqueurs `[[A_COMPLETER]]` bloquent le preflight. Le projet ne peut donc pas passer directement d un modèle vide à l implémentation.
+Les marqueurs `[[A_COMPLETER]]` bloquent le preflight. Le projet ne peut donc pas passer directement d’un modèle vide à l’implémentation.
 
 ## Les garanties de gouvernance
 
@@ -110,7 +110,7 @@ Le kit impose :
 
 ## Installation et premier démarrage
 
-Le guide complet et unique est [INSTALLATION.md](INSTALLATION.md). Il explique les prérequis, la copie du kit, l initialisation, la conversation obligatoire, le choix Trello, la configuration des technologies, la conception, le premier work item, les tests, le GitFlow et la première livraison.
+Le guide complet et unique est [INSTALLATION.md](INSTALLATION.md). Il explique les prérequis, la copie du kit, l’initialisation, la conversation obligatoire, le choix Trello, la configuration des technologies, la conception, le premier work item, les tests, le GitFlow et la première livraison.
 
 Guides rapides :
 
@@ -119,7 +119,7 @@ Guides rapides :
 
 ## Fonctionnement quotidien
 
-1. Ouvrir l agent à la racine du projet.
+1. Ouvrir l’agent à la racine du projet.
 2. Fournir le cahier des charges dans le chat.
 3. Répondre au choix Trello.
 4. Valider le profil de technologies détecté.
@@ -134,7 +134,7 @@ Pour une conversation sans construction de projet, utiliser explicitement `Mode 
 
 ## Performance et coût
 
-Le Coordinateur choisit un niveau de raisonnement proportionné au risque. Les tâches répétitives, contrôlables ou documentaires utilisent le profil le plus économique compatible. Les décisions d architecture, de sécurité et d audit utilisent un raisonnement plus approfondi. Les évaluations enregistrent les résultats, les relances, les défauts détectés, le temps et le coût afin d améliorer les règles sans dégrader la qualité.
+Le Coordinateur choisit un niveau de raisonnement proportionné au risque. Les tâches répétitives, contrôlables ou documentaires utilisent le profil le plus économique compatible. Les décisions d’architecture, de sécurité et d’audit utilisent un raisonnement plus approfondi. Les évaluations enregistrent les résultats, les relances, les défauts détectés, le temps et le coût afin d’améliorer les règles sans dégrader la qualité.
 
 ## Limites importantes
 
