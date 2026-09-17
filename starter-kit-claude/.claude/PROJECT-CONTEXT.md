@@ -30,4 +30,4 @@ Les agents doivent adapter leurs recommandations aux variables de `[stack]`. Ils
 
 ## Limite importante
 
-Un fichier d'instructions ne réalise pas d'interpolation automatique de variables. L'effet fiable consiste à imposer la lecture du profil dans les instructions de chaque agent. Le script `show-project-context.sh` produit aussi un résumé compact, utile comme contexte de délégation.
+Un fichier d'instructions ne réalise pas d'interpolation automatique de variables. L'effet fiable consiste à imposer la lecture du profil dans les instructions de chaque agent. Le script `show-project-context.sh` produit aussi un résumé compact, utile comme contexte de délégation. Le script `doctor.sh` distingue les outils obligatoires, les outils optionnels disponibles et les alternatives absentes avant toute commande.
