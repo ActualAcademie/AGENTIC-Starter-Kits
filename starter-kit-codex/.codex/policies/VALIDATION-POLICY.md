@@ -2,7 +2,7 @@
 
 ## Principe
 
-La validation doit démontrer le résultat demandé et non seulement l'absence d'erreur de syntaxe. Chaque contrôle est choisi selon le risque et le profil projet.
+La validation doit démontrer le résultat demandé et non seulement l'absence d'erreur de syntaxe. Chaque contrôle est choisi selon le risque et le profil projet. Avant toute commande, vérifier que l’outil est installé et que l’environnement permet réellement son exécution. En cas d’absence, utiliser l’alternative compatible la plus fiable et la documenter.
 
 ## Niveaux
 
