@@ -169,3 +169,15 @@ Le tutoriel unique et complet se trouve dans [INSTALLATION.md](../INSTALLATION.m
 Les Skills sont des procédures distinctes et réutilisables dans `.codex/skills/`. Les Skills d’entrée, onboarding, conception, coordination, planification Trello, implémentation, audit qualité, audit sécurité, journal qualité, livraison et optimisation coût sont disponibles. Le Coordinateur choisit le Skill adapté et fournit le contexte minimal nécessaire.
 
 Codex reste l’orchestrateur unique. Les agents spécialisés ne se délèguent pas entre eux sans décision du Coordinateur.
+
+## Optimisation pilotée par le Coordinateur
+
+Le script `.codex/scripts/cost-tracker.sh` conserve les appels dans `.codex/metrics/usage.jsonl` et produit un résumé exploitable :
+
+```bash
+bash .codex/scripts/cost-tracker.sh report
+```
+
+Le Coordinateur utilise ces données pour réduire le contexte, supprimer les relances, regrouper les tâches et router chaque demande vers Luna, Terra ou Sol selon le risque. Les prix sont optionnels dans le profil et aucune estimation monétaire n’est inventée.
+
+Après une instruction « fais tout », le Coordinateur poursuit jusqu’à la Definition of Done sans demander « Continue ». Il corrige les erreurs récupérables, vérifie les résultats et ne sollicite l’utilisateur que pour une décision sensible ou irréversible.
