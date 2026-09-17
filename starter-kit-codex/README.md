@@ -21,8 +21,8 @@ KIT_SOURCE="/chemin/vers/agentic-starter-kits/starter-kit-codex"
 3. Copier le point d'entrée obligatoire et toute la configuration :
 
 ```bash
-cp "$KIT_SOURCE/AGENTS.md" .
-cp -R "$KIT_SOURCE/.codex" .
+cp "$KIT_SOURCE/AGENTS.md".
+cp -R "$KIT_SOURCE/.codex".
 ```
 
 4. Lancer l'initialisation non destructive :

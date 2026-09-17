@@ -10,21 +10,21 @@ Le kit ne fournit pas une simple collection de prompts. Il fournit une méthode 
 
 Avec un seul kit importé dans un nouveau dépôt, l’IA peut :
 
-- refuser de commencer tant qu’un cahier des charges réel n’est pas fourni et accepté ;
-- analyser la machine, le dépôt existant, la stack et les commandes disponibles ;
-- adapter son comportement aux technologies déclarées dans `project-profile.toml` ;
-- produire une conception complète de niveau Concepteur Développeur d’Applications ;
-- générer vision, objectifs, user stories, parcours, architecture, données, API, sécurité, roadmap et diagrammes ;
-- proposer un Trello complet des tâches, après une réponse explicite de l’utilisateur ;
-- répartir le travail entre six rôles spécialisés ;
-- construire des interfaces premium avec direction artistique, design system, motion design et validation visuelle ;
-- rechercher ou générer des médias réalistes avec provenance, licence et retouches documentées ;
-- développer le frontend, le backend, les tests et la documentation par petits changements ;
-- enregistrer bugs, vulnérabilités, défauts visuels et corrections dans un journal partagé ;
-- auditer indépendamment chaque livraison avant sa clôture ;
-- bloquer un push si les contrôles, tests, audits ou documents requis échouent ;
-- livrer avec des branches, commits atomiques, Pull Requests et versionnement SemVer ;
-- mesurer et améliorer progressivement la qualité, la performance et le coût d’utilisation des agents.
+- Refuser de commencer tant qu’un cahier des charges réel n’est pas fourni et accepté.
+- Analyser la machine, le dépôt existant, la stack et les commandes disponibles.
+- Adapter son comportement aux technologies déclarées dans `project-profile.toml`.
+- Produire une conception complète de niveau Concepteur Développeur d’Applications.
+- Générer vision, objectifs, user stories, parcours, architecture, données, API, sécurité, roadmap et diagrammes.
+- Proposer un Trello complet des tâches, après une réponse explicite de l’utilisateur.
+- Répartir le travail entre six rôles spécialisés.
+- Construire des interfaces premium avec direction artistique, design system, motion design et validation visuelle.
+- Rechercher ou générer des médias réalistes avec provenance, licence et retouches documentées.
+- Développer le frontend, le backend, les tests et la documentation par petits changements.
+- Enregistrer bugs, vulnérabilités, défauts visuels et corrections dans un journal partagé.
+- Auditer indépendamment chaque livraison avant sa clôture.
+- Bloquer un push si les contrôles, tests, audits ou documents requis échouent.
+- Livrer avec des branches, commits atomiques, Pull Requests et versionnement SemVer.
+- Mesurer et améliorer progressivement la qualité, la performance et le coût d’utilisation des agents.
 
 ## Architecture générale
 
@@ -84,11 +84,11 @@ Il ne corrige pas ce qu’il vient d’approuver. Il vérifie les critères, le 
 
 Après le cahier accepté, l’initialisation crée un dossier `docs/` structuré :
 
-- `product/` pour la vision, le périmètre, les stories et les parcours ;
-- `design/` pour l’architecture, les données, les contrats, la sécurité, la direction artistique et l’inventaire médias ;
-- `diagrams/` pour les sources Mermaid ou éditables ;
-- `delivery/` pour la roadmap et les décisions ;
-- `quality/quality-journal.md` pour les anomalies et vérifications ;
+- `product/` pour la vision, le périmètre, les stories et les parcours.
+- `design/` pour l’architecture, les données, les contrats, la sécurité, la direction artistique et l’inventaire médias.
+- `diagrams/` pour les sources Mermaid ou éditables.
+- `delivery/` pour la roadmap et les décisions.
+- `quality/quality-journal.md` pour les anomalies et vérifications.
 - `project-management/trello-board.md` si l’utilisateur choisit Trello.
 
 Les marqueurs `[[A_COMPLETER]]` bloquent le preflight. Le projet ne peut donc pas passer directement d’un modèle vide à l’implémentation.
@@ -97,16 +97,16 @@ Les marqueurs `[[A_COMPLETER]]` bloquent le preflight. Le projet ne peut donc pa
 
 Le kit impose :
 
-- cahier des charges obligatoire ;
-- profil de technologies explicite ;
-- conception maintenue pendant toute la durée du projet ;
-- journal unique pour bugs, failles, défauts visuels et corrections ;
-- vérification indépendante avant clôture ;
-- GitFlow avec une branche par feature, correctif ou documentation ;
-- commits atomiques et taille limitée ;
-- lint, tests, sécurité et vérification avant push ;
-- CI GitHub pour les imports Codex, Claude et PowerShell ;
-- distinction claire entre vérifié, non vérifié, inconnu et risque résiduel.
+- Cahier des charges obligatoire.
+- Profil de technologies explicite.
+- Conception maintenue pendant toute la durée du projet.
+- Journal unique pour bugs, failles, défauts visuels et corrections.
+- Vérification indépendante avant clôture.
+- GitFlow avec une branche par feature, correctif ou documentation.
+- Commits atomiques et taille limitée.
+- Lint, tests, sécurité et vérification avant push.
+- CI GitHub pour les imports Codex, Claude et PowerShell.
+- Distinction claire entre vérifié, non vérifié, inconnu et risque résiduel.
 
 ## Installation et premier démarrage
 

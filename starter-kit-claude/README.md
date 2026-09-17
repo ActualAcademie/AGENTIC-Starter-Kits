@@ -21,8 +21,8 @@ KIT_SOURCE="/chemin/vers/agentic-starter-kits/starter-kit-claude"
 3. Copier le point d'entrée obligatoire et toute la configuration :
 
 ```bash
-cp "$KIT_SOURCE/CLAUDE.md" .
-cp -R "$KIT_SOURCE/.claude" .
+cp "$KIT_SOURCE/CLAUDE.md".
+cp -R "$KIT_SOURCE/.claude".
 ```
 
 4. Lancer l'initialisation non destructive :
