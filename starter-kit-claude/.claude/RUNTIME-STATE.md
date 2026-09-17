@@ -30,3 +30,7 @@
 - Questions réellement bloquantes : [[A_COMPLETER]]
 - Risques résiduels : [[A_COMPLETER]]
 - Reprise possible sans nouvelle confirmation : oui | non
+
+## Historique des checkpoints
+
+Les événements détaillés sont conservés dans `runtime-events.log`. Utiliser `scripts/checkpoint.sh` après chaque étape, erreur, reprise ou blocage.
