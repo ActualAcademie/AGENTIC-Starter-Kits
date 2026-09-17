@@ -12,7 +12,7 @@ En l'absence de mode général ou maintenance, si `.codex/PROJECT-BRIEF.md` est 
 
 Demander à l'utilisateur : `Envoie-moi le cahier des charges du projet. Je ne démarre aucune analyse, choix technique, modification ou orchestration avant sa réception.`
 
-Après réception du cahier dans le chat, demander explicitement si l’utilisateur veut un Trello complet et attendre sa réponse oui ou non. Enregistrer cette décision dans `project-profile.toml` avant de continuer.
+Après réception du cahier dans le chat, demander explicitement si l’utilisateur veut un Trello complet et attendre sa réponse oui ou non. Enregistrer cette décision dans `project-profile.toml` avant de continuer. Si la réponse est oui et que Trello est connecté, créer et vérifier réellement le tableau sur la plateforme, puis conserver ses identifiants et son URL dans le document Trello local.
 
 Après réception du cahier dans le chat, le formaliser dans `.codex/PROJECT-BRIEF.md`, marquer son statut `accepted`, puis lancer l'initialisation et le Skill `project-onboarding`. Avant toute implémentation, exécuter `bash .codex/scripts/initialize-project-design.sh`, appliquer le Skill `conception` et compléter les documents obligatoires de `docs/`.
 
