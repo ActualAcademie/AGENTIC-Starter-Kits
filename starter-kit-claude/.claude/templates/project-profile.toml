@@ -59,6 +59,8 @@ trello_choice = "pending"
 trello_execution = "plan-only"
 trello_board_name = ""
 trello_workspace = ""
+# Format : [{ name = "Prénom Nom", role = "Rôle projet", trello_id = "" }]
+trello_members = []
 
 [delivery]
 uses_pull_requests = true

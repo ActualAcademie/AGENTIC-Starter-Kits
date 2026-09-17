@@ -397,6 +397,12 @@ write_if_missing "$docs/project-management/trello-board.md" <<'DOC'
 - Responsable du tableau : [[A_COMPLETER]]
 - Dernière synchronisation : [[A_COMPLETER]]
 
+## Membres et rôles
+
+| Membre | Rôle projet | Identifiant Trello | Cartes attribuées |
+| --- | --- | --- | --- |
+| [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] |
+
 ## Règle de synchronisation
 
 Ce document est la source versionnée du tableau. Chaque carte possède un identifiant stable, un objectif, un périmètre, des dépendances, des critères d acceptation, une estimation, un responsable, une preuve attendue et un lien vers le work item. Le Coordinateur met à jour ce document avant toute création ou modification du tableau externe.

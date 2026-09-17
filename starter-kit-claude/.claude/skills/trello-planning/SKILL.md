@@ -15,18 +15,19 @@ Uniquement après une réponse utilisateur positive au choix Trello et après ac
 
 ## Entrées
 
-Cahier, dossier `docs/`, profil, roadmap, journal qualité, work items, contraintes et réponse Trello de l utilisateur.
+Cahier, dossier `docs/`, profil, roadmap, journal qualité, work items, contraintes, réponse Trello et liste validée des membres avec leur rôle.
 
 ## Procédure
 
-1. Décomposer chaque objectif et user story en cartes livrables.
-2. Ajouter les cartes de conception, développement frontend ou backend, données, tests, sécurité, documentation, CI, audit et livraison lorsque pertinentes.
-3. Découper chaque carte pour qu elle corresponde à une branche et à des commits atomiques.
-4. Renseigner pour chaque carte ID, liste, description, dépendances, critères d acceptation, preuve, responsable, estimation, priorité et risques.
-5. Ajouter les cartes de correction pour chaque entrée ouverte du journal qualité.
-6. Produire `docs/project-management/trello-board.md` avant toute synchronisation externe.
-7. Si une intégration Trello autorisée existe, créer ou mettre à jour le tableau sans supprimer une carte existante et rendre compte des identifiants externes.
-8. Synchroniser le statut Trello avec les work items, la roadmap et le journal qualité à chaque livraison.
+1. Vérifier que chaque membre possède un nom et un rôle confirmé dans `tracking.trello_members`. Si la liste est vide ou ambiguë, arrêter et demander les informations manquantes.
+2. Décomposer chaque objectif et user story en cartes livrables.
+3. Ajouter les cartes de conception, développement frontend ou backend, données, tests, sécurité, documentation, CI, audit et livraison lorsque pertinentes.
+4. Découper chaque carte pour qu elle corresponde à une branche et à des commits atomiques.
+5. Renseigner pour chaque carte ID, liste, description, dépendances, critères d acceptation, preuve, responsable, estimation, priorité et risques.
+6. Ajouter les cartes de correction pour chaque entrée ouverte du journal qualité.
+7. Produire `docs/project-management/trello-board.md` avant toute synchronisation externe.
+8. Si une intégration Trello autorisée existe, créer ou mettre à jour le tableau sans supprimer une carte existante et rendre compte des identifiants externes.
+9. Synchroniser le statut Trello avec les work items, la roadmap et le journal qualité à chaque livraison.
 
 ## Sortie
 
