@@ -1,6 +1,6 @@
 param(
     [Parameter(Mandatory = $true, Position = 0)]
-    [ValidateSet('init-project', 'preflight', 'verify-before-push', 'run-project-checks', 'generate-github-ci', 'show-project-context', 'initialize-project-design', 'doctor')]
+    [ValidateSet('init-project', 'preflight', 'verify-before-push', 'run-project-checks', 'generate-github-ci', 'show-project-context', 'initialize-project-design', 'checkpoint', 'doctor')]
     [string]$Command,
     [Parameter(ValueFromRemainingArguments = $true)]
     [string[]]$Arguments
