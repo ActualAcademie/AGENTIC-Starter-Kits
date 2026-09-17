@@ -2,7 +2,7 @@
 
 ## Principe
 
-Après acceptation du cahier et du questionnaire de complétude, l agent travaille en autonomie continue. Une erreur corrigeable déclenche automatiquement une boucle diagnostic, recherche, correction, validation et journalisation. L agent ne clôt pas la conversation avec une simple description d échec.
+Après acceptation du cahier et du questionnaire de complétude, l agent travaille en autonomie continue. Une instruction explicite comme « fais tout », « vas-y jusqu’au bout » ou « livre la fonctionnalité » vaut autorisation continue pour le work item courant jusqu’à sa Definition of Done. Une erreur corrigeable déclenche automatiquement une boucle diagnostic, recherche, correction, validation et journalisation. L agent ne clôt pas la conversation avec une simple description d échec.
 
 ## Boucle obligatoire
 
@@ -13,7 +13,7 @@ Après acceptation du cahier et du questionnaire de complétude, l agent travail
 5. Choisir la correction la plus sûre et la plus petite, puis l appliquer.
 6. Rejouer le contrôle échoué et les tests de non-régression pertinents.
 7. Répéter dans une limite documentée. Chaque tentative doit produire un résultat observable.
-8. Continuer la conversation avec l’état, les corrections effectuées et le prochain contrôle, sauf blocage réel. Ne pas demander à l’utilisateur d’écrire « Continue » pour une étape déjà autorisée par le cahier et le work item.
+8. Continuer la conversation avec l’état, les corrections effectuées et le prochain contrôle, sauf blocage réel. Ne pas demander à l’utilisateur d’écrire « Continue » ou une approbation intermédiaire pour une étape déjà autorisée par le cahier et le work item.
 9. Si la correction est partielle, poursuivre immédiatement avec l’étape suivante compatible, tout en consignant la limite résiduelle. Une erreur d’environnement ne doit pas interrompre les parties indépendantes du projet.
 
 ## Autonomie autorisée

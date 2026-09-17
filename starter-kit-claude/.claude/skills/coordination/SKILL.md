@@ -19,12 +19,12 @@ Demande, critères d'acceptation, `.claude/project-profile.toml`, état Git si d
 
 ## Récupération et recherche
 
-Ne pas transmettre une erreur corrigeable à l’utilisateur comme conclusion. Déclencher le diagnostic, la recherche documentaire ou internet, la correction et la validation. Continuer jusqu’à réussite, limite documentée ou blocage réel. Ne pas attendre un message « Continue » lorsque la prochaine étape est déjà autorisée. Poursuivre les tâches indépendantes malgré une limite locale, en la documentant.
+Ne pas transmettre une erreur corrigeable à l’utilisateur comme conclusion. Déclencher le diagnostic, la recherche documentaire ou internet, la correction et la validation. Continuer jusqu’à réussite, limite documentée ou blocage réel. Ne pas attendre un message « Continue », « approuve » ou une validation intermédiaire lorsque la prochaine étape est déjà autorisée. Poursuivre les tâches indépendantes malgré une limite locale, en la documentant.
 
 ## Procédure
 
 1. Créer un work item avec résultat, hors périmètre, critères et budget.
-2. En mode `autonomous-after-brief`, regrouper les choix non bloquants en décisions réversibles dans un ADR et continuer sans interrompre l’utilisateur. Ne poser qu’une demande consolidée pour les blocages réels.
+2. En mode `autonomous-after-brief` et lorsque `execution_authorization = "continuous-until-done"`, une instruction comme « fais tout » autorise l’exécution de toutes les sous-tâches du work item jusqu’à la Definition of Done. Regrouper les choix non bloquants en décisions réversibles dans un ADR et continuer sans interrompre l’utilisateur. Ne poser qu’une demande consolidée pour les blocages réels.
 3. Évaluer le risque avec `.claude/RISK-MATRIX.md`.
 4. Décomposer le résultat en tâches atomiques qui indiquent rôle, Skill, dépendances, fichiers autorisés et preuves.
 5. Ne paralléliser que les tâches sans contrat ni fichier commun.
