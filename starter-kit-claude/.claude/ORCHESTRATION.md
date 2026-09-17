@@ -26,6 +26,10 @@ Ce répertoire s'importe dans tout nouveau projet. Il adapte les contrôles à p
 - Les intégrations GitHub, Trello, Docker et autres sont facultatives.
 - Les fichiers de produit restent hors de `.claude/`.
 
+## Autorisation continue
+
+Lorsque l’utilisateur demande de tout faire ou de poursuivre jusqu’à la livraison, exécuter la chaîne complète du work item sans interruption volontaire. Produire des checkpoints et rapports intermédiaires sans demander d’approbation. Arrêter uniquement pour un blocage sensible défini par la politique d’autonomie.
+
 ## Reprise automatique
 
 À chaque nouvelle session, lire `RUNTIME-STATE.md`, le dernier work item, le dernier commit et les rapports avant de demander quoi que ce soit. Reprendre directement l’action autorisée.
