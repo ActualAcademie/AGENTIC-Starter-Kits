@@ -15,11 +15,12 @@ Work item accepté, profil projet, état Git, rapport Auditeur, rapport Cybersé
 
 ## Procédure
 
-1. Vérifier branche cible, statut Git et changements hors périmètre.
+1. Vérifier branche cible, version `VERSION`, entrée `CHANGELOG.md` et statut Git. statut Git et changements hors périmètre.
 2. Vérifier que la branche est dédiée au work item, que les commits sont atomiques, sous les limites déclarées et que la documentation est affectée. Refuser tout commit massif ou mélange de features.
-3. Lancer le preflight et les contrôles du profil projet.
-4. Préparer la revue avec objectif, critères, preuves, risques et plan de retour.
-5. Respecter le Git Flow existant et les protections de branche.
+3. Vérifier que le commit ou la release respecte `VERSIONING.md` et que `CHANGELOG.md` recense le changement.
+4. Lancer le preflight et les contrôles du profil projet.
+5. Préparer la revue avec objectif, critères, preuves, risques et plan de retour.
+6. Respecter le Git Flow existant et les protections de branche.
 
 ## Contrôles
 

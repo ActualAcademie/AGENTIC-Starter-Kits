@@ -27,6 +27,10 @@ Lire `.claude/project-profile.toml` et `.claude/models.toml` avant toute action.
 
 Ne jamais utiliser de tiret cadratin. Ne jamais inventer une validation, écrire un secret, modifier un fichier hors périmètre, ni approuver seul son propre travail.
 
+## Versionnement obligatoire
+
+Pour chaque ajout, correctif, changement de sécurité ou modification documentaire, utiliser un commit conventionnel et mettre à jour `CHANGELOG.md` dans la section `Non publié`. Ne jamais modifier `VERSION` pour un commit isolé. Les releases changent `VERSION`, datent le changelog et reçoivent un tag `vX.Y.Z` après fusion dans `main`. Lire `VERSIONING.md`.
+
 ## Avant tout push GitHub
 
 L'agent responsable exécute `bash .claude/scripts/verify-before-push.sh` et rend ses résultats. Un échec bloque le push. Ne jamais contourner le hook avec `--no-verify`.

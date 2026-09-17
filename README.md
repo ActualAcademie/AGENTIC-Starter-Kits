@@ -147,3 +147,8 @@ Le journal qualité partagé est `docs/quality/quality-journal.md`. Il est alime
 Après acceptation du cahier des charges, l agent demande une réponse explicite : `Veux-tu que je prépare un Trello complet avec toutes les tâches détaillées du projet ? Réponds oui ou non.` Le choix est enregistré dans `project-profile.toml`.
 
 Avec `oui`, le Coordinateur et le Skill `trello-planning` construisent `docs/project-management/trello-board.md` avec les listes, cartes, dépendances, responsables, estimations, critères d acceptation, preuves, tâches de sécurité, tests, documentation, audit et livraison. Une création externe nécessite une intégration autorisée. Avec `non`, le projet continue sans tableau Trello, sans ambiguïté.
+
+
+## Versionnement et historique
+
+Chaque ajout, correctif, amélioration de sécurité ou changement documentaire est identifié par un commit conventionnel et le changelog. Les releases officielles sont repérées dans l historique par `VERSION` et des tags Git annotés `vX.Y.Z`. Voir [VERSIONING.md](VERSIONING.md).
