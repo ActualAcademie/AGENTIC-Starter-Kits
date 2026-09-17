@@ -4,6 +4,8 @@ project_type = "unknown"
 risk_tolerance = "standard"
 # autonomous-after-brief ou approval-per-step
 execution_mode = "autonomous-after-brief"
+# continuous-until-done ou step-by-step
+execution_authorization = "continuous-until-done"
 integration_branch = "develop"
 
 [stack]
