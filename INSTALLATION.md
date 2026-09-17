@@ -218,6 +218,31 @@ Chaque feature doit avoir une branche dédiée :
 git switch --create feature/US-001-reservation
 ```
 
+## 12. Autoriser l’exécution complète
+
+Une fois le cahier accepté, écrire par exemple :
+
+```text
+Fais tout pour ce work item jusqu’à sa Definition of Done.
+```
+
+Le Coordinateur enchaîne les étapes autorisées, corrige les erreurs récupérables, relance les contrôles et documente les décisions. Il ne demande pas une validation intermédiaire pour chaque commande. Une question n’est posée que lorsqu’une décision métier, un secret, une permission externe ou une action irréversible est réellement nécessaire.
+
+## 13. Suivre et optimiser le coût
+
+Le suivi est destiné au Coordinateur. Après une délégation, enregistrer les volumes si l’intégration ne les fournit pas automatiquement :
+
+```bash
+bash .codex/scripts/cost-tracker.sh record --agent backend --model gpt-5.6-terra --input 12000 --output 3000 --work-item US-001 --feature reservation
+bash .codex/scripts/cost-tracker.sh report
+```
+
+Avec Claude, remplacer `.codex` par `.claude`. Le registre JSONL permet de comparer les agents, modèles, fonctionnalités, relances et volumes. Le profil peut définir un budget de tokens et des tarifs optionnels. Aucun montant ne doit être déduit si les tarifs ne sont pas configurés.
+
+## 14. Finaliser une livraison
+
+Avant le commit, le rôle responsable lance les validations du projet. Avant le push, le hook et `verify-before-push.sh` vérifient le preflight, la sécurité, le lint, les tests, le build, les documents et les limites du diff. L’Auditeur rend une décision indépendante. La Pull Request doit expliquer le résultat, les preuves, les risques résiduels et les migrations éventuelles.
+
 Les commits doivent rester atomiques. Ne jamais créer un commit de centaines ou milliers de fichiers pour plusieurs fonctionnalités.
 
 ## 12. Utiliser le journal qualité

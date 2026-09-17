@@ -177,3 +177,15 @@ Le tutoriel unique et complet se trouve dans [INSTALLATION.md](../INSTALLATION.m
 Les Skills natifs se trouvent dans `.claude/skills/<nom>/SKILL.md`. Ils couvrent l’intake, l’onboarding, la conception, la coordination, la planification Trello, l’implémentation, l’audit qualité, l’audit sécurité, le journal qualité, la livraison et l’optimisation coût. Les agents utilisent ces procédures avec un contexte limité et traçable.
 
 Claude Code reste l’orchestrateur de la session. Les sous-agents ne travaillent que sur des flux autorisés et indépendants.
+
+## Optimisation pilotée par le Coordinateur
+
+Le script `.claude/scripts/cost-tracker.sh` conserve les appels dans `.claude/metrics/usage.jsonl` et produit un résumé exploitable :
+
+```bash
+bash .claude/scripts/cost-tracker.sh report
+```
+
+Le Coordinateur utilise ces données pour réduire le contexte, supprimer les relances, regrouper les tâches et router chaque demande vers Luna, Terra ou Sol selon le risque. Les prix sont optionnels dans le profil et aucune estimation monétaire n’est inventée.
+
+Après une instruction « fais tout », le Coordinateur poursuit jusqu’à la Definition of Done sans demander « Continue ». Il corrige les erreurs récupérables, vérifie les résultats et ne sollicite l’utilisateur que pour une décision sensible ou irréversible.
