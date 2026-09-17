@@ -19,7 +19,7 @@ Work item, contrat, fichiers autorisés, dépendances, critères, niveau de risq
 
 ## Récupération automatique
 
-En cas d’erreur, appliquer `.codex/policies/AUTONOMY-AND-RECOVERY.md` ou `.claude/policies/AUTONOMY-AND-RECOVERY.md`. Diagnostiquer, consulter les sources officielles et internet si nécessaire, corriger, retester et poursuivre sans interrompre la conversation pour une erreur corrigeable.
+En cas d’erreur, appliquer `.codex/policies/AUTONOMY-AND-RECOVERY.md` ou `.claude/policies/AUTONOMY-AND-RECOVERY.md`. Diagnostiquer, consulter les sources officielles et internet si nécessaire, corriger, retester et poursuivre sans interrompre la conversation pour une erreur corrigeable. Si une commande reste incompatible, appliquer l’alternative officiellement supportée, documenter la limite et continuer les travaux indépendants.
 
 ## Procédure
 
