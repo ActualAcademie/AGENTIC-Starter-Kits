@@ -4,13 +4,13 @@
 
 Le dépôt suit Semantic Versioning : `MAJOR.MINOR.PATCH`.
 
-- `MAJOR` augmente lors d une rupture de compatibilité ou d une refonte qui invalide un contrat existant.
-- `MINOR` augmente lors d un ajout compatible.
-- `PATCH` augmente lors d un correctif compatible, d une amélioration interne ou d une correction documentaire sans rupture.
+- `MAJOR` augmente lors d’une rupture de compatibilité ou d’une refonte qui invalide un contrat existant.
+- `MINOR` augmente lors d’un ajout compatible.
+- `PATCH` augmente lors d’un correctif compatible, d’une amélioration interne ou d’une correction documentaire sans rupture.
 
-La version courante est dans `VERSION`. Elle est toujours accompagnée d une entrée dans `CHANGELOG.md` et d un tag Git annoté `vX.Y.Z` sur `main`.
+La version courante est dans `VERSION`. Elle est toujours accompagnée d’une entrée dans `CHANGELOG.md` et d’un tag Git annoté `vX.Y.Z` sur `main`.
 
-## Cycle d un changement
+## Cycle d’un changement
 
 1. Créer une branche dédiée depuis `develop`.
 2. Utiliser un commit conventionnel : `feat`, `fix`, `docs`, `test`, `refactor`, `perf`, `security` ou `chore`.
@@ -23,4 +23,4 @@ La version courante est dans `VERSION`. Elle est toujours accompagnée d une ent
 
 Un tag de release ne doit jamais être déplacé. Une version publiée ne doit jamais être réutilisée. Toute correction postérieure augmente la version PATCH. Une modification non versionnée dans `main` est une anomalie de processus et doit être corrigée par une release PATCH.
 
-Les commits individuels ne reçoivent pas tous un tag : le commit conserve la nature du changement et la release fournit le jalon consommable. Le lien est assuré par le changelog et la Pull Request.
+Les commits individuels ne reçoivent pas tous un tag : le commit conserve la nature du changement et la release fournit le jalon consommable. Le lien’est assuré par le changelog et la Pull Request.
