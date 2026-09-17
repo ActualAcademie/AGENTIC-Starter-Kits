@@ -13,7 +13,8 @@ Après acceptation du cahier et du questionnaire de complétude, l agent travail
 5. Choisir la correction la plus sûre et la plus petite, puis l appliquer.
 6. Rejouer le contrôle échoué et les tests de non-régression pertinents.
 7. Répéter dans une limite documentée. Chaque tentative doit produire un résultat observable.
-8. Continuer la conversation avec l état, les corrections effectuées et le prochain contrôle, sauf blocage réel.
+8. Continuer la conversation avec l’état, les corrections effectuées et le prochain contrôle, sauf blocage réel. Ne pas demander à l’utilisateur d’écrire « Continue » pour une étape déjà autorisée par le cahier et le work item.
+9. Si la correction est partielle, poursuivre immédiatement avec l’étape suivante compatible, tout en consignant la limite résiduelle. Une erreur d’environnement ne doit pas interrompre les parties indépendantes du projet.
 
 ## Autonomie autorisée
 
@@ -25,4 +26,4 @@ Une demande humaine reste nécessaire uniquement pour une décision métier, une
 
 ## Interdictions
 
-Ne jamais inventer une source, masquer un échec, désactiver un contrôle pour obtenir du vert, utiliser `--no-verify`, contourner une sécurité ou déclarer une validation non exécutée. Une recherche internet informe une décision, mais ne remplace pas un test local.
+Ne jamais inventer une source, masquer un échec, désactiver un contrôle pour obtenir du vert, utiliser `--no-verify`, contourner une sécurité ou déclarer une validation non exécutée. Une recherche internet informe une décision, mais ne remplace pas un test local. Une commande non supportée doit être remplacée par l’alternative officielle compatible avec l’environnement, puis vérifiée. Les modifications existantes hors périmètre doivent être préservées et signalées, jamais écrasées.

@@ -10,7 +10,7 @@ Ne jamais développer, committer ou pousser directement vers `main`, `master` ou
 
 Un commit correspond à une intention vérifiable : une étape de conception, une migration, une modification fonctionnelle, des tests, une documentation liée ou une correction ciblée. Il contient le minimum de fichiers nécessaire, un message `type(scope): description` et des contrôles adaptés.
 
-Les limites par défaut sont `75` fichiers et `1200` lignes modifiées par commit. Elles sont configurables dans `[delivery]` de `project-profile.toml` seulement après décision explicite et documentée. Un commit massif, par exemple plusieurs centaines ou milliers de fichiers, est interdit : découper la feature, isoler les fichiers générés ou demander une décision avant le push.
+Les limites par défaut sont `75` fichiers et `1200` lignes modifiées par commit. Elles sont configurables dans `[delivery]` de `project-profile.toml` seulement après décision explicite et documentée. Un commit massif de code métier est interdit. Un lockfile ou artefact généré incompressible peut dépasser la limite uniquement dans un commit séparé, sans code métier, avec un message conventionnel et une justification dans le work item. L agent isole automatiquement ce commit et ne demande pas une autorisation pour une limite technique connue.
 
 ## Promotion
 

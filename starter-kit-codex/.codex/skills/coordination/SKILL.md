@@ -14,7 +14,7 @@ Demande, critères d'acceptation, `.codex/project-profile.toml`, état Git si di
 
 ## Récupération et recherche
 
-Ne pas transmettre une erreur corrigeable à l’utilisateur comme conclusion. Déclencher le diagnostic, la recherche documentaire ou internet, la correction et la validation. Continuer jusqu’à réussite, limite documentée ou blocage réel.
+Ne pas transmettre une erreur corrigeable à l’utilisateur comme conclusion. Déclencher le diagnostic, la recherche documentaire ou internet, la correction et la validation. Continuer jusqu’à réussite, limite documentée ou blocage réel. Ne pas attendre un message « Continue » lorsque la prochaine étape est déjà autorisée. Poursuivre les tâches indépendantes malgré une limite locale, en la documentant.
 
 ## Procédure
 

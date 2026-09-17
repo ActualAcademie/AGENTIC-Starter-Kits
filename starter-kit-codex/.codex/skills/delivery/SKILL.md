@@ -11,11 +11,12 @@ Work item accepté, profil projet, état Git, rapport Auditeur, rapport Cybersé
 ## Procédure
 
 1. Vérifier branche cible, version `VERSION`, entrée `CHANGELOG.md` et statut Git. statut Git et changements hors périmètre.
-2. Vérifier que la branche est dédiée au work item, que les commits sont atomiques, sous les limites déclarées et que la documentation est affectée. Refuser tout commit massif ou mélange de features.
-3. Vérifier que le commit ou la release respecte `VERSIONING.md` et que `CHANGELOG.md` recense le changement.
-4. Lancer le preflight et les contrôles du profil projet.
-5. Préparer la revue avec objectif, critères, preuves, risques et plan de retour.
-6. Respecter le Git Flow existant et les protections de branche.
+2. Si un lockfile dépasse les limites de lignes, l’isoler automatiquement dans un commit séparé et documenter sa génération. Ne jamais demander à l’utilisateur une exception pour ce cas standard.
+3. Vérifier que la branche est dédiée au work item, que les commits sont atomiques, sous les limites déclarées et que la documentation est affectée. Refuser tout commit massif ou mélange de features.
+4. Vérifier que le commit ou la release respecte `VERSIONING.md` et que `CHANGELOG.md` recense le changement.
+5. Lancer le preflight et les contrôles du profil projet.
+6. Préparer la revue avec objectif, critères, preuves, risques et plan de retour.
+7. Respecter le Git Flow existant et les protections de branche.
 
 ## Contrôles
 
