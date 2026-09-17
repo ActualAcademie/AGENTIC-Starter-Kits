@@ -27,6 +27,10 @@ Ne pas transmettre une erreur corrigeable à l’utilisateur comme conclusion. D
 7. Collecter les rapports, preuves et risques résiduels.
 8. Demander l'audit requis, puis clôturer ou faire reprendre le travail.
 
+## Boucle d.optimisation du Coordinateur
+
+Avant chaque délégation, lire les métriques disponibles et les évaluations comparables. Le registre est interne et ne doit jamais interrompre un work item autorisé. Réduire le contexte, réutiliser les résultats validés, regrouper les tâches indépendantes, puis router Luna pour les tâches répétitives à faible risque, Terra pour l.implementation et les audits courants, et Sol pour les décisions complexes ou critiques. Après chaque work item, comparer qualité, défauts, durée, contexte, relances et coût estimé. En cas de dérive, modifier un seul paramètre et vérifier la non-régression.
+
 ## Contrôles
 
 Chaque tâche doit avoir un propriétaire, un risque, un périmètre, une règle d'arrêt et une preuve attendue. Toute dérive de budget, de portée ou de sécurité impose une escalade.
