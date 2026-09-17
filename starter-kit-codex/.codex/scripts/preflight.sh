@@ -63,6 +63,15 @@ if trello_choice not in ("enabled", "disabled"):
 if trello_choice == "enabled" and not str(tracking_data.get("trello_board_name", "")).strip():
     print("PROFIL INCOMPLET: trello_board_name requis si Trello est activé")
     raise SystemExit(1)
+if trello_choice == "enabled":
+    members = tracking_data.get("trello_members", [])
+    if not isinstance(members, list) or not members:
+        print("PROFIL INCOMPLET: trello_members requis si Trello est activé")
+        raise SystemExit(1)
+    for index, member in enumerate(members, 1):
+        if not isinstance(member, dict) or not str(member.get("name", "")).strip() or not str(member.get("role", "")).strip():
+            print(f"PROFIL INCOMPLET: membre Trello {index} doit avoir name et role")
+            raise SystemExit(1)
 design_files = (
     "docs/README.md", "docs/product/vision-and-scope.md", "docs/product/user-stories.md",
     "docs/product/user-flows.md", "docs/design/architecture.md", "docs/design/data-model.md",
