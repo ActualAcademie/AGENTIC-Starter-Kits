@@ -17,6 +17,10 @@ Pour toute demande qui modifie le produit, ses documents, sa configuration ou sa
 
 Demande, critères d'acceptation, `.claude/project-profile.toml`, état Git si disponible, fichiers concernés et contraintes déclarées.
 
+## Récupération et recherche
+
+Ne pas transmettre une erreur corrigeable à l’utilisateur comme conclusion. Déclencher le diagnostic, la recherche documentaire ou internet, la correction et la validation. Continuer jusqu’à réussite, limite documentée ou blocage réel.
+
 ## Procédure
 
 1. Créer un work item avec résultat, hors périmètre, critères et budget.
