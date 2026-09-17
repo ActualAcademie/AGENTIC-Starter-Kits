@@ -284,6 +284,71 @@ DOC
 
 echo "Documentation de conception initialisée dans $docs. Remplacer tous les marqueurs [[A_COMPLETER]] par une conception issue du cahier des charges avant le preflight."
 
+write_if_missing "$docs/design/visual-direction.md" <<'DOC'
+# Direction artistique et expérience visuelle
+
+## Statut et intention
+
+Statut : [[A_COMPLETER: draft, review, approved ou updated]]
+
+[[A_COMPLETER: formuler l'émotion, la personnalité et la promesse visuelle du produit.]]
+
+## Références et anti-références
+
+- Références : [[A_COMPLETER]]
+- Anti-références : [[A_COMPLETER]]
+- Différenciation attendue : [[A_COMPLETER]]
+
+## Système visuel
+
+| Élément | Décision | Justification produit | Exemple ou token |
+| --- | --- | --- | --- |
+| Palette | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] |
+| Typographie | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] |
+| Espacement | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] |
+| Formes et profondeur | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] |
+| Iconographie et illustration | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] |
+
+## Composants, états et motion
+
+Documenter les composants réutilisables, les états loading, vide, erreur, succès, focus et désactivé. Décrire les transitions, durées, courbes, déclencheurs et comportement avec `prefers-reduced-motion`.
+
+[[A_COMPLETER]]
+
+## Responsive, accessibilité et performance
+
+[[A_COMPLETER: points de rupture, clavier, lecteur d'écran, contraste, taille de texte, budget de performance et stratégie de chargement.]]
+
+## Validation visuelle
+
+Captures attendues : [[A_COMPLETER]]
+Parcours vérifiés : [[A_COMPLETER]]
+Auditeur : [[A_COMPLETER]]
+Date : [[A_COMPLETER]]
+DOC
+
+echo "Direction artistique initialisée dans $docs/design/visual-direction.md"
+
+write_if_missing "$docs/design/media-inventory.md" <<'DOC'
+# Inventaire des médias
+
+Chaque image, photo, illustration, vidéo, icône ou texture utilisée dans le produit doit être recensée avant livraison.
+
+| ID | Fichier ou URL | Type | Auteur ou fournisseur | Licence et preuve | Date | Retouches | Usage | Statut |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| MEDIA-001 | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] | [[A_COMPLETER]] |
+
+## Règles
+
+- Ne jamais utiliser une ressource sans provenance et licence vérifiable.
+- Conserver l'URL, la date de consultation et les obligations d'attribution.
+- Documenter le brief et les retouches d'une image générée.
+- Ne pas retirer de filigrane, scraper ou présenter un visuel temporaire comme final.
+- Contrôler réalisme, artefacts, texte illisible, visages, mains, logos et conformité au produit.
+DOC
+
+echo "Inventaire médias initialisé dans $docs/design/media-inventory.md"
+
 write_if_missing "$docs/quality/quality-journal.md" <<'DOC'
 # Journal qualité, bugs et risques
 
