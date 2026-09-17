@@ -1,3 +1,8 @@
+---
+name: visual-design
+description: Direction artistique frontend premium, motion design accessible et gestion vérifiable des médias.
+---
+
 # Skill visual-design
 
 ## Objectif
