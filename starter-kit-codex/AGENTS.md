@@ -24,7 +24,7 @@ Après réception du cahier, annoncer qu’une phase de questions de complétude
 
 ## Versionnement obligatoire
 
-Pour chaque ajout, correctif, changement de sécurité ou modification documentaire, utiliser un commit conventionnel et mettre à jour `CHANGELOG.md` dans la section `Non publié`. Ne jamais modifier `VERSION` pour un commit isolé. Les releases changent `VERSION`, datent le changelog et reçoivent un tag `vX.Y.Z` après fusion dans `main`. Lire `VERSIONING.md`.
+Pour chaque ajout, correctif, changement de sécurité ou modification documentaire, utiliser un commit conventionnel, mettre à jour `CHANGELOG.md` dans la section `Non publié` et déclarer l’impact SemVer dans la Pull Request. Une release met à jour `VERSION`, `kit_version`, le README, le changelog et le titre de Pull Request, puis reçoit un tag `vX.Y.Z` après fusion dans `main`. Lire `VERSIONING.md`.
 
 ## Avant tout push GitHub
 

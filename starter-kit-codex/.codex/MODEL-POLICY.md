@@ -21,6 +21,16 @@
 | Backend | Terra medium | Terra high | Sol xhigh |
 | Cybersécurité | Terra high | Terra high | Sol xhigh |
 | Auditeur | Terra high | Terra high | Sol xhigh |
+| Produit | Sol high | Sol high | Sol xhigh |
+| QA | Terra high | Terra high | Sol xhigh |
+| DevOps | Terra medium | Terra high | Sol xhigh |
+| Performance | Terra high | Terra high | Sol xhigh |
+| UX Research | Terra medium | Terra high | Sol xhigh |
+| Accessibilité | Terra high | Terra high | Sol xhigh |
+| Data | Terra medium | Terra high | Sol xhigh |
+| Documentation | Luna low | Terra medium | Sol high |
+| Release | Sol high | Terra high | Sol xhigh |
+| Conformité | Terra high | Terra high | Sol xhigh |
 
 Luna low est accessible avec le niveau `low` pour les tâches sans effet direct sur le produit ou la sécurité.
 

@@ -1,5 +1,7 @@
 # Agentic Starter Kits
 
+Version actuelle : `1.0.0`.
+
 ## Construire avec une IA comme avec une équipe senior
 
 Agentic Starter Kits est une base portable de gouvernance, de conception, d’orchestration et de contrôle qualité pour construire des projets logiciels avec un agent IA. Le dépôt transforme une conversation en processus de livraison traçable, depuis le cahier des charges jusqu’à la Pull Request et à la maintenance.
