@@ -21,6 +21,16 @@
 | Backend | Sonnet medium | Sonnet high | Opus high |
 | Cybersécurité | Sonnet high | Sonnet high | Opus high |
 | Auditeur | Sonnet high | Sonnet high | Opus high |
+| Produit | Opus high | Sonnet high | Opus high |
+| QA | Sonnet high | Sonnet high | Opus high |
+| DevOps | Sonnet medium | Sonnet high | Opus high |
+| Performance | Sonnet high | Sonnet high | Opus high |
+| UX Research | Sonnet medium | Sonnet high | Opus high |
+| Accessibilité | Sonnet high | Sonnet high | Opus high |
+| Data | Sonnet medium | Sonnet high | Opus high |
+| Documentation | Sonnet low | Sonnet medium | Opus high |
+| Release | Opus high | Sonnet high | Opus high |
+| Conformité | Sonnet high | Sonnet high | Opus high |
 
 Sonnet low est réservé aux tâches sans effet direct sur le produit ou la sécurité.
 
