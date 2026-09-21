@@ -6,6 +6,19 @@ Ce projet suit le versionnement sémantique. Les changements publiés sont regro
 
 - Ajout ou correction : inscrire ici chaque changement visible avant la release.
 
+## 1.0.0 - 2026-09-21
+
+### Ajouts
+
+- Ajout de dix agents spécialistes optionnels pour le produit, la QA, le DevOps, la performance, la recherche UX, l’accessibilité, les données, la documentation, les releases et la conformité.
+- Ajout de la gouvernance d’activation et de supervision des agents spécialistes.
+- Ajout du suivi interne des coûts et du routage des modèles par risque.
+
+### Corrections
+
+- Le Coordinateur lit désormais la gouvernance des spécialistes avant toute délégation.
+- Le preflight accepte les agents optionnels tout en conservant les six agents du noyau obligatoires.
+
 ## 0.1.0 - 2026-09-17
 
 ### Ajouts

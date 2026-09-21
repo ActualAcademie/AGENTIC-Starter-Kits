@@ -25,6 +25,8 @@ Ce répertoire s'importe dans tout nouveau projet. Il adapte les contrôles à p
 - Le niveau de risque commande la profondeur de revue.
 - Les intégrations GitHub, Trello, Docker et autres sont facultatives.
 - Les fichiers de produit restent hors de `.codex/`.
+- Lire `SPECIALIST-AGENTS.md` avant toute délégation. Le Coordinateur compare le besoin aux conditions d’activation, met à jour `[agents]`, justifie chaque activation dans le work item et exige les livrables annoncés.
+- Un spécialiste désactivé ne doit pas être appelé. Les agents de QA, Cybersécurité, Accessibilité et Auditeur contrôlent la livraison lorsqu’ils sont requis par le risque ou la nature du produit.
 
 ## Autorisation continue
 
