@@ -1,8 +1,8 @@
 # Agentic Starter Kits
 
-[![Version](https://img.shields.io/badge/version-1.0.6-blue.svg)](VERSION)
+[![Version](https://img.shields.io/badge/version-1.0.7-blue.svg)](VERSION)
 
-Version actuelle : `1.0.6`.
+Version actuelle : `1.0.7`.
 
 ## Construire avec une IA comme avec une équipe senior
 
@@ -180,6 +180,8 @@ Le kit ne devine pas les décisions métier, ne crée pas de secret, ne simule p
 ## État fonctionnel de la version 1.0.5
 
 La version actuelle inclut 16 agents au total : six agents du noyau et dix spécialistes optionnels. Elle inclut leurs politiques de modèles, la gouvernance d’activation, les Skills d’orchestration, les scripts d’initialisation, les checkpoints, le suivi des coûts et les contrôles CI. Les détails contractuels des spécialistes sont dans `SPECIALIST-AGENTS.md` dans chaque kit.
+
+Le dépôt utilise aussi `markdownlint-cli2` avec `.markdownlint.json`. Les conventions de longueur, de frontmatter Claude et de tableaux sont explicites dans cette configuration. Tout vrai défaut Markdown restant bloque la CI.
 
 Le cycle de travail prend également en charge les cartes Trello `time-gated`. Une carte dépendante d’une date peut être suspendue avec sa raison, sa date ISO et son checkpoint, tandis que les travaux indépendants continuent. Les règles de versionnement, de README obligatoire et de publication sont définies dans `VERSIONING.md`.
 

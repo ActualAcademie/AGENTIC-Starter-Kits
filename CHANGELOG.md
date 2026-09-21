@@ -6,6 +6,13 @@ Ce projet suit le versionnement sémantique. Les changements publiés sont regro
 
 - Ajout ou correction : inscrire ici chaque changement visible avant la release.
 
+## 1.0.7 - 2026-09-21
+
+### Corrections
+
+- Ajout d’un lint Markdown explicite et bloquant pour supprimer les avertissements jaunes avant fusion.
+- Ajout de la configuration `.markdownlint.json` adaptée aux README, aux frontmatters Claude et aux tableaux du kit.
+
 ## 1.0.6 - 2026-09-21
 
 ### Ajouts
