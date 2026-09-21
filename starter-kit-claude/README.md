@@ -172,6 +172,8 @@ Le tutoriel unique et complet se trouve dans [INSTALLATION.md](../INSTALLATION.m
 | `.claude/agents/cybersecurite.md` | Cybersécurité | menaces, vulnérabilités, contrôles et blocage critique |
 | `.claude/agents/auditeur.md` | Auditeur | vérification indépendante, preuves, régressions et décision |
 
+Les spécialistes optionnels sont activés dans `[agents]` de `.claude/project-profile.toml` : `produit`, `qa`, `devops`, `performance`, `ux_research`, `accessibilite`, `data`, `documentation`, `release` et `conformite`. Le Coordinateur les active selon les besoins détectés, le risque et le budget.
+
 ## Skills Claude Code
 
 Les Skills natifs se trouvent dans `.claude/skills/<nom>/SKILL.md`. Ils couvrent l’intake, l’onboarding, la conception, la coordination, la planification Trello, l’implémentation, l’audit qualité, l’audit sécurité, le journal qualité, la livraison et l’optimisation coût. Les agents utilisent ces procédures avec un contexte limité et traçable.

@@ -118,7 +118,7 @@ for agent in (config / 'agents').glob('*.toml'):
     if not profile_data or data['model'] != profile_data['model']:
         print(f'MODELE AGENT INCOHERENT: {agent}')
         raise SystemExit(1)
-if seen != required_agents:
+if not required_agents.issubset(seen):
     print(f'AGENTS INCOMPLETS: attendus={sorted(required_agents)} obtenus={sorted(seen)}')
     raise SystemExit(1)
 for prompt in ('coordinateur', 'concepteur', 'implementation', 'cybersecurite', 'auditeur'):

@@ -147,7 +147,7 @@ for agent in (config / 'agents').glob('*.md'):
         print(f'AGENT INSUFFISANT: {agent}')
         raise SystemExit(1)
     seen.add(data['name'])
-if seen != required_agents:
+if not required_agents.issubset(seen):
     print(f'AGENTS INCOMPLETS: attendus={sorted(required_agents)} obtenus={sorted(seen)}')
     raise SystemExit(1)
 for prompt in ('coordinateur', 'concepteur', 'implementation', 'cybersecurite', 'auditeur'):

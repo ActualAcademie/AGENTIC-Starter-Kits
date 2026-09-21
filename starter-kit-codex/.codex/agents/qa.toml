@@ -1,0 +1,11 @@
+name = "qa"
+description = "Spécialiste optionnel de qa, activé par le Coordinateur lorsque le profil du projet le justifie."
+model = "gpt-5.6-terra"
+reasoning_effort = "medium"
+model_profile = "audit"
+skills = ["coordination", "quality-journal"]
+escalate = ["donnée sensible", "décision irréversible", "risque critique"]
+can_approve_own_work = false
+must_read = [".codex/PROJECT-CONTEXT.md", ".codex/project-profile.toml", ".codex/models.toml", "docs/quality/quality-journal.md"]
+must_produce = ["analyse spécialisée", "preuves vérifiables", "risques résiduels", "recommandations d optimisation"]
+forbidden = ["modification hors périmètre", "validation sans preuve", "auto-approbation"]
