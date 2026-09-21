@@ -1,6 +1,6 @@
 # Agentic Starter Kits
 
-[![Version](https://img.shields.io/badge/version-1.0.14-blue.svg)](VERSION)
+[![Version](https://img.shields.io/badge/version-1.0.15-blue.svg)](VERSION)
 
 ## Construire avec une IA comme avec une équipe senior
 
@@ -263,3 +263,7 @@ Le kit installe un workflow GitHub Actions qui vérifie les nouvelles versions e
 ### Choix des mises à jour à l’initialisation
 
 Lors de l’initialisation, l’agent demande si les mises à jour automatiques doivent être activées. Le choix recommandé est `Oui, Pull Request automatique`. L’agent pourra alors préparer les mises à jour, les tester et ouvrir une Pull Request sans modifier directement `main`. Le choix `Non` désactive le workflow. Le comportement peut être imposé avec `--updates pr` ou `--updates off`.
+
+## Règle de protection de main
+
+Les mises à jour automatiques ouvrent uniquement une Pull Request vers `develop` ou `dev`. Elles ne peuvent jamais ouvrir ni fusionner automatiquement une Pull Request vers `main`. La promotion vers `main` reste une action humaine, ou une action explicitement demandée par l’utilisateur et documentée dans le work item.
