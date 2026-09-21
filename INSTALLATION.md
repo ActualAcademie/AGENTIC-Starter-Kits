@@ -432,3 +432,7 @@ Le workflow cible `develop` par défaut. Si votre projet utilise `dev`, définis
 ### Installateur guidé
 
 Lancez simplement `./install.sh` dans un terminal interactif. L’assistant propose Codex ou Claude, demande le dossier cible, affiche un résumé et demande confirmation avant toute copie. Dans une automatisation, utilisez `./install.sh --kit codex --target /chemin/du/projet`.
+
+### Choisir le dossier avec les flèches
+
+Si `fzf` est installé, lancez `./install.sh` sans `--target`. Une liste interactive apparaît. Utilisez les flèches pour sélectionner le dossier, puis appuyez sur Entrée. Sans `fzf`, le script demande simplement le chemin du projet. Le mode `--target` reste disponible pour les automatisations.

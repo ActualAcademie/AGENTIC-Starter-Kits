@@ -4,6 +4,8 @@ Ce projet suit le versionnement sémantique. Les changements publiés sont regro
 
 ## Non publié
 
+- Ajoute un sélecteur de dossier avec navigation fzf et un fallback Bash sans dépendance obligatoire.
+
 - Améliore l’installateur avec un assistant terminal coloré, des choix guidés et un résumé avant installation.
 
 - Verrouille les Pull Requests automatiques sur dev ou develop et interdit toute promotion automatique vers main.
@@ -21,7 +23,7 @@ Ce projet suit le versionnement sémantique. Les changements publiés sont regro
 - Ajout ou correction : inscrire ici chaque changement visible avant la release.
 - Ajout du synchroniseur non destructif et du workflow de Pull Request automatique pour propager les mises à jour du kit dans les projets utilisateurs.
 
-## 1.0.16 - 2026-09-21
+## 1.0.17 - 2026-09-21
 
 ### Corrections
 
