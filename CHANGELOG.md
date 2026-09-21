@@ -4,6 +4,8 @@ Ce projet suit le versionnement sémantique. Les changements publiés sont regro
 
 ## Non publié
 
+- Réorganisation du README principal pour présenter l’installation et le démarrage avant les détails avancés.
+
 - Suppression du doublon de version dans le README principal et clarification complète de l’installation et des mises à jour automatiques.
 
 - Ajout d’un installateur qui sélectionne automatiquement Codex ou Claude et installe uniquement la variante nécessaire.
@@ -11,7 +13,7 @@ Ce projet suit le versionnement sémantique. Les changements publiés sont regro
 - Ajout ou correction : inscrire ici chaque changement visible avant la release.
 - Ajout du synchroniseur non destructif et du workflow de Pull Request automatique pour propager les mises à jour du kit dans les projets utilisateurs.
 
-## 1.0.11 - 2026-09-21
+## 1.0.12 - 2026-09-21
 
 ### Corrections
 
