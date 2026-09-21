@@ -1,6 +1,6 @@
 name = "produit"
 description = "Spécialiste optionnel de produit, activé par le Coordinateur lorsque le profil du projet le justifie."
-model = "gpt-5.6-terra"
+model = "gpt-5.6-sol"
 reasoning_effort = "medium"
 model_profile = "orchestration"
 skills = ["coordination", "quality-journal"]
