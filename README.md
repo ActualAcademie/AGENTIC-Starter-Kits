@@ -1,6 +1,6 @@
 # Agentic Starter Kits
 
-Version actuelle : `1.0.3`.
+Version actuelle : `1.0.4`.
 
 ## Construire avec une IA comme avec une équipe senior
 
@@ -174,6 +174,12 @@ Le kit ne devine pas les décisions métier, ne crée pas de secret, ne simule p
 - [Sécurité](SECURITY.md)
 - [Versionnement](VERSIONING.md)
 - [Historique des changements](CHANGELOG.md)
+
+## État fonctionnel de la version 1.0.4
+
+La version actuelle inclut les six agents du noyau et dix spécialistes optionnels, leurs politiques de modèles, la gouvernance d’activation, les Skills d’orchestration, les scripts d’initialisation, les checkpoints, le suivi des coûts et les contrôles CI. Les détails contractuels des spécialistes sont dans `SPECIALIST-AGENTS.md` dans chaque kit.
+
+Le cycle de travail prend également en charge les cartes Trello `time-gated`. Une carte dépendante d’une date peut être suspendue avec sa raison, sa date ISO et son checkpoint, tandis que les travaux indépendants continuent. Les règles de versionnement, de README obligatoire et de publication sont définies dans `VERSIONING.md`.
 
 ## Synchronisation d’un fork d’organisation
 
