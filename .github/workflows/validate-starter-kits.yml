@@ -20,6 +20,8 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-python@v5
         with:
@@ -30,6 +32,21 @@ jobs:
 
       - name: Validate repository version
         run: bash scripts/check-version.sh
+
+      - name: Validate documentation and version consistency
+        run: bash scripts/check-documentation-consistency.sh
+
+      - name: Require all public READMEs for starter kit changes
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="${{ github.event.pull_request.base.sha || github.event.before }}"
+          changed="$(git diff --name-only "$base" HEAD)"
+          if printf '%s\n' "$changed" | grep -qE '^(starter-kit-(codex|claude)/|\.codex/|\.claude/|scripts/|README\.md|VERSION|VERSIONING\.md|CHANGELOG\.md)'; then
+            for readme in README.md starter-kit-codex/README.md starter-kit-claude/README.md; do
+              printf '%s\n' "$changed" | grep -Fxq "$readme" || { echo "README requis dans cette PR: $readme"; exit 1; }
+            done
+          fi
 
       - name: Check shell syntax and repository hygiene
         shell: bash

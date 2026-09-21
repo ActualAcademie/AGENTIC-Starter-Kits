@@ -1,6 +1,8 @@
 # Agentic Starter Kits
 
-Version actuelle : `1.0.5`.
+[![Version](https://img.shields.io/badge/version-1.0.6-blue.svg)](VERSION)
+
+Version actuelle : `1.0.6`.
 
 ## Construire avec une IA comme avec une équipe senior
 
