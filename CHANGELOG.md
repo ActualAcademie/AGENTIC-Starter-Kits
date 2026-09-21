@@ -5,8 +5,9 @@ Ce projet suit le versionnement sémantique. Les changements publiés sont regro
 ## Non publié
 
 - Ajout ou correction : inscrire ici chaque changement visible avant la release.
+- Ajout du synchroniseur non destructif et du workflow de Pull Request automatique pour propager les mises à jour du kit dans les projets utilisateurs.
 
-## 1.0.8 - 2026-09-21
+## 1.0.9 - 2026-09-21
 
 ### Corrections
 

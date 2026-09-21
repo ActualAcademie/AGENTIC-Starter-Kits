@@ -12,6 +12,11 @@ fi
 
 mkdir -p "$config_root/work-items/archive" "$config_root/evaluations"
 
+if [ ! -f "$project_root/.github/workflows/update-agentic-starter-kit.yml" ]; then
+  mkdir -p "$project_root/.github/workflows"
+  cp "$config_root/templates/github/workflows/update-agentic-starter-kit.yml" "$project_root/.github/workflows/update-agentic-starter-kit.yml"
+fi
+
 if [ ! -f "$config_root/project-profile.toml" ]; then
   cp "$config_root/templates/project-profile.toml" "$config_root/project-profile.toml"
 fi
