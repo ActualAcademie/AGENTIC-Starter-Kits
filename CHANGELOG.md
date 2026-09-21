@@ -6,6 +6,14 @@ Ce projet suit le versionnement sémantique. Les changements publiés sont regro
 
 - Ajout ou correction : inscrire ici chaque changement visible avant la release.
 
+## 1.0.8 - 2026-09-21
+
+### Corrections
+
+- Renforcement de l’autonomie continue pendant l’attente et la reprise des CI.
+- Ajout de la règle de traitement par lots des dettes historiques du périmètre.
+- Clarification des corrections réversibles qui ne nécessitent pas de demander « Continue ».
+
 ## 1.0.7 - 2026-09-21
 
 ### Corrections

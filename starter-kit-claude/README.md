@@ -1,6 +1,6 @@
 # Kit d'orchestration Claude Code portable
 
-![Version du kit](https://img.shields.io/badge/version-1.0.7-blue.svg)
+![Version du kit](https://img.shields.io/badge/version-1.0.8-blue.svg)
 
 Ce kit installe une gouvernance projet native pour Claude Code. Il ne construit rien tant que le cahier des charges n'a pas été fourni et formalisé.
 
@@ -192,6 +192,8 @@ Les spécialistes optionnels sont activés dans `[agents]` de `.claude/project-p
 | `conformite` | `.claude/agents/conformite.md` | Exigences RGPD, licences et preuves de conformité. |
 
 Le Coordinateur ne les appelle pas tous systématiquement. Il lit `.claude/SPECIALIST-AGENTS.md`, vérifie la condition d’activation, inscrit la justification dans le work item et exige le livrable correspondant.
+
+Une CI en cours ne clôture jamais le work item. Le Coordinateur attend les résultats, traite les erreurs, corrige les lints et les dettes historiques du périmètre par lots, puis relance les contrôles jusqu’à la Definition of Done.
 
 Le kit est actuellement en version `1.0.5`. Toute modification du kit doit mettre à jour ce README, le changelog et la version selon `VERSIONING.md`.
 
