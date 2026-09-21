@@ -1,5 +1,20 @@
 #!/usr/bin/env bash
 set -euo pipefail
+updates_mode=ask
+while [ "$#" -gt 0 ]; do
+  case "$1" in
+    --updates) updates_mode="$2"; shift 2 ;;
+    -h|--help) echo "Usage: init-project.sh [--updates ask|pr|off]"; exit 0 ;;
+    *) echo "Option inconnue: $1" >&2; exit 2 ;;
+  esac
+done
+if [ "$updates_mode" = "ask" ] && [ -t 0 ]; then
+  printf "Activer les mises à jour automatiques du starter kit ? [O]ui Pull Request, [N]on : "
+  read -r answer
+  case "$answer" in n|N|non|Non) updates_mode=off ;; *) updates_mode=pr ;; esac
+elif [ "$updates_mode" = "ask" ]; then
+  updates_mode=pr
+fi
 
 script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 config_root="$(cd "$script_dir/.." && pwd)"
@@ -12,7 +27,7 @@ fi
 
 mkdir -p "$config_root/work-items/archive" "$config_root/evaluations"
 
-if [ ! -f "$project_root/.github/workflows/update-agentic-starter-kit.yml" ]; then
+if [ "$updates_mode" != "off" ] && [ ! -f "$project_root/.github/workflows/update-agentic-starter-kit.yml" ]; then
   mkdir -p "$project_root/.github/workflows"
   cp "$config_root/templates/github/workflows/update-agentic-starter-kit.yml" "$project_root/.github/workflows/update-agentic-starter-kit.yml"
 fi
