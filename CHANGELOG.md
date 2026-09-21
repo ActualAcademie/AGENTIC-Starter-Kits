@@ -4,12 +4,14 @@ Ce projet suit le versionnement sémantique. Les changements publiés sont regro
 
 ## Non publié
 
+- Suppression du doublon de version dans le README principal et clarification complète de l’installation et des mises à jour automatiques.
+
 - Ajout d’un installateur qui sélectionne automatiquement Codex ou Claude et installe uniquement la variante nécessaire.
 
 - Ajout ou correction : inscrire ici chaque changement visible avant la release.
 - Ajout du synchroniseur non destructif et du workflow de Pull Request automatique pour propager les mises à jour du kit dans les projets utilisateurs.
 
-## 1.0.10 - 2026-09-21
+## 1.0.11 - 2026-09-21
 
 ### Corrections
 

@@ -338,3 +338,78 @@ Sous Windows, utiliser PowerShell pour les wrappers `run.ps1`. Sous macOS et Lin
 5. Dans GitHub, activez Actions. Les futures mises à jour arriveront automatiquement par Pull Request.
 
 Pour remplacer un kit existant, utilisez `--force` uniquement après avoir sauvegardé vos personnalisations.
+
+## Parcours recommandé pour un débutant
+
+Cette procédure est la seule nécessaire pour installer le kit et recevoir ses mises à jour.
+
+### Étape 1. Installer les prérequis
+
+Installez Git et créez le projet à construire. Le projet peut être vide ou déjà versionné.
+
+- macOS : installez Git avec Xcode Command Line Tools.
+- Windows : installez Git Bash ou utilisez PowerShell avec Git.
+- Linux : installez Git avec le gestionnaire de paquets de votre distribution.
+
+### Étape 2. Télécharger le dépôt du kit
+
+Dans un terminal, exécutez :
+
+```bash
+git clone https://github.com/krapaud/AGENTIC-Starter-Kits.git
+cd AGENTIC-Starter-Kits
+```
+
+### Étape 3. Installer une seule variante
+
+Pour un projet Codex :
+
+```bash
+./install.sh --kit codex --target /chemin/absolu/vers/mon-projet
+```
+
+Pour un projet Claude :
+
+```bash
+./install.sh --kit claude --target /chemin/absolu/vers/mon-projet
+```
+
+Remplacez le chemin par celui de votre projet. L’installateur copie directement les fichiers à la racine du projet. Il ne faut pas déplacer `starter-kit-codex` ou `starter-kit-claude` manuellement.
+
+### Étape 4. Vérifier l’installation
+
+Dans le projet, vérifiez la présence de l’une des structures suivantes :
+
+```text
+Codex : AGENTS.md, .codex/, .github/workflows/update-agentic-starter-kit.yml.
+Claude : CLAUDE.md, .claude/, .github/workflows/update-agentic-starter-kit.yml.
+```
+
+N’installez jamais Codex et Claude ensemble dans le même projet.
+
+### Étape 5. Activer les mises à jour
+
+Publiez le projet sur GitHub, ouvrez l’onglet `Actions` et activez les workflows si GitHub le demande. Le workflow est ensuite exécuté chaque lundi et peut être lancé immédiatement avec `Run workflow`.
+
+Il compare le projet avec la branche `main` du dépôt officiel, lance les contrôles, puis ouvre une Pull Request nommée `chore/update-agentic-kit`. Il ne modifie jamais directement `main`.
+
+### Étape 6. Accepter une mise à jour
+
+1. Ouvrez la Pull Request automatique.
+2. Lisez la liste des fichiers modifiés.
+3. Vérifiez que votre profil projet et vos documents métier sont conservés.
+4. Attendez que la CI soit entièrement verte.
+5. Fusionnez la Pull Request selon le GitFlow de votre projet.
+
+Le kit conserve automatiquement les personnalisations suivantes : `project-profile.toml`, `RUNTIME-STATE.md`, les décisions, les travaux, les rapports, les métriques et les journaux.
+
+### Mise à jour manuelle de secours
+
+Si les Actions GitHub sont désactivées, lancez le synchroniseur depuis la racine du projet :
+
+```bash
+git remote add upstream https://github.com/krapaud/AGENTIC-Starter-Kits.git
+bash .codex/scripts/update-starter-kit.sh --remote upstream --ref main --branch chore/update-agentic-kit
+```
+
+Avec Claude, remplacez `.codex` par `.claude`. Cette procédure crée une branche et ne remplace pas les données propres au projet.
