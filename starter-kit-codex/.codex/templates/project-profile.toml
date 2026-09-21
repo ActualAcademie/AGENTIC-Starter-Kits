@@ -56,6 +56,18 @@ authentication = false
 deployment = false
 ci = false
 
+[agents]
+produit = false
+qa = true
+devops = false
+performance = false
+ux_research = false
+accessibilite = false
+data = false
+documentation = true
+release = false
+conformite = false
+
 [tracking]
 mode = "local"
 provider = ""

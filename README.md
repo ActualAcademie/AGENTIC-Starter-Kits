@@ -80,6 +80,25 @@ Il analyse les actifs, menaces, permissions, entrées, secrets, dépendances, se
 
 Il ne corrige pas ce qu’il vient d’approuver. Il vérifie les critères, le diff, les tests, la conception, la sécurité, le rendu visuel, les licences médias et les risques résiduels. Sa décision est `accepted`, `rework` ou `blocked`.
 
+## Les agents spécialistes optionnels
+
+Le kit comprend aussi un registre de spécialistes activables dans `[agents]` du profil projet. Le Coordinateur choisit automatiquement les agents nécessaires et conserve les autres désactivés pour maîtriser le coût.
+
+| Identifiant | Responsabilité principale |
+| --- | --- |
+| `produit` | Priorités métier, objectifs, valeur utilisateur et arbitrages fonctionnels. |
+| `qa` | Stratégie de tests, couverture, régression et validation fonctionnelle. |
+| `devops` | CI/CD, environnements, déploiement, observabilité et disponibilité. |
+| `performance` | Temps de réponse, ressources, bundle, requêtes et budgets de performance. |
+| `ux_research` | Parcours utilisateurs, friction, ergonomie et validation des hypothèses. |
+| `accessibilite` | WCAG, clavier, contraste, lecteurs d’écran et navigation inclusive. |
+| `data` | Modèle de données, qualité, migrations, traitements et indicateurs. |
+| `documentation` | Documentation utilisateur, développeur, API et exploitation. |
+| `release` | Versionnement, changelog, migrations, notes de version et livraison. |
+| `conformite` | RGPD, conservation, consentement, licences et exigences réglementaires. |
+
+Chaque spécialiste possède un fichier Codex, un fichier Claude, un modèle cohérent, des livrables, des interdictions, des escalades et une intégration au journal qualité. Aucun spécialiste ne peut s’auto-approuver.
+
 ## Ce qui est généré dans chaque projet
 
 Après le cahier accepté, l’initialisation crée un dossier `docs/` structuré :
