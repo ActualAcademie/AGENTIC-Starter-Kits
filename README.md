@@ -1,6 +1,6 @@
 # Agentic Starter Kits
 
-Version actuelle : `1.0.1`.
+Version actuelle : `1.0.2`.
 
 ## Construire avec une IA comme avec une équipe senior
 
