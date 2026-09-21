@@ -43,8 +43,14 @@ case "$kit" in
   *) fail "Choisissez Codex ou Claude avec --kit codex|claude." ;;
 esac
 if [ -z "$target" ] && [ -t 0 ]; then
-  printf "\nChemin du projet cible [projet courant] : "
-  read -r target
+  info "Choisissez le dossier du projet. Les flèches sont disponibles si fzf est installé."
+  if command -v fzf >/dev/null 2>&1; then
+    target="$(find "$PWD" -maxdepth 4 -type d -not -path "*/.git*" -print | fzf --height=60% --layout=reverse --border --prompt="Dossier > " --header="Flèches pour naviguer, Entrée pour choisir")"
+  else
+    printf "\nChemin du projet cible [projet courant] : "
+    read -r target
+  fi
+  [ -n "$target" ] || fail "Aucun dossier sélectionné."
 fi
 target="${target:-.}"
 [ -d "$target" ] || fail "Le dossier cible n’existe pas : $target"
