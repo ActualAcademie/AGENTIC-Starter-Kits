@@ -88,3 +88,8 @@ requires_human_approval_for_critical = true
 require_feature_branch = true
 max_files_per_commit = 75
 max_changed_lines_per_commit = 1200
+
+[updates]
+# ask, pr ou off. Le mode pr ouvre une Pull Request automatique.
+mode = "pr"
+source = "https://github.com/krapaud/AGENTIC-Starter-Kits.git"
