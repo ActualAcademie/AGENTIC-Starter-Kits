@@ -1,6 +1,8 @@
 # Agentic Starter Kits
 
-Version actuelle : `1.0.4`.
+[![Version](https://img.shields.io/badge/version-1.0.6-blue.svg)](VERSION)
+
+Version actuelle : `1.0.6`.
 
 ## Construire avec une IA comme avec une équipe senior
 
@@ -18,7 +20,7 @@ Avec un seul kit importé dans un nouveau dépôt, l’IA peut :
 - Produire une conception complète de niveau Concepteur Développeur d’Applications.
 - Générer vision, objectifs, user stories, parcours, architecture, données, API, sécurité, roadmap et diagrammes.
 - Proposer un Trello complet des tâches, après une réponse explicite de l’utilisateur.
-- Répartir le travail entre six rôles spécialisés.
+- Répartir le travail entre les six agents du noyau et les dix agents spécialistes optionnels.
 - Construire des interfaces premium avec direction artistique, design system, motion design et validation visuelle.
 - Rechercher ou générer des médias réalistes avec provenance, licence et retouches documentées.
 - Développer le frontend, le backend, les tests et la documentation par petits changements.
@@ -56,7 +58,7 @@ flowchart TD
 
 Choisir un seul kit par projet. Les deux kits sont fonctionnellement alignés, mais leurs formats suivent leur outil respectif.
 
-## Les six agents
+## Les six agents du noyau
 
 ### Coordinateur
 
@@ -82,7 +84,7 @@ Il analyse les actifs, menaces, permissions, entrées, secrets, dépendances, se
 
 Il ne corrige pas ce qu’il vient d’approuver. Il vérifie les critères, le diff, les tests, la conception, la sécurité, le rendu visuel, les licences médias et les risques résiduels. Sa décision est `accepted`, `rework` ou `blocked`.
 
-## Les agents spécialistes optionnels
+## Les dix agents spécialistes optionnels
 
 Le kit comprend aussi un registre de spécialistes activables dans `[agents]` du profil projet. Le Coordinateur choisit automatiquement les agents nécessaires et conserve les autres désactivés pour maîtriser le coût.
 
@@ -175,9 +177,9 @@ Le kit ne devine pas les décisions métier, ne crée pas de secret, ne simule p
 - [Versionnement](VERSIONING.md)
 - [Historique des changements](CHANGELOG.md)
 
-## État fonctionnel de la version 1.0.4
+## État fonctionnel de la version 1.0.5
 
-La version actuelle inclut les six agents du noyau et dix spécialistes optionnels, leurs politiques de modèles, la gouvernance d’activation, les Skills d’orchestration, les scripts d’initialisation, les checkpoints, le suivi des coûts et les contrôles CI. Les détails contractuels des spécialistes sont dans `SPECIALIST-AGENTS.md` dans chaque kit.
+La version actuelle inclut 16 agents au total : six agents du noyau et dix spécialistes optionnels. Elle inclut leurs politiques de modèles, la gouvernance d’activation, les Skills d’orchestration, les scripts d’initialisation, les checkpoints, le suivi des coûts et les contrôles CI. Les détails contractuels des spécialistes sont dans `SPECIALIST-AGENTS.md` dans chaque kit.
 
 Le cycle de travail prend également en charge les cartes Trello `time-gated`. Une carte dépendante d’une date peut être suspendue avec sa raison, sa date ISO et son checkpoint, tandis que les travaux indépendants continuent. Les règles de versionnement, de README obligatoire et de publication sont définies dans `VERSIONING.md`.
 

@@ -6,6 +6,20 @@ Ce projet suit le versionnement sémantique. Les changements publiés sont regro
 
 - Ajout ou correction : inscrire ici chaque changement visible avant la release.
 
+## 1.0.6 - 2026-09-21
+
+### Ajouts
+
+- Ajout d’un contrôle CI qui exige les trois README publics pour les changements du kit.
+- Ajout d’un contrôle de cohérence entre `VERSION`, `KIT.toml`, les README et le changelog.
+- Ajout de l’affichage du tag de version sur les README.
+
+## 1.0.5 - 2026-09-21
+
+### Corrections
+
+- Correction des formulations des README afin d’indiquer explicitement les 16 agents disponibles.
+
 ## 1.0.4 - 2026-09-21
 
 ### Documentation

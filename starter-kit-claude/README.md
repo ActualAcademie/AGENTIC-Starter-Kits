@@ -1,5 +1,7 @@
 # Kit d'orchestration Claude Code portable
 
+![Version du kit](https://img.shields.io/badge/version-1.0.6-blue.svg)
+
 Ce kit installe une gouvernance projet native pour Claude Code. Il ne construit rien tant que le cahier des charges n'a pas été fourni et formalisé.
 
 ## Prérequis
@@ -163,6 +165,8 @@ Le tutoriel unique et complet se trouve dans [INSTALLATION.md](../INSTALLATION.m
 
 ## Agents Claude Code
 
+Le kit Claude Code comprend 16 agents : six agents du noyau et dix spécialistes optionnels activables selon le profil, le risque et les besoins du projet.
+
 | Fichier | Rôle | Responsabilité |
 | --- | --- | --- |
 | `.claude/agents/coordinateur.md` | Coordinateur | plan, dépendances, budget, orchestration et clôture |
@@ -174,7 +178,22 @@ Le tutoriel unique et complet se trouve dans [INSTALLATION.md](../INSTALLATION.m
 
 Les spécialistes optionnels sont activés dans `[agents]` de `.claude/project-profile.toml` : `produit`, `qa`, `devops`, `performance`, `ux_research`, `accessibilite`, `data`, `documentation`, `release` et `conformite`. Le Coordinateur les active selon les besoins détectés, le risque et le budget.
 
-Le kit est actuellement en version `1.0.4`. Toute modification du kit doit mettre à jour ce README, le changelog et la version selon `VERSIONING.md`.
+| Identifiant | Fichier | Livrable principal |
+| --- | --- | --- |
+| `produit` | `.claude/agents/produit.md` | Priorités, valeur métier et critères fonctionnels. |
+| `qa` | `.claude/agents/qa.md` | Stratégie de tests, couverture et régression. |
+| `devops` | `.claude/agents/devops.md` | CI/CD, environnements, observabilité et rollback. |
+| `performance` | `.claude/agents/performance.md` | Baseline, mesures et budget de performance. |
+| `ux_research` | `.claude/agents/ux_research.md` | Hypothèses utilisateur, parcours et validation. |
+| `accessibilite` | `.claude/agents/accessibilite.md` | Contrôles WCAG, clavier et lecteurs d’écran. |
+| `data` | `.claude/agents/data.md` | Modèle, qualité des données et migrations. |
+| `documentation` | `.claude/agents/documentation.md` | Documentation utilisateur, API et exploitation. |
+| `release` | `.claude/agents/release.md` | Version, changelog, migration et notes de livraison. |
+| `conformite` | `.claude/agents/conformite.md` | Exigences RGPD, licences et preuves de conformité. |
+
+Le Coordinateur ne les appelle pas tous systématiquement. Il lit `.claude/SPECIALIST-AGENTS.md`, vérifie la condition d’activation, inscrit la justification dans le work item et exige le livrable correspondant.
+
+Le kit est actuellement en version `1.0.5`. Toute modification du kit doit mettre à jour ce README, le changelog et la version selon `VERSIONING.md`.
 
 ## Gouvernance complète disponible
 

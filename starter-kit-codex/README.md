@@ -1,5 +1,7 @@
 # Kit d'orchestration Codex portable
 
+![Version du kit](https://img.shields.io/badge/version-1.0.6-blue.svg)
+
 Ce kit installe une gouvernance projet pour Codex. Il ne construit rien tant que le cahier des charges n'a pas été fourni et formalisé.
 
 ## Prérequis
@@ -71,7 +73,7 @@ Mode maintenance : vérifie les Skills du kit.
 
 ```text
 AGENTS.md                         Instructions permanentes chargées par Codex
-.codex/agents/                    Profils des six rôles
+.codex/agents/                    Profils des 16 agents, dont six du noyau
 .codex/skills/                    Procédures réutilisables
 .codex/project-profile.toml       Technologies et commandes du projet
 .codex/PROJECT-BRIEF.md           Cahier des charges formalisé après réception
@@ -155,6 +157,8 @@ Le tutoriel unique et complet se trouve dans [INSTALLATION.md](../INSTALLATION.m
 
 ## Agents Codex
 
+Le kit Codex comprend 16 agents : six agents du noyau et dix spécialistes optionnels activables selon le profil, le risque et les besoins du projet.
+
 | Fichier | Rôle | Responsabilité |
 | --- | --- | --- |
 | `.codex/agents/coordinateur.toml` | Coordinateur | plan, dépendances, budget, modèles, orchestration et clôture |
@@ -166,7 +170,22 @@ Le tutoriel unique et complet se trouve dans [INSTALLATION.md](../INSTALLATION.m
 
 Les spécialistes optionnels sont activés dans `[agents]` de `.codex/project-profile.toml` : `produit`, `qa`, `devops`, `performance`, `ux_research`, `accessibilite`, `data`, `documentation`, `release` et `conformite`. Le Coordinateur les active selon les besoins détectés, le risque et le budget.
 
-Le kit est actuellement en version `1.0.4`. Toute modification du kit doit mettre à jour ce README, le changelog et la version selon `VERSIONING.md`.
+| Identifiant | Fichier | Livrable principal |
+| --- | --- | --- |
+| `produit` | `.codex/agents/produit.toml` | Priorités, valeur métier et critères fonctionnels. |
+| `qa` | `.codex/agents/qa.toml` | Stratégie de tests, couverture et régression. |
+| `devops` | `.codex/agents/devops.toml` | CI/CD, environnements, observabilité et rollback. |
+| `performance` | `.codex/agents/performance.toml` | Baseline, mesures et budget de performance. |
+| `ux_research` | `.codex/agents/ux_research.toml` | Hypothèses utilisateur, parcours et validation. |
+| `accessibilite` | `.codex/agents/accessibilite.toml` | Contrôles WCAG, clavier et lecteurs d’écran. |
+| `data` | `.codex/agents/data.toml` | Modèle, qualité des données et migrations. |
+| `documentation` | `.codex/agents/documentation.toml` | Documentation utilisateur, API et exploitation. |
+| `release` | `.codex/agents/release.toml` | Version, changelog, migration et notes de livraison. |
+| `conformite` | `.codex/agents/conformite.toml` | Exigences RGPD, licences et preuves de conformité. |
+
+Le Coordinateur ne les appelle pas tous systématiquement. Il lit `.codex/SPECIALIST-AGENTS.md`, vérifie la condition d’activation, inscrit la justification dans le work item et exige le livrable correspondant.
+
+Le kit est actuellement en version `1.0.5`. Toute modification du kit doit mettre à jour ce README, le changelog et la version selon `VERSIONING.md`.
 
 ## Gouvernance complète disponible
 
