@@ -6,6 +6,12 @@ Ce projet suit le versionnement sémantique. Les changements publiés sont regro
 
 - Ajout ou correction : inscrire ici chaque changement visible avant la release.
 
+## 1.0.2 - 2026-09-21
+
+### Corrections
+
+- Correction du niveau de titre dans la gouvernance publique du kit Claude.
+
 ## 1.0.1 - 2026-09-21
 
 ### Ajouts
