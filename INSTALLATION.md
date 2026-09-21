@@ -424,3 +424,7 @@ Lors de l’exécution de `init-project.sh`, le kit demande si les mises à jour
 - Utilisez `--updates off` pour désactiver explicitement les mises à jour.
 
 Le choix recommandé est `O`. L’agent peut alors détecter une nouvelle version, créer la branche de mise à jour, synchroniser les fichiers universels, préserver les données du projet, lancer les contrôles et ouvrir la Pull Request. Il ne modifie jamais directement `main`.
+
+## Branche des Pull Requests automatiques
+
+Le workflow cible `develop` par défaut. Si votre projet utilise `dev`, définissez la variable de dépôt GitHub `AGENTIC_INTEGRATION_BRANCH` avec la valeur `dev`. Toute autre valeur, notamment `main`, est refusée automatiquement. La Pull Request de promotion vers `main` reste manuelle ou doit être demandée explicitement par l’utilisateur.

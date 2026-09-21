@@ -4,6 +4,8 @@ Ce projet suit le versionnement sémantique. Les changements publiés sont regro
 
 ## Non publié
 
+- Verrouille les Pull Requests automatiques sur dev ou develop et interdit toute promotion automatique vers main.
+
 - Ajout du choix d’activation des mises à jour automatiques lors de l’initialisation Codex ou Claude.
 
 - Complète la politique de sécurité et ajoute un résumé rassurant dans le README principal.
@@ -17,7 +19,7 @@ Ce projet suit le versionnement sémantique. Les changements publiés sont regro
 - Ajout ou correction : inscrire ici chaque changement visible avant la release.
 - Ajout du synchroniseur non destructif et du workflow de Pull Request automatique pour propager les mises à jour du kit dans les projets utilisateurs.
 
-## 1.0.14 - 2026-09-21
+## 1.0.15 - 2026-09-21
 
 ### Corrections
 
