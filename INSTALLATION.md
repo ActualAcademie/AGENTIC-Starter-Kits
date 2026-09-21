@@ -444,3 +444,5 @@ Dans le sélecteur intégré, l’option `1` choisit le dossier affiché comme p
 ### Gestion automatique du `.gitignore`
 
 L’installation crée `.gitignore` s’il est absent et ajoute uniquement les entrées nécessaires au kit choisi. Codex ajoute `.codex/` et `AGENTS.md`. Claude ajoute `.claude/` et `CLAUDE.md`. Les doublons ne sont pas ajoutés. Le fichier `.github/workflows/update-agentic-starter-kit.yml` reste suivi par Git, car il est nécessaire aux mises à jour automatiques.
+
+Le workflow détecte automatiquement `develop`, puis `dev`. Il refuse `main` et ne demande aucune variable GitHub Actions supplémentaire.
