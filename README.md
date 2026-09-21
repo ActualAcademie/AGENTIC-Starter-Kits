@@ -1,6 +1,6 @@
 # Agentic Starter Kits
 
-[![Version](https://img.shields.io/badge/version-1.0.15-blue.svg)](VERSION)
+[![Version](https://img.shields.io/badge/version-1.0.16-blue.svg)](VERSION)
 
 ## Construire avec une IA comme avec une équipe senior
 
@@ -267,3 +267,7 @@ Lors de l’initialisation, l’agent demande si les mises à jour automatiques 
 ## Règle de protection de main
 
 Les mises à jour automatiques ouvrent uniquement une Pull Request vers `develop` ou `dev`. Elles ne peuvent jamais ouvrir ni fusionner automatiquement une Pull Request vers `main`. La promotion vers `main` reste une action humaine, ou une action explicitement demandée par l’utilisateur et documentée dans le work item.
+
+## Installateur guidé
+
+Sans option, `./install.sh` affiche un assistant terminal avec choix de Codex ou Claude, chemin cible, résumé et confirmation. Pour les scripts automatisés, utilisez `--kit`, `--target` et éventuellement `--force`. Le terminal peut être rendu silencieux avec `NO_COLOR=1`.
