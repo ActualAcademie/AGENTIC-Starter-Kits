@@ -1,6 +1,6 @@
 # Agentic Starter Kits
 
-[![Version](https://img.shields.io/badge/version-1.0.17-blue.svg)](VERSION)
+[![Version](https://img.shields.io/badge/version-1.0.18-blue.svg)](VERSION)
 
 ## Construire avec une IA comme avec une équipe senior
 
@@ -273,3 +273,5 @@ Les mises à jour automatiques ouvrent uniquement une Pull Request vers `develop
 Sans option, `./install.sh` affiche un assistant terminal avec choix de Codex ou Claude, chemin cible, résumé et confirmation. Pour les scripts automatisés, utilisez `--kit`, `--target` et éventuellement `--force`. Le terminal peut être rendu silencieux avec `NO_COLOR=1`.
 
 Le sélecteur de dossier utilise `fzf` lorsqu’il est installé : les flèches permettent de parcourir les dossiers et la touche Entrée valide le choix. Sans `fzf`, l’installateur conserve son invite de chemin simple, sans ajouter de dépendance obligatoire.
+
+Le sélecteur de dossier distingue clairement la navigation et la sélection : choisissez le dossier actuel pour l’utiliser comme projet, entrez dans un sous-dossier uniquement si nécessaire, ou revenez au parent à tout moment. Entrer dans un dossier ne valide jamais automatiquement ce dossier.

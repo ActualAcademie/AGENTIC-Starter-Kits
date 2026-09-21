@@ -436,3 +436,7 @@ Lancez simplement `./install.sh` dans un terminal interactif. L’assistant prop
 ### Choisir le dossier avec les flèches
 
 Si `fzf` est installé, lancez `./install.sh` sans `--target`. Une liste interactive apparaît. Utilisez les flèches pour sélectionner le dossier, puis appuyez sur Entrée. Sans `fzf`, le script demande simplement le chemin du projet. Le mode `--target` reste disponible pour les automatisations.
+
+### Navigation dans le sélecteur
+
+Dans le sélecteur intégré, l’option `1` choisit le dossier affiché comme projet, l’option `2` affiche ses sous-dossiers, l’option `3` revient au parent et l’option `4` annule. Vous pouvez donc sélectionner un dossier qui contient lui-même des sous-dossiers sans devoir entrer dedans. La touche Entrée dans la liste des sous-dossiers revient au niveau précédent sans sélectionner de dossier.
