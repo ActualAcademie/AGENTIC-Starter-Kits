@@ -17,6 +17,7 @@ Work item accepté, profil projet, état Git, rapport Auditeur, rapport Cybersé
 5. Lancer le preflight et les contrôles du profil projet.
 6. Préparer la revue avec objectif, critères, preuves, risques et plan de retour.
 7. Respecter le Git Flow existant et les protections de branche.
+8. Vérifier que le README concerné a été mis à jour et décrit le changement, son usage, ses prérequis, ses limites et son impact. Refuser la livraison si la documentation publique est incomplète.
 
 ## Contrôles
 

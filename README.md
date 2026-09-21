@@ -1,6 +1,6 @@
 # Agentic Starter Kits
 
-Version actuelle : `1.0.0`.
+Version actuelle : `1.0.1`.
 
 ## Construire avec une IA comme avec une équipe senior
 
@@ -194,3 +194,11 @@ Pour préserver le GitFlow, effectuer cette synchronisation sur une branche déd
 - Trello n’est pas disponible : le plan local reste créé ; activer l’intégration puis demander une synchronisation vérifiée.
 - Un outil manque sur la machine : lancer `doctor.sh`. Le Coordinateur utilise les outils disponibles et documente la limite.
 - Une commande projet est inconnue : renseigner les champs `[commands]` du profil au lieu d’inventer une validation.
+
+## Règle de documentation continue
+
+Chaque ajout, correction, agent, Skill, politique, commande ou changement de comportement doit mettre à jour le README concerné dans le même work item. La documentation doit expliquer le fonctionnement, l’installation, l’usage, les prérequis, les limites et les effets sur l’orchestration. Une modification sans documentation correspondante est incomplète.
+
+## Échéances Trello
+
+Une échéance ne bloque que la carte concernée et ses dépendances directes. Les cartes indépendantes continuent. Une carte réellement dépendante passe en état `time-gated`, avec date ISO, raison et checkpoint de reprise. À la date prévue, le Coordinateur relit l’état Trello et reprend la carte sans contourner les contrôles.
