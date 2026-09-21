@@ -1,6 +1,6 @@
 # Agentic Starter Kits
 
-[![Version](https://img.shields.io/badge/version-1.0.12-blue.svg)](VERSION)
+[![Version](https://img.shields.io/badge/version-1.0.13-blue.svg)](VERSION)
 
 ## Construire avec une IA comme avec une équipe senior
 
@@ -165,6 +165,12 @@ Le kit impose :
 - Lint, tests, sécurité et vérification avant push.
 - CI GitHub pour les imports Codex, Claude et PowerShell.
 - Distinction claire entre vérifié, non vérifié, inconnu et risque résiduel.
+
+## Sécurité et confiance
+
+Le kit est conçu avec une politique de sécurité explicite. Il protège le processus par des contrôles avant push, une analyse dédiée Cybersécurité, un audit indépendant, une CI bloquante et une traçabilité des risques. Il ne collecte pas automatiquement les secrets et ne prétend pas garantir la sécurité de production.
+
+Avant de l’utiliser, lisez [SECURITY.md](SECURITY.md). Il explique les données à anonymiser, les secrets à ne jamais transmettre, les contrôles disponibles, les limites du kit et le signalement responsable. Les décisions de sécurité critiques restent validées par une personne autorisée.
 
 ## Installation et premier démarrage
 
