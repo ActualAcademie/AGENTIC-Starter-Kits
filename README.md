@@ -1,8 +1,8 @@
 # Agentic Starter Kits
 
-[![Version](https://img.shields.io/badge/version-1.0.8-blue.svg)](VERSION)
+[![Version](https://img.shields.io/badge/version-1.0.9-blue.svg)](VERSION)
 
-Version actuelle : `1.0.8`.
+Version actuelle : `1.0.9`.
 
 ## Construire avec une IA comme avec une équipe senior
 
@@ -214,3 +214,7 @@ Chaque ajout, correction, agent, Skill, politique, commande ou changement de com
 ## Échéances Trello
 
 Une échéance ne bloque que la carte concernée et ses dépendances directes. Les cartes indépendantes continuent. Une carte réellement dépendante passe en état `time-gated`, avec date ISO, raison et checkpoint de reprise. À la date prévue, le Coordinateur relit l’état Trello et reprend la carte sans contourner les contrôles.
+
+## Mises à jour automatiques
+
+Le kit installe un workflow GitHub Actions qui vérifie les nouvelles versions et ouvre une Pull Request dédiée. Le synchroniseur met à jour le socle universel et préserve le profil projet, les décisions, les journaux, les travaux, les rapports et l’état d’exécution. La fusion reste soumise à la CI et au GitFlow du projet.

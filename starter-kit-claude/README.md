@@ -1,6 +1,6 @@
 # Kit d'orchestration Claude Code portable
 
-![Version du kit](https://img.shields.io/badge/version-1.0.8-blue.svg)
+![Version du kit](https://img.shields.io/badge/version-1.0.9-blue.svg)
 
 Ce kit installe une gouvernance projet native pour Claude Code. Il ne construit rien tant que le cahier des charges n'a pas été fourni et formalisé.
 
@@ -222,3 +222,7 @@ bash .claude/scripts/cost-tracker.sh report
 Le Coordinateur utilise ces données pour réduire le contexte, supprimer les relances, regrouper les tâches et router chaque demande vers Luna, Terra ou Sol selon le risque. Les prix sont optionnels dans le profil et aucune estimation monétaire n’est inventée.
 
 Après une instruction « fais tout », le Coordinateur poursuit jusqu’à la Definition of Done sans demander « Continue ». Il corrige les erreurs récupérables, vérifie les résultats et ne sollicite l’utilisateur que pour une décision sensible ou irréversible.
+
+## Synchronisation automatique
+
+L’initialisation installe un workflow GitHub Actions hebdomadaire qui ouvre une Pull Request pour chaque évolution du kit officiel. Le script `.claude/scripts/update-starter-kit.sh` permet aussi une mise à jour manuelle avec un remote, une référence et une branche.
