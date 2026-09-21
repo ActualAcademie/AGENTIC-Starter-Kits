@@ -13,11 +13,18 @@ La version courante est dans `VERSION`. Elle est toujours accompagnée d’une e
 ## Cycle d’un changement
 
 1. Créer une branche dédiée depuis `develop`.
-2. Utiliser un commit conventionnel : `feat`, `fix`, `docs`, `test`, `refactor`, `perf`, `security` ou `chore`.
-3. Ajouter une entrée dans `CHANGELOG.md`, section `Non publié`, pour tout changement visible, correctif, faille, comportement ou contrat modifié.
-4. Fusionner la feature dans `develop` par Pull Request validée.
-5. Pour une release, choisir le niveau SemVer, déplacer les entrées vers une section datée, mettre à jour `VERSION`, puis ouvrir une Pull Request `develop` vers `main`.
-6. Après fusion dans `main`, créer un tag annoté correspondant exactement à `VERSION` et publier les notes de release.
+2. Déclarer dans la Pull Request le type de version attendu : `major`, `minor`, `patch` ou `aucune` si le changement est strictement interne.
+3. Utiliser un commit conventionnel : `feat`, `fix`, `docs`, `test`, `refactor`, `perf`, `security` ou `chore`.
+4. Ajouter une entrée dans `CHANGELOG.md`, section `Non publié`, pour tout changement visible, correctif, faille, comportement ou contrat modifié.
+5. Fusionner la feature dans `develop` par Pull Request validée.
+6. Pour une release, choisir le niveau SemVer, déplacer les entrées vers une section datée, mettre à jour `VERSION`, les versions `kit_version`, le README et les notes de Pull Request, puis ouvrir une Pull Request `develop` vers `main` avec la version dans son titre.
+7. Après fusion dans `main`, créer un tag annoté correspondant exactement à `VERSION` et publier les notes de release.
+
+## Contrat de Pull Request
+
+Toute Pull Request doit indiquer sa version cible ou `aucune` dans son titre ou sa description. Une Pull Request qui modifie le comportement, la documentation publique, la sécurité, les agents, les Skills ou les politiques doit avoir une entrée dans `CHANGELOG.md`. Une release doit présenter la même version dans `VERSION`, `README.md`, les manifestes `KIT.toml`, le changelog, le titre de Pull Request et le tag Git.
+
+Le Coordinateur refuse une livraison si ces références sont incohérentes. Il ne demande pas une version différente pour chaque commit d’une même fonctionnalité, mais chaque fonctionnalité doit être rattachée à une release identifiable.
 
 ## Règles d intégrité
 
