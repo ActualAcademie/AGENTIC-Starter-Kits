@@ -34,6 +34,12 @@ Cahier, dossier `docs/`, profil, roadmap, journal qualité, work items, contrain
 13. Relire le tableau, les listes, les cartes et les checklists depuis Trello. Conserver les identifiants et URLs dans `docs/project-management/trello-board.md`, puis passer `trello_sync_status` à `verified` uniquement si le tableau, les listes, les cartes, les checklists et les membres attendus sont relus avec succès.
 14. Synchroniser le statut Trello avec les work items, la roadmap et le journal qualité à chaque livraison.
 
+## Échéances et pauses contrôlées
+
+Une date limite Trello ne suspend jamais tout le projet par défaut. Si une carte ne peut commencer avant sa date, la marquer `time-gated`, enregistrer la date ISO, la raison, les dépendances et la prochaine action dans le work item et `RUNTIME-STATE.md`. Suspendre uniquement cette carte et ses dépendances directes. Continuer les cartes indépendantes autorisées.
+
+À la date prévue, reprendre la carte au prochain checkpoint, relire son état Trello et vérifier que la condition d’entrée est toujours vraie. Ne pas poller inutilement ni inventer un réveil automatique que l’environnement ne fournit pas. Une échéance dépassée déclenche une réévaluation, pas un contournement de contrôle.
+
 ## Sortie
 
 Un tableau réellement créé et vérifié sur Trello, ou un blocage externe documenté avec le tableau local complet, sans tâche implicite, avec traçabilité cahier, code, tests et audit.
