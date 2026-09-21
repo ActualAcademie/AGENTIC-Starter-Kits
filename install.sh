@@ -43,14 +43,50 @@ case "$kit" in
   *) fail "Choisissez Codex ou Claude avec --kit codex|claude." ;;
 esac
 if [ -z "$target" ] && [ -t 0 ]; then
-  info "Choisissez le dossier du projet. Les flèches sont disponibles si fzf est installé."
-  if command -v fzf >/dev/null 2>&1; then
-    target="$(find "$PWD" -maxdepth 4 -type d -not -path "*/.git*" -print | fzf --height=60% --layout=reverse --border --prompt="Dossier > " --header="Flèches pour naviguer, Entrée pour choisir")"
-  else
-    printf "\nChemin du projet cible [projet courant] : "
-    read -r target
-  fi
-  [ -n "$target" ] || fail "Aucun dossier sélectionné."
+  current="$PWD"
+  while true; do
+    printf "\n%b\n" "${bold}Dossier actuel :${reset} $current"
+    printf "  ${cyan}1${reset}) Choisir ce dossier comme projet\n"
+    printf "  ${cyan}2${reset}) Entrer dans un sous-dossier\n"
+    printf "  ${cyan}3${reset}) Revenir au dossier parent\n"
+    printf "  ${cyan}4${reset}) Annuler\n\n"
+    printf "Votre choix [1] : "
+    read -r navigation_choice
+    case "${navigation_choice:-1}" in
+      1) target="$current"; break ;;
+      2)
+        directories=()
+        for directory in "$current"/*/; do
+          [ -d "$directory" ] && directories+=("${directory%/}")
+        done
+        if [ "${#directories[@]}" -eq 0 ]; then
+          warning "Aucun sous-dossier disponible dans ce dossier."
+          continue
+        fi
+        printf "\nSous-dossiers disponibles :\n"
+        index=0
+        for directory in "${directories[@]}"; do
+          index=$((index + 1))
+          printf "  %s) %s\n" "$index" "$(basename "$directory")"
+        done
+        printf "\nNuméro du sous-dossier, ou Entrée pour revenir : "
+        read -r directory_choice
+        if [ -z "$directory_choice" ]; then
+          continue
+        elif [[ "$directory_choice" =~ ^[0-9]+$ ]] && [ "$directory_choice" -ge 1 ] && [ "$directory_choice" -le "${#directories[@]}" ]; then
+          current="${directories[$((directory_choice - 1))]}"
+        else
+          warning "Choix invalide."
+        fi
+        ;;
+      3)
+        parent="$(dirname "$current")"
+        [ "$parent" != "$current" ] && current="$parent" || warning "Vous êtes déjà à la racine."
+        ;;
+      4) fail "Installation annulée." ;;
+      *) warning "Choix invalide." ;;
+    esac
+  done
 fi
 target="${target:-.}"
 [ -d "$target" ] || fail "Le dossier cible n’existe pas : $target"
