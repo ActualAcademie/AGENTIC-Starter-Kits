@@ -1,0 +1,41 @@
+name: Update Agentic Starter Kit
+
+on:
+  schedule:
+    - cron: '17 8 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configure starter kit source
+        run: git remote add upstream "${{ vars.AGENTIC_STARTER_KIT_URL || 'https://github.com/krapaud/AGENTIC-Starter-Kits.git' }}"
+
+      - name: Update Claude kit
+        run: bash .claude/scripts/update-starter-kit.sh --remote upstream --ref main --branch chore/update-agentic-kit
+
+      - name: Validate update
+        run: bash .claude/scripts/verify-before-push.sh
+
+      - name: Open update pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: chore/update-agentic-kit
+          delete-branch: true
+          title: 'chore: update Agentic starter kit'
+          commit-message: 'chore: update Agentic starter kit'
+          body: |
+            Mise à jour automatique du starter kit depuis le dépôt officiel.
+
+            La PR conserve le profil projet, les décisions, les travaux et l’état d’exécution locaux.
+            Les contrôles qualité doivent être verts avant fusion.
