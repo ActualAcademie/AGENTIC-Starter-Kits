@@ -19,6 +19,16 @@ title() {
   printf "%b\n" "  ╚══════════════════════════════════════════════════════════╝${reset}"
   printf "\n"
 }
+ensure_gitignore() {
+  local gitignore="$target/.gitignore"
+  touch "$gitignore"
+  local entries=("$hidden/" "$entry")
+  for ignored_path in "${entries[@]}"; do
+    if ! grep -Fqx "$ignored_path" "$gitignore"; then
+      printf "%s\n" "$ignored_path" >> "$gitignore"
+    fi
+  done
+}
 usage() { printf "%b\n" "Usage : ./install.sh [--kit codex|claude] [--target CHEMIN] [--force]"; }
 kit=""; target=""; force=false
 while [ "$#" -gt 0 ]; do
@@ -107,6 +117,8 @@ cp -R "$repo_root/$source_dir/$entry" "$target/$entry"
 cp -R "$repo_root/$source_dir/$hidden" "$target/$hidden"
 mkdir -p "$target/.github/workflows"
 cp "$repo_root/$source_dir/$hidden/templates/github/workflows/update-agentic-starter-kit.yml" "$target/.github/workflows/update-agentic-starter-kit.yml"
+ensure_gitignore
+info "Gitignore mis à jour pour le kit $label."
 printf "\n"
 success "Kit $label installé avec succès."
 success "Fichier racine : $target/$entry"

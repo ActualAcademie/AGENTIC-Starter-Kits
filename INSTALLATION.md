@@ -440,3 +440,7 @@ Si `fzf` est installé, lancez `./install.sh` sans `--target`. Une liste interac
 ### Navigation dans le sélecteur
 
 Dans le sélecteur intégré, l’option `1` choisit le dossier affiché comme projet, l’option `2` affiche ses sous-dossiers, l’option `3` revient au parent et l’option `4` annule. Vous pouvez donc sélectionner un dossier qui contient lui-même des sous-dossiers sans devoir entrer dedans. La touche Entrée dans la liste des sous-dossiers revient au niveau précédent sans sélectionner de dossier.
+
+### Gestion automatique du `.gitignore`
+
+L’installation crée `.gitignore` s’il est absent et ajoute uniquement les entrées nécessaires au kit choisi. Codex ajoute `.codex/` et `AGENTS.md`. Claude ajoute `.claude/` et `CLAUDE.md`. Les doublons ne sont pas ajoutés. Le fichier `.github/workflows/update-agentic-starter-kit.yml` reste suivi par Git, car il est nécessaire aux mises à jour automatiques.
