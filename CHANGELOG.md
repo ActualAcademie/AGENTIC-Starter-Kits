@@ -6,6 +6,12 @@ Ce projet suit le versionnement sémantique. Les changements publiés sont regro
 
 - Ajout ou correction : inscrire ici chaque changement visible avant la release.
 
+## 1.0.4 - 2026-09-21
+
+### Documentation
+
+- Mise à jour du README principal et des README Codex et Claude avec l’inventaire fonctionnel réel, la gouvernance des spécialistes, les checkpoints, le suivi des coûts et le mode Trello `time-gated`.
+
 ## 1.0.3 - 2026-09-21
 
 ### Corrections
