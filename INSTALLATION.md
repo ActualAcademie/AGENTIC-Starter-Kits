@@ -328,3 +328,13 @@ bash .claude/scripts/doctor.sh
 ```
 
 Sous Windows, utiliser PowerShell pour les wrappers `run.ps1`. Sous macOS et Linux, utiliser Bash. En cas de désaccord entre documentation, code et profil, l’agent arrête l’action et documente l’inconnue.
+
+## Installation débutant
+
+1. Ouvrez un terminal dans le dépôt du starter kit.
+2. Exécutez `./install.sh --kit codex --target /chemin/du/projet` ou remplacez `codex` par `claude`.
+3. Ouvrez le projet dans Codex ou Claude.
+4. Complétez le profil projet demandé par l’agent.
+5. Dans GitHub, activez Actions. Les futures mises à jour arriveront automatiquement par Pull Request.
+
+Pour remplacer un kit existant, utilisez `--force` uniquement après avoir sauvegardé vos personnalisations.

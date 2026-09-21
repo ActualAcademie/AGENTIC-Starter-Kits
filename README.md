@@ -1,8 +1,8 @@
 # Agentic Starter Kits
 
-[![Version](https://img.shields.io/badge/version-1.0.9-blue.svg)](VERSION)
+[![Version](https://img.shields.io/badge/version-1.0.10-blue.svg)](VERSION)
 
-Version actuelle : `1.0.9`.
+Version actuelle : `1.0.10`.
 
 ## Construire avec une IA comme avec une équipe senior
 
@@ -218,3 +218,7 @@ Une échéance ne bloque que la carte concernée et ses dépendances directes. L
 ## Mises à jour automatiques
 
 Le kit installe un workflow GitHub Actions qui vérifie les nouvelles versions et ouvre une Pull Request dédiée. Le synchroniseur met à jour le socle universel et préserve le profil projet, les décisions, les journaux, les travaux, les rapports et l’état d’exécution. La fusion reste soumise à la CI et au GitFlow du projet.
+
+## Installation simplifiée
+
+Depuis ce dépôt, choisissez une seule variante. Pour Codex : `./install.sh --kit codex --target /chemin/du/projet`. Pour Claude : `./install.sh --kit claude --target /chemin/du/projet`. L’installateur place directement `AGENTS.md` et `.codex`, ou `CLAUDE.md` et `.claude`, à la racine du projet. Il installe aussi le workflow GitHub Actions de mise à jour automatique. Aucun déplacement manuel de dossier n’est nécessaire.
