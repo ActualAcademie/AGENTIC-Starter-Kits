@@ -6,6 +6,13 @@ Ce projet suit le versionnement sémantique. Les changements publiés sont regro
 
 - Ajout ou correction : inscrire ici chaque changement visible avant la release.
 
+## 1.0.3 - 2026-09-21
+
+### Corrections
+
+- Synchronisation des versions affichées dans les README internes des deux kits.
+- Ajout des profils de modèles Claude pour les dix agents spécialistes optionnels.
+
 ## 1.0.2 - 2026-09-21
 
 ### Corrections
