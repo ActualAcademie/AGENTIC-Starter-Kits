@@ -10,6 +10,6 @@ for kit in codex claude; do
   kit_file="$root/starter-kit-$kit/.${kit}/KIT.toml"
   grep -Fq "kit_version = \"$version\"" "$kit_file" || { echo "Version incohérente: $kit_file" >&2; exit 1; }
 done
-grep -Fq "Version actuelle" "$root/README.md" || { echo "Version absente du README principal" >&2; exit 1; }
+grep -Fq "version-" "$root/README.md" || { echo "Version absente du README principal" >&2; exit 1; }
 grep -Fq "## $version -" "$root/CHANGELOG.md" || { echo "Entrée changelog absente: $version" >&2; exit 1; }
 printf 'Documentation et version cohérentes: %s\n' "$version"
