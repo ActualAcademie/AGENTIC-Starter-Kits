@@ -1,6 +1,6 @@
 # Agentic Starter Kits
 
-[![Version](https://img.shields.io/badge/version-1.0.18-blue.svg)](VERSION)
+[![Version](https://img.shields.io/badge/version-1.0.19-blue.svg)](VERSION)
 
 ## Construire avec une IA comme avec une équipe senior
 
@@ -275,3 +275,5 @@ Sans option, `./install.sh` affiche un assistant terminal avec choix de Codex ou
 Le sélecteur de dossier utilise `fzf` lorsqu’il est installé : les flèches permettent de parcourir les dossiers et la touche Entrée valide le choix. Sans `fzf`, l’installateur conserve son invite de chemin simple, sans ajouter de dépendance obligatoire.
 
 Le sélecteur de dossier distingue clairement la navigation et la sélection : choisissez le dossier actuel pour l’utiliser comme projet, entrez dans un sous-dossier uniquement si nécessaire, ou revenez au parent à tout moment. Entrer dans un dossier ne valide jamais automatiquement ce dossier.
+
+L’installateur met également à jour ou crée `.gitignore` sans doublons. Il ignore le dossier de gouvernance choisi et son fichier d’entrée (`AGENTS.md` ou `CLAUDE.md`), tout en conservant le workflow GitHub de mise à jour dans Git afin que les futures Pull Requests fonctionnent.
