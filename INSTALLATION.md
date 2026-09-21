@@ -413,3 +413,14 @@ bash .codex/scripts/update-starter-kit.sh --remote upstream --ref main --branch 
 ```
 
 Avec Claude, remplacez `.codex` par `.claude`. Cette procédure crée une branche et ne remplace pas les données propres au projet.
+
+## Choix des mises à jour à l’initialisation
+
+Lors de l’exécution de `init-project.sh`, le kit demande si les mises à jour automatiques doivent être activées.
+
+- Répondez `O` pour installer le workflow qui ouvre automatiquement une Pull Request.
+- Répondez `N` pour ne pas installer ce workflow.
+- Utilisez `--updates pr` pour activer directement le mode Pull Request.
+- Utilisez `--updates off` pour désactiver explicitement les mises à jour.
+
+Le choix recommandé est `O`. L’agent peut alors détecter une nouvelle version, créer la branche de mise à jour, synchroniser les fichiers universels, préserver les données du projet, lancer les contrôles et ouvrir la Pull Request. Il ne modifie jamais directement `main`.

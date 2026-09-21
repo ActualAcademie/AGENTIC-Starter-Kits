@@ -1,6 +1,6 @@
 # Agentic Starter Kits
 
-[![Version](https://img.shields.io/badge/version-1.0.13-blue.svg)](VERSION)
+[![Version](https://img.shields.io/badge/version-1.0.14-blue.svg)](VERSION)
 
 ## Construire avec une IA comme avec une équipe senior
 
@@ -259,3 +259,7 @@ Une échéance ne bloque que la carte concernée et ses dépendances directes. L
 ## Mises à jour automatiques
 
 Le kit installe un workflow GitHub Actions qui vérifie les nouvelles versions et ouvre une Pull Request dédiée. Le synchroniseur met à jour le socle universel et préserve le profil projet, les décisions, les journaux, les travaux, les rapports et l’état d’exécution. La fusion reste soumise à la CI et au GitFlow du projet.
+
+### Choix des mises à jour à l’initialisation
+
+Lors de l’initialisation, l’agent demande si les mises à jour automatiques doivent être activées. Le choix recommandé est `Oui, Pull Request automatique`. L’agent pourra alors préparer les mises à jour, les tester et ouvrir une Pull Request sans modifier directement `main`. Le choix `Non` désactive le workflow. Le comportement peut être imposé avec `--updates pr` ou `--updates off`.
