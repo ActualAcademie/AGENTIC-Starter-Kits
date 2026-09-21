@@ -30,4 +30,6 @@ Le Coordinateur refuse une livraison si ces références sont incohérentes. Il 
 
 Un tag de release ne doit jamais être déplacé. Une version publiée ne doit jamais être réutilisée. Toute correction postérieure augmente la version PATCH. Une modification non versionnée dans `main` est une anomalie de processus et doit être corrigée par une release PATCH.
 
+La version de chaque kit importable dans `KIT.toml` doit être identique à la version racine dans `VERSION`. Le README principal doit afficher cette version. Toute promotion vers `main` doit contenir ces références, une entrée datée du changelog et un tag Git correspondant.
+
 Les commits individuels ne reçoivent pas tous un tag : le commit conserve la nature du changement et la release fournit le jalon consommable. Le lien’est assuré par le changelog et la Pull Request.

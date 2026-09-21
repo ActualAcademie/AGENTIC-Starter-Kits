@@ -6,6 +6,17 @@ Ce projet suit le versionnement sémantique. Les changements publiés sont regro
 
 - Ajout ou correction : inscrire ici chaque changement visible avant la release.
 
+## 1.0.1 - 2026-09-21
+
+### Ajouts
+
+- Ajout du mode `time-gated` pour suspendre uniquement les cartes Trello dépendantes d’une échéance.
+- Ajout de l’obligation de mise à jour détaillée du README pour chaque changement livré.
+
+### Corrections
+
+- Le Coordinateur doit lire la gouvernance des spécialistes avant toute délégation et justifier leur activation.
+
 ## 1.0.0 - 2026-09-21
 
 ### Ajouts

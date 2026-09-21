@@ -25,3 +25,6 @@ Les secrets sont fournis par un environnement sécurisé, jamais versionnés. Le
 ## Amélioration continue
 
 Après une tâche acceptée, enregistrer tours, contexte, durée, relances, défauts et gain réutilisable. Une amélioration est adoptée seulement après comparaison mesurée et sans régression de sécurité ou de qualité.
+# Documentation publique obligatoire
+
+Le README est une surface contractuelle du kit. Chaque ajout, correction ou changement de comportement doit être expliqué dans le README concerné avant la clôture du work item. La documentation doit rester complète, détaillée et cohérente avec les fichiers réellement livrés.

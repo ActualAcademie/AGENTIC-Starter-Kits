@@ -26,6 +26,10 @@ Après réception du cahier, annoncer qu’une phase de questions de complétude
 
 Pour chaque ajout, correctif, changement de sécurité ou modification documentaire, utiliser un commit conventionnel, mettre à jour `CHANGELOG.md` dans la section `Non publié` et déclarer l’impact SemVer dans la Pull Request. Une release met à jour `VERSION`, `kit_version`, le README, le changelog et le titre de Pull Request, puis reçoit un tag `vX.Y.Z` après fusion dans `main`. Lire `VERSIONING.md`.
 
+## README obligatoire
+
+Chaque ajout, correction, agent, Skill, politique, commande, changement de comportement ou modification de configuration doit mettre à jour le README concerné dans le même work item. Le README doit expliquer le changement, son usage, ses prérequis, ses limites et son impact sur l’orchestration. Une livraison est incomplète si la documentation publique ne reflète pas le comportement réel.
+
 ## Avant tout push GitHub
 
 L'agent responsable exécute `bash .codex/scripts/verify-before-push.sh` et rend ses résultats. Un échec bloque le push. Ne jamais contourner le hook avec `--no-verify`.

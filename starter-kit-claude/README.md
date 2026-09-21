@@ -174,6 +174,8 @@ Le tutoriel unique et complet se trouve dans [INSTALLATION.md](../INSTALLATION.m
 
 Les spécialistes optionnels sont activés dans `[agents]` de `.claude/project-profile.toml` : `produit`, `qa`, `devops`, `performance`, `ux_research`, `accessibilite`, `data`, `documentation`, `release` et `conformite`. Le Coordinateur les active selon les besoins détectés, le risque et le budget.
 
+Le kit est actuellement en version `1.0.1`. Toute modification du kit doit mettre à jour ce README, le changelog et la version selon `VERSIONING.md`.
+
 ## Skills Claude Code
 
 Les Skills natifs se trouvent dans `.claude/skills/<nom>/SKILL.md`. Ils couvrent l’intake, l’onboarding, la conception, la coordination, la planification Trello, l’implémentation, l’audit qualité, l’audit sécurité, le journal qualité, la livraison et l’optimisation coût. Les agents utilisent ces procédures avec un contexte limité et traçable.

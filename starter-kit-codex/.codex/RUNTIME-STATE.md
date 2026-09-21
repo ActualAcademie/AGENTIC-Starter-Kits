@@ -11,6 +11,9 @@
 
 - Étape : intake | questionnaire | onboarding | conception | planning | implementation | validation | audit | delivery | maintenance | blocked
 - Prochaine action autorisée : [[A_COMPLETER]]
+- État d’échéance : none | time-gated | ready-to-resume
+- Reprise prévue : [[A_COMPLETER]]
+- Raison de la pause : [[A_COMPLETER]]
 - Dernière action réalisée : [[A_COMPLETER]]
 
 ## Reprise
