@@ -1,6 +1,6 @@
 # Kit d'orchestration Codex portable
 
-![Version du kit](https://img.shields.io/badge/version-1.0.7-blue.svg)
+![Version du kit](https://img.shields.io/badge/version-1.0.8-blue.svg)
 
 Ce kit installe une gouvernance projet pour Codex. Il ne construit rien tant que le cahier des charges n'a pas été fourni et formalisé.
 
@@ -184,6 +184,8 @@ Les spécialistes optionnels sont activés dans `[agents]` de `.codex/project-pr
 | `conformite` | `.codex/agents/conformite.toml` | Exigences RGPD, licences et preuves de conformité. |
 
 Le Coordinateur ne les appelle pas tous systématiquement. Il lit `.codex/SPECIALIST-AGENTS.md`, vérifie la condition d’activation, inscrit la justification dans le work item et exige le livrable correspondant.
+
+Une CI en cours ne clôture jamais le work item. Le Coordinateur attend les résultats, traite les erreurs, corrige les lints et les dettes historiques du périmètre par lots, puis relance les contrôles jusqu’à la Definition of Done.
 
 Le kit est actuellement en version `1.0.5`. Toute modification du kit doit mettre à jour ce README, le changelog et la version selon `VERSIONING.md`.
 

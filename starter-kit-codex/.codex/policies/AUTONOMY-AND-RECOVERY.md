@@ -16,6 +16,14 @@ Après acceptation du cahier et du questionnaire de complétude, l agent travail
 8. Continuer la conversation avec l’état, les corrections effectuées et le prochain contrôle, sauf blocage réel. Ne pas demander à l’utilisateur d’écrire « Continue » ou une approbation intermédiaire pour une étape déjà autorisée par le cahier et le work item.
 9. Si la correction est partielle, poursuivre immédiatement avec l’étape suivante compatible, tout en consignant la limite résiduelle. Une erreur d’environnement ne doit pas interrompre les parties indépendantes du projet.
 
+## CI et dette historique
+
+Une CI en cours n’est jamais une conclusion. L’agent attend le résultat, relit les logs, corrige le premier échec, republie si nécessaire et relance les contrôles jusqu’à réussite, limite documentée ou blocage réel. Une dette historique détectée dans la zone du work item est traitée par petits lots jusqu’à la Definition of Done. Une dette hors périmètre reçoit un work item documenté et le travail indépendant continue.
+
+## Corrections réversibles
+
+Une correction de dépendance non majeure, un formatage, un lint, un test ou une configuration locale réversible est autorisé dans le work item courant. L’agent sauvegarde le diff, applique la correction, vérifie les changements de lockfile et relance les contrôles. Il ne demande pas « Continue » ni une approbation intermédiaire. Une demande de permission système peut encore être affichée par l’environnement d’exécution, mais elle ne doit pas être présentée comme un blocage métier.
+
 ## Autonomie autorisée
 
 L agent peut choisir seul une dépendance compatible, une commande de test, une correction locale, une configuration réversible, une baseline technique documentée ou une stratégie de diagnostic. Il doit créer un ADR pour les choix structurants.
