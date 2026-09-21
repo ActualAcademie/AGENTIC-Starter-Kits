@@ -1,12 +1,49 @@
 # Agentic Starter Kits
 
-[![Version](https://img.shields.io/badge/version-1.0.11-blue.svg)](VERSION)
+[![Version](https://img.shields.io/badge/version-1.0.12-blue.svg)](VERSION)
 
 ## Construire avec une IA comme avec une équipe senior
 
 Agentic Starter Kits est une base portable de gouvernance, de conception, d’orchestration et de contrôle qualité pour construire des projets logiciels avec un agent IA. Le dépôt transforme une conversation en processus de livraison traçable, depuis le cahier des charges jusqu’à la Pull Request et à la maintenance.
 
 Le kit ne fournit pas une simple collection de prompts. Il fournit une méthode de travail complète : règles, agents spécialisés, Skills réutilisables, configuration technologique, documents de conception, journal qualité, contrôles de sécurité, GitFlow, CI et optimisation continue du coût.
+
+## Démarrage rapide
+
+Vous n’avez pas besoin de déplacer manuellement les dossiers du dépôt. L’installateur choisit une seule variante, la copie au bon emplacement et installe le workflow de mises à jour.
+
+### 1. Télécharger le kit
+
+```bash
+git clone https://github.com/krapaud/AGENTIC-Starter-Kits.git
+cd AGENTIC-Starter-Kits
+```
+
+### 2. Installer Codex ou Claude
+
+Pour Codex :
+
+```bash
+./install.sh --kit codex --target /chemin/vers/mon-projet
+```
+
+Pour Claude :
+
+```bash
+./install.sh --kit claude --target /chemin/vers/mon-projet
+```
+
+Le chemin cible doit déjà exister. N’installez jamais les deux variantes dans le même projet.
+
+### 3. Activer les mises à jour
+
+Publiez le projet sur GitHub, ouvrez `Actions`, puis activez les workflows si GitHub le demande. Le workflow installé vérifie les nouvelles versions chaque semaine et ouvre une Pull Request automatique.
+
+### 4. Premier échange avec l’agent
+
+Ouvrez le projet à sa racine dans Codex ou Claude et envoyez le cahier des charges complet. L’agent pose ensuite les questions manquantes, prépare les documents de conception et attend les décisions nécessaires avant de coder.
+
+Le guide détaillé est disponible dans [INSTALLATION.md](INSTALLATION.md).
 
 ## Ce que le projet permet de faire
 
@@ -216,7 +253,3 @@ Une échéance ne bloque que la carte concernée et ses dépendances directes. L
 ## Mises à jour automatiques
 
 Le kit installe un workflow GitHub Actions qui vérifie les nouvelles versions et ouvre une Pull Request dédiée. Le synchroniseur met à jour le socle universel et préserve le profil projet, les décisions, les journaux, les travaux, les rapports et l’état d’exécution. La fusion reste soumise à la CI et au GitFlow du projet.
-
-## Installation simplifiée
-
-Depuis ce dépôt, choisissez une seule variante. Pour Codex : `./install.sh --kit codex --target /chemin/du/projet`. Pour Claude : `./install.sh --kit claude --target /chemin/du/projet`. L’installateur place directement `AGENTS.md` et `.codex`, ou `CLAUDE.md` et `.claude`, à la racine du projet. Il installe aussi le workflow GitHub Actions de mise à jour automatique. Aucun déplacement manuel de dossier n’est nécessaire.
