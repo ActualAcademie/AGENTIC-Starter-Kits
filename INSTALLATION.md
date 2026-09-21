@@ -428,3 +428,7 @@ Le choix recommandé est `O`. L’agent peut alors détecter une nouvelle versio
 ## Branche des Pull Requests automatiques
 
 Le workflow cible `develop` par défaut. Si votre projet utilise `dev`, définissez la variable de dépôt GitHub `AGENTIC_INTEGRATION_BRANCH` avec la valeur `dev`. Toute autre valeur, notamment `main`, est refusée automatiquement. La Pull Request de promotion vers `main` reste manuelle ou doit être demandée explicitement par l’utilisateur.
+
+### Installateur guidé
+
+Lancez simplement `./install.sh` dans un terminal interactif. L’assistant propose Codex ou Claude, demande le dossier cible, affiche un résumé et demande confirmation avant toute copie. Dans une automatisation, utilisez `./install.sh --kit codex --target /chemin/du/projet`.
