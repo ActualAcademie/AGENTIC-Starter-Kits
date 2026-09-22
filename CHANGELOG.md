@@ -4,6 +4,8 @@ Ce projet suit le versionnement sémantique. Les changements publiés sont regro
 
 ## Non publié
 
+- Ajoute la publication automatique des Releases et la mise à jour de la section About après un tag sur main.
+
 - Ajoute le contrat documentaire premium, les Skills de rédaction et d’audit et la validation automatique des documents.
 
 - Supprime les contextes GitHub Actions optionnels non déclarés et détecte automatiquement dev ou develop.
@@ -31,7 +33,7 @@ Ce projet suit le versionnement sémantique. Les changements publiés sont regro
 - Ajout ou correction : inscrire ici chaque changement visible avant la release.
 - Ajout du synchroniseur non destructif et du workflow de Pull Request automatique pour propager les mises à jour du kit dans les projets utilisateurs.
 
-## 1.0.21 - 2026-09-21
+## 1.0.22 - 2026-09-21
 
 ### Corrections
 
