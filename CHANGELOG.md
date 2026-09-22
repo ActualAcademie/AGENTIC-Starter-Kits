@@ -1,4 +1,9 @@
 # Changelog
+## 1.0.25 - 2026-09-22
+
+- Fixe le déclenchement et la publication idempotente des Releases GitHub.
+- Maintient la synchronisation documentaire et le contrôle de version.
+
 
 Ce projet suit le versionnement sémantique. Les changements publiés sont regroupés par version et classés en ajouts, corrections, sécurité, changements incompatibles et dépréciations.
 
@@ -37,7 +42,7 @@ Ce projet suit le versionnement sémantique. Les changements publiés sont regro
 - Ajout ou correction : inscrire ici chaque changement visible avant la release.
 - Ajout du synchroniseur non destructif et du workflow de Pull Request automatique pour propager les mises à jour du kit dans les projets utilisateurs.
 
-## 1.0.24 - 2026-09-21
+## 1.0.25 - 2026-09-21
 
 ### Corrections
 
