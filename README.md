@@ -293,3 +293,4 @@ Après la promotion humaine vers `main`, la publication d’un tag SemVer `vX.Y.
 La création de Release fonctionne avec le token GitHub standard. La modification de la description et des topics nécessite un secret de dépôt nommé `REPO_SETTINGS_TOKEN`, contenant un token GitHub autorisé à modifier les métadonnées du dépôt. Sans ce secret, la Release est publiée normalement et la mise à jour About est ignorée avec un avertissement non bloquant.
 
 Le workflow Release utilise le motif de tag compatible `v*.*.*` et peut être relancé sans erreur si la Release existe déjà.
+La gouvernance de versionnement distingue désormais les évolutions consommées des opérations de maintenance internes.
