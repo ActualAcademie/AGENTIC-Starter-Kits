@@ -195,7 +195,7 @@ Le Coordinateur ne les appelle pas tous systématiquement. Il lit `.claude/SPECI
 
 Une CI en cours ne clôture jamais le work item. Le Coordinateur attend les résultats, traite les erreurs, corrige les lints et les dettes historiques du périmètre par lots, puis relance les contrôles jusqu’à la Definition of Done.
 
-Le kit est actuellement en version `1.0.5`. Toute modification du kit doit mettre à jour ce README, le changelog et la version selon `VERSIONING.md`.
+Le kit est actuellement en version `1.0.23`. Toute modification du kit doit mettre à jour ce README, le changelog et la version selon `VERSIONING.md`.
 
 ## Gouvernance complète disponible
 
