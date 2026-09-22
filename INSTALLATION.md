@@ -424,3 +424,36 @@ Lors de l’exécution de `init-project.sh`, le kit demande si les mises à jour
 - Utilisez `--updates off` pour désactiver explicitement les mises à jour.
 
 Le choix recommandé est `O`. L’agent peut alors détecter une nouvelle version, créer la branche de mise à jour, synchroniser les fichiers universels, préserver les données du projet, lancer les contrôles et ouvrir la Pull Request. Il ne modifie jamais directement `main`.
+
+## Branche des Pull Requests automatiques
+
+Le workflow cible `develop` par défaut. Si votre projet utilise `dev`, définissez la variable de dépôt GitHub `AGENTIC_INTEGRATION_BRANCH` avec la valeur `dev`. Toute autre valeur, notamment `main`, est refusée automatiquement. La Pull Request de promotion vers `main` reste manuelle ou doit être demandée explicitement par l’utilisateur.
+
+### Installateur guidé
+
+Lancez simplement `./install.sh` dans un terminal interactif. L’assistant propose Codex ou Claude, demande le dossier cible, affiche un résumé et demande confirmation avant toute copie. Dans une automatisation, utilisez `./install.sh --kit codex --target /chemin/du/projet`.
+
+### Choisir le dossier avec les flèches
+
+Si `fzf` est installé, lancez `./install.sh` sans `--target`. Une liste interactive apparaît. Utilisez les flèches pour sélectionner le dossier, puis appuyez sur Entrée. Sans `fzf`, le script demande simplement le chemin du projet. Le mode `--target` reste disponible pour les automatisations.
+
+### Navigation dans le sélecteur
+
+Dans le sélecteur intégré, l’option `1` choisit le dossier affiché comme projet, l’option `2` affiche ses sous-dossiers, l’option `3` revient au parent et l’option `4` annule. Vous pouvez donc sélectionner un dossier qui contient lui-même des sous-dossiers sans devoir entrer dedans. La touche Entrée dans la liste des sous-dossiers revient au niveau précédent sans sélectionner de dossier.
+
+### Gestion automatique du `.gitignore`
+
+L’installation crée `.gitignore` s’il est absent et ajoute uniquement les entrées nécessaires au kit choisi. Codex ajoute `.codex/` et `AGENTS.md`. Claude ajoute `.claude/` et `CLAUDE.md`. Les doublons ne sont pas ajoutés. Le fichier `.github/workflows/update-agentic-starter-kit.yml` reste suivi par Git, car il est nécessaire aux mises à jour automatiques.
+
+Le workflow détecte automatiquement `develop`, puis `dev`. Il refuse `main` et ne demande aucune variable GitHub Actions supplémentaire.
+
+## Publication Release et About
+
+La promotion vers `main` reste humaine. Après cette promotion, créez et poussez le tag annoté prévu par le versionnement :
+
+```bash
+git tag -a vX.Y.Z -m "Release vX.Y.Z"
+git push origin vX.Y.Z
+```
+
+Le workflow GitHub crée alors la Release, vérifie la cohérence avec `VERSION`, et actualise automatiquement la description et les topics visibles dans la section About. Le dépôt doit autoriser les GitHub Actions à écrire le contenu et les métadonnées du dépôt.

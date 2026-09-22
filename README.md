@@ -1,6 +1,6 @@
 # Agentic Starter Kits
 
-[![Version](https://img.shields.io/badge/version-1.0.14-blue.svg)](VERSION)
+[![Version](https://img.shields.io/badge/version-1.0.22-blue.svg)](VERSION)
 
 ## Construire avec une IA comme avec une équipe senior
 
@@ -263,3 +263,27 @@ Le kit installe un workflow GitHub Actions qui vérifie les nouvelles versions e
 ### Choix des mises à jour à l’initialisation
 
 Lors de l’initialisation, l’agent demande si les mises à jour automatiques doivent être activées. Le choix recommandé est `Oui, Pull Request automatique`. L’agent pourra alors préparer les mises à jour, les tester et ouvrir une Pull Request sans modifier directement `main`. Le choix `Non` désactive le workflow. Le comportement peut être imposé avec `--updates pr` ou `--updates off`.
+
+## Règle de protection de main
+
+Les mises à jour automatiques ouvrent uniquement une Pull Request vers `develop` ou `dev`. Elles ne peuvent jamais ouvrir ni fusionner automatiquement une Pull Request vers `main`. La promotion vers `main` reste une action humaine, ou une action explicitement demandée par l’utilisateur et documentée dans le work item.
+
+## Installateur guidé
+
+Sans option, `./install.sh` affiche un assistant terminal avec choix de Codex ou Claude, chemin cible, résumé et confirmation. Pour les scripts automatisés, utilisez `--kit`, `--target` et éventuellement `--force`. Le terminal peut être rendu silencieux avec `NO_COLOR=1`.
+
+Le sélecteur de dossier utilise `fzf` lorsqu’il est installé : les flèches permettent de parcourir les dossiers et la touche Entrée valide le choix. Sans `fzf`, l’installateur conserve son invite de chemin simple, sans ajouter de dépendance obligatoire.
+
+Le sélecteur de dossier distingue clairement la navigation et la sélection : choisissez le dossier actuel pour l’utiliser comme projet, entrez dans un sous-dossier uniquement si nécessaire, ou revenez au parent à tout moment. Entrer dans un dossier ne valide jamais automatiquement ce dossier.
+
+L’installateur met également à jour ou crée `.gitignore` sans doublons. Il ignore le dossier de gouvernance choisi et son fichier d’entrée (`AGENTS.md` ou `CLAUDE.md`), tout en conservant le workflow GitHub de mise à jour dans Git afin que les futures Pull Requests fonctionnent.
+
+Le workflow de mise à jour utilise la branche `develop` si elle existe, sinon `dev`. Il refuse `main` et ne dépend d’aucune variable GitHub Actions non déclarée.
+
+## Qualité documentaire premium
+
+Le kit impose désormais un contrat documentaire : chaque document indique son statut, sa version, sa date, son responsable, son audience, son périmètre, ses faits vérifiés, ses hypothèses, ses inconnues, ses décisions, ses risques et ses critères de validation. Le Skill de rédaction adapte le contenu au lecteur et ajoute les exemples, diagrammes, commandes et références nécessaires. Le Skill d’audit refuse les documents incomplets, vagues ou incohérents avec le code.
+
+## Release et section About GitHub
+
+Après la promotion humaine vers `main`, la publication d’un tag SemVer `vX.Y.Z` déclenche le workflow `publish-release-and-about.yml`. Il vérifie que le tag correspond à `VERSION`, publie la GitHub Release avec les notes générées, puis met à jour la description et les topics de la section About du dépôt. Le workflow n’est pas déclenché par les branches `dev` ou `develop`.

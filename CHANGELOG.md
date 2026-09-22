@@ -4,6 +4,22 @@ Ce projet suit le versionnement sémantique. Les changements publiés sont regro
 
 ## Non publié
 
+- Ajoute la publication automatique des Releases et la mise à jour de la section About après un tag sur main.
+
+- Ajoute le contrat documentaire premium, les Skills de rédaction et d’audit et la validation automatique des documents.
+
+- Supprime les contextes GitHub Actions optionnels non déclarés et détecte automatiquement dev ou develop.
+
+- Ajoute la création et la mise à jour idempotente du gitignore lors de l’installation.
+
+- Corrige la navigation du sélecteur de dossiers avec choix explicite du dossier courant et retour au parent.
+
+- Ajoute un sélecteur de dossier avec navigation fzf et un fallback Bash sans dépendance obligatoire.
+
+- Améliore l’installateur avec un assistant terminal coloré, des choix guidés et un résumé avant installation.
+
+- Verrouille les Pull Requests automatiques sur dev ou develop et interdit toute promotion automatique vers main.
+
 - Ajout du choix d’activation des mises à jour automatiques lors de l’initialisation Codex ou Claude.
 
 - Complète la politique de sécurité et ajoute un résumé rassurant dans le README principal.
@@ -17,7 +33,7 @@ Ce projet suit le versionnement sémantique. Les changements publiés sont regro
 - Ajout ou correction : inscrire ici chaque changement visible avant la release.
 - Ajout du synchroniseur non destructif et du workflow de Pull Request automatique pour propager les mises à jour du kit dans les projets utilisateurs.
 
-## 1.0.14 - 2026-09-21
+## 1.0.22 - 2026-09-21
 
 ### Corrections
 

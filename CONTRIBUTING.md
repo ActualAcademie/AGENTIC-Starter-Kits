@@ -29,3 +29,7 @@ Tout ajout ou correctif visible reçoit un commit conventionnel et une entrée d
 ## Revue
 
 L'auteur ne s'auto-approuve pas. Les changements à risque élevé ou critique exigent le rapport cybersécurité et l'audit prévus par le kit.
+
+## Protection de main
+
+Les automatisations du starter kit créent uniquement des Pull Requests vers `develop` ou `dev`. Elles refusent `main` comme branche cible. La Pull Request de promotion vers `main` est créée et fusionnée par un humain, sauf demande explicite de l’utilisateur enregistrée dans le work item et validée par les protections du dépôt.

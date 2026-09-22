@@ -19,8 +19,19 @@ jobs:
           fetch-depth: 0
 
       - name: Configure starter kit source
-        run: git remote add upstream "${{ vars.AGENTIC_STARTER_KIT_URL || 'https://github.com/krapaud/AGENTIC-Starter-Kits.git' }}"
+        run: git remote add upstream https://github.com/krapaud/AGENTIC-Starter-Kits.git
 
+      - name: Select protected integration branch
+        id: integration
+        run: |
+          if git ls-remote --exit-code --heads origin develop >/dev/null 2>&1; then
+            echo "branch=develop" >> "$GITHUB_OUTPUT"
+          elif git ls-remote --exit-code --heads origin dev >/dev/null 2>&1; then
+            echo "branch=dev" >> "$GITHUB_OUTPUT"
+          else
+            echo "Aucune branche d’intégration dev ou develop n’existe." >&2
+            exit 1
+          fi
       - name: Update Codex kit
         run: bash .codex/scripts/update-starter-kit.sh --remote upstream --ref main --branch chore/update-agentic-kit
 
@@ -31,6 +42,7 @@ jobs:
         uses: peter-evans/create-pull-request@v7
         with:
           branch: chore/update-agentic-kit
+          base: ${{ steps.integration.outputs.branch }}
           delete-branch: true
           title: 'chore: update Agentic starter kit'
           commit-message: 'chore: update Agentic starter kit'
