@@ -29,9 +29,9 @@ Après réception du cahier, annoncer qu’une phase de questions de complétude
 
 Une CI en cours doit être suivie jusqu’à son résultat. Une dette historique détectée dans le périmètre est corrigée par lots, et une dette hors périmètre reçoit un work item sans interrompre les tâches indépendantes. Les corrections non majeures et réversibles de dépendances sont exécutées, testées et documentées sans demander « Continue ».
 
-## Versionnement obligatoire
+## Versionnement produit
 
-Pour chaque ajout, correctif, changement de sécurité ou modification documentaire, utiliser un commit conventionnel, mettre à jour `CHANGELOG.md` dans la section `Non publié` et déclarer l’impact SemVer dans la Pull Request. Une release met à jour `VERSION`, `kit_version`, le README, le changelog et le titre de Pull Request, puis reçoit un tag `vX.Y.Z` après fusion dans `main`. Lire `VERSIONING.md`.
+Pour chaque changement, utiliser un commit conventionnel et déclarer dans la Pull Request son impact produit : `major`, `minor`, `patch` ou `aucune`. Une nouvelle version est réservée à une évolution du kit réellement consommée par les projets importateurs. Les corrections internes de CI, de workflow, de dépôt, de métadonnées, de documentation interne et d’outillage restent dans le changelog sans incrément artificiel. Une release met à jour `VERSION`, `kit_version`, le README, le changelog et le titre de Pull Request, puis reçoit un tag après fusion dans `main`. Lire `VERSIONING.md`.
 
 ## README obligatoire
 
