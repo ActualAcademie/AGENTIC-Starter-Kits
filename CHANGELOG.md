@@ -13,6 +13,8 @@ Ce projet suit le versionnement sémantique. Les changements publiés sont regro
 
 ## Non publié
 
+- Clarifie que les versions reflètent les évolutions consommées du kit et non chaque maintenance interne.
+
 - Corrige le déclencheur de tags et rend la publication Release idempotente.
 
 - Corrige les permissions du workflow Release et documente le secret nécessaire à la mise à jour About.
