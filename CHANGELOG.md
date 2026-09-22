@@ -4,6 +4,8 @@ Ce projet suit le versionnement sémantique. Les changements publiés sont regro
 
 ## Non publié
 
+- Corrige le déclencheur de tags et rend la publication Release idempotente.
+
 - Corrige les permissions du workflow Release et documente le secret nécessaire à la mise à jour About.
 
 - Ajoute la publication automatique des Releases et la mise à jour de la section About après un tag sur main.
@@ -35,7 +37,7 @@ Ce projet suit le versionnement sémantique. Les changements publiés sont regro
 - Ajout ou correction : inscrire ici chaque changement visible avant la release.
 - Ajout du synchroniseur non destructif et du workflow de Pull Request automatique pour propager les mises à jour du kit dans les projets utilisateurs.
 
-## 1.0.23 - 2026-09-21
+## 1.0.24 - 2026-09-21
 
 ### Corrections
 
