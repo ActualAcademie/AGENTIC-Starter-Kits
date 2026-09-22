@@ -40,3 +40,7 @@ Chaque ajout, correction, agent, Skill, politique, commande, changement de compo
 ## Avant tout push GitHub
 
 L'agent responsable exécute `bash .claude/scripts/verify-before-push.sh` et rend ses résultats. Un échec bloque le push. Ne jamais contourner le hook avec `--no-verify`.
+
+## Installation Git obligatoire
+
+Après l’installation du kit, vérifier que `.github/workflows/update-agentic-starter-kit.yml` existe et n’est pas ignoré. Avant le premier commit, l’ajouter explicitement avec `.gitignore` et `CLAUDE.md`, puis vérifier son suivi avec `git ls-files --error-unmatch .github/workflows/update-agentic-starter-kit.yml`. Le workflow doit être présent dans la première branche publiée. Ne jamais le supprimer, le placer dans `.gitignore` ou le pousser directement vers `main`.
