@@ -1,6 +1,6 @@
 # Agentic Starter Kits
 
-[![Version](https://img.shields.io/badge/version-1.0.22-blue.svg)](VERSION)
+[![Version](https://img.shields.io/badge/version-1.0.23-blue.svg)](VERSION)
 
 ## Construire avec une IA comme avec une équipe senior
 
@@ -218,7 +218,7 @@ Le kit ne devine pas les décisions métier, ne crée pas de secret, ne simule p
 - [Versionnement](VERSIONING.md)
 - [Historique des changements](CHANGELOG.md)
 
-## État fonctionnel de la version 1.0.5
+## État fonctionnel de la version 1.0.23
 
 La version actuelle inclut 16 agents au total : six agents du noyau et dix spécialistes optionnels. Elle inclut leurs politiques de modèles, la gouvernance d’activation, les Skills d’orchestration, les scripts d’initialisation, les checkpoints, le suivi des coûts et les contrôles CI. Les détails contractuels des spécialistes sont dans `SPECIALIST-AGENTS.md` dans chaque kit.
 
@@ -287,3 +287,7 @@ Le kit impose désormais un contrat documentaire : chaque document indique son s
 ## Release et section About GitHub
 
 Après la promotion humaine vers `main`, la publication d’un tag SemVer `vX.Y.Z` déclenche le workflow `publish-release-and-about.yml`. Il vérifie que le tag correspond à `VERSION`, publie la GitHub Release avec les notes générées, puis met à jour la description et les topics de la section About du dépôt. Le workflow n’est pas déclenché par les branches `dev` ou `develop`.
+
+### Autoriser la mise à jour de la section About
+
+La création de Release fonctionne avec le token GitHub standard. La modification de la description et des topics nécessite un secret de dépôt nommé `REPO_SETTINGS_TOKEN`, contenant un token GitHub autorisé à modifier les métadonnées du dépôt. Sans ce secret, la Release est publiée normalement et la mise à jour About est ignorée avec un avertissement non bloquant.

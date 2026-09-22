@@ -27,19 +27,21 @@ jobs:
 
       - name: Publish GitHub release
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.REPO_SETTINGS_TOKEN || github.token }}
         run: gh release create "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" --title "Agentic Starter Kits $GITHUB_REF_NAME" --generate-notes --verify-tag
 
       - name: Update repository description
+        if: ${{ secrets.REPO_SETTINGS_TOKEN !=  }}
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.REPO_SETTINGS_TOKEN || github.token }}
         run: |
           gh api --method PATCH "repos/$GITHUB_REPOSITORY" \
             --field description='Starter kits premium et portables pour orchestrer des projets logiciels avec Codex ou Claude, avec gouvernance, sécurité, GitFlow, CI et mises à jour contrôlées.'
 
       - name: Update repository topics
+        if: ${{ secrets.REPO_SETTINGS_TOKEN !=  }}
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.REPO_SETTINGS_TOKEN || github.token }}
         run: |
           gh api --method PUT "repos/$GITHUB_REPOSITORY/topics" \
             --header 'Accept: application/vnd.github+json' \
