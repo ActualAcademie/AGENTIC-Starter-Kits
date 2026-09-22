@@ -457,3 +457,7 @@ git push origin vX.Y.Z
 ```
 
 Le workflow GitHub crée alors la Release, vérifie la cohérence avec `VERSION`, et actualise automatiquement la description et les topics visibles dans la section About. Le dépôt doit autoriser les GitHub Actions à écrire le contenu et les métadonnées du dépôt.
+
+### Secret nécessaire pour la section About
+
+Pour autoriser l’actualisation automatique de la description et des topics, créez dans GitHub un secret de dépôt nommé `REPO_SETTINGS_TOKEN`. Utilisez un token appartenant à une personne autorisée à administrer le dépôt, avec les droits de dépôt nécessaires à la modification de ses métadonnées. La Release reste fonctionnelle sans ce secret, mais la section About devra alors être mise à jour manuellement.
