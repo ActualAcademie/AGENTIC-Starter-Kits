@@ -446,3 +446,14 @@ Dans le sélecteur intégré, l’option `1` choisit le dossier affiché comme p
 L’installation crée `.gitignore` s’il est absent et ajoute uniquement les entrées nécessaires au kit choisi. Codex ajoute `.codex/` et `AGENTS.md`. Claude ajoute `.claude/` et `CLAUDE.md`. Les doublons ne sont pas ajoutés. Le fichier `.github/workflows/update-agentic-starter-kit.yml` reste suivi par Git, car il est nécessaire aux mises à jour automatiques.
 
 Le workflow détecte automatiquement `develop`, puis `dev`. Il refuse `main` et ne demande aucune variable GitHub Actions supplémentaire.
+
+## Publication Release et About
+
+La promotion vers `main` reste humaine. Après cette promotion, créez et poussez le tag annoté prévu par le versionnement :
+
+```bash
+git tag -a vX.Y.Z -m "Release vX.Y.Z"
+git push origin vX.Y.Z
+```
+
+Le workflow GitHub crée alors la Release, vérifie la cohérence avec `VERSION`, et actualise automatiquement la description et les topics visibles dans la section About. Le dépôt doit autoriser les GitHub Actions à écrire le contenu et les métadonnées du dépôt.
