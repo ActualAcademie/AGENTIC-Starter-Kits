@@ -1,6 +1,6 @@
 # Kit d'orchestration Codex portable
 
-![Version du kit](https://img.shields.io/badge/version-1.0.20-blue.svg)
+![Version du kit](https://img.shields.io/badge/version-1.0.21-blue.svg)
 
 Ce kit installe une gouvernance projet pour Codex. Il ne construit rien tant que le cahier des charges n'a pas été fourni et formalisé.
 
@@ -218,3 +218,7 @@ Après une instruction « fais tout », le Coordinateur poursuit jusqu’à la D
 ## Synchronisation automatique
 
 L’initialisation installe un workflow GitHub Actions hebdomadaire qui ouvre une Pull Request pour chaque évolution du kit officiel. Le script `.codex/scripts/update-starter-kit.sh` permet aussi une mise à jour manuelle avec un remote, une référence et une branche.
+
+## Qualité documentaire premium
+
+Utilisez `documentation-authoring` pour rédiger et `documentation-audit` pour relire. Le contrôle `bash .codex/scripts/validate-documentation.sh` vérifie les métadonnées, les dates et les marqueurs incomplets avant la livraison.
