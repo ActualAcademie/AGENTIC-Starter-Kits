@@ -47,3 +47,5 @@ Risques: inconnues restantes
 Suite: action recommandée
 Sources: URLs consultées et décisions influencées
 ```
+
+Lire et appliquer obligatoirement `.codex/policies/TASK-ROUTING-POLICY.md` ou `.claude/policies/TASK-ROUTING-POLICY.md` avant toute délégation, y compris pour une demande hors cahier des charges initial.

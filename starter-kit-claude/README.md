@@ -232,3 +232,4 @@ L’initialisation installe un workflow GitHub Actions hebdomadaire qui ouvre un
 Utilisez `documentation-authoring` pour rédiger et `documentation-audit` pour relire. Le contrôle `bash .claude/scripts/validate-documentation.sh` vérifie les métadonnées, les dates et les marqueurs incomplets avant la livraison.
 La version du kit évolue uniquement lorsqu’un changement consommé par un projet importateur le justifie.
 L’installateur vérifie que le workflow de mise à jour est suivi par Git avant la première publication.
+Le Coordinateur applique une politique universelle de routage pour toute demande nouvelle, corrective ou hors cahier des charges.
