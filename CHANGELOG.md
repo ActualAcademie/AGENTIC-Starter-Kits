@@ -1,3 +1,10 @@
+## 1.2.2 - 2026-09-23
+
+### Fiabilité
+
+- Ajoute la restauration automatique du kit précédent après une synchronisation échouée.
+- Conserve la sauvegarde et signale explicitement le rollback.
+
 ## 1.2.1 - 2026-09-23
 
 ### Sécurité et fiabilité
