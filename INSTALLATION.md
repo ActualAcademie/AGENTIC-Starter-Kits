@@ -39,6 +39,22 @@ Si le projet existe déjà, ne pas supprimer ses fichiers. Importer le kit de ma
 
 ## 3. Choisir et copier un kit
 
+Deux distributions sont disponibles. Le mode `native` installe le kit directement dans le projet. Le mode `external` installe le même socle localement dans le projet mais l’ignore dans Git et ne publie que `.workspace.toml` et `update-workspace-kit.yml`. Ce mode est recommandé si le dépôt distant ne doit pas contenir le kit.
+
+Pour le mode externe Codex :
+
+```bash
+./install.sh --kit codex --mode external --target /chemin/absolu/vers/mon-projet
+```
+
+Pour le mode externe Claude :
+
+```bash
+./install.sh --kit claude --mode external --target /chemin/absolu/vers/mon-projet
+```
+
+Le mode externe conserve les fichiers nécessaires localement pour que Codex ou Claude fonctionne nativement, mais les ajoute au `.gitignore`. Le dépôt distant ne contient que le manifeste `.workspace.toml` et le workflow `.github/workflows/update-workspace-kit.yml`.
+
 Définir le chemin local du dépôt source. Adapter ce chemin à votre machine.
 
 Pour Codex :
@@ -464,3 +480,5 @@ Pour autoriser l’actualisation automatique de la description et des topics, cr
 
 Le workflow de publication est idempotent : si une Release portant le tag existe déjà, il la conserve et poursuit la mise à jour About.
 Le workflow de mise à jour doit être ajouté au premier commit du projet. L’installateur affiche les commandes nécessaires et vérifie qu’il n’est pas ignoré.
+
+Les distributions `native` et `external` sont documentées dans le dossier `distributions/`.
