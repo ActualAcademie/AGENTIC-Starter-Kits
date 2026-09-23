@@ -310,3 +310,7 @@ Les descriptions Trello sont normalisées avec de vrais retours à la ligne et r
 Une fusion de Pull Request est un checkpoint et non une fin de carte. Le Coordinateur doit reprendre automatiquement la prochaine étape ouverte.
 
 Le workflow récupère maintenant le script de mise à jour officiel depuis le dépôt source, car .codex/ et .claude/ restent volontairement ignorés dans les projets importateurs.
+
+## Distributions disponibles
+
+Le kit propose deux modes : `native`, avec intégration directe dans le projet et mises à jour par Pull Request, et `external`, avec kit local hors du dépôt et manifeste `.workspace.toml`. Voir `distributions/README.md`.

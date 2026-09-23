@@ -464,3 +464,5 @@ Pour autoriser l’actualisation automatique de la description et des topics, cr
 
 Le workflow de publication est idempotent : si une Release portant le tag existe déjà, il la conserve et poursuit la mise à jour About.
 Le workflow de mise à jour doit être ajouté au premier commit du projet. L’installateur affiche les commandes nécessaires et vérifie qu’il n’est pas ignoré.
+
+Les distributions `native` et `external` sont documentées dans le dossier `distributions/`.
