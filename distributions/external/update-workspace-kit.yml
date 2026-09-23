@@ -1,0 +1,48 @@
+name: Update workspace kit
+
+on:
+  schedule:
+    - cron: '17 8 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v4
+
+      - name: Detect latest kit version
+        id: version
+        run: |
+          latest="$(curl -fsSL https://raw.githubusercontent.com/ActualAcademie/AGENTIC-Starter-Kits/main/VERSION)"
+          current="$(sed -n 's/^kit_version = "\(.*\)"/\1/p' .workspace.toml)"
+          echo "current=$current" >> "$GITHUB_OUTPUT"
+          echo "latest=$latest" >> "$GITHUB_OUTPUT"
+          if [ "$current" = "$latest" ]; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Update workspace manifest
+        if: steps.version.outputs.changed == 'true'
+        run: sed -i.bak "s/^kit_version = .*/kit_version = \"${{ steps.version.outputs.latest }}\"/" .workspace.toml && rm -f .workspace.toml.bak
+
+      - name: Open update pull request
+        if: steps.version.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: chore/update-workspace-kit
+          base: ${{ github.ref_name }}
+          delete-branch: true
+          title: 'chore: update workspace kit to v${{ steps.version.outputs.latest }}'
+          commit-message: 'chore: update workspace kit manifest'
+          body: |
+            Mise à jour de la version du kit externe.
+
+            Le contenu du kit reste local à la machine et n’est pas publié dans ce dépôt.

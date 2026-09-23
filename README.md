@@ -31,6 +31,9 @@ Pour Claude :
 
 ```bash
 ./install.sh --kit claude --target /chemin/vers/mon-projet
+
+# Mode externe, kit local et manifeste uniquement dans le projet
+./install.sh --kit codex --mode external --target /chemin/vers/mon-projet
 ```
 
 Le chemin cible doit déjà exister. N’installez jamais les deux variantes dans le même projet.

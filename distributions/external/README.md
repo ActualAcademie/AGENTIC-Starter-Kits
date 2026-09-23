@@ -2,6 +2,6 @@
 
 Cette distribution conserve le kit hors du dépôt projet.
 
-Le projet utilise uniquement le manifeste discret `.workspace.toml` et le lanceur local du kit. Le contenu des dossiers `.codex/` ou `.claude/`, les fichiers d’entrée et les données de contexte ne sont pas publiés dans le dépôt projet.
+Le projet utilise le manifeste discret `.workspace.toml` et le workflow `update-workspace-kit.yml`. Le contenu des dossiers `.codex/` ou `.claude/`, les fichiers d’entrée et les données de contexte ne sont pas publiés dans le dépôt projet.
 
-Les mises à jour sont récupérées depuis une Release du dépôt officiel et appliquées localement par le lanceur. Le mode externe nécessite que le lanceur soit installé et disponible sur la machine.
+Les mises à jour sont détectées par le workflow, qui ouvre une Pull Request uniquement pour `.workspace.toml`. Après fusion, réexécuter l’installateur externe avec `--force` pour synchroniser localement le kit correspondant à la nouvelle version.
