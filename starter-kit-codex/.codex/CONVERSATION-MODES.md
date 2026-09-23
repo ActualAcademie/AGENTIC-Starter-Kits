@@ -4,6 +4,16 @@
 
 Mode par défaut dans un workspace qui contient ce kit. Les instructions de `AGENTS.md` s'appliquent. Si le cahier des charges est absent, Codex demande le cahier puis s'arrête.
 
+## Mode initialisation
+
+L'utilisateur démarre son message par :
+
+```text
+Mode initialisation :
+```
+
+Ce mode est prioritaire même dans une conversation existante. Codex recharge les instructions et l'état local, vérifie le statut de `PROJECT-BRIEF.md`, puis applique la porte `project-intake`. Si le cahier est absent ou `pending`, il répond uniquement : `Envoie-moi le cahier des charges du projet. Je ne démarre aucune analyse, modification ou orchestration avant sa réception.`
+
 ## Mode général
 
 L'utilisateur démarre son message par :

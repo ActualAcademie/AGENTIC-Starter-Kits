@@ -1,5 +1,12 @@
 # Changelog
-## 1.1.1 - 2026-09-23
+## 1.1.2 - 2026-09-23
+
+### Corrections
+
+- Ajoute le mode initialisation utilisable dans une conversation déjà ouverte.
+- Rend la porte du cahier des charges explicitement relançable sans redémarrer la session.
+
+## 1.1.2 - 2026-09-23
 
 ### Corrections
 
@@ -7,7 +14,7 @@
 - Corrige les exemples manuels d’installation Codex et Claude.
 - Clarifie les parcours native et external dans les README.
 
-## 1.1.1 - 2026-09-23
+## 1.1.2 - 2026-09-23
 
 ### Ajouts
 
@@ -15,14 +22,14 @@
 - Ajoute le manifeste `.workspace.toml` et le workflow de mise à jour externe.
 - Conserve les fichiers d’orchestration localement sans les publier dans le dépôt projet en mode external.
 
-## 1.1.1 - 2026-09-23
+## 1.1.2 - 2026-09-23
 
 ### Corrections
 
 - Corrige le workflow de mise à jour pour récupérer son script officiel malgré l’ignorance de `.codex/` et `.claude/`.
 - Rend la détection et la mise à jour automatique utilisables dans les projets importateurs.
 
-## 1.1.1 - 2026-09-23
+## 1.1.2 - 2026-09-23
 
 ### Corrections
 
@@ -31,11 +38,11 @@
 - Rend la validation navigateur obligatoire pour les changements frontend.
 - Ajoute le routage universel des demandes hors cahier des charges initial.
 
-## 1.1.1 - 2026-09-22
+## 1.1.2 - 2026-09-22
 
 - Corrige la condition de secret du workflow de publication GitHub.
 
-## 1.1.1 - 2026-09-22
+## 1.1.2 - 2026-09-22
 
 - Fixe le déclenchement et la publication idempotente des Releases GitHub.
 - Maintient la synchronisation documentaire et le contrôle de version.
@@ -80,7 +87,7 @@ Ce projet suit le versionnement sémantique. Les changements publiés sont regro
 - Ajout ou correction : inscrire ici chaque changement visible avant la release.
 - Ajout du synchroniseur non destructif et du workflow de Pull Request automatique pour propager les mises à jour du kit dans les projets utilisateurs.
 
-## 1.1.1 - 2026-09-21
+## 1.1.2 - 2026-09-21
 
 ### Corrections
 
