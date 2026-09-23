@@ -14,6 +14,8 @@ Mode initialisation :
 
 Ce mode est prioritaire même dans une conversation existante. Claude recharge les instructions et l'état local, vérifie le statut de `PROJECT-BRIEF.md`, puis applique la porte `project-intake`. Si le cahier est absent ou `pending`, il répond uniquement : `Envoie-moi le cahier des charges du projet. Je ne démarre aucune analyse, modification ou orchestration avant sa réception.`
 
+La réponse doit toujours afficher le chemin du cahier, son statut, son origine, les documents réellement lus, les documents manquants et l action suivante. Si le cahier est déjà accepté, préciser qu il est réutilisé sans remplacement.
+
 ## Mode général
 
 L'utilisateur démarre son message par :
