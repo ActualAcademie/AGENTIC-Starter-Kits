@@ -29,6 +29,20 @@ ensure_gitignore() {
     fi
   done
 }
+sync_kit_directory() {
+  local source_hidden="$1"
+  local target_hidden="$2"
+  mkdir -p "$target_hidden"
+  for item in "$source_hidden"/*; do
+    [ -e "$item" ] || continue
+    case "$(basename "$item")" in
+      PROJECT-BRIEF.md|project-profile.toml|project-inventory.md|RUNTIME-STATE.md|decisions|work-items|reports|metrics|evaluations)
+        continue
+        ;;
+    esac
+    cp -R "$item" "$target_hidden/"
+  done
+}
 verify_update_workflow() {
   local workflow="$target/$1"
   [ -f "$workflow" ] || fail "Le workflow de mise à jour est absent : $workflow"
@@ -142,7 +156,7 @@ if [ -t 0 ]; then
 fi
 info "Installation de la configuration $label..."
 cp -R "$repo_root/$source_dir/$entry" "$target/$entry"
-cp -R "$repo_root/$source_dir/$hidden" "$target/$hidden"
+sync_kit_directory "$repo_root/$source_dir/$hidden" "$target/$hidden"
 mkdir -p "$target/.github/workflows"
 if [ "$mode" = "external" ]; then
   workflow_path="$target/.github/workflows/update-workspace-kit.yml"
