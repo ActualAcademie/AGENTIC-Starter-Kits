@@ -1,6 +1,6 @@
 # Agentic Starter Kits
 
-[![Version](https://img.shields.io/badge/version-1.0.28-blue.svg)](VERSION)
+[![Version](https://img.shields.io/badge/version-1.1.0-blue.svg)](VERSION)
 
 ## Construire avec une IA comme avec une équipe senior
 
@@ -31,6 +31,9 @@ Pour Claude :
 
 ```bash
 ./install.sh --kit claude --target /chemin/vers/mon-projet
+
+# Mode externe, kit local et manifeste uniquement dans le projet
+./install.sh --kit codex --mode external --target /chemin/vers/mon-projet
 ```
 
 Le chemin cible doit déjà exister. N’installez jamais les deux variantes dans le même projet.
@@ -218,7 +221,7 @@ Le kit ne devine pas les décisions métier, ne crée pas de secret, ne simule p
 - [Versionnement](VERSIONING.md)
 - [Historique des changements](CHANGELOG.md)
 
-## État fonctionnel de la version 1.0.28
+## État fonctionnel de la version 1.1.0
 
 La version actuelle inclut 16 agents au total : six agents du noyau et dix spécialistes optionnels. Elle inclut leurs politiques de modèles, la gouvernance d’activation, les Skills d’orchestration, les scripts d’initialisation, les checkpoints, le suivi des coûts et les contrôles CI. Les détails contractuels des spécialistes sont dans `SPECIALIST-AGENTS.md` dans chaque kit.
 
@@ -310,3 +313,7 @@ Les descriptions Trello sont normalisées avec de vrais retours à la ligne et r
 Une fusion de Pull Request est un checkpoint et non une fin de carte. Le Coordinateur doit reprendre automatiquement la prochaine étape ouverte.
 
 Le workflow récupère maintenant le script de mise à jour officiel depuis le dépôt source, car .codex/ et .claude/ restent volontairement ignorés dans les projets importateurs.
+
+## Distributions disponibles
+
+Le kit propose deux modes : `native`, avec intégration directe dans le projet et mises à jour par Pull Request, et `external`, avec kit local hors du dépôt et manifeste `.workspace.toml`. Voir `distributions/README.md`.

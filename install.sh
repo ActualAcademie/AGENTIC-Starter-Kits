@@ -30,23 +30,25 @@ ensure_gitignore() {
   done
 }
 verify_update_workflow() {
-  local workflow="$target/.github/workflows/update-agentic-starter-kit.yml"
+  local workflow="$target/$1"
   [ -f "$workflow" ] || fail "Le workflow de mise à jour est absent : $workflow"
   if git -C "$target" check-ignore -q "$workflow" 2>/dev/null; then
     fail "Le workflow de mise à jour est ignoré par Git. Retirez cette règle avant de continuer."
   fi
 }
-usage() { printf "%b\n" "Usage : ./install.sh [--kit codex|claude] [--target CHEMIN] [--force]"; }
-kit=""; target=""; force=false
+usage() { printf "%b\n" "Usage : ./install.sh [--kit codex|claude] [--mode native|external] [--target CHEMIN] [--force]"; }
+kit=""; mode="native"; target=""; force=false
 while [ "$#" -gt 0 ]; do
   case "$1" in
     --kit) [ "$#" -ge 2 ] || fail "Valeur manquante pour --kit."; kit="$2"; shift 2 ;;
+    --mode) [ "$#" -ge 2 ] || fail "Valeur manquante pour --mode."; mode="$2"; shift 2 ;;
     --target) [ "$#" -ge 2 ] || fail "Valeur manquante pour --target."; target="$2"; shift 2 ;;
     --force) force=true; shift ;;
     -h|--help) usage; exit 0 ;;
     *) fail "Option inconnue : $1" ;;
   esac
 done
+case "$mode" in native|external) ;; *) fail "Le mode doit être native ou external." ;; esac
 title
 if [ -z "$kit" ] && [ -t 0 ]; then
   printf "%b\n" "${bold}Quel orchestrateur souhaitez-vous installer ?${reset}"
@@ -113,32 +115,49 @@ if [ "$force" != true ] && { [ -e "$target/$entry" ] || [ -e "$target/$hidden" ]
   fail "Un kit existe déjà dans $target. Utilisez --force après vérification."
 fi
 printf "\n%b\n" "${bold}Résumé de l’installation${reset}"
-printf "  Orchestrateur : %s\n  Projet cible  : %s\n  Mises à jour   : Pull Request automatique vers dev ou develop\n\n" "$label" "$target"
+printf "  Orchestrateur : %s\n  Distribution  : %s\n  Projet cible  : %s\n\n" "$label" "$mode" "$target"
 if [ -t 0 ]; then
   printf "Continuer l’installation ? [O/n] : "
   read -r confirm
   case "${confirm:-o}" in n|N|non|Non) info "Installation annulée."; exit 0 ;; esac
 fi
-info "Copie de la configuration $label..."
+info "Installation de la configuration $label..."
 cp -R "$repo_root/$source_dir/$entry" "$target/$entry"
 cp -R "$repo_root/$source_dir/$hidden" "$target/$hidden"
 mkdir -p "$target/.github/workflows"
-cp "$repo_root/$source_dir/$hidden/templates/github/workflows/update-agentic-starter-kit.yml" "$target/.github/workflows/update-agentic-starter-kit.yml"
+if [ "$mode" = "external" ]; then
+  workflow_path="$target/.github/workflows/update-workspace-kit.yml"
+  cp "$repo_root/distributions/external/update-workspace-kit.yml" "$workflow_path"
+  kit_version="$(sed -n 's/^kit_version = "\(.*\)"/\1/p' "$target/$hidden/KIT.toml")"
+  cat > "$target/.workspace.toml" <<EOF
+orchestrator = "$kit"
+kit_version = "$kit_version"
+source = "https://github.com/ActualAcademie/AGENTIC-Starter-Kits"
+update_channel = "stable"
+EOF
+else
+  workflow_path="$target/.github/workflows/update-agentic-starter-kit.yml"
+  cp "$repo_root/$source_dir/$hidden/templates/github/workflows/update-agentic-starter-kit.yml" "$workflow_path"
+fi
 ensure_gitignore
-verify_update_workflow
+verify_update_workflow "${workflow_path#$target/}"
 info "Gitignore mis à jour pour le kit $label."
 printf "\n"
 success "Kit $label installé avec succès."
 success "Fichier racine : $target/$entry"
 success "Configuration : $target/$hidden"
-success "Mises à jour  : $target/.github/workflows/update-agentic-starter-kit.yml"
+success "Mises à jour  : $workflow_path"
 printf "\n%b\n" "${cyan}Prochaine étape${reset}"
 printf "%s\n" "Ouvrez le projet dans $label et envoyez votre cahier des charges complet."
 printf "%s\n" "Les futures mises à jour arriveront par Pull Request vers dev ou develop."
 if git -C "$target" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
   printf "\n%b\n" "${yellow}Avant le premier push${reset}"
   printf "%s\n" "Ajoutez le workflow au premier commit :"
-  printf "  git add .github/workflows/update-agentic-starter-kit.yml .gitignore %s\n" "$entry"
+  if [ "$mode" = "external" ]; then
+    printf "  git add .github/workflows/update-workspace-kit.yml .workspace.toml .gitignore\n"
+  else
+    printf "  git add .github/workflows/update-agentic-starter-kit.yml .gitignore %s\n" "$entry"
+  fi
   printf "  git commit -m \"chore: install agentic starter kit\"\n"
   printf "  git push -u origin \"\$(git branch --show-current)\"\n"
   printf "\n%s\n" "Le workflow doit être visible dans git ls-files avant le push."
