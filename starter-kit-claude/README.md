@@ -241,3 +241,5 @@ La synchronisation Trello est obligatoire immédiatement après chaque étape li
 Le Coordinateur distingue désormais les tâches terminées, les sous-tâches en attente d’autorisation et les blocages réels.
 
 Une carte ne passe dans `Terminé` qu’après validation complète, y compris juridique ou externe si elle est requise.
+
+Les descriptions Trello utilisent de vrais retours à la ligne et sont relues après synchronisation.
