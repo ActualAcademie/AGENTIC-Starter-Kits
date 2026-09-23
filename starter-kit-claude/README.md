@@ -233,3 +233,5 @@ Utilisez `documentation-authoring` pour rédiger et `documentation-audit` pour r
 La version du kit évolue uniquement lorsqu’un changement consommé par un projet importateur le justifie.
 L’installateur vérifie que le workflow de mise à jour est suivi par Git avant la première publication.
 Le Coordinateur applique une politique universelle de routage pour toute demande nouvelle, corrective ou hors cahier des charges.
+
+La validation navigateur est obligatoire pour les changements frontend et doit être documentée dans le work item.
