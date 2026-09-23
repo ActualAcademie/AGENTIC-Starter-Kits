@@ -275,7 +275,7 @@ Avant le commit, le rôle responsable lance les validations du projet. Avant le 
 
 Les commits doivent rester atomiques. Ne jamais créer un commit de centaines ou milliers de fichiers pour plusieurs fonctionnalités.
 
-## 12. Utiliser le journal qualité
+## 15. Utiliser le journal qualité
 
 Le journal est créé ici :
 
@@ -285,7 +285,7 @@ docs/quality/quality-journal.md
 
 Tous les agents d’audit ou de correction l’utilisent. Chaque anomalie doit avoir un identifiant, une source, une catégorie, une gravité, un impact, une preuve, un responsable, une correction et un statut. Une correction passe par `fixed`, puis `verified` après une vérification indépendante.
 
-## 13. Valider avant chaque push
+## 16. Valider avant chaque push
 
 Codex :
 
@@ -301,21 +301,21 @@ bash .claude/scripts/verify-before-push.sh
 
 La commande vérifie la branche, les commits atomiques, le preflight, la sécurité, le lint, les tests, le build et les commandes configurées. Ne jamais utiliser `git push --no-verify`.
 
-## 14. Générer la CI du projet
+## 17. Générer la CI du projet
 
 Après l’onboarding, si le projet ne possède pas déjà une CI :
 
 ```bash
-# Codex
+### Codex
 bash .codex/scripts/generate-github-ci.sh
 
-# Claude Code
+### Claude Code
 bash .claude/scripts/generate-github-ci.sh
 ```
 
 Le générateur refuse d’écraser un workflow existant. Relire les commandes, configurer les secrets dans GitHub et faire vérifier le déploiement par Cybersécurité.
 
-## 15. GitFlow de livraison
+## 18. GitFlow de livraison
 
 Le flux est :
 
@@ -325,7 +325,7 @@ feature ou fix -> Pull Request -> develop -> Pull Request de release -> main -> 
 
 Avant promotion, exiger les preuves du Coordinateur, de l’agent responsable, de Cybersécurité lorsque nécessaire et de l’Auditeur. Le changement visible est inscrit dans `CHANGELOG.md`.
 
-## 16. Modes qui évitent le faux démarrage
+## 19. Modes qui évitent le faux démarrage
 
 Pour une question générale :
 
@@ -341,7 +341,7 @@ Mode maintenance : vérifie les Skills et les contrôles du kit.
 
 Sans préfixe, la conversation est considérée comme une demande projet et la porte cahier des charges s’applique.
 
-## 17. Diagnostic
+## 20. Diagnostic
 
 Codex :
 
