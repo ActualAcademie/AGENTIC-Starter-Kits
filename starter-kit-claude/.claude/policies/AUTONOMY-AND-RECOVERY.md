@@ -35,3 +35,9 @@ Une demande humaine reste nécessaire uniquement pour une décision métier, une
 ## Interdictions
 
 Ne jamais inventer une source, masquer un échec, désactiver un contrôle pour obtenir du vert, utiliser `--no-verify`, contourner une sécurité ou déclarer une validation non exécutée. Une recherche internet informe une décision, mais ne remplace pas un test local. Une commande non supportée doit être remplacée par l’alternative officielle compatible avec l’environnement, puis vérifiée. Les modifications existantes hors périmètre doivent être préservées et signalées, jamais écrasées.
+
+## Continuité après fusion
+
+La fusion d’une Pull Request est un checkpoint technique et jamais une clôture automatique du work item ou de la carte Trello. Après une fusion réussie, relire immédiatement la checklist, identifier la prochaine action et reprendre le travail jusqu’à la Definition of Done. Ne pas attendre un nouveau message utilisateur et ne pas demander « Continue » pour une étape déjà autorisée.
+
+Si des éléments de la carte restent ouverts, maintenir la carte dans son état approprié, créer ou sélectionner le prochain work item, exécuter les validations nécessaires et synchroniser Trello après chaque étape. Arrêter uniquement pour un blocage réel, une décision humaine requise ou une action sensible non autorisée.
