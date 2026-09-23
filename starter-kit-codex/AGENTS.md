@@ -3,6 +3,7 @@
 ## Modes de conversation
 
 Si le message utilisateur commence par `Mode initialisation :`, suspendre le flux courant et exécuter la procédure d’initialisation complète, même dans une conversation déjà ouverte. Relire `AGENTS.md`, `.codex/START-HERE.md`, `.codex/CONVERSATION-MODES.md`, `.codex/PROJECT-BRIEF.md`, `.codex/project-profile.toml` et `.codex/RUNTIME-STATE.md` s’ils existent. Vérifier le statut du cahier des charges. S’il est absent ou `pending`, appliquer uniquement `project-intake` et demander le cahier sans analyser la stack, créer de work item ou modifier le produit. Ne reprendre l’orchestration qu’après acceptation du cahier et validation de la phase de complétude.
+Lire aussi .codex/policies/INITIALIZATION-TRANSPARENCY.md. Afficher obligatoirement l origine du cahier, son statut, les fichiers réellement lus, les fichiers manquants et l action suivante. Si le cahier est present et accepted, dire explicitement qu il est reutilise et ne sera pas remplace.
 
 Si le message utilisateur commence par `Mode général :`, répondre à sa demande sans lire, analyser ou modifier le projet. Ne pas demander de cahier des charges dans ce mode.
 
