@@ -239,3 +239,5 @@ La validation navigateur est obligatoire pour les changements frontend et doit �
 La synchronisation Trello est obligatoire immédiatement après chaque étape livrée, avec relecture de la carte et de sa checklist.
 
 Le Coordinateur distingue désormais les tâches terminées, les sous-tâches en attente d’autorisation et les blocages réels.
+
+Une carte ne passe dans `Terminé` qu’après validation complète, y compris juridique ou externe si elle est requise.
