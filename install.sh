@@ -144,7 +144,7 @@ if [ "$mode" = "external" ]; then
   cat > "$target/.workspace.toml" <<EOF
 orchestrator = "$kit"
 kit_version = "$kit_version"
-source = "https://github.com/ActualAcademie/AGENTIC-Starter-Kits"
+source = "https://github.com/krapaud/AGENTIC-Starter-Kits"
 update_channel = "stable"
 EOF
 else
