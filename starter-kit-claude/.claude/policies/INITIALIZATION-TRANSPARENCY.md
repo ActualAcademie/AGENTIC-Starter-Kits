@@ -24,3 +24,10 @@ Si le cahier est absent, répondre avec le chemin vérifié, l'action d'attente 
 Si le cahier est présent et accepté, afficher son chemin, son statut, son origine, les documents réellement lus, les documents manquants et l'action de réutilisation sans remplacement.
 
 L'agent ne doit jamais déclarer qu'un projet est configuré sans afficher ces informations. Le fichier existant ne doit jamais être considéré comme reçu dans le chat sans preuve.
+
+
+## Porte de réponse
+
+Le rapport de transparence est le premier et unique contenu du premier message du mode initialisation. Aucun résumé de configuration, aucune analyse et aucune annonce de tâche ne peut le précéder.
+
+Le statut accepted ne dispense pas du rapport. Il remplace uniquement la demande d un nouveau cahier par une confirmation de réutilisation.

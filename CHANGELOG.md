@@ -1,3 +1,11 @@
+## 1.1.7 - 2026-09-23
+
+### Corrections
+
+- Rend le rapport de cadrage obligatoire comme première réponse du mode initialisation.
+- Interdit les résumés de configuration avant la vérification explicite du cahier des charges.
+- Distingue strictement les statuts absent, pending et accepted.
+
 ## 1.1.6 - 2026-09-23
 
 ### Améliorations
