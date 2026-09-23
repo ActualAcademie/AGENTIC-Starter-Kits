@@ -113,6 +113,20 @@ Envoyer une demande projet simple, par exemple :
 Je veux construire une application de réservation pour des associations locales.
 ```
 
+## Reprendre une conversation déjà ouverte
+
+Une nouvelle conversation n'est pas obligatoire. Si une conversation existe déjà, envoyer exactement le message suivant :
+
+```text
+Mode initialisation :
+```
+
+Ce mode est prioritaire sur le sujet de la conversation. L'agent recharge les instructions du kit, vérifie l'état local du projet et recherche le cahier des charges ainsi que le profil technique. Tant que le cahier des charges n'est pas reçu et accepté, il ne doit pas coder, créer de work item, modifier Trello ou choisir une architecture.
+
+Après réception du cahier des charges, l'agent pose les questions manquantes avec une recommandation explicite. Il crée ensuite les documents de conception, le profil technique, le registre des décisions et le premier plan de livraison. Cette commande est donc la méthode fiable pour reprendre l'initialisation sans perdre la conversation existante.
+
+Si l'agent répond à côté, renvoyer la commande depuis la racine du projet, puis vérifier que la réponse commence par la demande du cahier des charges. Ne pas démarrer le développement avant cette confirmation.
+
 Tant que le cahier des charges n’est pas reçu et accepté, l’agent ne doit pas analyser la stack, écrire du code, créer une tâche ou lancer une orchestration.
 
 ## 6. Fournir le cahier des charges

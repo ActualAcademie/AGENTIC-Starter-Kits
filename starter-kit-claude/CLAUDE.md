@@ -7,6 +7,8 @@
 
 ## Modes de conversation
 
+Si le message utilisateur commence par `Mode initialisation :`, suspendre le flux courant et exécuter la procédure d’initialisation complète, même dans une conversation déjà ouverte. Relire `CLAUDE.md`, `.claude/START-HERE.md`, `.claude/CONVERSATION-MODES.md`, `.claude/PROJECT-BRIEF.md`, `.claude/project-profile.toml` et `.claude/RUNTIME-STATE.md` s’ils existent. Vérifier le statut du cahier des charges. S’il est absent ou `pending`, appliquer uniquement `project-intake` et demander le cahier sans analyser la stack, créer de work item ou modifier le produit. Ne reprendre l’orchestration qu’après acceptation du cahier et validation de la phase de complétude.
+
 Si le message utilisateur commence par `Mode général :`, répondre à sa demande sans lire, analyser ou modifier le projet. Ne pas demander de cahier des charges dans ce mode.
 
 Si le message utilisateur commence par `Mode maintenance :`, traiter uniquement l'entretien explicitement demandé du kit ou du projet. Ne pas commencer la construction du produit sans cahier des charges accepté.
