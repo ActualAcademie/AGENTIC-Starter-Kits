@@ -300,3 +300,5 @@ Le routage des demandes est universel : chaque nouvelle demande est qualifiée p
 La validation navigateur est obligatoire pour les changements frontend et doit être documentée dans le work item.
 
 La synchronisation Trello est obligatoire immédiatement après chaque étape livrée, avec relecture de la carte et de sa checklist.
+
+Le kit distingue désormais les tâches terminées, les sous-tâches en attente d’autorisation et les blocages réels.
