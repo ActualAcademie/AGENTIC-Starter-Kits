@@ -9,12 +9,17 @@ permissions:
   contents: write
   pull-requests: write
 
+concurrency:
+  group: workspace-kit-update-${{ github.ref_name }}
+  cancel-in-progress: true
+
 jobs:
   update:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Checkout project
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
 
       - name: Detect latest kit version
         id: version
