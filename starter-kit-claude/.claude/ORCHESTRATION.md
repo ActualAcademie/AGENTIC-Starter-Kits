@@ -47,3 +47,9 @@ Risques: inconnues restantes
 Suite: action recommandée
 Sources: URLs consultées et décisions influencées
 ```
+
+Lire et appliquer obligatoirement `.codex/policies/TASK-ROUTING-POLICY.md` ou `.claude/policies/TASK-ROUTING-POLICY.md` avant toute délégation, y compris pour une demande hors cahier des charges initial.
+
+## Synchronisation après chaque livraison
+
+Après chaque étape validée, fusion, correction ou changement de statut, relire la carte Trello concernée et sa checklist. Une livraison sans mise à jour et preuve de relecture Trello est incomplète.

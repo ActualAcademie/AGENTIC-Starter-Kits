@@ -295,3 +295,8 @@ La création de Release fonctionne avec le token GitHub standard. La modificatio
 Le workflow Release utilise le motif de tag compatible `v*.*.*` et peut être relancé sans erreur si la Release existe déjà.
 La gouvernance de versionnement distingue désormais les évolutions consommées des opérations de maintenance internes.
 L’installation vérifie désormais le workflow de mise à jour et affiche les commandes exactes pour l’ajouter au premier commit.
+Le routage des demandes est universel : chaque nouvelle demande est qualifiée puis confiée aux agents concernés, quel que soit son domaine.
+
+La validation navigateur est obligatoire pour les changements frontend et doit être documentée dans le work item.
+
+La synchronisation Trello est obligatoire immédiatement après chaque étape livrée, avec relecture de la carte et de sa checklist.
