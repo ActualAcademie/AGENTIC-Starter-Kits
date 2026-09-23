@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+set -euo pipefail
+script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+kit_root="$(cd "$script_dir/.." && pwd)"
+project_root="$(cd "$kit_root/.." && pwd)"
+manifest="$project_root/.workspace.toml"
+[ -f "$manifest" ] || { echo "Manifest .workspace.toml introuvable." >&2; exit 1; }
+source_url="$(sed -n 's/^source = "\(.*\)"/\1/p' "$manifest")"
+[ -n "$source_url" ] || { echo "Source du kit absente du manifeste." >&2; exit 1; }
+raw_base="${source_url/github.com/raw.githubusercontent.com}"
+latest="$(curl -fsSL "$raw_base/main/VERSION")"
+installed="$(sed -n 's/^kit_version = "\(.*\)"/\1/p' "$manifest")"
+[ "$installed" = "$latest" ] && { echo "Kit Claude déjà à jour : $installed"; exit 0; }
+backup_root="$project_root/.claude/backups/kit-$installed-$(date +%Y%m%d-%H%M%S)"
+mkdir -p "$backup_root"
+mkdir -p "$backup_root/claude-before-update"; rsync -a --exclude backups/ "$kit_root/" "$backup_root/claude-before-update/"
+tmp_dir="$(mktemp -d)"
+trap 'rm -rf "$tmp_dir"' EXIT
+archive="$tmp_dir/kit.tar.gz"
+curl -fsSL -L "${source_url%/}/archive/refs/tags/v${latest}.tar.gz" -o "$archive"
+tar -xzf "$archive" -C "$tmp_dir"
+source_kit="$(find "$tmp_dir" -mindepth 2 -maxdepth 2 -type d -name starter-kit-claude | head -n 1)"
+[ -n "$source_kit" ] || { echo "Kit Claude absent de l'archive." >&2; exit 1; }
+rsync -a --delete --exclude 'PROJECT-BRIEF.md' --exclude 'project-profile.toml' --exclude 'project-inventory.md' --exclude 'RUNTIME-STATE.md' --exclude 'decisions/' --exclude 'work-items/' --exclude 'reports/' --exclude 'metrics/' --exclude 'evaluations/' "$source_kit/.claude/" "$kit_root/.claude/"
+cp "$source_kit/CLAUDE.md" "$kit_root/CLAUDE.md"
+sed -i.bak "s/^kit_version = .*/kit_version = \"\$latest\"/" "$manifest"
+rm -f "$manifest.bak"
+printf 'Kit Claude mis à jour : %s -> %s\nSauvegarde : %s\n' "$installed" "$latest" "$backup_root"
