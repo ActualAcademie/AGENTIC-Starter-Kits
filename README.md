@@ -1,6 +1,6 @@
 # Agentic Starter Kits
 
-[![Version](https://img.shields.io/badge/version-1.1.1-blue.svg)](VERSION)
+[![Version](https://img.shields.io/badge/version-1.1.2-blue.svg)](VERSION)
 
 ## Construire avec une IA comme avec une équipe senior
 
@@ -230,7 +230,7 @@ Le kit ne devine pas les décisions métier, ne crée pas de secret, ne simule p
 - [Versionnement](VERSIONING.md)
 - [Historique des changements](CHANGELOG.md)
 
-## État fonctionnel de la version 1.1.1
+## État fonctionnel de la version 1.1.2
 
 La version actuelle inclut 16 agents au total : six agents du noyau et dix spécialistes optionnels. Elle inclut leurs politiques de modèles, la gouvernance d’activation, les Skills d’orchestration, les scripts d’initialisation, les checkpoints, le suivi des coûts et les contrôles CI. Les détails contractuels des spécialistes sont dans `SPECIALIST-AGENTS.md` dans chaque kit.
 
@@ -326,3 +326,5 @@ Le workflow récupère maintenant le script de mise à jour officiel depuis le d
 ## Distributions disponibles
 
 Le kit propose deux modes : `native`, avec intégration directe dans le projet et mises à jour par Pull Request, et `external`, avec kit local hors du dépôt et manifeste `.workspace.toml`. Voir `distributions/README.md`.
+
+Pour initialiser un projet dans une conversation déjà ouverte, envoyer `Mode initialisation :`. Ce mode recharge le kit et impose la porte du cahier des charges sans nécessiter une nouvelle conversation.

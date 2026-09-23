@@ -1,6 +1,6 @@
 # Kit d'orchestration Codex portable
 
-![Version du kit](https://img.shields.io/badge/version-1.1.1-blue.svg)
+![Version du kit](https://img.shields.io/badge/version-1.1.2-blue.svg)
 
 Ce kit installe une gouvernance projet pour Codex. Il ne construit rien tant que le cahier des charges n'a pas été fourni et formalisé.
 
@@ -187,7 +187,7 @@ Le Coordinateur ne les appelle pas tous systématiquement. Il lit `.codex/SPECIA
 
 Une CI en cours ne clôture jamais le work item. Le Coordinateur attend les résultats, traite les erreurs, corrige les lints et les dettes historiques du périmètre par lots, puis relance les contrôles jusqu’à la Definition of Done.
 
-Le kit est actuellement en version `1.1.1`. Toute modification du kit doit mettre à jour ce README, le changelog et la version selon `VERSIONING.md`.
+Le kit est actuellement en version `1.1.2`. Toute modification du kit doit mettre à jour ce README, le changelog et la version selon `VERSIONING.md`.
 
 ## Gouvernance complète disponible
 
@@ -241,3 +241,5 @@ Une fusion de Pull Request est un checkpoint et non une fin de carte. Le Coordin
 Le workflow récupère le script officiel à l’exécution et ne dépend plus d’un script ignoré dans `.codex/`.
 
 L’installateur propose désormais les distributions native et external, avec conservation du socle local et du contexte projet selon le mode choisi.
+
+Dans une conversation existante, utiliser `Mode initialisation :` pour relancer de façon fiable la porte obligatoire du cahier des charges.
