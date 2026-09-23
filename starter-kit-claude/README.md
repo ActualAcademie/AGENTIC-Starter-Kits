@@ -243,3 +243,5 @@ Le Coordinateur distingue désormais les tâches terminées, les sous-tâches en
 Une carte ne passe dans `Terminé` qu’après validation complète, y compris juridique ou externe si elle est requise.
 
 Les descriptions Trello utilisent de vrais retours à la ligne et sont relues après synchronisation.
+
+Une fusion de Pull Request est un checkpoint et non une fin de carte. Le Coordinateur reprend automatiquement la prochaine étape ouverte.

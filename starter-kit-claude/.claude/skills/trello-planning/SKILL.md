@@ -61,3 +61,5 @@ Une carte ne peut être déplacée dans `Terminé` que si toutes ses cases, y co
 Les descriptions, commentaires et checklists envoyés à Trello doivent contenir de vrais retours à la ligne, jamais la séquence littérale `\n`. Construire le texte avec des chaînes multilignes ou des retours à la ligne natifs, puis vérifier après relecture que Trello affiche des paragraphes et des listes lisibles. Normaliser les échappements avant l’appel API, sans modifier les URLs, le code ou les exemples qui doivent conserver leur syntaxe.
 
 Après création ou modification, relire le champ description depuis Trello et contrôler l’absence de `\n` littéraux, de doublons, de titres collés ou de listes mal rendues. Si le rendu est incorrect, corriger immédiatement avant de déclarer la synchronisation vérifiée.
+
+La fusion d’une PR ne clôture jamais une carte. Après chaque fusion, relire la checklist, reprendre immédiatement la prochaine étape ouverte et poursuivre jusqu’à la Definition of Done réelle.

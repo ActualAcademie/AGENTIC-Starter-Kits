@@ -306,3 +306,5 @@ Le kit distingue désormais les tâches terminées, les sous-tâches en attente 
 Les validations externes sont maintenant des conditions de fin obligatoires, et les dépendances entre cartes sont respectées.
 
 Les descriptions Trello sont normalisées avec de vrais retours à la ligne et relues pour éviter les séquences littérales `\n`.
+
+Une fusion de Pull Request est un checkpoint et non une fin de carte. Le Coordinateur doit reprendre automatiquement la prochaine étape ouverte.
