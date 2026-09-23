@@ -1,3 +1,11 @@
+## 1.2.1 - 2026-09-23
+
+### Sécurité et fiabilité
+
+- Ajoute des timeouts et une concurrence contrôlée aux workflows.
+- Épingle les actions GitHub de checkout et de configuration Python par SHA.
+- Réduit les risques de mises à jour external concurrentes.
+
 ## 1.2.0 - 2026-09-23
 
 ### Ajouts
