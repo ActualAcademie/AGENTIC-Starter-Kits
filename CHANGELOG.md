@@ -1,3 +1,10 @@
+## 1.1.5 - 2026-09-23
+
+### Corrections
+
+- Corrige la mise à jour forcée d un kit déjà installé.
+- Préserve les données projet tout en actualisant réellement KIT.toml et les fichiers universels.
+
 ## 1.1.4 - 2026-09-23
 
 ### Améliorations
