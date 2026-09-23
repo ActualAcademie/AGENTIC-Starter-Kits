@@ -44,6 +44,23 @@ L'agent responsable exécute `bash .codex/scripts/verify-before-push.sh` et rend
 Après l’installation du kit, vérifier que `.github/workflows/update-agentic-starter-kit.yml` existe et n’est pas ignoré. Avant le premier commit, l’ajouter explicitement avec `.gitignore` et `AGENTS.md`, puis vérifier son suivi avec `git ls-files --error-unmatch .github/workflows/update-agentic-starter-kit.yml`. Le workflow doit être présent dans la première branche publiée. Ne jamais le supprimer, le placer dans `.gitignore` ou le pousser directement vers `main`.
 
 
+## Contrat du premier message d initialisation
+
+Pour le message `Mode initialisation :`, le premier message de réponse doit être exclusivement un rapport de cadrage. Il doit afficher, dans cet ordre :
+
+1. Le résultat de la vérification du cahier des charges.
+2. Le chemin exact du fichier vérifié : .codex/PROJECT-BRIEF.md.
+3. Le statut observé : absent, pending ou accepted.
+4. L origine prouvée : chat, fichier existant ou génération depuis des documents identifiés.
+5. La liste des documents réellement lus.
+6. La liste des documents manquants.
+7. La décision : demander le cahier, poser les questions manquantes ou réutiliser le contexte accepté.
+8. L action suivante et ce qui reste interdit.
+
+Il est interdit de commencer par un résumé d installation, une liste d outils, une analyse technique ou une annonce de projet configuré. Tant que ce rapport n est pas affiché, aucune autre action ne doit être annoncée.
+
+Si le statut est absent ou pending, répondre uniquement en demandant le cahier des charges. Si le statut est accepted, ne pas redemander le cahier, mais annoncer explicitement sa réutilisation et lancer la phase de complétude si elle n est pas prouvée comme terminée.
+
 ## Synchronisation du kit externe
 
 Si le projet contient .workspace.toml et .codex/scripts/sync-workspace-kit.sh, exécuter ce synchroniseur au début d une nouvelle session avant toute analyse. Il vérifie la version distante, sauvegarde le kit local et ne remplace jamais le cahier des charges, le profil projet, l état d exécution, les décisions, les work items ou les journaux. Si la mise à jour échoue, conserver la version actuelle et poursuivre uniquement avec le kit local après signalement.
