@@ -1,3 +1,11 @@
+## 1.1.8 - 2026-09-23
+
+### Corrections
+
+- Ajoute une validation pre-push dédiée au mode external.
+- Évite les contrôles de profil et les artefacts générés incompatibles avec un kit local ignoré.
+- Conserve la détection des secrets, du suivi Git interdit et des workflows invalides.
+
 ## 1.1.7 - 2026-09-23
 
 ### Corrections
