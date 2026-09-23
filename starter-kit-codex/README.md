@@ -227,3 +227,5 @@ L’installateur vérifie que le workflow de mise à jour est suivi par Git avan
 Le Coordinateur applique une politique universelle de routage pour toute demande nouvelle, corrective ou hors cahier des charges.
 
 La validation navigateur est obligatoire pour les changements frontend et doit être documentée dans le work item.
+
+La synchronisation Trello est obligatoire immédiatement après chaque étape livrée, avec relecture de la carte et de sa checklist.

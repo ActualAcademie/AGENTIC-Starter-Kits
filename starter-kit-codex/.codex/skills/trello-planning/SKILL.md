@@ -25,9 +25,11 @@ Cahier, dossier `docs/`, profil, roadmap, journal qualité, work items, contrain
 9. Lire `tracking.trello_board_id` et `tracking.trello_sync_status`. Si un identifiant existe, reprendre le tableau existant. Sinon, rechercher un tableau de même nom avant toute création afin d’éviter un doublon.
 10. Si les outils Trello sont absents, enregistrer `pending_activation`, demander à l’utilisateur d’activer le plugin et ne pas annoncer de synchronisation.
 11. Avec l’intégration Trello disponible, passer à `syncing`, rechercher le workspace cible, créer ou reprendre le tableau avec une visibilité adaptée, puis créer les listes manquantes dans l’ordre défini.
-12. Créer ou reprendre chaque carte par son identifiant stable ou son titre préfixé, sans doublon, dans sa liste avec son titre, sa description complète, ses critères, dépendances, responsable et Definition of Done. dans sa liste avec son titre, sa description complète, ses critères, dépendances, responsable et Definition of Done. Créer la checklist et chacun de ses items dans Trello.
+12. Créer ou reprendre chaque carte par son identifiant stable ou son titre préfixé, sans doublon, dans sa liste avec son titre, sa description complète, ses critères, dépendances, responsable et Definition of Done. avec son titre, sa description complète, ses critères, dépendances, responsable et Definition of Done. Créer la checklist et chacun de ses items dans Trello.
 13. Relire le tableau, les listes, les cartes et les checklists depuis Trello. Conserver les identifiants et URLs dans `docs/project-management/trello-board.md`, puis passer `trello_sync_status` à `verified` uniquement si le tableau, les listes, les cartes, les checklists et les membres attendus sont relus avec succès.
-14. Synchroniser le statut Trello avec les work items, la roadmap et le journal qualité à chaque livraison.
+14. Synchroniser le statut Trello avec les work items, la roadmap et le journal qualité à chaque livraison. Cette synchronisation est immédiate après chaque étape validée, chaque fusion de Pull Request, chaque correction et chaque changement de statut, sans attendre la fin de la carte.
+15. Relire sur Trello la carte précise, sa liste, sa description, sa checklist et ses cases cochées après chaque synchronisation. Comparer cette lecture avec le work item et refuser le statut `complete` si une case livrée n’est pas cochée ou si la carte n’est pas dans la liste attendue.
+16. En cas d’écart, corriger Trello immédiatement, mettre à jour le fichier local et conserver dans le journal la date, l’identifiant de carte, l’URL, l’action effectuée et la preuve de relecture.
 
 ## Échéances et pauses contrôlées
 
