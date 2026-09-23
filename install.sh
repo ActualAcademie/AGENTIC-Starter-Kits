@@ -29,6 +29,20 @@ ensure_gitignore() {
     fi
   done
 }
+sync_kit_directory() {
+  local source_hidden="$1"
+  local target_hidden="$2"
+  mkdir -p "$target_hidden"
+  for item in "$source_hidden"/*; do
+    [ -e "$item" ] || continue
+    case "$(basename "$item")" in
+      PROJECT-BRIEF.md|project-profile.toml|project-inventory.md|RUNTIME-STATE.md|decisions|work-items|reports|metrics|evaluations)
+        continue
+        ;;
+    esac
+    cp -R "$item" "$target_hidden/"
+  done
+}
 verify_update_workflow() {
   local workflow="$target/$1"
   [ -f "$workflow" ] || fail "Le workflow de mise à jour est absent : $workflow"
@@ -75,50 +89,57 @@ case "$kit" in
 esac
 if [ -z "$target" ] && [ -t 0 ]; then
   current="$PWD"
+  selected_index=0
   while true; do
-    printf "\n%b\n" "${bold}Dossier actuel :${reset} $current"
-    printf "  ${cyan}1${reset}) Choisir ce dossier comme projet\n"
-    printf "  ${cyan}2${reset}) Entrer dans un sous-dossier\n"
-    printf "  ${cyan}3${reset}) Revenir au dossier parent\n"
-    printf "  ${cyan}4${reset}) Annuler\n\n"
-    printf "Votre choix [1] : "
-    read -r navigation_choice
-    case "${navigation_choice:-1}" in
-      1) target="$current"; break ;;
-      2)
-        directories=()
-        for directory in "$current"/*/; do
-          [ -d "$directory" ] && directories+=("${directory%/}")
-        done
-        if [ "${#directories[@]}" -eq 0 ]; then
-          warning "Aucun sous-dossier disponible dans ce dossier."
-          continue
-        fi
-        printf "\nSous-dossiers disponibles :\n"
-        index=0
-        for directory in "${directories[@]}"; do
-          index=$((index + 1))
-          printf "  %s) %s\n" "$index" "$(basename "$directory")"
-        done
-        printf "\nNuméro du sous-dossier, ou Entrée pour revenir : "
-        read -r directory_choice
-        if [ -z "$directory_choice" ]; then
-          continue
-        elif [[ "$directory_choice" =~ ^[0-9]+$ ]] && [ "$directory_choice" -ge 1 ] && [ "$directory_choice" -le "${#directories[@]}" ]; then
-          current="${directories[$((directory_choice - 1))]}"
-        else
-          warning "Choix invalide."
+    mapfile -t directories < <(find "$current" -mindepth 1 -maxdepth 1 -type d ! -name '.*' -print 2>/dev/null | sort)
+    item_count=${#directories[@]}
+    [ "$selected_index" -lt "$item_count" ] || selected_index=0
+    clear 2>/dev/null || true
+    title
+    printf "%b\n" "${bold}Choisissez le dossier du projet${reset}"
+    printf "\n  Dossier actuel : %s\n\n" "$current"
+    printf "  ${green}s${reset} Sélectionner ce dossier comme projet\n"
+    printf "  ${cyan}↑ ↓${reset} Parcourir les sous-dossiers\n"
+    printf "  ${cyan}→${reset} ou Entrée Entrer dans le dossier sélectionné\n"
+    printf "  ${cyan}←${reset} ou Backspace Revenir au dossier parent\n"
+    printf "  ${red}q${reset} Annuler\n\n"
+    if [ "$item_count" -eq 0 ]; then
+      printf "  ${yellow}Aucun sous-dossier visible.${reset}\n"
+    else
+      for index in "${!directories[@]}"; do
+        marker="  "
+        [ "$index" -eq "$selected_index" ] && marker="${cyan}▸${reset} "
+        printf "  %b%s/\n" "$marker" "$(basename "${directories[$index]}")"
+      done
+    fi
+    printf "\n  Action : "
+    IFS= read -r -s -n 1 key
+    case "$key" in
+      $'\x1b')
+        IFS= read -r -s -n 2 key
+        case "$key" in
+          '[A') [ "$item_count" -gt 0 ] && selected_index=$(( (selected_index - 1 + item_count) % item_count )) ;;
+          '[B') [ "$item_count" -gt 0 ] && selected_index=$(( (selected_index + 1) % item_count )) ;;
+          '[C') [ "$item_count" -gt 0 ] && current="${directories[$selected_index]}" && selected_index=0 ;;
+          '[D') parent="$(dirname "$current")"; [ "$parent" != "$current" ] && current="$parent" && selected_index=0 ;;
+        esac
+        ;;
+      '')
+        if [ "$item_count" -gt 0 ]; then
+          current="${directories[$selected_index]}"
+          selected_index=0
         fi
         ;;
-      3)
+      $'\x7f'|$'\x08')
         parent="$(dirname "$current")"
-        [ "$parent" != "$current" ] && current="$parent" || warning "Vous êtes déjà à la racine."
+        [ "$parent" != "$current" ] && current="$parent" && selected_index=0
         ;;
-      4) fail "Installation annulée." ;;
-      *) warning "Choix invalide." ;;
+      s|S) target="$current"; break ;;
+      q|Q) fail "Installation annulée." ;;
     esac
   done
 fi
+
 target="${target:-.}"
 [ -d "$target" ] || fail "Le dossier cible n’existe pas : $target"
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -135,7 +156,7 @@ if [ -t 0 ]; then
 fi
 info "Installation de la configuration $label..."
 cp -R "$repo_root/$source_dir/$entry" "$target/$entry"
-cp -R "$repo_root/$source_dir/$hidden" "$target/$hidden"
+sync_kit_directory "$repo_root/$source_dir/$hidden" "$target/$hidden"
 mkdir -p "$target/.github/workflows"
 if [ "$mode" = "external" ]; then
   workflow_path="$target/.github/workflows/update-workspace-kit.yml"

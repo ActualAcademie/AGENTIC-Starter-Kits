@@ -1,3 +1,18 @@
+## 1.1.5 - 2026-09-23
+
+### Corrections
+
+- Corrige la mise à jour forcée d un kit déjà installé.
+- Préserve les données projet tout en actualisant réellement KIT.toml et les fichiers universels.
+
+## 1.1.4 - 2026-09-23
+
+### Améliorations
+
+- Remplace la navigation de dossiers par un sélecteur clavier sans dépendance obligatoire.
+- Sépare clairement l entrée dans un dossier et la sélection du projet.
+- Ajoute le retour parent avec Backspace ou la flèche gauche.
+
 ## 1.1.3 - 2026-09-23
 
 ### Ajouts

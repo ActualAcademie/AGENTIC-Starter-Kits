@@ -1,6 +1,6 @@
 # Agentic Starter Kits
 
-[![Version](https://img.shields.io/badge/version-1.1.3-blue.svg)](VERSION)
+[![Version](https://img.shields.io/badge/version-1.1.5-blue.svg)](VERSION)
 
 ## Construire avec une IA comme avec une équipe senior
 
@@ -284,9 +284,9 @@ Les mises à jour automatiques ouvrent uniquement une Pull Request vers `develop
 
 Sans option, `./install.sh` affiche un assistant terminal avec choix de Codex ou Claude, chemin cible, résumé et confirmation. Pour les scripts automatisés, utilisez `--kit`, `--target` et éventuellement `--force`. Le terminal peut être rendu silencieux avec `NO_COLOR=1`.
 
-Le sélecteur de dossier utilise `fzf` lorsqu’il est installé : les flèches permettent de parcourir les dossiers et la touche Entrée valide le choix. Sans `fzf`, l’installateur conserve son invite de chemin simple, sans ajouter de dépendance obligatoire.
+Le sélecteur de dossier intégré fonctionne sans dépendance obligatoire : les flèches parcourent les sous-dossiers, la flèche droite ou Entrée entre dans le dossier sélectionné, la flèche gauche ou Backspace revient au parent, et `s` sélectionne explicitement le dossier courant.
 
-Le sélecteur de dossier distingue clairement la navigation et la sélection : choisissez le dossier actuel pour l’utiliser comme projet, entrez dans un sous-dossier uniquement si nécessaire, ou revenez au parent à tout moment. Entrer dans un dossier ne valide jamais automatiquement ce dossier.
+La navigation et la sélection sont distinctes : entrer dans un dossier sert uniquement à le parcourir, tandis que `s` confirme le dossier courant comme projet. Cette distinction évite de sélectionner par erreur un dossier parent contenant plusieurs projets.
 
 L’installateur met également à jour ou crée `.gitignore` sans doublons. Il ignore le dossier de gouvernance choisi et son fichier d’entrée (`AGENTS.md` ou `CLAUDE.md`), tout en conservant le workflow GitHub de mise à jour dans Git afin que les futures Pull Requests fonctionnent.
 
