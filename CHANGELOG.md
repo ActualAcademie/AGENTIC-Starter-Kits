@@ -1,3 +1,11 @@
+## 1.1.6 - 2026-09-23
+
+### Améliorations
+
+- Rend l origine et le statut du cahier des charges explicites à chaque initialisation.
+- Signale les fichiers réellement lus, les fichiers manquants et l action suivante.
+- Interdit de présenter un cahier existant comme reçu dans le chat sans preuve.
+
 ## 1.1.5 - 2026-09-23
 
 ### Corrections
