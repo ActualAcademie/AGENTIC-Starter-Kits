@@ -56,6 +56,18 @@ if [ -z "$kit" ] && [ -t 0 ]; then
   read -r choice
   case "${choice:-1}" in 1) kit=codex ;; 2) kit=claude ;; *) fail "Choix invalide." ;; esac
 fi
+if [ -t 0 ] && [ "$mode" = "native" ] && [ -z "${AGENTIC_MODE_SELECTED:-}" ]; then
+  printf "\n%b\n" "${bold}Comment souhaitez-vous installer le kit ?${reset}"
+  printf "  ${cyan}1${reset}) Mode natif : fichiers du kit disponibles directement dans le projet\n"
+  printf "  ${cyan}2${reset}) Mode externe : fichiers du kit ignorés par Git, manifeste discret uniquement\n\n"
+  printf "Votre choix [1] : "
+  read -r mode_choice
+  case "${mode_choice:-1}" in
+    1) mode=native ;;
+    2) mode=external ;;
+    *) fail "Choix de distribution invalide." ;;
+  esac
+fi
 case "$kit" in
   codex) source_dir=starter-kit-codex; entry=AGENTS.md; hidden=.codex; label="Codex" ;;
   claude) source_dir=starter-kit-claude; entry=CLAUDE.md; hidden=.claude; label="Claude" ;;
