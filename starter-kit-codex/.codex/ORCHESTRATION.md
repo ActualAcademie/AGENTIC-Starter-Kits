@@ -53,3 +53,5 @@ Lire et appliquer obligatoirement `.codex/policies/TASK-ROUTING-POLICY.md` ou `.
 ## Synchronisation après chaque livraison
 
 Après chaque étape validée, fusion, correction ou changement de statut, relire la carte Trello concernée et sa checklist. Une livraison sans mise à jour et preuve de relecture Trello est incomplète.
+
+Lire et appliquer obligatoirement la politique DELIVERY-CLOSURE-POLICY.md avant de suspendre, clôturer ou déclarer bloqué un work item.
