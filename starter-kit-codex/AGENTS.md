@@ -41,3 +41,8 @@ L'agent responsable exécute `bash .codex/scripts/verify-before-push.sh` et rend
 ## Installation Git obligatoire
 
 Après l’installation du kit, vérifier que `.github/workflows/update-agentic-starter-kit.yml` existe et n’est pas ignoré. Avant le premier commit, l’ajouter explicitement avec `.gitignore` et `AGENTS.md`, puis vérifier son suivi avec `git ls-files --error-unmatch .github/workflows/update-agentic-starter-kit.yml`. Le workflow doit être présent dans la première branche publiée. Ne jamais le supprimer, le placer dans `.gitignore` ou le pousser directement vers `main`.
+
+
+## Synchronisation du kit externe
+
+Si le projet contient .workspace.toml et .codex/scripts/sync-workspace-kit.sh, exécuter ce synchroniseur au début d une nouvelle session avant toute analyse. Il vérifie la version distante, sauvegarde le kit local et ne remplace jamais le cahier des charges, le profil projet, l état d exécution, les décisions, les work items ou les journaux. Si la mise à jour échoue, conserver la version actuelle et poursuivre uniquement avec le kit local après signalement.

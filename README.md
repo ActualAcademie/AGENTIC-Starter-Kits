@@ -1,6 +1,6 @@
 # Agentic Starter Kits
 
-[![Version](https://img.shields.io/badge/version-1.1.2-blue.svg)](VERSION)
+[![Version](https://img.shields.io/badge/version-1.1.3-blue.svg)](VERSION)
 
 ## Construire avec une IA comme avec une équipe senior
 
@@ -326,6 +326,8 @@ Le workflow récupère maintenant le script de mise à jour officiel depuis le d
 ## Distributions disponibles
 
 Le kit propose deux modes : `native`, avec intégration directe dans le projet et mises à jour par Pull Request, et `external`, avec kit local hors du dépôt et manifeste `.workspace.toml`. Voir `distributions/README.md`.
+
+En mode `external`, le kit vérifie sa version au démarrage de chaque session. Une mise à jour crée une sauvegarde et ne remplace que les instructions et scripts universels. Le cahier des charges, le profil technique, l état projet et les work items sont conservés.
 
 Pour initialiser un projet dans une conversation déjà ouverte, envoyer `Mode initialisation :`. Ce mode recharge le kit et impose la porte du cahier des charges sans nécessiter une nouvelle conversation.
 
