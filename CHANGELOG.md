@@ -1,3 +1,11 @@
+## 1.2.0 - 2026-09-23
+
+### Ajouts
+
+- Ajoute la carte de documentation du dépôt.
+- Ajoute le diagnostic local Codex et Claude.
+- Rend vérifiables le mode, la version, le manifeste, le cahier et les fichiers external suivis par Git.
+
 ## 1.1.9 - 2026-09-23
 
 ### Documentation
