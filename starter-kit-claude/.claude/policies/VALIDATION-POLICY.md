@@ -24,3 +24,4 @@ Une contrainte d'environnement, comme un réseau indisponible ou une dépendance
 ## Régression
 
 Après une modification importante, vérifier au minimum le comportement modifié, une erreur pertinente, la compatibilité annoncée et les zones voisines à risque. Étendre les tests seulement si le changement ou un échec le justifie.
+Tout work item qui modifie une interface, un composant, un parcours ou un média frontend doit inclure une validation dans un navigateur réel ou dans un outil de navigateur effectivement contrôlé. La preuve indique le parcours, le viewport, les interactions, les états observés, les anomalies et les captures. Sans cette preuve, la Definition of Done frontend reste incomplète.
