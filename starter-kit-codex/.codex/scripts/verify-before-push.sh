@@ -5,6 +5,24 @@ script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 config="$(cd "$script_dir/.." && pwd)"
 root="$(git -C "$config/.." rev-parse --show-toplevel 2>/dev/null || { echo "Git requis pour valider un push"; exit 1; })"
 
+if [ -f "$root/.workspace.toml" ]; then
+  echo "Mode external détecté: validation du kit et des fichiers publiables uniquement"
+  if git -C "$root" ls-files --error-unmatch .codex AGENTS.md >/dev/null 2>&1; then
+    echo "ECHEC EXTERNAL: .codex ou AGENTS.md est suivi par Git"
+    exit 1
+  fi
+  if rg -n --hidden --glob '!.git/**' --glob '!.codex/**' --glob '!.claude/**' --glob '!node_modules/**' -- '-----BEGIN (RSA|OPENSSH|EC|PRIVATE) KEY-----|AKIA[0-9A-Z]{16}|ghp_[A-Za-z0-9]{20,}|sk-[A-Za-z0-9]{20,}' "$root"; then
+    echo "ECHEC EXTERNAL: secret potentiel détecté"
+    exit 1
+  fi
+  git -C "$root" diff --check
+  workflow="$root/.github/workflows/update-workspace-kit.yml"
+  [ -f "$workflow" ] || { echo "ECHEC EXTERNAL: workflow de mise à jour absent"; exit 1; }
+  grep -q 'Update workspace kit' "$workflow" || { echo "ECHEC EXTERNAL: workflow invalide"; exit 1; }
+  echo "Validation external avant push OK"
+  exit 0
+fi
+
 "$script_dir/python.sh" - "$config/project-profile.toml" <<'PY'
 import pathlib, sys, tomllib
 profile = tomllib.loads(pathlib.Path(sys.argv[1]).read_text())
