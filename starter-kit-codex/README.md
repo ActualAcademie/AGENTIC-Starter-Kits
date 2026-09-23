@@ -1,6 +1,6 @@
 # Kit d'orchestration Codex portable
 
-![Version du kit](https://img.shields.io/badge/version-1.1.0-blue.svg)
+![Version du kit](https://img.shields.io/badge/version-1.1.1-blue.svg)
 
 Ce kit installe une gouvernance projet pour Codex. Il ne construit rien tant que le cahier des charges n'a pas été fourni et formalisé.
 
@@ -23,8 +23,8 @@ KIT_SOURCE="/chemin/vers/agentic-starter-kits/starter-kit-codex"
 3. Copier le point d'entrée obligatoire et toute la configuration :
 
 ```bash
-cp "$KIT_SOURCE/AGENTS.md".
-cp -R "$KIT_SOURCE/.codex".
+cp "$KIT_SOURCE/AGENTS.md" ./AGENTS.md
+cp -R "$KIT_SOURCE/.codex" ./.codex
 ```
 
 4. Lancer l'initialisation non destructive :
@@ -187,7 +187,7 @@ Le Coordinateur ne les appelle pas tous systématiquement. Il lit `.codex/SPECIA
 
 Une CI en cours ne clôture jamais le work item. Le Coordinateur attend les résultats, traite les erreurs, corrige les lints et les dettes historiques du périmètre par lots, puis relance les contrôles jusqu’à la Definition of Done.
 
-Le kit est actuellement en version `1.1.0`. Toute modification du kit doit mettre à jour ce README, le changelog et la version selon `VERSIONING.md`.
+Le kit est actuellement en version `1.1.1`. Toute modification du kit doit mettre à jour ce README, le changelog et la version selon `VERSIONING.md`.
 
 ## Gouvernance complète disponible
 
