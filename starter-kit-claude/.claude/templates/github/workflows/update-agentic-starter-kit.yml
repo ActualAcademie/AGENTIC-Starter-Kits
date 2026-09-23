@@ -32,6 +32,11 @@ jobs:
             echo "Aucune branche d’intégration dev ou develop n’existe." >&2
             exit 1
           fi
+      - name: Bootstrap updater from official source
+        run: |
+          mkdir -p .claude/scripts
+          git show upstream/main:starter-kit-claude/.claude/scripts/update-starter-kit.sh > .claude/scripts/update-starter-kit.sh
+          chmod +x .claude/scripts/update-starter-kit.sh
       - name: Update Claude kit
         run: bash .claude/scripts/update-starter-kit.sh --remote upstream --ref main --branch chore/update-agentic-kit
 

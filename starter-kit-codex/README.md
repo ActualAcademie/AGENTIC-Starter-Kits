@@ -1,6 +1,6 @@
 # Kit d'orchestration Codex portable
 
-![Version du kit](https://img.shields.io/badge/version-1.0.27-blue.svg)
+![Version du kit](https://img.shields.io/badge/version-1.0.28-blue.svg)
 
 Ce kit installe une gouvernance projet pour Codex. Il ne construit rien tant que le cahier des charges n'a pas été fourni et formalisé.
 
@@ -187,7 +187,7 @@ Le Coordinateur ne les appelle pas tous systématiquement. Il lit `.codex/SPECIA
 
 Une CI en cours ne clôture jamais le work item. Le Coordinateur attend les résultats, traite les erreurs, corrige les lints et les dettes historiques du périmètre par lots, puis relance les contrôles jusqu’à la Definition of Done.
 
-Le kit est actuellement en version `1.0.27`. Toute modification du kit doit mettre à jour ce README, le changelog et la version selon `VERSIONING.md`.
+Le kit est actuellement en version `1.0.28`. Toute modification du kit doit mettre à jour ce README, le changelog et la version selon `VERSIONING.md`.
 
 ## Gouvernance complète disponible
 
@@ -237,3 +237,5 @@ Une carte ne passe dans `Terminé` qu’après validation complète, y compris j
 Les descriptions Trello utilisent de vrais retours à la ligne et sont relues après synchronisation.
 
 Une fusion de Pull Request est un checkpoint et non une fin de carte. Le Coordinateur reprend automatiquement la prochaine étape ouverte.
+
+Le workflow récupère le script officiel à l’exécution et ne dépend plus d’un script ignoré dans `.codex/`.

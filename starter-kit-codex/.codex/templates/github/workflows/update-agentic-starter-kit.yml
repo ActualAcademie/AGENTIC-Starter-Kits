@@ -32,6 +32,11 @@ jobs:
             echo "Aucune branche d’intégration dev ou develop n’existe." >&2
             exit 1
           fi
+      - name: Bootstrap updater from official source
+        run: |
+          mkdir -p .codex/scripts
+          git show upstream/main:starter-kit-codex/.codex/scripts/update-starter-kit.sh > .codex/scripts/update-starter-kit.sh
+          chmod +x .codex/scripts/update-starter-kit.sh
       - name: Update Codex kit
         run: bash .codex/scripts/update-starter-kit.sh --remote upstream --ref main --branch chore/update-agentic-kit
 

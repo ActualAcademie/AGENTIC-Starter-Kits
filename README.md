@@ -1,6 +1,6 @@
 # Agentic Starter Kits
 
-[![Version](https://img.shields.io/badge/version-1.0.27-blue.svg)](VERSION)
+[![Version](https://img.shields.io/badge/version-1.0.28-blue.svg)](VERSION)
 
 ## Construire avec une IA comme avec une équipe senior
 
@@ -218,7 +218,7 @@ Le kit ne devine pas les décisions métier, ne crée pas de secret, ne simule p
 - [Versionnement](VERSIONING.md)
 - [Historique des changements](CHANGELOG.md)
 
-## État fonctionnel de la version 1.0.27
+## État fonctionnel de la version 1.0.28
 
 La version actuelle inclut 16 agents au total : six agents du noyau et dix spécialistes optionnels. Elle inclut leurs politiques de modèles, la gouvernance d’activation, les Skills d’orchestration, les scripts d’initialisation, les checkpoints, le suivi des coûts et les contrôles CI. Les détails contractuels des spécialistes sont dans `SPECIALIST-AGENTS.md` dans chaque kit.
 
@@ -308,3 +308,5 @@ Les validations externes sont maintenant des conditions de fin obligatoires, et 
 Les descriptions Trello sont normalisées avec de vrais retours à la ligne et relues pour éviter les séquences littérales `\n`.
 
 Une fusion de Pull Request est un checkpoint et non une fin de carte. Le Coordinateur doit reprendre automatiquement la prochaine étape ouverte.
+
+Le workflow récupère maintenant le script de mise à jour officiel depuis le dépôt source, car .codex/ et .claude/ restent volontairement ignorés dans les projets importateurs.
