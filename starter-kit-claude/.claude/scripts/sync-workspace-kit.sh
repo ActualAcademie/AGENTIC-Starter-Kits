@@ -15,7 +15,17 @@ backup_root="$project_root/.claude/backups/kit-$installed-$(date +%Y%m%d-%H%M%S)
 mkdir -p "$backup_root"
 mkdir -p "$backup_root/claude-before-update"; rsync -a --exclude backups/ "$kit_root/" "$backup_root/claude-before-update/"
 tmp_dir="$(mktemp -d)"
-trap 'rm -rf "$tmp_dir"' EXIT
+rollback_dir="$backup_root/claude-before-update"
+cleanup() {
+  status="$?"
+  if [ "$status" -ne 0 ] && [ -d "$rollback_dir" ]; then
+    echo "Échec de la mise à jour. Restauration du kit Claude précédent." >&2
+    cp -R "$rollback_dir"/. "$kit_root/"
+  fi
+  rm -rf "$tmp_dir"
+  exit "$status"
+}
+trap cleanup EXIT
 archive="$tmp_dir/kit.tar.gz"
 curl -fsSL -L "${source_url%/}/archive/refs/tags/v${latest}.tar.gz" -o "$archive"
 tar -xzf "$archive" -C "$tmp_dir"
