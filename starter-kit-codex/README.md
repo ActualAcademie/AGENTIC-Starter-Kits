@@ -239,3 +239,5 @@ Les descriptions Trello utilisent de vrais retours à la ligne et sont relues ap
 Une fusion de Pull Request est un checkpoint et non une fin de carte. Le Coordinateur reprend automatiquement la prochaine étape ouverte.
 
 Le workflow récupère le script officiel à l’exécution et ne dépend plus d’un script ignoré dans `.codex/`.
+
+L’installateur propose désormais les distributions native et external, avec conservation du socle local et du contexte projet selon le mode choisi.
