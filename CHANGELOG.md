@@ -1,3 +1,12 @@
+## 1.1.9 - 2026-09-23
+
+### Documentation
+
+- Réorganise le guide d installation avec une progression numérotée cohérente.
+- Met à jour le README principal vers la version réelle du kit.
+- Complète les README des distributions native et external.
+- Documente les fichiers suivis, les données protégées, les mises à jour et le GitFlow.
+
 ## 1.1.8 - 2026-09-23
 
 ### Corrections
