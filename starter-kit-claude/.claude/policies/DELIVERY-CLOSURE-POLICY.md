@@ -32,3 +32,13 @@ Avant de clôturer ou de suspendre une carte, le Coordinateur doit :
 7. Utiliser `needs-review` pour une décision humaine et `blocked` uniquement pour une impossibilité réelle.
 
 Une carte ne peut être annoncée comme terminée si une action nécessaire reste non préparée. Elle peut être livrée avec une sous-tâche en attente uniquement si cette sous-tâche exige explicitement une décision humaine ou une action irréversible.
+
+## Validations externes et juridiques
+
+Une validation juridique, métier, réglementaire, client ou externe prévue dans les critères d’acceptation est une condition de fin. Tant qu’elle n’est pas obtenue et prouvée, la carte ne doit jamais être déplacée dans `Terminé`. Utiliser `needs-review`, conserver la carte dans `En cours` ou créer une liste dédiée selon le workflow du projet, puis indiquer clairement la validation manquante.
+
+Une publication technique réussie ne vaut pas validation juridique. L’agent doit distinguer `livré techniquement`, `en attente de validation` et `terminé`.
+
+## Dépendances explicites
+
+Lorsqu’un utilisateur ordonne de terminer une carte avant d’en commencer une autre, créer une dépendance dans le work item et Trello. Ne pas déplacer la carte suivante dans `En cours` avant la preuve de clôture de la première. Si la première carte est techniquement livrée mais attend une validation externe, la seconde reste bloquée par dépendance, sauf autorisation explicite contraire.
