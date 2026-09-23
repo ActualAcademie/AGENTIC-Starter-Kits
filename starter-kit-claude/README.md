@@ -251,3 +251,5 @@ Le workflow récupère le script officiel à l’exécution et ne dépend plus d
 L’installateur propose désormais les distributions native et external, avec conservation du socle local et du contexte projet selon le mode choisi.
 
 Dans une conversation existante, utiliser `Mode initialisation :` pour relancer de façon fiable la porte obligatoire du cahier des charges.
+
+Envoyer cette commande seule depuis la racine du projet. Claude recharge alors les instructions et l'état du kit, vérifie le cahier des charges et n'autorise aucune analyse technique, aucun work item ni aucune modification produit avant sa réception et son acceptation. La procédure détaillée est documentée dans le guide d'installation du dépôt principal.
