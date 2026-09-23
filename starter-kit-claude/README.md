@@ -1,6 +1,6 @@
 # Kit d'orchestration Claude Code portable
 
-![Version du kit](https://img.shields.io/badge/version-1.1.0-blue.svg)
+![Version du kit](https://img.shields.io/badge/version-1.1.1-blue.svg)
 
 Ce kit installe une gouvernance projet native pour Claude Code. Il ne construit rien tant que le cahier des charges n'a pas été fourni et formalisé.
 
@@ -23,8 +23,8 @@ KIT_SOURCE="/chemin/vers/agentic-starter-kits/starter-kit-claude"
 3. Copier le point d'entrée obligatoire et toute la configuration :
 
 ```bash
-cp "$KIT_SOURCE/CLAUDE.md".
-cp -R "$KIT_SOURCE/.claude".
+cp "$KIT_SOURCE/CLAUDE.md" ./CLAUDE.md
+cp -R "$KIT_SOURCE/.claude" ./.claude
 ```
 
 4. Lancer l'initialisation non destructive :
@@ -195,7 +195,7 @@ Le Coordinateur ne les appelle pas tous systématiquement. Il lit `.claude/SPECI
 
 Une CI en cours ne clôture jamais le work item. Le Coordinateur attend les résultats, traite les erreurs, corrige les lints et les dettes historiques du périmètre par lots, puis relance les contrôles jusqu’à la Definition of Done.
 
-Le kit est actuellement en version `1.1.0`. Toute modification du kit doit mettre à jour ce README, le changelog et la version selon `VERSIONING.md`.
+Le kit est actuellement en version `1.1.1`. Toute modification du kit doit mettre à jour ce README, le changelog et la version selon `VERSIONING.md`.
 
 ## Gouvernance complète disponible
 
