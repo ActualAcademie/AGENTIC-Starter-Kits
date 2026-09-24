@@ -261,3 +261,12 @@ Ce projet suit le versionnement sémantique. Les changements publiés sont regro
 - Interdit de terminer l'intervention lorsqu'une case autonome reste ouverte.
 - Impose la reprise immédiate du prochain work item jusqu'à la Definition of Done réelle.
 - Distingue explicitement une livraison intermédiaire d'une clôture de carte.
+## 1.2.5 - 2026-09-24
+
+### Autonomie continue
+
+- Renforce le contrat d'exécution sans interruption pour toutes les actions autorisées.
+- Interdit les demandes intermédiaires de type « Continue » lorsqu'une action autonome reste disponible.
+- Ajoute une procédure obligatoire avant toute déclaration de blocage.
+- Oblige l'agent à poursuivre les tâches indépendantes lorsqu'une intégration ou une CI est indisponible.
+- Interdit les conclusions basées uniquement sur une CI en cours, une PR ouverte ou une erreur corrigeable.
