@@ -27,7 +27,7 @@ Si Git est indisponible, le Coordinateur peut préparer le travail et les preuve
 ## Pull Requests automatiques
 
 Toute Pull Request créée automatiquement par le starter kit cible exclusivement `develop` ou `dev`. Le workflow refuse toute autre branche cible, notamment `main`. Une promotion vers `main` doit être réalisée par un humain ou demandée explicitement par l’utilisateur dans la conversation, avec une justification et des contrôles verts.
+
 ## Pull Request par carte
 
 Une carte Trello correspond par défaut à une branche de travail et à une seule Pull Request finale. Les commits restent atomiques et peuvent couvrir plusieurs étapes de la checklist, mais l'agent ne crée pas de PR pour chaque contrôle, sous-tâche, correction ou document. Si une PR existe déjà pour la carte, il la met à jour jusqu'à la Definition of Done. Une PR intermédiaire exige une demande explicite de l'utilisateur ou une justification critique documentée.
-\n ## Pull Request par carte
