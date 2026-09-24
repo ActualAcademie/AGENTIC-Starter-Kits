@@ -1,3 +1,11 @@
+## 1.6.0 - 2026-09-24
+
+### Gouvernance visuelle Trello
+
+- Ajoute des listes, étiquettes, couleurs et règles de nommage standardisées.
+- Rend le rendu du tableau lisible, accessible et vérifiable après synchronisation.
+- Interdit les doublons d étiquettes et les descriptions mal formatées.
+
 ## 1.5.0 - 2026-09-24
 
 ### Documentation technique en anglais

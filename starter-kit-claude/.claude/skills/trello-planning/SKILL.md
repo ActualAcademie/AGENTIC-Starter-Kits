@@ -13,6 +13,10 @@ Transformer le cahier des charges, la conception et les résultats d audit en un
 
 Uniquement après une réponse utilisateur positive au choix Trello et après acceptation du cahier des charges. Le tableau complet versionné est toujours créé dans `docs/project-management/trello-board.md`. Après une réponse `oui`, l agent passe par les états `pending_activation`, `syncing`, `verified` ou `blocked`. Il doit créer réellement le tableau sur Trello avec l intégration connectée. Il ne doit jamais s arrêter au fichier local si l intégration est disponible. Si l intégration est absente, il demande son activation, attend la confirmation de l utilisateur et reprend. Si elle reste indisponible, il signale explicitement le blocage et fournit le fichier prêt à synchroniser.
 
+## Système visuel obligatoire
+
+Lire et appliquer `policies/TRELLO-VISUAL-SYSTEM.md` avant de créer le tableau ou la première carte. Créer ou réutiliser les listes et étiquettes standardisées par nom exact, couleur et identifiant stable. Relire le rendu réel du tableau après synchronisation et corriger tout doublon, étiquette incohérente, liste mal ordonnée ou description illisible.
+
 ## Entrées
 
 Cahier, dossier `docs/`, profil, roadmap, journal qualité, work items, contraintes, réponse Trello et liste validée des membres avec leur rôle.
