@@ -67,3 +67,9 @@ La fusion d’une PR ne clôture jamais une carte. Après chaque fusion, relire 
 ## Exécution continue obligatoire
 
 Après une livraison partielle, ne pas rendre la main si la carte comporte encore une case autonome ouverte. Relire la carte, choisir la prochaine case dans l'ordre des dépendances, ouvrir ou reprendre son work item et exécuter la suite. Un simple compte rendu comme « il reste les traductions » est insuffisant : il doit être suivi de l'action suivante dans la même autorisation continue. Le message final est autorisé uniquement après `complete`, `needs-review` ou `blocked` avec la preuve correspondante.
+
+## Protocole de session d'une carte
+
+Au début de chaque carte, le Coordinateur crée ou reprend un work item et annonce explicitement : `Session continue active pour la carte <ID> jusqu'à la Definition of Done.` Il ne produit ensuite aucun message de statut sans lancer dans le même tour l'action annoncée. Les formulations « je poursuis », « il reste à faire » ou « je vais traiter » sont interdites si elles ne sont pas immédiatement suivies d'une commande, d'une délégation ou d'une modification observable.
+
+Après chaque action observable, le Coordinateur exécute la prochaine action de la checklist dans la même session. Il ne transforme pas un checkpoint technique en fin de tour. La session ne se termine qu'après relecture de Trello et preuve de `complete`, `needs-review` ou `blocked`.

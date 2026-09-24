@@ -278,3 +278,11 @@ Ce projet suit le versionnement sémantique. Les changements publiés sont regro
 - Rend les politiques d'autonomie et de clôture obligatoires pour le Coordinateur.
 - Traite chaque PR, fusion, CI et rapport intermédiaire comme un checkpoint et non comme une fin de tâche.
 - Empêche explicitement la clôture conversationnelle après une simple liste de tâches restantes.
+## 1.2.7 - 2026-09-24
+
+### Exécution des cartes
+
+- Ajoute un protocole de session continue pour chaque carte Trello.
+- Interdit les annonces de poursuite sans action observable dans le même tour.
+- Rend obligatoire la reprise immédiate de la prochaine case ouverte.
+- Conditionne la fin de session à la relecture de Trello et à un état final prouvé.
