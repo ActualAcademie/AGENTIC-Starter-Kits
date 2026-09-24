@@ -270,3 +270,11 @@ Ce projet suit le versionnement sémantique. Les changements publiés sont regro
 - Ajoute une procédure obligatoire avant toute déclaration de blocage.
 - Oblige l'agent à poursuivre les tâches indépendantes lorsqu'une intégration ou une CI est indisponible.
 - Interdit les conclusions basées uniquement sur une CI en cours, une PR ouverte ou une erreur corrigeable.
+## 1.2.6 - 2026-09-24
+
+### Continuité d'exécution
+
+- Rend l'interdiction de rendre la main avec une action autonome restante visible dans les points d'entrée Codex et Claude.
+- Rend les politiques d'autonomie et de clôture obligatoires pour le Coordinateur.
+- Traite chaque PR, fusion, CI et rapport intermédiaire comme un checkpoint et non comme une fin de tâche.
+- Empêche explicitement la clôture conversationnelle après une simple liste de tâches restantes.

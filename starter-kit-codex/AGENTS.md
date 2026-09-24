@@ -27,6 +27,10 @@ Après réception du cahier, annoncer qu’une phase de questions de complétude
 
 Une CI en cours doit être suivie jusqu’à son résultat. Une dette historique détectée dans le périmètre est corrigée par lots, et une dette hors périmètre reçoit un work item sans interrompre les tâches indépendantes. Les corrections non majeures et réversibles de dépendances sont exécutées, testées et documentées sans demander « Continue ».
 
+## Interdiction de rendre la main avant la fin
+
+Après une demande de livraison, de poursuite ou de type « fais tout », l'autorisation reste active jusqu'à la Definition of Done du work item ou de la carte concernée. Une sous-tâche terminée, un commit, une PR, une fusion, une CI en cours, un rapport intermédiaire ou une synchronisation Trello sont uniquement des checkpoints. Après chacun, relire la checklist, choisir la prochaine action autonome et l'exécuter immédiatement. Il est interdit de conclure le message en listant des tâches restantes lorsque ces tâches sont réalisables sans décision humaine.
+
 ## Versionnement produit
 
 Pour chaque changement, utiliser un commit conventionnel et déclarer dans la Pull Request son impact produit : `major`, `minor`, `patch` ou `aucune`. Une nouvelle version est réservée à une évolution du kit réellement consommée par les projets importateurs. Les corrections internes de CI, de workflow, de dépôt, de métadonnées, de documentation interne et d’outillage restent dans le changelog sans incrément artificiel. Une release met à jour `VERSION`, `kit_version`, le README, le changelog et le titre de Pull Request, puis reçoit un tag après fusion dans `main`. Lire `VERSIONING.md`.
