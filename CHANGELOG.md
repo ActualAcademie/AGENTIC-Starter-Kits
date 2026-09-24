@@ -1,3 +1,12 @@
+## 1.5.0 - 2026-09-24
+
+### Documentation technique en anglais
+
+- Rend l anglais obligatoire pour les README, commentaires, docstrings, scripts, CI, work items et rapports techniques, sauf dérogation explicite du profil projet.
+- Normalise les séparateurs de sections et les métadonnées TODO et FIXME.
+- Impose la synchronisation documentaire après chaque changement significatif.
+- Ajoute une validation de cohérence avant commit et Pull Request.
+
 ## 1.4.0 - 2026-09-24
 
 ### Demandes exceptionnelles

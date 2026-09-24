@@ -8,6 +8,7 @@
 - `SPECIALIST-AGENTS.md` définit leur activation, leurs livrables et leur ordre de contrôle.
 - `policies/EXCEPTIONAL-REQUESTS.md` définit la classification des demandes exceptionnelles.
 - `policies/`, `agents/`, `prompts/`, `skills/`, `scripts/`, `templates/`, `evaluations/`
+- `policies/DOCUMENTATION-LANGUAGE-POLICY.md` impose la qualité et la langue des documents techniques.
 
 ## Attentes de qualité
 
