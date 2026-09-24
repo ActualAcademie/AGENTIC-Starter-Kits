@@ -4,6 +4,10 @@
 
 Ce répertoire s'importe dans tout nouveau projet. Il adapte les contrôles à partir de `project-profile.toml` sans imposer de langage, framework, outil de suivi ou fournisseur de déploiement. Lire aussi `CONVERSATION-MODES.md`, `PROJECT-CONTEXT.md`, `PROJECT-DATA-BOUNDARY.md`, `FILE-MANIFEST.md`, `models.toml`, `MODEL-POLICY.md`, `GOVERNANCE.md`, `RISK-MATRIX.md`, `COST-AND-EVALUATION.md` et `ADAPTERS.md`.
 
+## Recherche actualisée
+
+Lire et appliquer obligatoirement `policies/WEB-RESEARCH-POLICY.md`. Le Coordinateur déclenche une recherche externe dès qu'une information peut avoir changé ou engage une décision technique, légale, de sécurité, de coût ou de compatibilité. Les agents concernés consignent les sources et la date de consultation dans les preuves.
+
 ## Cycle obligatoire
 
 1. Recevoir et accepter le cahier des charges.

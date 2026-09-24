@@ -1,6 +1,6 @@
 # Agentic Starter Kits
 
-[![Version](https://img.shields.io/badge/version-1.2.2-blue.svg)](VERSION)
+[![Version](https://img.shields.io/badge/version-1.2.5-blue.svg)](VERSION)
 
 ## Construire avec une IA comme avec une équipe senior
 
@@ -225,6 +225,12 @@ Le kit ne devine pas les décisions métier, ne crée pas de secret, ne simule p
 ## Documentation du dépôt
 
 La carte complète de navigation documentaire se trouve dans [DOCUMENTATION-MAP.md](DOCUMENTATION-MAP.md).
+
+## Recherche Internet et exactitude dans le temps
+
+Les agents ne doivent pas se fier à une connaissance potentiellement obsolète. Le Coordinateur active une recherche externe pour les réglementations, vulnérabilités, versions, API, frameworks, licences, tarifs, limites, compatibilités, outils CI/CD, recommandations d'architecture et services externes. Les agents Backend, Frontend, Cybersécurité, DevOps, Conformité, Performance, Concepteur et Documentation sont directement concernés selon leur périmètre.
+
+La politique [WEB-RESEARCH-POLICY.md](starter-kit-codex/.codex/policies/WEB-RESEARCH-POLICY.md) impose des sources primaires, une vérification de la version et de la date, la consignation des URL et des décisions influencées, ainsi que l'anonymisation des données. La recherche complète les tests et les audits locaux, mais ne les remplace pas. Les résultats encore valides sont réutilisés pour limiter le coût.
 
 - [Installation complète](INSTALLATION.md)
 - [Contribution et GitFlow](CONTRIBUTING.md)

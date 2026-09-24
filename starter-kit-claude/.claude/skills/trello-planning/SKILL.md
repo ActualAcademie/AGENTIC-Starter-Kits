@@ -63,3 +63,7 @@ Les descriptions, commentaires et checklists envoyés à Trello doivent contenir
 Après création ou modification, relire le champ description depuis Trello et contrôler l’absence de `\n` littéraux, de doublons, de titres collés ou de listes mal rendues. Si le rendu est incorrect, corriger immédiatement avant de déclarer la synchronisation vérifiée.
 
 La fusion d’une PR ne clôture jamais une carte. Après chaque fusion, relire la checklist, reprendre immédiatement la prochaine étape ouverte et poursuivre jusqu’à la Definition of Done réelle.
+
+## Exécution continue obligatoire
+
+Après une livraison partielle, ne pas rendre la main si la carte comporte encore une case autonome ouverte. Relire la carte, choisir la prochaine case dans l'ordre des dépendances, ouvrir ou reprendre son work item et exécuter la suite. Un simple compte rendu comme « il reste les traductions » est insuffisant : il doit être suivi de l'action suivante dans la même autorisation continue. Le message final est autorisé uniquement après `complete`, `needs-review` ou `blocked` avec la preuve correspondante.
