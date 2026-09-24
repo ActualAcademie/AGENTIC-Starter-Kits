@@ -18,6 +18,7 @@ Cahier, dossier `docs/`, profil, roadmap, journal qualité, work items, contrain
 2. Décomposer chaque objectif et user story en petites features logiques, indépendantes autant que possible et livrables sur une branche dédiée. Une carte ne doit pas regrouper plusieurs features sans lien.
 3. Ajouter les cartes de conception, développement frontend ou backend, données, tests, sécurité, documentation, CI, audit et livraison lorsque pertinentes.
 4. Découper chaque carte pour qu elle corresponde à une branche et à des commits atomiques.
+4 bis. Utiliser une seule branche de travail et une seule Pull Request finale par carte. Les cases de checklist, corrections et validations intermédiaires sont regroupées sur cette branche avec des commits atomiques.
 5. Renseigner pour chaque carte ID, liste, feature, description détaillée, périmètre inclus et exclu, dépendances, critères d acceptation, preuve, responsable, estimation, priorité et risques.
 6. Ajouter à chaque carte une checklist explicite : conception à jour, code, tests, sécurité, accessibilité si applicable, documentation, revue, preuve et Definition of Done.
 7. Ajouter les cartes de correction pour chaque entrée ouverte du journal qualité.
@@ -52,6 +53,10 @@ Arrêter si la réponse utilisateur est absente, si le périmètre est ambigu, s
 Une carte ne peut être déplacée dans `Terminé` que si toutes ses cases, y compris les validations juridiques, métier, réglementaires, client ou externes, sont prouvées. Une publication technique ne suffit pas. Lorsqu’une carte doit précéder une autre, enregistrer la dépendance et ne pas démarrer la suivante avant la clôture conforme de la première, sauf instruction explicite contraire.
 
 ## Format des descriptions
+
+## Règle de Pull Request par carte
+
+Une carte Trello correspond par défaut à une branche de travail et à une seule Pull Request finale. Les commits restent atomiques et couvrent les étapes de la checklist, mais l'agent ne crée pas de PR pour chaque contrôle, sous-tâche, correction ou document. Si une PR existe déjà pour la carte, il la met à jour jusqu'à la Definition of Done. Une PR intermédiaire exige une demande explicite de l'utilisateur ou une justification critique documentée.
 
 Les descriptions, commentaires et checklists envoyés à Trello doivent contenir de vrais retours à la ligne, jamais la séquence littérale `\n`. Construire le texte avec des chaînes multilignes ou des retours à la ligne natifs, puis vérifier après relecture que Trello affiche des paragraphes et des listes lisibles. Normaliser les échappements avant l’appel API, sans modifier les URLs, le code ou les exemples qui doivent conserver leur syntaxe.
 
