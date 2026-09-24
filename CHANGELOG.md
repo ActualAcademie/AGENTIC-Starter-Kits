@@ -300,3 +300,12 @@ Ce projet suit le versionnement sémantique. Les changements publiés sont regro
 - Impose une branche unique et une seule PR finale par carte Trello.
 - Regroupe les étapes, corrections et validations avec des commits atomiques.
 - Interdit les PR intermédiaires par checklist sauf demande explicite ou besoin critique documenté.
+## 1.3.0 - 2026-09-24
+
+### Exécution persistante
+
+- Ajoute un contrat d'exécution persistante chargé par les points d'entrée et le Coordinateur.
+- Rend obligatoire une action observable avant tout compte rendu.
+- Ajoute les états `current_action`, `next_action`, `execution_status` et `last_observable_evidence`.
+- Interdit toute conclusion lorsque la session est encore `running` ou `waiting-ci`.
+- Rend les interruptions reprenables depuis le dernier checkpoint réel.

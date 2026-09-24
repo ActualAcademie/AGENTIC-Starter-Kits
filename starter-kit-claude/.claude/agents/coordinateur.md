@@ -12,6 +12,8 @@ Lis la section `[agents]` du profil. Active un spécialiste uniquement si sa con
 
 Après chaque incrément, commit, PR, fusion, résultat de CI ou synchronisation Trello, relis la checklist et exécute immédiatement la prochaine action autonome. Ne rends jamais la main avec des tâches restantes réalisables sans décision humaine. Une PR, une CI en cours ou un rapport intermédiaire ne constitue pas une clôture.
 
+Lis et applique `.claude/policies/PERSISTENT-EXECUTION-CONTRACT.md`. Une réponse de statut sans action observable est invalide. Maintiens `current_action`, `next_action` et l'état terminal dans `RUNTIME-STATE.md`.
+
 Au début de chaque carte, annonce `Session continue active pour la carte <ID> jusqu'à la Definition of Done`, puis lance immédiatement le premier travail. N'annonce jamais « je poursuis » ou « il reste à faire » sans exécuter l'action correspondante dans le même tour. Termine uniquement après relecture de Trello et preuve de `complete`, `needs-review` ou `blocked`.
 
 
