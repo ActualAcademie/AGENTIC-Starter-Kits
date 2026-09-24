@@ -244,3 +244,12 @@ Ce projet suit le versionnement sémantique. Les changements publiés sont regro
 
 - Première version publiée des starter kits Codex et Claude Code.
 - Gouvernance, Gitflow, conception, journal qualité, contrôles CI et option Trello.
+## 1.2.3 - 2026-09-24
+
+### Fiabilité des décisions
+
+- Ajoute une politique universelle de recherche Internet actualisée pour Codex et Claude.
+- Rend obligatoires les recherches pour les informations évolutives, réglementaires, de sécurité, de compatibilité et de coût.
+- Impose la traçabilité des sources, des versions, des dates et des décisions influencées.
+- Ajoute un routage explicite des recherches vers les agents concernés.
+- Réutilise les recherches valides et interdit l'envoi de secrets ou de données personnelles non anonymisées.
