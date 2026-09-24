@@ -244,3 +244,29 @@ Ce projet suit le versionnement sémantique. Les changements publiés sont regro
 
 - Première version publiée des starter kits Codex et Claude Code.
 - Gouvernance, Gitflow, conception, journal qualité, contrôles CI et option Trello.
+## 1.2.3 - 2026-09-24
+
+### Fiabilité des décisions
+
+- Ajoute une politique universelle de recherche Internet actualisée pour Codex et Claude.
+- Rend obligatoires les recherches pour les informations évolutives, réglementaires, de sécurité, de compatibilité et de coût.
+- Impose la traçabilité des sources, des versions, des dates et des décisions influencées.
+- Ajoute un routage explicite des recherches vers les agents concernés.
+- Réutilise les recherches valides et interdit l'envoi de secrets ou de données personnelles non anonymisées.
+## 1.2.4 - 2026-09-24
+
+### Continuité des cartes
+
+- Ajoute une boucle obligatoire de continuation après chaque livraison partielle, PR, fusion, CI ou synchronisation Trello.
+- Interdit de terminer l'intervention lorsqu'une case autonome reste ouverte.
+- Impose la reprise immédiate du prochain work item jusqu'à la Definition of Done réelle.
+- Distingue explicitement une livraison intermédiaire d'une clôture de carte.
+## 1.2.5 - 2026-09-24
+
+### Autonomie continue
+
+- Renforce le contrat d'exécution sans interruption pour toutes les actions autorisées.
+- Interdit les demandes intermédiaires de type « Continue » lorsqu'une action autonome reste disponible.
+- Ajoute une procédure obligatoire avant toute déclaration de blocage.
+- Oblige l'agent à poursuivre les tâches indépendantes lorsqu'une intégration ou une CI est indisponible.
+- Interdit les conclusions basées uniquement sur une CI en cours, une PR ouverte ou une erreur corrigeable.
