@@ -253,3 +253,11 @@ Ce projet suit le versionnement sémantique. Les changements publiés sont regro
 - Impose la traçabilité des sources, des versions, des dates et des décisions influencées.
 - Ajoute un routage explicite des recherches vers les agents concernés.
 - Réutilise les recherches valides et interdit l'envoi de secrets ou de données personnelles non anonymisées.
+## 1.2.4 - 2026-09-24
+
+### Continuité des cartes
+
+- Ajoute une boucle obligatoire de continuation après chaque livraison partielle, PR, fusion, CI ou synchronisation Trello.
+- Interdit de terminer l'intervention lorsqu'une case autonome reste ouverte.
+- Impose la reprise immédiate du prochain work item jusqu'à la Definition of Done réelle.
+- Distingue explicitement une livraison intermédiaire d'une clôture de carte.
