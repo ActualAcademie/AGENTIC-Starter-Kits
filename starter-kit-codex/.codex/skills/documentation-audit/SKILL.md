@@ -17,6 +17,7 @@ Auditer la qualité et la cohérence de la documentation avant livraison.
 - Cohérence entre profil, code, API, diagrammes, tests et README.
 - Exemples reproductibles ou limites documentées.
 - Risques, décisions et alternatives tracés.
+- Synchronisation du code avec les README, la conception, les work items, le journal qualité, le changelog, les preuves et Trello si activé.
 
 ## Décision
 
@@ -40,4 +41,4 @@ Nombre de documents contrôlés, anomalies trouvées, corrections et limites res
 
 ## Arrêt
 
-S’arrêter si une preuve manque, si une décision métier est nécessaire ou si le document reste incohérent avec le code.
+S’arrêter si une preuve manque, si une décision métier est nécessaire ou si le document reste incohérent avec le code. Dans ce dernier cas, corriger la documentation dans le même work item avant toute clôture.
