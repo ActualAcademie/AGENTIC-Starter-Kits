@@ -30,3 +30,4 @@ Toute Pull Request créée automatiquement par le starter kit cible exclusivemen
 ## Pull Request par carte
 
 Une carte Trello correspond par défaut à une branche de travail et à une seule Pull Request finale. Les commits restent atomiques et peuvent couvrir plusieurs étapes de la checklist, mais l'agent ne crée pas de PR pour chaque contrôle, sous-tâche, correction ou document. Si une PR existe déjà pour la carte, il la met à jour jusqu'à la Definition of Done. Une PR intermédiaire exige une demande explicite de l'utilisateur ou une justification critique documentée.
+\n ## Pull Request par carte
