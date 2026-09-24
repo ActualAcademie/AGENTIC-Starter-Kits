@@ -293,3 +293,10 @@ Ce projet suit le versionnement sémantique. Les changements publiés sont regro
 - Rend obligatoire la synchronisation du code, de la configuration, des README, de la conception, des décisions, des work items, du journal qualité, du changelog, des preuves et de Trello.
 - Transforme toute documentation obsolète en anomalie de livraison.
 - Renforce l'audit documentaire avant la Definition of Done.
+## 1.2.9 - 2026-09-24
+
+### GitFlow des cartes
+
+- Impose une branche unique et une seule PR finale par carte Trello.
+- Regroupe les étapes, corrections et validations avec des commits atomiques.
+- Interdit les PR intermédiaires par checklist sauf demande explicite ou besoin critique documenté.
