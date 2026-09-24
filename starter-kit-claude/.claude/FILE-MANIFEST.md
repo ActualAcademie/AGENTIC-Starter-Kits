@@ -9,6 +9,7 @@
 - `policies/EXCEPTIONAL-REQUESTS.md` définit la classification des demandes exceptionnelles.
 - `policies/`, `agents/`, `prompts/`, `skills/`, `scripts/`, `templates/`, `evaluations/`
 - `policies/DOCUMENTATION-LANGUAGE-POLICY.md` impose la qualité et la langue des documents techniques.
+- `policies/TRELLO-VISUAL-SYSTEM.md` définit les listes, étiquettes et règles de lisibilité Trello.
 
 ## Attentes de qualité
 
