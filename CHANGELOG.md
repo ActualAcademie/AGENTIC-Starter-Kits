@@ -1,3 +1,10 @@
+## 1.4.0 - 2026-09-24
+
+### Demandes exceptionnelles
+
+- Ajoute une classification S1 à S4 et rend Trello obligatoire pour les demandes structurantes ou critiques.
+- Ajoute un work item, une Definition of Done, un retour arrière et un mode local si Trello est indisponible.
+
 ## 1.2.2 - 2026-09-23
 
 ### Fiabilité

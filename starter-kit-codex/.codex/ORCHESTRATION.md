@@ -6,7 +6,7 @@ Ce répertoire s'importe dans tout nouveau projet. Il adapte les contrôles à p
 
 ## Recherche actualisée
 
-Lire et appliquer obligatoirement `policies/WEB-RESEARCH-POLICY.md`. Le Coordinateur déclenche une recherche externe dès qu'une information peut avoir changé ou engage une décision technique, légale, de sécurité, de coût ou de compatibilité. Les agents concernés consignent les sources et la date de consultation dans les preuves.
+Lire et appliquer obligatoirement `policies/WEB-RESEARCH-POLICY.md` et `policies/EXCEPTIONAL-REQUESTS.md`. Le Coordinateur déclenche une recherche externe dès qu'une information peut avoir changé ou engage une décision technique, légale, de sécurité, de coût ou de compatibilité. Les agents concernés consignent les sources et la date de consultation dans les preuves.
 
 ## Cycle obligatoire
 
@@ -15,7 +15,7 @@ Lire et appliquer obligatoirement `policies/WEB-RESEARCH-POLICY.md`. Le Coordina
 3. Mettre à jour `RUNTIME-STATE.md` à chaque transition et après chaque erreur.
 4. Recevoir le choix Trello et initialiser le profil du projet.
 5. Créer un work item.
-6. Évaluer le risque.
+6. Classer toute demande exceptionnelle et créer une carte Trello dès que le seuil S3 ou S4 est atteint.
 7. Choisir rôle et Skill.
 8. Implémenter dans le périmètre déclaré.
 9. Auditer, vérifier et enregistrer les preuves.
