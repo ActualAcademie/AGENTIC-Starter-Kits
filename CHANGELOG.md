@@ -309,3 +309,10 @@ Ce projet suit le versionnement sémantique. Les changements publiés sont regro
 - Ajoute les états `current_action`, `next_action`, `execution_status` et `last_observable_evidence`.
 - Interdit toute conclusion lorsque la session est encore `running` ou `waiting-ci`.
 - Rend les interruptions reprenables depuis le dernier checkpoint réel.
+## 1.3.1 - 2026-09-24
+
+### Mode d'exécution
+
+- Documente l'utilisation obligatoire du mode Agent avec Work locally pour modifier un projet.
+- Distingue explicitement le mode Plan, le mode lecture seule et le mode d'exécution.
+- Ajoute la reprise contrôlée depuis `RUNTIME-STATE.md` lorsque le mode d'exécution est interrompu.
