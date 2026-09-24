@@ -286,3 +286,10 @@ Ce projet suit le versionnement sémantique. Les changements publiés sont regro
 - Interdit les annonces de poursuite sans action observable dans le même tour.
 - Rend obligatoire la reprise immédiate de la prochaine case ouverte.
 - Conditionne la fin de session à la relecture de Trello et à un état final prouvé.
+## 1.2.8 - 2026-09-24
+
+### Cohérence documentaire
+
+- Rend obligatoire la synchronisation du code, de la configuration, des README, de la conception, des décisions, des work items, du journal qualité, du changelog, des preuves et de Trello.
+- Transforme toute documentation obsolète en anomalie de livraison.
+- Renforce l'audit documentaire avant la Definition of Done.
