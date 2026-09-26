@@ -1,5 +1,14 @@
 ## Unreleased
 
+## 1.12.9 - 2026-09-26
+
+### Délégation automatique à la création des Goals
+
+- Ajoute au Goal un plan de création ou d'activation d'agents pour les cartes comportant au moins trois tâches indépendantes.
+- Exige la partition, les preuves, les dépendances et l'agent intégrateur avant le démarrage parallèle.
+- Conserve une branche et une PR finales par carte.
+- Impact de release : `patch`.
+
 ## 1.12.8 - 2026-09-26
 
 ### Cible frontend Framer-like

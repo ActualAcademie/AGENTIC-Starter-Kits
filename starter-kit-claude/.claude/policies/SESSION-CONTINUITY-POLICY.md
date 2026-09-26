@@ -34,6 +34,8 @@ Quand elles existent, utiliser les commandes natives de l'environnement. Ne pas 
 
 Lorsqu'une demande explicite porte sur la finalisation d'une carte Trello et que sa checklist contient au moins deux éléments ouverts, le Coordinateur doit créer un objectif persistant avant de traiter la première case. L'objectif doit reprendre le titre de la carte, inclure toutes les cases ouvertes, la Definition of Done, les preuves attendues, les contraintes de branche/PR et la condition de blocage.
 
+Si la checklist contient au moins trois tâches ouvertes indépendantes, ou plusieurs lots clairement parallélisables, le Goal doit aussi inclure avant sa première action un plan de délégation accélérée : agents à créer ou activer, rôle de chacun, partition exacte des tâches, fichiers autorisés, preuves attendues, dépendances et agent intégrateur. Le Coordinateur lance les agents parallèles dans le même cycle d'autorisation lorsque les partitions sont sûres, puis conserve une seule branche et une seule PR finale pour la carte. Il ne crée pas d'agent supplémentaire si les tâches partagent un fichier, un contrat, une migration ou une dépendance séquentielle.
+
 Le Coordinateur renseigne `goal_status: active`, `goal_objective`, `goal_verification`, `goal_constraints`, `goal_budget`, `goal_blocked_condition` et `goal_session_id` dans `RUNTIME-STATE.md`, puis active le mécanisme natif de Goal lorsqu'il est disponible. Une carte à une seule case, une demande d'information ou une tâche ponctuelle n'active pas automatiquement de Goal.
 
 ## Source de référence
