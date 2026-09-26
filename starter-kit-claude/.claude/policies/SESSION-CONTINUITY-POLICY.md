@@ -32,7 +32,7 @@ Quand elles existent, utiliser les commandes natives de l'environnement. Ne pas 
 
 ## Activation automatique depuis Trello
 
-Lorsqu'une demande explicite porte sur la finalisation d'une carte Trello et que sa checklist contient au moins deux éléments ouverts, le Coordinateur doit créer un objectif persistant avant de traiter la première case. L'objectif doit reprendre le titre de la carte, inclure toutes les cases ouvertes, la Definition of Done, les preuves attendues, les contraintes de branche/PR et la condition de blocage.
+Lorsqu'une demande explicite porte sur la finalisation d'une carte Trello, le Coordinateur doit créer un objectif persistant dès le début, quel que soit le nombre de cases ouvertes, y compris une seule case. L'objectif doit reprendre le titre de la carte, inclure toutes les cases ouvertes, la Definition of Done, les preuves attendues, les contraintes de branche/PR et la condition de blocage. Une carte à une seule case n'active pas la parallélisation, mais elle active bien le Goal.
 
 Si la checklist contient au moins trois tâches ouvertes indépendantes, ou plusieurs lots clairement parallélisables, le Goal doit aussi inclure avant sa première action un plan de délégation accélérée : agents à créer ou activer, rôle de chacun, partition exacte des tâches, fichiers autorisés, preuves attendues, dépendances et agent intégrateur. Le Coordinateur lance les agents parallèles dans le même cycle d'autorisation lorsque les partitions sont sûres, puis conserve une seule branche et une seule PR finale pour la carte. Il ne crée pas d'agent supplémentaire si les tâches partagent un fichier, un contrat, une migration ou une dépendance séquentielle.
 

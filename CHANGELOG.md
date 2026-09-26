@@ -1,5 +1,13 @@
 ## Unreleased
 
+## 1.12.11 - 2026-09-26
+
+### Goal obligatoire pour chaque carte
+
+- Crée un Goal dès le début de toute demande explicite de finalisation d'une carte Trello, même avec une seule case ouverte.
+- Réserve le nombre de checks au choix de parallélisation et non à l'activation du Goal.
+- Impact de release : `patch`.
+
 ## 1.12.10 - 2026-09-26
 
 ### Attribution dynamique des checks d'un Goal
