@@ -47,6 +47,8 @@ Les agents parallèles travaillent dans des espaces isolés si nécessaire. Le C
 
 Pour une famille de tâches homogènes, plusieurs agents du même rôle peuvent travailler en parallèle sur des cartes, fichiers, parcours, lignes de données ou lots de checklist distincts. Le Coordinateur désigne un agent intégrateur, vérifie les partitions avant lancement, interdit les doublons et ne valide qu'après assemblage, tests et relecture de toutes les preuves.
 
+Lors de la création d'un Goal pour une carte contenant au moins trois cases ouvertes indépendantes, inscrire dans le Goal la création ou l'activation des agents parallèles, la partition de chaque lot et l'agent intégrateur avant de commencer. Synchroniser ces responsables dans Trello et conserver une seule branche et une seule PR finale pour la carte.
+
 ### Rythme obligatoire des transitions et preuves
 
 Une synchronisation Trello correspond à un événement significatif, jamais à un lot différé. Le Coordinateur doit synchroniser puis relire la carte immédiatement après chacun de ces événements : entrée ou sortie d'une colonne, assignation ou changement de responsable, ajout ou clôture d'une case, début ou fin d'un work item, commit ou push livrable, ouverture ou mise à jour d'une PR, résultat CI, correction, blocage, déblocage, validation externe et fusion. La relecture doit confirmer l'identifiant de la carte, la colonne, le responsable, la checklist, la description et la preuve associée avant toute action suivante.
