@@ -36,6 +36,8 @@ Lorsqu'une demande explicite porte sur la finalisation d'une carte Trello et que
 
 Si la checklist contient au moins trois tâches ouvertes indépendantes, ou plusieurs lots clairement parallélisables, le Goal doit aussi inclure avant sa première action un plan de délégation accélérée : agents à créer ou activer, rôle de chacun, partition exacte des tâches, fichiers autorisés, preuves attendues, dépendances et agent intégrateur. Le Coordinateur lance les agents parallèles dans le même cycle d'autorisation lorsque les partitions sont sûres, puis conserve une seule branche et une seule PR finale pour la carte. Il ne crée pas d'agent supplémentaire si les tâches partagent un fichier, un contrat, une migration ou une dépendance séquentielle.
 
+À la création du Goal et à chaque relecture du Goal, le Coordinateur réévalue la checklist restante et le registre des agents. Pour chaque check autonome non attribué, il attribue immédiatement le check à un agent disponible ; si aucun agent compétent n'est disponible et que le check est parallélisable, il crée ou active l'agent requis avant de poursuivre. Il ne laisse pas un agent disponible inactif lorsqu'un check compatible est ouvert. Toute attribution est enregistrée avec le check, le périmètre, la preuve attendue et l'heure de début.
+
 Le Coordinateur renseigne `goal_status: active`, `goal_objective`, `goal_verification`, `goal_constraints`, `goal_budget`, `goal_blocked_condition` et `goal_session_id` dans `RUNTIME-STATE.md`, puis active le mécanisme natif de Goal lorsqu'il est disponible. Une carte à une seule case, une demande d'information ou une tâche ponctuelle n'active pas automatiquement de Goal.
 
 ## Source de référence

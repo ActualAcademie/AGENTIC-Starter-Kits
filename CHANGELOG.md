@@ -1,5 +1,14 @@
 ## Unreleased
 
+## 1.12.10 - 2026-09-26
+
+### Attribution dynamique des checks d'un Goal
+
+- Réévalue les checks ouverts et les agents disponibles à chaque relecture du Goal.
+- Attribue immédiatement chaque check autonome à un agent disponible ou crée/active un agent compétent.
+- Trace l'attribution, le périmètre, la preuve attendue et l'heure de début.
+- Impact de release : `patch`.
+
 ## 1.12.9 - 2026-09-26
 
 ### Délégation automatique à la création des Goals
