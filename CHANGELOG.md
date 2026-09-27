@@ -1,5 +1,14 @@
 ## Unreleased
 
+## 1.12.12 - 2026-09-27
+
+### Numérotation et ordre des cartes Trello
+
+- Ajoute une numérotation stable `MVP-001` ou `POST-MVP-001` fondée sur les dépendances.
+- Documente l'ordre d'exécution, les groupes parallèles et les décisions de périmètre.
+- Ajoute les files `MVP - À développer` et `Post-MVP - À développer` uniquement lorsque les deux phases existent.
+- Impact de release : `patch`.
+
 ## 1.12.11 - 2026-09-26
 
 ### Goal obligatoire pour chaque carte
