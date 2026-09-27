@@ -91,6 +91,8 @@ Une carte Trello correspond par défaut à une branche de travail et à une seul
 
 Les descriptions, commentaires et checklists envoyés à Trello doivent contenir de vrais retours à la ligne, jamais la séquence littérale `\n`. Construire le texte avec des chaînes multilignes ou des retours à la ligne natifs, puis vérifier après relecture que Trello affiche des paragraphes et des listes lisibles. Normaliser les échappements avant l’appel API, sans modifier les URLs, le code ou les exemples qui doivent conserver leur syntaxe.
 
+Les commentaires doivent être saisis ou collés en texte brut. Avant de valider, fermer tout menu d'autocomplétion ou de formatage ouvert et vérifier que le champ contient encore l'intégralité du texte attendu. Après validation, relire le commentaire dans l'activité de la carte et comparer son contenu complet à la preuve source. Un commentaire partiel, vide, tronqué ou remplacé par une suggestion n'est pas une preuve : le corriger immédiatement et ne pas poursuivre la checklist.
+
 Après création ou modification, relire le champ description depuis Trello et contrôler l’absence de `\n` littéraux, de doublons, de titres collés ou de listes mal rendues. Si le rendu est incorrect, corriger immédiatement avant de déclarer la synchronisation vérifiée.
 
 La fusion d’une PR ne clôture jamais une carte. Après chaque fusion, relire la checklist, reprendre immédiatement la prochaine étape ouverte et poursuivre jusqu’à la Definition of Done réelle.
