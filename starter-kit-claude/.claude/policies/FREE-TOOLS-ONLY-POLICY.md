@@ -7,3 +7,4 @@ Le kit fonctionne en mode gratuit par défaut.
 - Les workflows générés utilisent uniquement `ubuntu-latest` et ne configurent aucun budget, paiement ou dépense automatique.
 - Si un quota gratuit est épuisé ou si une CI est bloquée par la facturation, arrêter l'action externe, expliquer le blocage et proposer une validation locale gratuite. Ne jamais contourner le blocage en activant la facturation.
 - Toute dépense éventuelle nécessite une décision humaine explicite et documentée avant l'action.
+- Si un outil gratuit nécessaire aux tests ou validations est absent, l'agent peut l'installer provisoirement dans l'environnement de travail, exécuter les contrôles, journaliser la version et le résultat, puis supprimer l'installation temporaire si elle n'est pas requise par le projet. Ne pas modifier durablement les dépendances du projet sans justification et validation du périmètre.

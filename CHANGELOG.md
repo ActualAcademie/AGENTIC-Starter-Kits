@@ -1,5 +1,13 @@
 ## Unreleased
 
+## 1.12.24 - 2026-09-27
+
+### Outils de test manquants
+
+- Autorise l'installation provisoire d'outils gratuits manquants pour exécuter les tests.
+- Impose la journalisation de la version et du résultat ainsi que le nettoyage si l'outil n'est pas une dépendance projet.
+- Impact de release : `patch`.
+
 ## 1.12.23 - 2026-09-27
 
 ### Commentaires Trello en phrases
