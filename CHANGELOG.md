@@ -1,5 +1,13 @@
 ## Unreleased
 
+## 1.12.14 - 2026-09-27
+
+### Frontière entre kit et projet
+
+- Interdit l'exposition des noms, fichiers et mécanismes internes du kit dans les livrables projet.
+- Ajoute la politique de séparation aux kits Codex et Claude.
+- Impact de release : `patch`.
+
 ## 1.12.13 - 2026-09-27
 
 ### Porte conception avant développement
