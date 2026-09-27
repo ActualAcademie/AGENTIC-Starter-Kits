@@ -1,5 +1,12 @@
 ## Unreleased
 
+## 1.12.32 - 2026-09-27
+
+### Découverte fiable des outils
+
+- Vérifie les chemins, environnements, IDE, scripts locaux, intégrations, identité et authentification avant de déclarer un outil indisponible.
+- Interdit de conclure à une absence sur un simple échec lié au `PATH`.
+
 ## 1.12.31 - 2026-09-27
 
 ### Cadence des commentaires Trello
