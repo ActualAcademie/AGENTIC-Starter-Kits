@@ -1,5 +1,13 @@
 ## Unreleased
 
+## 1.12.16 - 2026-09-27
+
+### Preuve Trello fiable
+
+- Impose la saisie en texte brut et la fermeture des menus d'autocomplétion avant validation d'un commentaire.
+- Impose la relecture du commentaire publié dans l'activité avant de considérer la preuve comme valide.
+- Impact de release : `patch`.
+
 ## 1.12.15 - 2026-09-27
 
 ### Contrôle automatisé de frontière projet
