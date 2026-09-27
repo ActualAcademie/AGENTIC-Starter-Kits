@@ -89,5 +89,6 @@ fi
 git -C "$root" diff --check
 bash "$script_dir/validate-obligations.sh" --if-present
 bash "$script_dir/preflight.sh"
+bash "$script_dir/verify-project-boundary.sh"
 bash "$script_dir/run-project-checks.sh" --execute
 echo "Validation avant push OK"

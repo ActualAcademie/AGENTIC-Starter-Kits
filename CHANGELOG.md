@@ -1,5 +1,13 @@
 ## Unreleased
 
+## 1.12.15 - 2026-09-27
+
+### Contrôle automatisé de frontière projet
+
+- Ajoute un garde avant push qui bloque les références aux outils internes dans les fichiers suivis du projet.
+- Vérifie que la détection bloque une fuite et accepte un livrable neutre.
+- Impact de release : `patch`.
+
 ## 1.12.14 - 2026-09-27
 
 ### Frontière entre kit et projet
