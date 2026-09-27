@@ -1,5 +1,13 @@
 ## Unreleased
 
+## 1.12.28 - 2026-09-27
+
+### Livraison automatique de l'onboarding
+
+- Termine l'onboarding après collecte des réponses, avec `.gitignore`, branche `dev`, commit et push vérifié.
+- Reporte la question de lancement du développement après cette livraison uniquement.
+- Impact de release : `patch`.
+
 ## 1.12.27 - 2026-09-27
 
 ### Migration des tableaux Trello existants
