@@ -1,5 +1,19 @@
 ## Unreleased
 
+## 1.12.32 - 2026-09-27
+
+### Découverte fiable des outils
+
+- Vérifie les chemins, environnements, IDE, scripts locaux, intégrations, identité et authentification avant de déclarer un outil indisponible.
+- Interdit de conclure à une absence sur un simple échec lié au `PATH`.
+
+## 1.12.31 - 2026-09-27
+
+### Cadence des commentaires Trello
+
+- Réduit les micro-commentaires pour éviter les cartes qui stagnent.
+- Impose des synthèses lors des changements significatifs et une synthèse finale probante.
+
 ## 1.12.30 - 2026-09-27
 
 ### Nommage obligatoire des étiquettes Trello
@@ -462,6 +476,11 @@
 - Crée une sauvegarde avant chaque remplacement du moteur du kit.
 
 # Changelog
+
+## 1.12.31
+
+- Réduit la cadence des commentaires Trello pour éviter les cartes qui stagnent sous des micro-mises à jour.
+- Impose des synthèses uniquement lors d'événements significatifs, avec une synthèse finale probante.
 ## 1.1.2 - 2026-09-23
 
 ### Corrections
