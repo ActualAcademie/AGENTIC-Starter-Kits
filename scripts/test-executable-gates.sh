@@ -62,16 +62,24 @@ trap 'rm -rf "$boundary_root"' EXIT
 git -C "$boundary_root" init --quiet
 git -C "$boundary_root" config user.email test@example.invalid
 git -C "$boundary_root" config user.name test
+git -C "$boundary_root" config commit.gpgsign false
+git -C "$boundary_root" checkout --quiet -b main
 mkdir -p "$boundary_root/.codex/scripts"
 cp "$root/starter-kit-codex/.codex/scripts/verify-project-boundary.sh" "$boundary_root/.codex/scripts/verify-project-boundary.sh"
-printf '%s\n' 'Piloté par Agentic Starter Kits' > "$boundary_root/README.md"
+printf '%s\n' 'Documentation produit neutre' > "$boundary_root/README.md"
 git -C "$boundary_root" add README.md .codex/scripts/verify-project-boundary.sh
-if (cd "$boundary_root" && bash .codex/scripts/verify-project-boundary.sh >/dev/null 2>&1); then
+git -C "$boundary_root" commit --quiet -m baseline
+git -C "$boundary_root" checkout --quiet -b feature/test-boundary
+printf '%s\n' 'Piloté par Agentic Starter Kits' > "$boundary_root/README.md"
+git -C "$boundary_root" add README.md
+git -C "$boundary_root" commit --quiet -m leak
+if (cd "$boundary_root" && BOUNDARY_BASE_REF=main bash .codex/scripts/verify-project-boundary.sh >/dev/null 2>&1); then
   echo "ECHEC TEST: une référence au kit aurait dû être bloquée"
   exit 1
 fi
 printf '%s\n' 'Documentation produit neutre' > "$boundary_root/README.md"
 git -C "$boundary_root" add README.md
-(cd "$boundary_root" && bash .codex/scripts/verify-project-boundary.sh >/dev/null)
+git -C "$boundary_root" commit --quiet -m neutralize
+(cd "$boundary_root" && BOUNDARY_BASE_REF=main bash .codex/scripts/verify-project-boundary.sh >/dev/null)
 
 echo "Tests des portes exécutables OK"
