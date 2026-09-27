@@ -1,5 +1,13 @@
 ## Unreleased
 
+## 1.12.23 - 2026-09-27
+
+### Commentaires Trello en phrases
+
+- Remplace les puces et numérotations par une phrase par ligne séparée par un retour à la ligne.
+- Maintient la rédaction française, la preuve explicite et la vérification visuelle après sauvegarde.
+- Impact de release : `patch`.
+
 ## 1.12.22 - 2026-09-27
 
 ### Format final des commentaires Trello
