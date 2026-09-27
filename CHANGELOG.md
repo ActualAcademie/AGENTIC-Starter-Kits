@@ -1,5 +1,22 @@
 ## Unreleased
 
+## 1.12.30 - 2026-09-27
+
+### Nommage obligatoire des étiquettes Trello
+
+- Invalide les étiquettes sans nom explicite.
+- Autorise le navigateur comme solution de secours lorsque le connecteur ne permet pas le renommage.
+- Impose une relecture visuelle du nom dans Trello.
+- Impact de release : `patch`.
+
+## 1.12.29 - 2026-09-27
+
+### Étiquettes Trello obligatoires
+
+- Rend obligatoires les étiquettes de périmètre et de risque applicables dès la création des cartes.
+- Impose la relecture des rattachements et bloque les transitions si une étiquette requise manque.
+- Impact de release : `patch`.
+
 ## 1.12.28 - 2026-09-27
 
 ### Livraison automatique de l'onboarding
