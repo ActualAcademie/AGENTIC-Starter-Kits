@@ -1,5 +1,13 @@
 ## Unreleased
 
+## 1.12.27 - 2026-09-27
+
+### Migration des tableaux Trello existants
+
+- Rend obligatoire la remise en conformité directe d'un tableau existant avec les normes du kit.
+- Impose la préservation de l'historique utile, la correction sans doublons et la relecture complète après migration.
+- Impact de release : `patch`.
+
 ## 1.12.26 - 2026-09-27
 
 ### Audit obligatoire des projets existants
