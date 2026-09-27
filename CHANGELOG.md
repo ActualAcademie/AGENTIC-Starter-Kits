@@ -1,5 +1,13 @@
 ## Unreleased
 
+## 1.12.22 - 2026-09-27
+
+### Format final des commentaires Trello
+
+- Remplace les tirets manuels par les puces natives Trello et impose le français, une idée par puce, une ponctuation complète et une relecture visuelle.
+- Impose la mention des preuves vérifiées et des éléments non vérifiés ou bloqués.
+- Impact de release : `patch`.
+
 ## 1.12.21 - 2026-09-27
 
 ### Format strict des commentaires Trello
