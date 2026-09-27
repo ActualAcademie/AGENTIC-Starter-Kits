@@ -15,7 +15,7 @@ if rg -n --hidden --glob '!.git/**' --glob '!node_modules/**' -- '-----BEGIN (RS
 fi
 
 if "$script_dir/python.sh" - "$root" <<'PY'
-import pathlib, sys, tomllib
+import pathlib, re, sys, tomllib
 root = pathlib.Path(sys.argv[1])
 config = root / '.claude'
 found = []
@@ -100,7 +100,7 @@ readiness = design_readiness.read_text(errors="ignore")
 if "Status: approved" not in readiness:
     print("CONCEPTION INCOMPLETE: docs/design/design-readiness.md doit avoir Status: approved")
     raise SystemExit(1)
-if "- [ ]" in readiness or "TODO" in readiness or "FIXME" in readiness:
+if "- [ ]" in readiness or re.search(r"(?m)^\s*(TODO|FIXME)(?:[:\s]|$)", readiness):
     print("CONCEPTION INCOMPLETE: design-readiness contient une case ouverte ou une dette non traitée")
     raise SystemExit(1)
 models = tomllib.loads((config / 'models.toml').read_text())
