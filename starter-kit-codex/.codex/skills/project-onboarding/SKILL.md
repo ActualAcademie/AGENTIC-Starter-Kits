@@ -23,6 +23,7 @@ Après acceptation du cahier des charges, après un changement majeur de stack o
 8. Conserver les conventions existantes, y compris la branche d'intégration.
 9. Créer une décision locale si une convention est absente ou contradictoire.
 10. Si `tracking.trello_choice = "enabled"`, appliquer le Skill `trello-planning` et compléter `docs/project-management/trello-board.md` avec toutes les cartes détaillées avant l implémentation.
+11. Si le projet contient déjà du code, des fonctionnalités ou un historique de livraison, considérer l'initialisation comme une reprise de projet existant. Après le choix Trello, effectuer un audit complet et minutieux de la conception, du périmètre, de l'architecture, des données, de la sécurité, du code, des tests, de l'accessibilité, de l'UX, de la documentation, de la CI, de l'exploitation et des risques. Transformer chaque correction, dette, incohérence ou amélioration identifiée en carte Trello distincte, ordonnée par dépendances et classée MVP ou Post-MVP. Ne reprendre le développement qu'après la création et la relecture de toutes les cartes d'audit.
 11. Exécuter `bash .codex/scripts/initialize-project-design.sh`, puis appliquer le Skill `conception` pour compléter `docs/` avant toute implémentation.
 
 ## Sortie

@@ -1,5 +1,13 @@
 ## Unreleased
 
+## 1.12.26 - 2026-09-27
+
+### Audit obligatoire des projets existants
+
+- Déclenche un audit complet après le choix Trello lors de l'initialisation d'un projet déjà commencé.
+- Transforme chaque correction, dette, incohérence ou amélioration en carte ordonnée et classée MVP ou Post-MVP avant toute reprise du développement.
+- Impact de release : `patch`.
+
 ## 1.12.25 - 2026-09-27
 
 ### Anti-boucle des Goals
