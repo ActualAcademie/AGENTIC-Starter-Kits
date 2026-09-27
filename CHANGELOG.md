@@ -1,5 +1,13 @@
 ## Unreleased
 
+## 1.12.35 - 2026-09-27
+
+### Sobriété CI/CD
+
+- Évite les doublons de validation entre `push` et `pull_request` pour un même commit.
+- Annule les exécutions obsolètes et limite les matrices aux besoins justifiés.
+- Réutilise les preuves lors de la promotion vers `main` lorsque le commit est identique.
+
 ## 1.12.34 - 2026-09-27
 
 ### Runners auto-hébergés
