@@ -53,9 +53,15 @@ Create or reuse these labels with the same names and colors:
 
 Use at least one type label and one domain label. Add risk, priority and validation labels only when relevant. Never create near-duplicate labels such as `frontend`, `Front end` and `UI`.
 
+## Numérotation, ordre et périmètre
+
+Chaque carte reçoit un numéro d'exécution stable, calculé après le tri des dépendances et avant la création Trello. Utiliser le format `[MVP-001]` pour le périmètre MVP et `[POST-MVP-001]` pour une fonctionnalité explicitement hors MVP. Le numéro suit l'ordre topologique des dépendances : une carte dépendante reçoit un numéro supérieur à toutes ses dépendances ; des cartes au même niveau peuvent partager le même groupe de parallélisation. Ne jamais renuméroter une carte déjà synchronisée ; utiliser le prochain numéro disponible et documenter tout déplacement de périmètre.
+
+Chaque description contient aussi `Execution order`, `Phase`, `Dependencies`, `Parallel group` et `Scope decision`. Si le tableau contient réellement les deux périmètres, créer des listes de travail lisibles comme `MVP - À développer` et `Post-MVP - À développer`, avec leurs variantes `In Progress` si nécessaires. Ne pas créer une colonne Post-MVP vide : une phase absente reste identifiée par le champ `Phase` et l'étiquette correspondante.
+
 ## Card naming
 
-Use the format `[WI-XXX] Verb + precise outcome`. Keep titles short, unique and action-oriented. Do not encode status, dates or unchecked progress in the title. Status belongs to the list and labels belong to the visual taxonomy.
+Use the format `[MVP-001] Verb + precise outcome` or `[POST-MVP-001] Verb + precise outcome`. Keep titles short, unique and action-oriented. Preserve the stable work-item ID in the description. Do not encode transient status, dates or unchecked progress in the title. Status belongs to the list and labels belong to the visual taxonomy.
 
 ## Card layout
 
@@ -66,6 +72,10 @@ Owner: <name>
 Type: <Feature|Bug|Architecture|...>
 Priority: <Low|Medium|High|Critical>
 Dependencies: <IDs or None>
+Execution order: <MVP-001 or POST-MVP-001>
+Phase: <MVP|Post-MVP>
+Parallel group: <P0|P1|None>
+Scope decision: <Included in MVP|Post-MVP with reason>
 Definition of Done: <short statement>
 ```
 
