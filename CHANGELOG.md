@@ -1,5 +1,14 @@
 ## Unreleased
 
+## 1.12.18 - 2026-09-27
+
+### Outils gratuits uniquement
+
+- Interdit toute activation de service payant, runner supérieur, quota supplémentaire ou moyen de paiement sans accord explicite.
+- Privilégie les outils locaux, open source, gratuits et les runners GitHub Actions standards.
+- Bloque toute tentative de contournement d'un quota ou d'une facturation.
+- Impact de release : `patch`.
+
 ## 1.12.17 - 2026-09-27
 
 ### Clôture documentaire Trello
