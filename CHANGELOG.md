@@ -1,5 +1,13 @@
 ## Unreleased
 
+## 1.12.21 - 2026-09-27
+
+### Format strict des commentaires Trello
+
+- Implique des lignes alignées à gauche, chacune commençant par `-`, sans titre, gras, ligne vide, deux-points ou caractère ouvrant un menu.
+- Impose la relecture du contenu complet après sauvegarde.
+- Impact de release : `patch`.
+
 ## 1.12.20 - 2026-09-27
 
 ### Commentaires Trello sans autocomplétion
