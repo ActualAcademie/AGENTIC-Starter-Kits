@@ -16,7 +16,7 @@ Create missing lists in this order:
 6. `Done`
 7. `Archived`
 
-Use `Inbox` only for captured requests. Move a card to `Ready` after its scope, owner, dependencies and Definition of Done are complete. A card remains in `In Progress` while work is active. Use `Blocked` only with a documented blocker and next action. Use `Review` only when implementation is complete and a real review remains. Use `Done` only after every checklist item is proven.
+Use `Inbox` only for captured requests. Move a card to `Ready` after its scope, owner, dependencies and Definition of Done are complete. A card remains in `In Progress` while work is active. Use `Blocked` only with a documented blocker and next action. Use `Review` only when implementation is complete and a real review remains. Use `Done` only after every checklist item is proven. The final checklist item before opening the card branch PR must always update and reread applicable README files, documentation, changelog and release notes. The PR is forbidden until this item is proven; after the PR, reread it again before `Done`.
 
 ### Dimensionnement selon l'équipe
 

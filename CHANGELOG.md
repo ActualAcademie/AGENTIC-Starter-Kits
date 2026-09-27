@@ -1,5 +1,13 @@
 ## Unreleased
 
+## 1.12.17 - 2026-09-27
+
+### Clôture documentaire Trello
+
+- Rend obligatoire une dernière case de checklist pour mettre à jour et relire les README, docs, changelog et notes de release applicables.
+- Interdit de passer la carte à `Done` avant la preuve de cette dernière case.
+- Impact de release : `patch`.
+
 ## 1.12.16 - 2026-09-27
 
 ### Preuve Trello fiable
