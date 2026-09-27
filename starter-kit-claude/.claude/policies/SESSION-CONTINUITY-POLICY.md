@@ -26,6 +26,8 @@ L'agent peut reprendre automatiquement seulement si l'objectif est actif, que la
 
 À chaque reprise : relire `RUNTIME-STATE.md`, le work item, les preuves et le dernier résultat de tour, puis exécuter `next_action`. Si l'environnement a malgré tout marqué le Goal natif `blocked` pour une attente récupérable, le Coordinateur doit d'abord réconcilier l'état local `waiting`, demander la reprise native uniquement si l'interface l'exige, puis exécuter `next_action` immédiatement. Ne jamais annoncer « je poursuis » sans lancer une action observable dans le même tour lorsque l'environnement le permet.
 
+Un même blocage ne peut pas être répété plus de deux tours de Goal. Au deuxième tour, le Coordinateur doit changer d'approche et exécuter une action de déblocage concrète, par exemple installer provisoirement un outil gratuit, déléguer une analyse indépendante, utiliser une alternative locale, réduire le périmètre ou demander une décision humaine consolidée avec toutes les alternatives tentées. Il est interdit de produire un troisième tour identique ou de rendre la main avec le même `next_action` sans preuve de changement.
+
 ## Commandes d'environnement
 
 Quand elles existent, utiliser les commandes natives de l'environnement. Ne pas inventer une commande équivalente et ne pas traiter un mode Agent ou Work locally comme une garantie de persistance.

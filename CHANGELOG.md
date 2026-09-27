@@ -1,5 +1,13 @@
 ## Unreleased
 
+## 1.12.25 - 2026-09-27
+
+### Anti-boucle des Goals
+
+- Interdit de répéter le même blocage plus de deux tours de Goal.
+- Impose une action de déblocage concrète au deuxième tour et documente les alternatives tentées.
+- Impact de release : `patch`.
+
 ## 1.12.24 - 2026-09-27
 
 ### Outils de test manquants
