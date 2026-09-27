@@ -1,5 +1,13 @@
 ## Unreleased
 
+## 1.12.29 - 2026-09-27
+
+### Étiquettes Trello obligatoires
+
+- Rend obligatoires les étiquettes de périmètre et de risque applicables dès la création des cartes.
+- Impose la relecture des rattachements et bloque les transitions si une étiquette requise manque.
+- Impact de release : `patch`.
+
 ## 1.12.28 - 2026-09-27
 
 ### Livraison automatique de l'onboarding
