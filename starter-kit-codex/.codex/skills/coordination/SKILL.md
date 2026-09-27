@@ -15,6 +15,7 @@ Demande, critères d'acceptation, `.codex/project-profile.toml`, état Git si di
 ## Récupération et recherche
 
 Ne pas transmettre une erreur corrigeable à l’utilisateur comme conclusion. Déclencher le diagnostic, la recherche documentaire ou internet, la correction et la validation. Continuer jusqu’à réussite, limite documentée ou blocage réel. Ne pas attendre un message « Continue », « approuve » ou une validation intermédiaire lorsque la prochaine étape est déjà autorisée. Poursuivre les tâches indépendantes malgré une limite locale, en la documentant.
+Un check Trello ouvert est une obligation active, pas une suggestion. Tant que le check courant n'est pas validé par une preuve relue, le Coordinateur ne passe pas à une autre carte, ne présente pas la carte comme livrée et ne transforme pas un échec en simple information. Il doit enchaîner diagnostic, correction, test ciblé, alternative sûre et relecture Trello jusqu'à preuve, décision humaine réellement nécessaire ou blocage externe démontré.
 
 ## Procédure
 
@@ -34,6 +35,7 @@ Une carte peut être confiée à plusieurs agents en parallèle lorsque sa check
 Lors de la création d'un Goal pour une carte comportant au moins trois tâches ouvertes indépendantes, cette matrice de délégation devient une partie obligatoire du Goal avant le premier travail. Le Goal doit demander explicitement la création ou l'activation des agents nécessaires pour traiter les lots en parallèle, préciser l'agent intégrateur et prévoir l'assemblage, les tests et l'audit. Cette décision est réévaluée si le coût de coordination dépasse le gain attendu.
 
 À chaque relecture du Goal, le Coordinateur parcourt les checks encore ouverts dans l'ordre des dépendances, attribue tout check autonome à un agent disponible et active un nouvel agent si aucun agent compétent n'est libre. L'état `available` d'un agent ne vaut pas preuve de travail : il doit être suivi d'une attribution observable ou d'une justification documentée lorsqu'aucun check ne lui correspond.
+Pour chaque check bloqué, le Goal conserve un journal de tentatives avec le symptôme, la cause supposée, l'action exécutée, le résultat observable et l'alternative suivante. Après deux tours sans résolution, il est obligatoire de changer concrètement d'approche, d'activer un agent ou un outil disponible, d'installer provisoirement un outil gratuit si nécessaire, ou d'utiliser une voie de validation de secours. Le Coordinateur ne peut déclarer `blocked` qu'après ces alternatives et une preuve du blocage. Une carte comportant un check ouvert reste prioritaire sur toute carte suivante, sauf instruction explicite contraire de l'utilisateur.
 
 Le Coordinateur ne parallélise jamais une tâche dépendante, une migration partagée, une décision d'architecture, une modification du même fichier ou une validation qui exige le résultat d'un autre agent. Après chaque lot, il relit la preuve, Trello et le work item, résout les conflits, intègre les résultats sur la branche unique de la carte, puis lance l'audit et les contrôles finaux. La carte reste ouverte tant que tous les lots, la revue et la Definition of Done ne sont pas prouvés.
 
