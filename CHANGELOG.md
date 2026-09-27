@@ -1,5 +1,13 @@
 ## Unreleased
 
+## 1.12.20 - 2026-09-27
+
+### Commentaires Trello sans autocomplétion
+
+- Interdit les deux-points et les caractères connus pour ouvrir des menus dans les commentaires Trello.
+- Maintient la relecture complète après publication et la correction des commentaires historiques incomplets.
+- Impact de release : `patch`.
+
 ## 1.12.19 - 2026-09-27
 
 ### Relecture historique des commentaires Trello
