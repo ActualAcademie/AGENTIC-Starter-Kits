@@ -1,5 +1,12 @@
 ## Unreleased
 
+## 1.12.33 - 2026-09-27
+
+### Résolution obligatoire des checks bloqués
+
+- Interdit de passer à une autre carte tant qu'un check ouvert n'est pas prouvé ou réellement bloqué.
+- Impose un journal de tentatives et un changement concret d'approche après deux tours sans résolution.
+
 ## 1.12.32 - 2026-09-27
 
 ### Découverte fiable des outils
