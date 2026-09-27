@@ -37,7 +37,7 @@ Une CI en cours doit être suivie jusqu’à son résultat. Une dette historique
 
 Avant toute livraison, contrôler le diff complet depuis la branche d’intégration et refuser toute branche qui mélange plusieurs objectifs, work items ou domaines sans lien. Si la branche est mélangée, créer automatiquement une branche propre depuis `dev` ou `develop`, reporter uniquement les commits du work item courant et relancer les contrôles.
 
-Lire et appliquer obligatoirement `.codex/policies/PERSISTENT-EXECUTION-CONTRACT.md`. Une réponse de statut sans action observable est invalide. Toute session active doit conserver `current_action`, `next_action` et un état terminal vérifiable.
+Lire et appliquer obligatoirement `.codex/policies/PERSISTENT-EXECUTION-CONTRACT.md`. Une réponse de statut sans action observable est invalide. Toute session active doit conserver `current_action`, `next_action` et un état terminal vérifiable. Lire aussi `.codex/policies/PROJECT-BOUNDARY-POLICY.md` : les livrables du projet ne doivent jamais exposer l'outillage interne.
 
 ## Interdiction de rendre la main avant la fin
 
