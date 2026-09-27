@@ -1,5 +1,13 @@
 ## Unreleased
 
+## 1.12.19 - 2026-09-27
+
+### Relecture historique des commentaires Trello
+
+- Impose la relecture des commentaires précédents avant toute nouvelle mise à jour.
+- Exige la correction des preuves partielles, vides ou tronquées avant de poursuivre.
+- Impact de release : `patch`.
+
 ## 1.12.18 - 2026-09-27
 
 ### Outils gratuits uniquement
