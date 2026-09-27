@@ -1,5 +1,29 @@
 ## Unreleased
 
+## 1.12.27 - 2026-09-27
+
+### Migration des tableaux Trello existants
+
+- Rend obligatoire la remise en conformité directe d'un tableau existant avec les normes du kit.
+- Impose la préservation de l'historique utile, la correction sans doublons et la relecture complète après migration.
+- Impact de release : `patch`.
+
+## 1.12.26 - 2026-09-27
+
+### Audit obligatoire des projets existants
+
+- Déclenche un audit complet après le choix Trello lors de l'initialisation d'un projet déjà commencé.
+- Transforme chaque correction, dette, incohérence ou amélioration en carte ordonnée et classée MVP ou Post-MVP avant toute reprise du développement.
+- Impact de release : `patch`.
+
+## 1.12.25 - 2026-09-27
+
+### Anti-boucle des Goals
+
+- Interdit de répéter le même blocage plus de deux tours de Goal.
+- Impose une action de déblocage concrète au deuxième tour et documente les alternatives tentées.
+- Impact de release : `patch`.
+
 ## 1.12.24 - 2026-09-27
 
 ### Outils de test manquants
