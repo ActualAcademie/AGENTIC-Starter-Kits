@@ -84,6 +84,8 @@ design_files = (
     "docs/design/api-contracts.md", "docs/design/security-design.md", "docs/delivery/roadmap.md",
     "docs/delivery/decision-log.md", "docs/diagrams/README.md", "docs/quality/quality-journal.md",
 )
+design_readiness = root / "docs/design/design-readiness.md"
+design_files = design_files + ("docs/design/design-readiness.md",)
 if data.get("tracking", {}).get("trello_choice") == "enabled":
     design_files = design_files + ("docs/project-management/trello-board.md",)
 missing_design = [path for path in design_files if not (root / path).is_file()]
@@ -93,6 +95,13 @@ if missing_design:
 incomplete_design = [path for path in design_files if "[[A_COMPLETER" in (root / path).read_text(errors="ignore")]
 if incomplete_design:
     print(f"CONCEPTION INCOMPLETE: remplacer les marqueurs de modèle dans : {chr(44).join(incomplete_design)}")
+    raise SystemExit(1)
+readiness = design_readiness.read_text(errors="ignore")
+if "Status: approved" not in readiness:
+    print("CONCEPTION INCOMPLETE: docs/design/design-readiness.md doit avoir Status: approved")
+    raise SystemExit(1)
+if "- [ ]" in readiness or "TODO" in readiness or "FIXME" in readiness:
+    print("CONCEPTION INCOMPLETE: design-readiness contient une case ouverte ou une dette non traitée")
     raise SystemExit(1)
 models = tomllib.loads((config / 'models.toml').read_text())
 allowed_models = {'opus', 'sonnet'}
