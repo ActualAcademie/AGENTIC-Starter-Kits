@@ -1,5 +1,14 @@
 ## Unreleased
 
+## 1.12.13 - 2026-09-27
+
+### Porte conception avant développement
+
+- Bloque l'implémentation tant que `docs/design/design-readiness.md` n'est pas approuvé et complet.
+- Ajoute le contrôle preflight du statut, des cases ouvertes et des marqueurs de conception.
+- Ajoute le template et l'initialisation du manifeste de readiness pour Codex et Claude.
+- Impact de release : `patch`.
+
 ## 1.12.12 - 2026-09-27
 
 ### Numérotation et ordre des cartes Trello
