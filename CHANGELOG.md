@@ -1,5 +1,12 @@
 ## Unreleased
 
+## 1.12.34 - 2026-09-27
+
+### Runners auto-hébergés
+
+- Préfère les runners auto-hébergés pour les contrôles GitHub Actions afin d'éviter les coûts de runners facturables.
+- Vérifie leur disponibilité, leur autorisation, leur label et leurs outils avant exécution.
+
 ## 1.12.33 - 2026-09-27
 
 ### Résolution obligatoire des checks bloqués
