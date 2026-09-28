@@ -3,6 +3,19 @@ set -euo pipefail
 
 root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 
+for coordinator in \
+  "$root/starter-kit-codex/AGENTS.md" \
+  "$root/starter-kit-codex/.codex/ORCHESTRATION.md" \
+  "$root/starter-kit-codex/.codex/policies/SESSION-CONTINUITY-POLICY.md" \
+  "$root/starter-kit-claude/CLAUDE.md" \
+  "$root/starter-kit-claude/.claude/ORCHESTRATION.md" \
+  "$root/starter-kit-claude/.claude/policies/SESSION-CONTINUITY-POLICY.md"; do
+  if ! grep -Eq "toute demande.*carte|Toute demande.*carte|quel que soit le nombre de cases" "$coordinator"; then
+    echo "ECHEC TEST: la création automatique du Goal pour une reprise de carte est absente de $coordinator"
+    exit 1
+  fi
+done
+
 for kit in codex claude; do
   hidden=".$kit"
   source_config="$root/starter-kit-$kit/$hidden"

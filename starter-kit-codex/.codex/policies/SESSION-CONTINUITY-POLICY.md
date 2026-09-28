@@ -40,9 +40,17 @@ Si la checklist contient au moins trois tâches ouvertes indépendantes, ou plus
 
 À la création du Goal et à chaque relecture du Goal, le Coordinateur réévalue la checklist restante et le registre des agents. Pour chaque check autonome non attribué, il attribue immédiatement le check à un agent disponible ; si aucun agent compétent n'est disponible et que le check est parallélisable, il crée ou active l'agent requis avant de poursuivre. Il ne laisse pas un agent disponible inactif lorsqu'un check compatible est ouvert. Toute attribution est enregistrée avec le check, le périmètre, la preuve attendue et l'heure de début.
 
-Le Coordinateur renseigne `goal_status: active`, `goal_objective`, `goal_verification`, `goal_constraints`, `goal_budget`, `goal_blocked_condition` et `goal_session_id` dans `RUNTIME-STATE.md`, puis active `/goal` ou l'API native lorsqu'elle est disponible. Une carte à une seule case, une demande d'information ou une tâche ponctuelle n'active pas automatiquement de Goal.
+Le Coordinateur renseigne `goal_status: active`, `goal_objective`, `goal_verification`, `goal_constraints`, `goal_budget`, `goal_blocked_condition` et `goal_session_id` dans `RUNTIME-STATE.md`, puis active `/goal` ou l'API native lorsqu'elle est disponible. Toute demande ciblant une carte à reprendre ou à livrer active automatiquement le Goal, y compris une carte à une seule case ou une reprise ponctuelle. Une simple demande d'information sans travail sur une carte reste hors de ce mécanisme.
 
 ## Source de référence
+
+## Matrice obligatoire de déclenchement
+
+Le Coordinateur crée ou reprend un Goal avant toute action observable dès qu'une demande implique une exécution, une correction ou une livraison. Le déclenchement est obligatoire pour les formulations directes ou équivalentes suivantes : reprendre ou continuer une carte, traiter un check ou une anomalie, corriger un échec CI ou de test, effectuer un audit, appliquer une amélioration, mettre à jour la documentation, synchroniser ou publier une branche, préparer ou mettre à jour une Pull Request, installer ou configurer un outil pour valider, ou exécuter une demande aléatoire qui modifie le dépôt.
+
+Le nombre de cases, le nombre de fichiers, le nombre de tours prévus, le caractère ponctuel de la demande et l'absence de carte Trello visible ne désactivent jamais ce déclenchement. Dans ce dernier cas, le Coordinateur crée d'abord le work item local et la carte requise selon les règles Trello, puis rattache le Goal à cet identifiant. Une simple question d'information sans exécution, modification, diagnostic actif ou engagement de livraison ne déclenche pas de Goal.
+
+Avant la première commande, lecture de log, délégation, modification, commentaire externe ou test, le Coordinateur doit renseigner `goal_status: active`, `goal_objective`, `goal_verification`, `goal_constraints`, `goal_blocked_condition` et `goal_session_id`, puis vérifier que le Goal natif est bien actif ou consigner la preuve de son indisponibilité. L'absence de cette preuve interdit de démarrer le travail et interdit toute conclusion de tour.
 
 Le comportement attendu est aligné sur la documentation officielle OpenAI sur les Goals et les sessions. Les URLs et la date de consultation doivent être conservées dans le work item ou l'ADR lorsque cette politique influence une décision.
 
