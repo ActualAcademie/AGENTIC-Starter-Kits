@@ -1,5 +1,21 @@
 ## Unreleased
 
+## 1.12.36 - 2026-09-28
+
+### Cadence des Pull Requests
+
+- Ouvre une seule PR vers `dev` ou `develop` quand une carte est prête à intégrer.
+- Met à jour la PR existante au lieu de créer une PR par commit, check ou correction.
+- Réserve une PR unique de promotion vers `main` par lot cohérent et version.
+
+## 1.12.35 - 2026-09-27
+
+### Sobriété CI/CD
+
+- Évite les doublons de validation entre `push` et `pull_request` pour un même commit.
+- Annule les exécutions obsolètes et limite les matrices aux besoins justifiés.
+- Réutilise les preuves lors de la promotion vers `main` lorsque le commit est identique.
+
 ## 1.12.34 - 2026-09-27
 
 ### Runners auto-hébergés
