@@ -1,5 +1,13 @@
 ## Unreleased
 
+## 1.12.38 - 2026-09-28
+
+### Langue Trello
+
+- Rend le français obligatoire pour tous les contenus rédigés dans Trello.
+- Autorise uniquement les éléments techniques incompressibles dans leur forme originale.
+- Impose la relecture du contenu réellement affiché après chaque enregistrement.
+
 ## 1.12.37 - 2026-09-28
 
 ### Livraison obligatoire des goals
