@@ -4,6 +4,10 @@
 
 Every project board must be immediately understandable without reading every card. The Coordinateur creates or reuses a consistent visual system before creating cards.
 
+## Langue obligatoire
+
+Tout contenu rédigé dans Trello doit être exclusivement en français : noms de tableaux, listes, cartes, descriptions, checklists, commentaires, preuves, décisions, étiquettes nommées et messages de synchronisation. Les noms techniques incompressibles, commandes, identifiants, URLs, noms de branches et extraits de logs peuvent rester dans leur forme originale, mais toute explication autour doit être en français. Le Coordinateur traduit le contenu avant publication et relit le texte réellement affiché après chaque enregistrement. Une carte partiellement rédigée en anglais n'est pas conforme et ne peut pas être déclarée terminée.
+
 ## Standard lists
 
 Create missing lists in this order:
