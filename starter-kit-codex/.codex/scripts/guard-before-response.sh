@@ -15,10 +15,18 @@ evidence="$(value last_observable_evidence)"
 ci="$(value ci_status)"; trello="$(value trello_sync_status)"
 attempts="$(value attempt_count)"; max_attempts="$(value max_attempts)"; redundant="$(value redundant_confirmation_requested)"
 required="$(value required_action_status)"; budget="$(value budget_status)"; environment="$(value environment_status)"; shutdown="$(value environment_shutdown_status)"; pending_request="$(value pending_request_id)"; pending_turn="$(value pending_turn_id)"
+goal_status="$(value goal_status)"; goal_delivery="$(value goal_delivery_status)"; integration_branch="$(value integration_branch)"; pushed_commit="$(value pushed_integration_commit)"; pr_status="$(value pull_request_status)"
 turn_status="$(value last_turn_status)"; tool_failures="$(value tool_failures)"; session_status="$(value session_status)"
 
 case "$status" in
   complete)
+    if [[ "$goal_status" != "none" && "$goal_status" != "not-required" ]]; then
+      [[ "$goal_status" == "complete" ]] || fail "goal encore actif: $goal_status"
+      [[ "$goal_delivery" == "verified" ]] || fail "livraison du goal non prouvée: $goal_delivery"
+      [[ "$integration_branch" =~ ^(dev|develop)$ ]] || fail "branche d'intégration absente ou invalide: $integration_branch"
+      [[ -n "$pushed_commit" && "$pushed_commit" != "none" && "$pushed_commit" != *"A_COMPLETER"* ]] || fail "commit poussé vers l'intégration absent"
+      [[ "$pr_status" =~ ^(open|updated|merged|verified)$ ]] || fail "PR d'intégration absente ou non relue: $pr_status"
+    fi
     [[ "$next" =~ ^(none|aucune|aucun)$ ]] || fail "next_action reste ouverte: $next"
     [[ "$open" =~ ^(0|none|aucune|aucun)$ ]] || fail "open_checklist_items non nul: $open"
     [[ -n "$evidence" && "$evidence" != *"A_COMPLETER"* ]] || fail "last_observable_evidence absente"
