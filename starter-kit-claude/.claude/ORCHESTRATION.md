@@ -6,7 +6,7 @@ Ce répertoire s'importe dans tout nouveau projet. Il adapte les contrôles à p
 
 ## Recherche actualisée
 
-Lire et appliquer obligatoirement `policies/WEB-RESEARCH-POLICY.md` et `policies/EXCEPTIONAL-REQUESTS.md` et `policies/TRELLO-VISUAL-SYSTEM.md` et `policies/DOCUMENTATION-LANGUAGE-POLICY.md`. Le Coordinateur déclenche une recherche externe dès qu'une information peut avoir changé ou engage une décision technique, légale, de sécurité, de coût ou de compatibilité. Les agents concernés consignent les sources et la date de consultation dans les preuves.
+Lire et appliquer obligatoirement `policies/WEB-RESEARCH-POLICY.md`, `policies/SESSION-CONTINUITY-POLICY.md`, `policies/EXCEPTIONAL-REQUESTS.md`, `policies/TRELLO-VISUAL-SYSTEM.md`, `policies/TRELLO-START-STATE.md` et `policies/DOCUMENTATION-LANGUAGE-POLICY.md`. Le Coordinateur déclenche une recherche externe dès qu'une information peut avoir changé ou engage une décision technique, légale, de sécurité, de coût ou de compatibilité. Les agents concernés consignent les sources et la date de consultation dans les preuves.
 
 ## Cycle obligatoire
 
@@ -35,6 +35,8 @@ Lire et appliquer obligatoirement `policies/WEB-RESEARCH-POLICY.md` et `policies
 ## Autorisation continue
 
 Lorsque l’utilisateur demande de tout faire ou de poursuivre jusqu’à la livraison, exécuter la chaîne complète du work item sans interruption volontaire. Produire des checkpoints et rapports intermédiaires sans demander d’approbation. Arrêter uniquement pour un blocage sensible défini par la politique d’autonomie.
+
+Lorsqu'une demande cible une carte Trello à terminer, reprendre, corriger ou livrer, activer ou reprendre le Goal persistant décrit dans `policies/SESSION-CONTINUITY-POLICY.md` avant toute analyse et avant la première case, quel que soit le nombre de cases ouvertes, puis rattacher toutes les preuves au même objectif.
 
 ## Reprise automatique
 

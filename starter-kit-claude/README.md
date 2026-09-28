@@ -1,6 +1,6 @@
 # Kit d'orchestration Claude Code portable
 
-![Version du kit](https://img.shields.io/badge/version-1.6.0-blue.svg)
+![Version du kit](https://img.shields.io/badge/version-1.12.40-blue.svg)
 
 Ce kit installe une gouvernance projet native pour Claude Code. Il ne construit rien tant que le cahier des charges n'a pas été fourni et formalisé.
 
@@ -195,13 +195,17 @@ Le Coordinateur ne les appelle pas tous systématiquement. Il lit `.claude/SPECI
 
 Une CI en cours ne clôture jamais le work item. Le Coordinateur attend les résultats, traite les erreurs, corrige les lints et les dettes historiques du périmètre par lots, puis relance les contrôles jusqu’à la Definition of Done.
 
-Le kit est actuellement en version `1.6.0`. Toute modification du kit doit mettre à jour ce README, le changelog et la version selon `VERSIONING.md`.
+Le kit est actuellement en version `1.12.40`. Toute modification du kit doit mettre à jour ce README, le changelog et la version selon `VERSIONING.md`.
+
+Le contrat central `.claude/policies/CORE-EXECUTION-CONTRACT.md` impose un registre d obligations, huit portes de validation et une reprise persistante. Une tâche ne peut être clôturée tant qu une obligation applicable ne possède pas de preuve.
+
+Chaque nouveau work item reçoit `obligations.tsv`. `bash .claude/scripts/validate-obligations.sh --require-active` vérifie les huit portes et `verify-before-push.sh` bloque automatiquement une livraison incomplète.
 
 ## Gouvernance complète disponible
 
 Le fichier `.claude/SPECIALIST-AGENTS.md` définit les conditions d’activation, les livrables et l’ordre de contrôle des dix spécialistes. Le Coordinateur lit ce fichier avant toute délégation, consulte `[agents]` dans le profil et justifie chaque activation dans le work item.
 
-Le kit comprend aussi `RUNTIME-STATE.md` et `scripts/checkpoint.sh` pour reprendre une session, `scripts/cost-tracker.sh` pour aider le Coordinateur à réduire les coûts, et le mode Trello `time-gated` pour suspendre uniquement une carte dépendante d’une échéance. Les flux indépendants continuent.
+Le kit comprend aussi `RUNTIME-STATE.md`, `scripts/checkpoint.sh` et `scripts/guard-before-response.sh` pour reprendre une session et empêcher une conclusion prématurée, `scripts/cost-tracker.sh` pour aider le Coordinateur à réduire les coûts, et le mode Trello `time-gated` pour suspendre uniquement une carte dépendante d’une échéance. Pour les tâches longues, `policies/SESSION-CONTINUITY-POLICY.md` décrit l'usage d'un objectif persistant natif lorsqu'il existe. Les flux indépendants continuent.
 
 Toute évolution doit mettre à jour ce README, `CHANGELOG.md`, la version SemVer, le titre et la description de la Pull Request. Une livraison sans documentation correspondante est refusée.
 
@@ -255,6 +259,8 @@ Dans une conversation existante, utiliser `Mode initialisation :` pour relancer 
 Envoyer cette commande seule depuis la racine du projet. Claude recharge alors les instructions et l'état du kit, vérifie le cahier des charges et n'autorise aucune analyse technique, aucun work item ni aucune modification produit avant sa réception et son acceptation. La procédure détaillée est documentée dans le guide d'installation du dépôt principal.
 
 ## Diagnostic
+
+Le synchroniseur external met à jour directement `.claude/` et conserve les données projet protégées.
 
 Le diagnostic local vérifie la version, le manifeste, le cahier des charges, l état runtime, le workflow external, le point d entrée et les fichiers qui ne doivent pas être suivis par Git :
 

@@ -1,3 +1,441 @@
+## Unreleased
+
+## 1.12.40 - 2026-09-28
+
+### Parallélisation obligatoire des lots indépendants
+
+- Impose la création ou l’activation de plusieurs agents dès deux lots indépendants lorsque le parallélisme apporte un gain réel.
+- Impose la matrice agent, périmètre, fichiers, dépendances et preuves avant le démarrage.
+- Exige une justification dans le Goal lorsqu’une exécution séquentielle est conservée malgré des lots techniquement indépendants.
+- Ajoute un test de cohérence pour empêcher le retour d’une règle seulement facultative.
+
+## 1.12.39 - 2026-09-28
+
+### Goals obligatoires pour les reprises de cartes
+
+- Initialise ou reprend automatiquement un Goal pour toute demande ciblant une carte Trello, même avec une seule case ouverte.
+- Supprime les contradictions entre les règles du Coordinateur, de l'orchestration et de la continuité de session.
+- Ajoute un test de régression vérifiant cette obligation dans les deux kits.
+
+## 1.12.38 - 2026-09-28
+
+### Langue Trello
+
+- Rend le français obligatoire pour tous les contenus rédigés dans Trello.
+- Autorise uniquement les éléments techniques incompressibles dans leur forme originale.
+- Impose la relecture du contenu réellement affiché après chaque enregistrement.
+
+## 1.12.37 - 2026-09-28
+
+### Livraison obligatoire des goals
+
+- Maintient un goal actif jusqu'à la preuve du push vers `dev` ou `develop` et de la PR d'intégration relue.
+- Ajoute au runtime la branche d'intégration, le commit poussé, l'état de livraison et l'état de la PR.
+- Bloque le garde avant réponse si un goal est déclaré terminé sans preuve de livraison complète.
+- Ajoute un test de régression pour un goal terminé prématurément.
+
+## 1.12.36 - 2026-09-28
+
+### Cadence des Pull Requests
+
+- Ouvre une seule PR vers `dev` ou `develop` quand une carte est prête à intégrer.
+- Met à jour la PR existante au lieu de créer une PR par commit, check ou correction.
+- Réserve une PR unique de promotion vers `main` par lot cohérent et version.
+
+## 1.12.35 - 2026-09-27
+
+### Sobriété CI/CD
+
+- Évite les doublons de validation entre `push` et `pull_request` pour un même commit.
+- Annule les exécutions obsolètes et limite les matrices aux besoins justifiés.
+- Réutilise les preuves lors de la promotion vers `main` lorsque le commit est identique.
+
+## 1.12.34 - 2026-09-27
+
+### Runners auto-hébergés
+
+- Préfère les runners auto-hébergés pour les contrôles GitHub Actions afin d'éviter les coûts de runners facturables.
+- Vérifie leur disponibilité, leur autorisation, leur label et leurs outils avant exécution.
+
+## 1.12.33 - 2026-09-27
+
+### Résolution obligatoire des checks bloqués
+
+- Interdit de passer à une autre carte tant qu'un check ouvert n'est pas prouvé ou réellement bloqué.
+- Impose un journal de tentatives et un changement concret d'approche après deux tours sans résolution.
+
+## 1.12.32 - 2026-09-27
+
+### Découverte fiable des outils
+
+- Vérifie les chemins, environnements, IDE, scripts locaux, intégrations, identité et authentification avant de déclarer un outil indisponible.
+- Interdit de conclure à une absence sur un simple échec lié au `PATH`.
+
+## 1.12.31 - 2026-09-27
+
+### Cadence des commentaires Trello
+
+- Réduit les micro-commentaires pour éviter les cartes qui stagnent.
+- Impose des synthèses lors des changements significatifs et une synthèse finale probante.
+
+## 1.12.30 - 2026-09-27
+
+### Nommage obligatoire des étiquettes Trello
+
+- Invalide les étiquettes sans nom explicite.
+- Autorise le navigateur comme solution de secours lorsque le connecteur ne permet pas le renommage.
+- Impose une relecture visuelle du nom dans Trello.
+- Impact de release : `patch`.
+
+## 1.12.29 - 2026-09-27
+
+### Étiquettes Trello obligatoires
+
+- Rend obligatoires les étiquettes de périmètre et de risque applicables dès la création des cartes.
+- Impose la relecture des rattachements et bloque les transitions si une étiquette requise manque.
+- Impact de release : `patch`.
+
+## 1.12.28 - 2026-09-27
+
+### Livraison automatique de l'onboarding
+
+- Termine l'onboarding après collecte des réponses, avec `.gitignore`, branche `dev`, commit et push vérifié.
+- Reporte la question de lancement du développement après cette livraison uniquement.
+- Impact de release : `patch`.
+
+## 1.12.27 - 2026-09-27
+
+### Migration des tableaux Trello existants
+
+- Rend obligatoire la remise en conformité directe d'un tableau existant avec les normes du kit.
+- Impose la préservation de l'historique utile, la correction sans doublons et la relecture complète après migration.
+- Impact de release : `patch`.
+
+## 1.12.26 - 2026-09-27
+
+### Audit obligatoire des projets existants
+
+- Déclenche un audit complet après le choix Trello lors de l'initialisation d'un projet déjà commencé.
+- Transforme chaque correction, dette, incohérence ou amélioration en carte ordonnée et classée MVP ou Post-MVP avant toute reprise du développement.
+- Impact de release : `patch`.
+
+## 1.12.25 - 2026-09-27
+
+### Anti-boucle des Goals
+
+- Interdit de répéter le même blocage plus de deux tours de Goal.
+- Impose une action de déblocage concrète au deuxième tour et documente les alternatives tentées.
+- Impact de release : `patch`.
+
+## 1.12.24 - 2026-09-27
+
+### Outils de test manquants
+
+- Autorise l'installation provisoire d'outils gratuits manquants pour exécuter les tests.
+- Impose la journalisation de la version et du résultat ainsi que le nettoyage si l'outil n'est pas une dépendance projet.
+- Impact de release : `patch`.
+
+## 1.12.23 - 2026-09-27
+
+### Commentaires Trello en phrases
+
+- Remplace les puces et numérotations par une phrase par ligne séparée par un retour à la ligne.
+- Maintient la rédaction française, la preuve explicite et la vérification visuelle après sauvegarde.
+- Impact de release : `patch`.
+
+## 1.12.22 - 2026-09-27
+
+### Format final des commentaires Trello
+
+- Remplace les tirets manuels par les puces natives Trello et impose le français, une idée par puce, une ponctuation complète et une relecture visuelle.
+- Impose la mention des preuves vérifiées et des éléments non vérifiés ou bloqués.
+- Impact de release : `patch`.
+
+## 1.12.21 - 2026-09-27
+
+### Format strict des commentaires Trello
+
+- Implique des lignes alignées à gauche, chacune commençant par `-`, sans titre, gras, ligne vide, deux-points ou caractère ouvrant un menu.
+- Impose la relecture du contenu complet après sauvegarde.
+- Impact de release : `patch`.
+
+## 1.12.20 - 2026-09-27
+
+### Commentaires Trello sans autocomplétion
+
+- Interdit les deux-points et les caractères connus pour ouvrir des menus dans les commentaires Trello.
+- Maintient la relecture complète après publication et la correction des commentaires historiques incomplets.
+- Impact de release : `patch`.
+
+## 1.12.19 - 2026-09-27
+
+### Relecture historique des commentaires Trello
+
+- Impose la relecture des commentaires précédents avant toute nouvelle mise à jour.
+- Exige la correction des preuves partielles, vides ou tronquées avant de poursuivre.
+- Impact de release : `patch`.
+
+## 1.12.18 - 2026-09-27
+
+### Outils gratuits uniquement
+
+- Interdit toute activation de service payant, runner supérieur, quota supplémentaire ou moyen de paiement sans accord explicite.
+- Privilégie les outils locaux, open source, gratuits et les runners GitHub Actions standards.
+- Bloque toute tentative de contournement d'un quota ou d'une facturation.
+- Impact de release : `patch`.
+
+## 1.12.17 - 2026-09-27
+
+### Clôture documentaire Trello
+
+- Rend obligatoire une dernière case de checklist pour mettre à jour et relire les README, docs, changelog et notes de release applicables.
+- Interdit de passer la carte à `Done` avant la preuve de cette dernière case.
+- Impact de release : `patch`.
+
+## 1.12.16 - 2026-09-27
+
+### Preuve Trello fiable
+
+- Impose la saisie en texte brut et la fermeture des menus d'autocomplétion avant validation d'un commentaire.
+- Impose la relecture du commentaire publié dans l'activité avant de considérer la preuve comme valide.
+- Impact de release : `patch`.
+
+## 1.12.15 - 2026-09-27
+
+### Contrôle automatisé de frontière projet
+
+- Ajoute un garde avant push qui bloque les références aux outils internes dans les fichiers suivis du projet.
+- Vérifie que la détection bloque une fuite et accepte un livrable neutre.
+- Impact de release : `patch`.
+
+## 1.12.14 - 2026-09-27
+
+### Frontière entre kit et projet
+
+- Interdit l'exposition des noms, fichiers et mécanismes internes du kit dans les livrables projet.
+- Ajoute la politique de séparation aux kits Codex et Claude.
+- Impact de release : `patch`.
+
+## 1.12.13 - 2026-09-27
+
+### Porte conception avant développement
+
+- Bloque l'implémentation tant que `docs/design/design-readiness.md` n'est pas approuvé et complet.
+- Ajoute le contrôle preflight du statut, des cases ouvertes et des marqueurs de conception.
+- Ajoute le template et l'initialisation du manifeste de readiness pour Codex et Claude.
+- Impact de release : `patch`.
+
+## 1.12.12 - 2026-09-27
+
+### Numérotation et ordre des cartes Trello
+
+- Ajoute une numérotation stable `MVP-001` ou `POST-MVP-001` fondée sur les dépendances.
+- Documente l'ordre d'exécution, les groupes parallèles et les décisions de périmètre.
+- Ajoute les files `MVP - À développer` et `Post-MVP - À développer` uniquement lorsque les deux phases existent.
+- Impact de release : `patch`.
+
+## 1.12.11 - 2026-09-26
+
+### Goal obligatoire pour chaque carte
+
+- Crée un Goal dès le début de toute demande explicite de finalisation d'une carte Trello, même avec une seule case ouverte.
+- Réserve le nombre de checks au choix de parallélisation et non à l'activation du Goal.
+- Impact de release : `patch`.
+
+## 1.12.10 - 2026-09-26
+
+### Attribution dynamique des checks d'un Goal
+
+- Réévalue les checks ouverts et les agents disponibles à chaque relecture du Goal.
+- Attribue immédiatement chaque check autonome à un agent disponible ou crée/active un agent compétent.
+- Trace l'attribution, le périmètre, la preuve attendue et l'heure de début.
+- Impact de release : `patch`.
+
+## 1.12.9 - 2026-09-26
+
+### Délégation automatique à la création des Goals
+
+- Ajoute au Goal un plan de création ou d'activation d'agents pour les cartes comportant au moins trois tâches indépendantes.
+- Exige la partition, les preuves, les dépendances et l'agent intégrateur avant le démarrage parallèle.
+- Conserve une branche et une PR finales par carte.
+- Impact de release : `patch`.
+
+## 1.12.8 - 2026-09-26
+
+### Cible frontend Framer-like
+
+- Ajoute une cible comparative de rendu Framer-like à 99 % sur la qualité perçue.
+- Renforce les contrôles de composition, motion, interactions, responsive et micro-détails.
+- Maintient les exigences d'accessibilité, de performance, de provenance et de maintenabilité.
+- Impact de release : `patch`.
+
+## 1.12.7 - 2026-09-26
+
+### Parallélisation contrôlée des agents
+
+- Autorise plusieurs agents sur une même carte lorsque les lots sont indépendants et partitionnés.
+- Autorise plusieurs agents du même rôle sur des cartes, fichiers, parcours ou lots distincts.
+- Ajoute un agent intégrateur chargé de l'assemblage, des conflits, des tests et des preuves finales.
+- Impact de release : `patch`.
+
+## 1.12.6 - 2026-09-26
+
+### Contenu visuel frontend premium
+
+- Encourage la génération d'images réalistes et spécifiques lorsque le produit en a besoin.
+- Ajoute les contrôles de provenance, artefacts, responsive, performance, accessibilité et crédibilité.
+- Renforce les livrables et interdictions de l'agent frontend Codex et Claude.
+- Impact de release : `patch`.
+
+## 1.12.5 - 2026-09-26
+
+### Attente récupérable des Goals
+
+- Ajoute l'état `waiting` pour les CI, intégrations temporaires indisponibles et commandes réessayables.
+- Interdit de transformer automatiquement ces attentes en `blocked` ou en pause native du Goal.
+- Ajoute un test vérifiant qu'un checkpoint `waiting` conserve la reprise possible.
+- Impact de release : `patch`.
+
+## 1.12.4 - 2026-09-26
+
+### Synchronisation Trello événementielle
+
+- Interdit les mises à jour groupées après plusieurs transitions ou preuves.
+- Impose une synchronisation et une relecture immédiates après chaque événement significatif.
+- Documente le checkpoint local et le rejeu ordonné en cas d'indisponibilité Trello.
+- Impact de release : `patch`.
+
+## 1.12.3 - 2026-09-26
+
+### Dimensionnement adaptatif des tableaux Trello
+
+- Adapte le nombre de colonnes de travail au nombre de personnes actives.
+- Conserve les colonnes de gouvernance stables et limite les colonnes de travail à quatre.
+- Impact de release : `patch`.
+
+## 1.12.2 - 2026-09-26
+
+### Enchaînement automatique des cartes Trello
+
+- Ajoute la sélection automatique de la prochaine carte éligible après clôture vérifiée d'une carte lors d'une autorisation de lot.
+- Ignore explicitement les cartes bloquées, dépendantes, `time-gated`, en revue ou déjà terminées.
+- Impact de release : `patch`.
+
+## 1.12.1 - 2026-09-26
+
+### Correction du synchroniseur external
+
+- Corrige la cible de synchronisation pour éviter la création de `.codex/.codex`.
+- Corrige l’écriture de la version dans `.workspace.toml`.
+- Impact de release : `patch`.
+
+## 1.12.0 - 2026-09-26
+
+### Goal automatique pour les cartes Trello multi-étapes
+
+- Active automatiquement le contrat Goal pour une demande de finalisation d'une carte comportant au moins deux cases ouvertes.
+- Rattache l'objectif au titre, à la checklist, à la Definition of Done, aux preuves et aux contraintes de livraison de la carte.
+- Conserve un fonctionnement local explicite lorsque le mécanisme Goal natif n'est pas disponible.
+- Impact de release : `minor`.
+
+## 1.11.0 - 2026-09-26
+
+### Application du cahier des charges agentique
+
+- Ajoute la validation explicite de la session, du dernier tour et des échecs d'outils.
+- Ajoute `validate-session-state.sh` aux kits Codex et Claude.
+- Renforce le garde avant réponse sur les états distribués et les environnements distants.
+- Documente l'état d'implémentation et les limites des adaptateurs Agents API/webhooks.
+- Impact de release : `minor`.
+
+## 1.10.0 - 2026-09-26
+
+### Continuité de session fondée sur les objectifs
+
+- Ajoute une politique commune de continuité de session aux kits Codex et Claude.
+- Documente l'utilisation d'un objectif persistant natif lorsqu'il est disponible, avec résultat attendu, preuves, contraintes, budget et condition de blocage.
+- Ajoute les métadonnées d'objectif à `RUNTIME-STATE.md`.
+- Interdit de présenter Agent, Work locally, idle ou un tour terminé comme une garantie d'autonomie continue.
+- Aligne la clôture sur la vérification réelle des outils et des preuves.
+- Ajoute les contrôles runtime pour les actions requises, reprises, budgets, environnements, requêtes en attente et artefacts.
+- Documente l'idempotence, la signature et la déduplication des webhooks, la traçabilité et la protection des secrets.
+- Impact de release : `minor`.
+
+## 1.9.0 - 2026-09-26
+
+### Continuité de session fondée sur les objectifs
+
+- Ajoute une politique commune de continuité de session aux kits Codex et Claude.
+- Documente l'utilisation d'un objectif persistant natif lorsqu'il est disponible, avec résultat attendu, preuves, contraintes, budget et condition de blocage.
+- Ajoute les métadonnées d'objectif à `RUNTIME-STATE.md`.
+- Interdit de présenter Agent, Work locally, idle ou un tour terminé comme une garantie d'autonomie continue.
+- Aligne la clôture sur la vérification réelle des outils et des preuves.
+- Impact de release : `minor`.
+
+## 1.8.2 - 2026-09-26
+
+### Exécution agentique sans confirmation redondante
+
+- Autorise immédiatement les actions réversibles explicitement demandées par l'utilisateur, notamment la création d'une carte Trello et du work item associé.
+- Interdit de demander une confirmation supplémentaire pour une action déjà demandée.
+- Ajoute des contrôles de cohérence pour maintenir cette règle dans les kits Codex et Claude.
+- Ajoute un état runtime obligatoire et un garde avant réponse pour empêcher les clôtures prématurées.
+- Renforce `checkpoint.sh` et ajoute un test automatisé des états `running` et `complete`.
+- Impact de release : `patch`.
+
+## 1.8.0 - 2026-09-25
+
+### Portes de gouvernance exécutables
+
+- Ajoute un registre TSV structuré aux nouveaux work items pour les huit portes du contrat central.
+- Bloque le push et la livraison lorsqu une porte reste ouverte ou sans preuve.
+- Ajoute des scénarios de non-régression pour les registres incomplets, valides et sans preuve.
+- Exécute les tests de gouvernance dans la CI et contrôle la parité Codex et Claude.
+
+## 1.7.0 - 2026-09-25
+
+### Contrat de gouvernance central
+
+- Ajoute un registre d obligations persistant avec responsable, déclencheur, preuve, état et prochaine action.
+- Ajoute huit portes obligatoires couvrant intake, conception, périmètre, validation, documentation, intégrations, audit et livraison.
+- Aligne les parcours Codex et Claude et ajoute un audit automatisé de cohérence.
+- Interdit la clôture tant qu une obligation applicable ne possède pas de preuve ou une justification explicite.
+
+### Synchronisation Trello
+
+- Privilégie les connecteurs Trello déjà disponibles dans la session.
+- Interdit de proposer l’installation d’outils de remplacement lorsqu’une intégration connectée existe.
+- Ajoute un checkpoint local et la poursuite des tâches indépendantes lorsque Trello est réellement indisponible.
+
+## 1.6.3 - 2026-09-25
+
+### Autonomie après le cadrage
+
+- Conserve les réponses partielles au questionnaire et ne redemande que les décisions réellement manquantes.
+- Lance automatiquement l onboarding, la conception et le flux prévu dès que les blocages de cadrage sont levés.
+- Interdit de demander « Continue » ou « fais tout » pour déclencher une étape déjà autorisée.
+
+### Intégrité des branches
+
+- Ajoute un contrôle explicite du diff complet par rapport au work item avant commit final et Pull Request.
+- Bloque les branches qui mélangent internationalisation, configuration, maintenance ou plusieurs work items.
+- Documente la création automatique d’une branche propre depuis la branche d’intégration et le report des seuls commits pertinents.
+
+## 1.6.2 - 2026-09-24
+
+### Synchronisation temps réel Trello
+
+- Impose la validation, le cochage, la relecture et la reprise séquentielle après chaque élément.
+- Interdit de cocher plusieurs éléments en différé ou sans preuve.
+
+## 1.6.1 - 2026-09-24
+
+### Démarrage obligatoire des cartes Trello
+
+- Impose le déplacement de la carte active dans `In Progress` avant toute analyse ou modification.
+- Ajoute une preuve de relecture de la liste, des labels, de la checklist et de la Definition of Done.
+- Bloque le codage si l état Trello et l état local ne correspondent pas.
+
 ## 1.6.0 - 2026-09-24
 
 ### Gouvernance visuelle Trello
@@ -102,6 +540,11 @@
 - Crée une sauvegarde avant chaque remplacement du moteur du kit.
 
 # Changelog
+
+## 1.12.31
+
+- Réduit la cadence des commentaires Trello pour éviter les cartes qui stagnent sous des micro-mises à jour.
+- Impose des synthèses uniquement lors d'événements significatifs, avec une synthèse finale probante.
 ## 1.1.2 - 2026-09-23
 
 ### Corrections
