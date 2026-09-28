@@ -16,6 +16,17 @@ for coordinator in \
   fi
 done
 
+for flow in \
+  "$root/starter-kit-codex/.codex/policies/GIT-FLOW.md" \
+  "$root/starter-kit-claude/.claude/policies/GIT-FLOW.md"; do
+  grep -q "Tant qu'un seul check" "$flow" || {
+    echo "ECHEC TEST: la PR prématurée n'est pas interdite dans $flow"; exit 1;
+  }
+  grep -q "dernière checklist" "$flow" || {
+    echo "ECHEC TEST: la condition de PR finale est absente de $flow"; exit 1;
+  }
+done
+
 for coordinator in \
   "$root/starter-kit-codex/.codex/ORCHESTRATION.md" \
   "$root/starter-kit-claude/.claude/ORCHESTRATION.md"; do

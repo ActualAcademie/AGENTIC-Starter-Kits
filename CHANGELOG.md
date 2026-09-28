@@ -1,5 +1,10 @@
 ## Unreleased
 
+## 1.12.43 - 2026-09-28
+
+- Interdit les Pull Requests tant qu'un check de carte reste ouvert.
+- Impose les commits poussés sur la branche dédiée jusqu'à la clôture complète de la carte.
+
 ## 1.12.42 - 2026-09-28
 
 - Rend obligatoire la préparation automatique de chaque session avant toute action.
