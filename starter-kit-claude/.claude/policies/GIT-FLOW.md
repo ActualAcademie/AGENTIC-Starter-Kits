@@ -36,6 +36,12 @@ Si Git est indisponible, le Coordinateur peut préparer le travail et les preuve
 
 Toute Pull Request créée automatiquement par le starter kit cible exclusivement `develop` ou `dev`. Le workflow refuse toute autre branche cible, notamment `main`. Une promotion vers `main` doit être réalisée par un humain ou demandée explicitement par l’utilisateur dans la conversation, avec une justification et des contrôles verts.
 
+## Cadence des Pull Requests
+
+Un push sur une branche de travail ne crée pas automatiquement une nouvelle PR. Le Coordinateur pousse les commits nécessaires sur la branche existante, puis ouvre une seule PR vers la branche d'intégration `dev` ou `develop` uniquement lorsque la carte est prête à intégrer, que les contrôles locaux sont passés et que les preuves de la Definition of Done sont réunies. Si une PR existe déjà pour la carte, elle est mise à jour au lieu d'en créer une autre. Les micro-corrections, commits de checkpoint et changements de documentation liés restent dans la même PR.
+
+La promotion vers `main` est une seule PR depuis `dev` ou `develop` par lot cohérent et version. Elle ne doit pas créer de PR intermédiaire par commit, check, agent, résultat CI ou correction.
+
 ## Pull Request par carte
 
 Une carte Trello correspond par défaut à une branche de travail et à une seule Pull Request finale. Les commits restent atomiques et peuvent couvrir plusieurs étapes de la checklist, mais l'agent ne crée pas de PR pour chaque contrôle, sous-tâche, correction ou document. Si une PR existe déjà pour la carte, il la met à jour jusqu'à la Definition of Done. Une PR intermédiaire exige une demande explicite de l'utilisateur ou une justification critique documentée.

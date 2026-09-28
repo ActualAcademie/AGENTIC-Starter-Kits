@@ -1,5 +1,13 @@
 ## Unreleased
 
+## 1.12.36 - 2026-09-28
+
+### Cadence des Pull Requests
+
+- Ouvre une seule PR vers `dev` ou `develop` quand une carte est prête à intégrer.
+- Met à jour la PR existante au lieu de créer une PR par commit, check ou correction.
+- Réserve une PR unique de promotion vers `main` par lot cohérent et version.
+
 ## 1.12.35 - 2026-09-27
 
 ### Sobriété CI/CD
