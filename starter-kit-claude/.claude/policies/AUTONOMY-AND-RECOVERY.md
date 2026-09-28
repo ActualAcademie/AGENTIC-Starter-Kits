@@ -14,6 +14,8 @@ Une permission d'exécution affichée par l'environnement n'est pas une décisio
 
 Une demande explicite d'action vaut autorisation pour cette action et ses étapes réversibles nécessaires. Par exemple, « ajoute une carte », « crée le work item », « synchronise Trello » ou « prépare cette amélioration » autorise la création ou la mise à jour correspondante. Ne jamais demander ensuite « confirmes-tu ? », « puis-je la créer ? » ou afficher un bouton de confirmation pour la même action. Une question supplémentaire n'est permise que si elle porte sur une décision métier, une action irréversible, une dépense, un accès externe ou une information réellement manquante.
 
+Lorsqu'une intégration Trello déjà autorisée est disponible, une demande explicite de publier, corriger ou synchroniser un commentaire vaut autorisation d'écriture externe réversible. Ne pas demander une seconde confirmation juste avant l'envoi. Demander uniquement l'activation d'un accès absent, un secret, une dépense, une action irréversible ou une décision réellement manquante, puis vérifier visuellement le commentaire après publication.
+
 Après chaque action, l'agent choisit immédiatement l'étape suivante selon cet ordre :
 
 1. Corriger l'échec observé.

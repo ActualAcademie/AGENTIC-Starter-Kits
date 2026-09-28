@@ -67,6 +67,16 @@ for scope in \
   }
 done
 
+for autonomy in \
+  "$root/starter-kit-codex/.codex/policies/AUTONOMY-AND-RECOVERY.md" \
+  "$root/starter-kit-codex/.codex/skills/trello-planning/SKILL.md" \
+  "$root/starter-kit-claude/.claude/policies/AUTONOMY-AND-RECOVERY.md" \
+  "$root/starter-kit-claude/.claude/skills/trello-planning/SKILL.md"; do
+  grep -q "Ne pas demander.*seconde confirmation\|Ne pas demander.*confirmation équivalente" "$autonomy" || {
+    echo "ECHEC TEST: la règle d'autorisation explicite Trello est absente de $autonomy"; exit 1;
+  }
+done
+
 for kit in codex claude; do
   hidden=".$kit"
   source_config="$root/starter-kit-$kit/$hidden"
