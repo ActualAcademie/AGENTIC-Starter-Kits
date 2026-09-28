@@ -1,5 +1,15 @@
 ## Unreleased
 
+## 1.12.46 - 2026-09-28
+
+- Interdit de redemander une confirmation pour publier un commentaire Trello explicitement demandé lorsque l'intégration est déjà autorisée.
+- Maintient la relecture visuelle obligatoire après publication.
+
+## 1.12.45 - 2026-09-28
+
+- Empêche de transformer une suggestion ou un blocage hors périmètre en check Trello ou exigence de Goal.
+- Impose la vérification du cahier des charges, des critères, de la conception et des décisions avant toute extension du périmètre.
+
 ## 1.12.44 - 2026-09-28
 
 - Ajoute à l'onboarding le choix entre CI sur chaque push et CI uniquement sur les Pull Requests et les branches protégées.
