@@ -3,6 +3,32 @@ set -euo pipefail
 
 root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 
+for coordinator in \
+  "$root/starter-kit-codex/AGENTS.md" \
+  "$root/starter-kit-codex/.codex/ORCHESTRATION.md" \
+  "$root/starter-kit-codex/.codex/policies/SESSION-CONTINUITY-POLICY.md" \
+  "$root/starter-kit-claude/CLAUDE.md" \
+  "$root/starter-kit-claude/.claude/ORCHESTRATION.md" \
+  "$root/starter-kit-claude/.claude/policies/SESSION-CONTINUITY-POLICY.md"; do
+  if ! grep -Eq "toute demande.*carte|Toute demande.*carte|quel que soit le nombre de cases" "$coordinator"; then
+    echo "ECHEC TEST: la création automatique du Goal pour une reprise de carte est absente de $coordinator"
+    exit 1
+  fi
+done
+
+for parallel in \
+  "$root/starter-kit-codex/.codex/skills/coordination/SKILL.md" \
+  "$root/starter-kit-codex/.codex/skills/trello-planning/SKILL.md" \
+  "$root/starter-kit-claude/.claude/skills/coordination/SKILL.md" \
+  "$root/starter-kit-claude/.claude/skills/trello-planning/SKILL.md"; do
+  grep -Eq "au moins deux lots indépendants|au moins deux cases indépendantes" "$parallel" || {
+    echo "ECHEC TEST: seuil de parallélisation absent de $parallel"; exit 1;
+  }
+  grep -Eq "doit créer ou activer plusieurs agents" "$parallel" || {
+    echo "ECHEC TEST: création obligatoire des agents parallèles absente de $parallel"; exit 1;
+  }
+done
+
 for kit in codex claude; do
   hidden=".$kit"
   source_config="$root/starter-kit-$kit/$hidden"

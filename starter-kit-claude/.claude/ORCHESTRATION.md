@@ -36,7 +36,7 @@ Lire et appliquer obligatoirement `policies/WEB-RESEARCH-POLICY.md`, `policies/S
 
 Lorsque l’utilisateur demande de tout faire ou de poursuivre jusqu’à la livraison, exécuter la chaîne complète du work item sans interruption volontaire. Produire des checkpoints et rapports intermédiaires sans demander d’approbation. Arrêter uniquement pour un blocage sensible défini par la politique d’autonomie.
 
-Lorsqu'une carte Trello à terminer possède au moins deux cases ouvertes, activer le Goal persistant décrit dans `policies/SESSION-CONTINUITY-POLICY.md` avant la première case et rattacher toutes les preuves au même objectif.
+Lorsqu'une demande cible une carte Trello à terminer, reprendre, corriger ou livrer, activer ou reprendre le Goal persistant décrit dans `policies/SESSION-CONTINUITY-POLICY.md` avant toute analyse et avant la première case, quel que soit le nombre de cases ouvertes, puis rattacher toutes les preuves au même objectif.
 
 ## Reprise automatique
 
