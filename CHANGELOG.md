@@ -1,5 +1,11 @@
 ## Unreleased
 
+## 1.12.42 - 2026-09-28
+
+- Rend obligatoire la préparation automatique de chaque session avant toute action.
+- Impose le chargement du cahier, du profil, des politiques, de l'état runtime et de l'inventaire des outils déjà installés.
+- Ajoute un contrôle de non-régression dans les deux kits pour empêcher l'oubli de ces prérequis.
+
 ## 1.12.41 - 2026-09-28
 
 ### Initialisation executable des Goals

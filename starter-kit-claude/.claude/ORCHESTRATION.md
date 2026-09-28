@@ -21,6 +21,8 @@ Lire et appliquer obligatoirement `policies/WEB-RESEARCH-POLICY.md`, `policies/S
 9. Auditer, vérifier et enregistrer les preuves.
 10. Livrer, évaluer et archiver.
 
+Avant l'étape 1, le Coordinateur exécute une préparation de session obligatoire. Il charge le cahier des charges, le profil projet, le contrat central, les politiques applicables, le work item ou la carte active, l'état runtime, les décisions et les outils déjà installés. Il exécute `scripts/doctor.sh`, vérifie les commandes déclarées et disponibles avec leur chemin absolu et leur version, puis enregistre l'inventaire dans les preuves. Une nouvelle conversation ne dispense jamais de cette préparation et l'utilisateur n'a pas à rappeler ces règles. Une commande absente du `PATH` ne peut pas être déclarée indisponible avant la recherche multi-emplacements définie par `TOOL-DISCOVERY-POLICY.md`.
+
 ## Règles
 
 - Claude est l'unique orchestrateur.
