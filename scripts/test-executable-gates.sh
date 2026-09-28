@@ -16,6 +16,20 @@ for coordinator in \
   fi
 done
 
+for coordinator in \
+  "$root/starter-kit-codex/.codex/ORCHESTRATION.md" \
+  "$root/starter-kit-claude/.claude/ORCHESTRATION.md"; do
+  grep -q "préparation de session obligatoire" "$coordinator" || {
+    echo "ECHEC TEST: la préparation automatique de session est absente de $coordinator"; exit 1;
+  }
+  grep -q "doctor.sh" "$coordinator" || {
+    echo "ECHEC TEST: l'inventaire automatique des outils est absent de $coordinator"; exit 1;
+  }
+  grep -q "TOOL-DISCOVERY-POLICY.md" "$coordinator" || {
+    echo "ECHEC TEST: la règle de recherche multi-emplacements est absente de $coordinator"; exit 1;
+  }
+done
+
 for parallel in \
   "$root/starter-kit-codex/.codex/skills/coordination/SKILL.md" \
   "$root/starter-kit-codex/.codex/skills/trello-planning/SKILL.md" \
