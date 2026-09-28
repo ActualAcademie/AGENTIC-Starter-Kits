@@ -1,5 +1,11 @@
 ## Unreleased
 
+## 1.12.44 - 2026-09-28
+
+- Ajoute à l'onboarding le choix entre CI sur chaque push et CI uniquement sur les Pull Requests et les branches protégées.
+- Configure par défaut le mode `pull-request-only` afin de limiter les exécutions et le coût CI.
+- Génère le workflow selon le choix enregistré dans `[delivery].ci_trigger_mode`.
+
 ## 1.12.43 - 2026-09-28
 
 - Interdit les Pull Requests tant qu'un check de carte reste ouvert.

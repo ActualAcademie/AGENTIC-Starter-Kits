@@ -84,6 +84,8 @@ trello_board_url = ""
 
 [delivery]
 uses_pull_requests = true
+# pull-request-only ou every-push. Le Coordinateur propose ce choix à l'onboarding.
+ci_trigger_mode = "pull-request-only"
 requires_human_approval_for_critical = true
 require_feature_branch = true
 max_files_per_commit = 75
