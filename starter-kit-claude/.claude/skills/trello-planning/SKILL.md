@@ -48,7 +48,7 @@ Avant toute analyse technique, délégation, modification de fichier ou écritur
 
 ### Répartition parallèle des cartes multi-lots
 
-Si une carte comporte au moins deux cases indépendantes, le Coordinateur répartit les lots entre plusieurs agents lorsque cela réduit réellement le délai. Il renseigne pour chaque lot l'agent, les fichiers autorisés, les dépendances, le responsable et la preuve attendue, puis synchronise l'assignation et la checklist Trello avant le démarrage. Les lots qui touchent le même fichier, un contrat partagé, une migration, une décision d'architecture ou une validation dépendante restent séquentiels.
+Si une carte comporte au moins deux cases indépendantes et que leur exécution parallèle réduit réellement le délai, le Coordinateur doit créer ou activer plusieurs agents et répartir les lots avant le démarrage. Il renseigne pour chaque lot l'agent, les fichiers autorisés, les dépendances, le responsable et la preuve attendue, puis synchronise l'assignation et la checklist Trello avant le démarrage. Les lots qui touchent le même fichier, un contrat partagé, une migration, une décision d'architecture ou une validation dépendante restent séquentiels et cette décision doit être justifiée dans le Goal.
 
 Les agents parallèles travaillent dans des espaces isolés si nécessaire. Le Coordinateur intègre ensuite leurs résultats sur la branche unique de la carte, résout les conflits, synchronise chaque transition et fait exécuter l'audit final. Une carte ne passe pas à `Done` tant que tous les lots, preuves et contrôles ne sont pas relus.
 

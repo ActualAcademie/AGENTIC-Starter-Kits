@@ -1,5 +1,14 @@
 ## Unreleased
 
+## 1.12.40 - 2026-09-28
+
+### Parallélisation obligatoire des lots indépendants
+
+- Impose la création ou l’activation de plusieurs agents dès deux lots indépendants lorsque le parallélisme apporte un gain réel.
+- Impose la matrice agent, périmètre, fichiers, dépendances et preuves avant le démarrage.
+- Exige une justification dans le Goal lorsqu’une exécution séquentielle est conservée malgré des lots techniquement indépendants.
+- Ajoute un test de cohérence pour empêcher le retour d’une règle seulement facultative.
+
 ## 1.12.39 - 2026-09-28
 
 ### Goals obligatoires pour les reprises de cartes

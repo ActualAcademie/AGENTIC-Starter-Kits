@@ -16,6 +16,19 @@ for coordinator in \
   fi
 done
 
+for parallel in \
+  "$root/starter-kit-codex/.codex/skills/coordination/SKILL.md" \
+  "$root/starter-kit-codex/.codex/skills/trello-planning/SKILL.md" \
+  "$root/starter-kit-claude/.claude/skills/coordination/SKILL.md" \
+  "$root/starter-kit-claude/.claude/skills/trello-planning/SKILL.md"; do
+  grep -Eq "au moins deux lots indépendants|au moins deux cases indépendantes" "$parallel" || {
+    echo "ECHEC TEST: seuil de parallélisation absent de $parallel"; exit 1;
+  }
+  grep -Eq "doit créer ou activer plusieurs agents" "$parallel" || {
+    echo "ECHEC TEST: création obligatoire des agents parallèles absente de $parallel"; exit 1;
+  }
+done
+
 for kit in codex claude; do
   hidden=".$kit"
   source_config="$root/starter-kit-$kit/$hidden"
