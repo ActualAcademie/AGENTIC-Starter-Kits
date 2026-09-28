@@ -90,6 +90,19 @@ for recovery in \
   }
 done
 
+for deploy in \
+  "$root/starter-kit-codex/.codex/policies/GIT-FLOW.md" \
+  "$root/starter-kit-codex/.codex/skills/coordination/SKILL.md" \
+  "$root/starter-kit-claude/.claude/policies/GIT-FLOW.md" \
+  "$root/starter-kit-claude/.claude/skills/coordination/SKILL.md"; do
+  grep -q "Exception de déploiement explicite\|demande explicitement de déployer" "$deploy" || {
+    echo "ECHEC TEST: l'exception de déploiement explicite est absente de $deploy"; exit 1;
+  }
+  grep -Eq "ne clôture ni la carte ni le Goal|PR de déploiement comme la PR finale" "$deploy" || {
+    echo "ECHEC TEST: la non-clôture après PR de déploiement est absente de $deploy"; exit 1;
+  }
+done
+
 for kit in codex claude; do
   hidden=".$kit"
   source_config="$root/starter-kit-$kit/$hidden"
