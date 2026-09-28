@@ -1,5 +1,13 @@
 ## Unreleased
 
+## 1.12.41 - 2026-09-28
+
+### Initialisation executable des Goals
+
+- Ajoute `start-goal.sh` aux kits Codex et Claude pour initialiser l état persistant avant toute action.
+- Enregistre l objectif, les preuves attendues, les contraintes, le blocage, la carte, la branche d intégration et la délégation parallèle.
+- Ajoute un test de régression couvrant le lancement du Goal et sa traçabilité.
+
 ## 1.12.40 - 2026-09-28
 
 ### Parallélisation obligatoire des lots indépendants

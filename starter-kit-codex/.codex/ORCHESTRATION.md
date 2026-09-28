@@ -38,6 +38,8 @@ Lorsque l’utilisateur demande de tout faire ou de poursuivre jusqu’à la liv
 
 Lorsqu'une demande cible une carte Trello à terminer, reprendre, corriger ou livrer, activer ou reprendre le Goal persistant décrit dans `policies/SESSION-CONTINUITY-POLICY.md` avant toute analyse et avant la première case, quel que soit le nombre de cases ouvertes, puis rattacher toutes les preuves au même objectif.
 
+Le Coordinateur initialise ce Goal avec `scripts/start-goal.sh` avant toute commande, délégation ou commentaire externe. Il fournit l'objectif, les preuves attendues, les contraintes, la condition de blocage, la carte, la branche d'intégration et le plan de délégation. Si l'API native du Goal est disponible, il l'active immédiatement après cette écriture et vérifie son état. Sinon, l'état local reste la source de reprise et la limite est consignée.
+
 ## Reprise automatique
 
 À chaque nouvelle session, lire `RUNTIME-STATE.md`, le dernier work item, le dernier commit et les rapports avant de demander quoi que ce soit. Reprendre directement l’action autorisée.

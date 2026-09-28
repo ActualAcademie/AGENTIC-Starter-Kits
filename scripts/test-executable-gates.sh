@@ -32,6 +32,10 @@ done
 for kit in codex claude; do
   hidden=".$kit"
   source_config="$root/starter-kit-$kit/$hidden"
+  [ -x "$source_config/scripts/start-goal.sh" ] || {
+    echo "ECHEC TEST: start-goal.sh absent ou non executable pour $kit"
+    exit 1
+  }
   test_root="$(mktemp -d)"
   trap 'rm -rf "$test_root"' EXIT
   config="$test_root/$hidden"
@@ -90,6 +94,24 @@ for kit in codex claude; do
 
   rm -rf "$test_root"
   trap - EXIT
+done
+
+for kit in codex claude; do
+  hidden=".$kit"
+  source_config="$root/starter-kit-$kit/$hidden"
+  goal_root="$(mktemp -d)"
+  mkdir -p "$goal_root/$hidden/scripts"
+  cp "$source_config/RUNTIME-STATE.md" "$goal_root/$hidden/"
+  cp "$source_config/scripts/start-goal.sh" "$goal_root/$hidden/scripts/"
+  : > "$goal_root/$hidden/runtime-events.log"
+  (cd "$goal_root" && bash "$hidden/scripts/start-goal.sh" \
+    "Livrer la carte de test" "preuve CI et PR" "branche dev et outils gratuits" \
+    "decision humaine ou blocage externe prouve" "P01" "dev" "qa,frontend") >/dev/null
+  grep -q '^- execution_status: running$' "$goal_root/$hidden/RUNTIME-STATE.md"
+  grep -q '^- goal_status: active$' "$goal_root/$hidden/RUNTIME-STATE.md"
+  grep -q '^- active_card: P01$' "$goal_root/$hidden/RUNTIME-STATE.md"
+  grep -q 'delegation=qa,frontend' "$goal_root/$hidden/runtime-events.log"
+  rm -rf "$goal_root"
 done
 
 boundary_root="$(mktemp -d)"
