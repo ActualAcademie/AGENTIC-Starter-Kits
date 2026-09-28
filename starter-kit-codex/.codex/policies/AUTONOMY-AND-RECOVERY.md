@@ -40,6 +40,8 @@ Après chaque action, l'agent choisit immédiatement l'étape suivante selon cet
 
 Une CI en cours n’est jamais une conclusion. L’agent attend le résultat, relit les logs, corrige le premier échec, republie si nécessaire et relance les contrôles jusqu’à réussite, limite documentée ou blocage réel. Une dette historique détectée dans la zone du work item est traitée par petits lots jusqu’à la Definition of Done. Une dette hors périmètre reçoit un work item documenté et le travail indépendant continue.
 
+Une preuve négative ou un résultat observable non conforme, notamment `404`, déploiement absent, endpoint indisponible, test échoué ou revalidation externe négative, ne constitue jamais une conclusion ni une simple information à transmettre. Le Coordinateur doit identifier la cause, corriger le problème, déployer ou appliquer l'alternative autorisée, puis revalider le résultat et poursuivre la boucle. Il ne demande pas à l'utilisateur de lui dire de continuer. Si l'action exige un accès, un secret, une dépense, une décision métier ou une autorisation de production absente, il prépare toutes les étapes réversibles et passe en `needs-review` avec la demande précise ; sinon il continue jusqu'à réussite ou blocage réel prouvé.
+
 ## Corrections réversibles
 
 Une correction de dépendance non majeure, un formatage, un lint, un test ou une configuration locale réversible est autorisé dans le work item courant. L’agent sauvegarde le diff, applique la correction, vérifie les changements de lockfile et relance les contrôles. Il ne demande pas « Continue » ni une approbation intermédiaire. Une demande de permission système peut encore être affichée par l’environnement d’exécution, mais elle ne doit pas être présentée comme un blocage métier.
