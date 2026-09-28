@@ -1,5 +1,13 @@
 ## Unreleased
 
+## 1.12.39 - 2026-09-28
+
+### Goals obligatoires pour les reprises de cartes
+
+- Initialise ou reprend automatiquement un Goal pour toute demande ciblant une carte Trello, même avec une seule case ouverte.
+- Supprime les contradictions entre les règles du Coordinateur, de l'orchestration et de la continuité de session.
+- Ajoute un test de régression vérifiant cette obligation dans les deux kits.
+
 ## 1.12.38 - 2026-09-28
 
 ### Langue Trello
