@@ -1,5 +1,10 @@
 ## Unreleased
 
+## 1.12.47 - 2026-09-28
+
+- Interdit de conclure après une preuve négative comme un `404`, un échec de test ou un déploiement absent.
+- Impose diagnostic, correction, déploiement ou alternative, puis revalidation automatique jusqu'à réussite ou blocage réel.
+
 ## 1.12.46 - 2026-09-28
 
 - Interdit de redemander une confirmation pour publier un commentaire Trello explicitement demandé lorsque l'intégration est déjà autorisée.

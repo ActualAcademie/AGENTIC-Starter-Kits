@@ -77,6 +77,19 @@ for autonomy in \
   }
 done
 
+for recovery in \
+  "$root/starter-kit-codex/.codex/policies/AUTONOMY-AND-RECOVERY.md" \
+  "$root/starter-kit-codex/.codex/skills/coordination/SKILL.md" \
+  "$root/starter-kit-claude/.claude/policies/AUTONOMY-AND-RECOVERY.md" \
+  "$root/starter-kit-claude/.claude/skills/coordination/SKILL.md"; do
+  grep -q "preuve négative" "$recovery" || {
+    echo "ECHEC TEST: la reprise automatique après preuve négative est absente de $recovery"; exit 1;
+  }
+  grep -q "404" "$recovery" || {
+    echo "ECHEC TEST: le cas 404 n'est pas couvert dans $recovery"; exit 1;
+  }
+done
+
 for kit in codex claude; do
   hidden=".$kit"
   source_config="$root/starter-kit-$kit/$hidden"
