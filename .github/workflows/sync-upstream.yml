@@ -19,7 +19,7 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Synchroniser la branche main
+      - name: Synchroniser le contenu et les tags
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -27,8 +27,52 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git remote add upstream https://github.com/Krapaud-Labs/AGENTIC-Starter-Kits.git
-          git fetch upstream main
+          git fetch upstream main --tags
           git switch -C automation/sync-upstream
           git reset --hard upstream/main
           git push --force-with-lease origin automation/sync-upstream
+          git push origin --tags
           gh pr create --base main --head automation/sync-upstream --title "chore: synchroniser avec Krapaud-Labs" --body "Synchronisation automatique du fork Actual Academy avec Krapaud-Labs/AGENTIC-Starter-Kits." || true
+
+      - name: Synchroniser la section About
+        env:
+          GH_TOKEN: ${{ secrets.REPO_SETTINGS_TOKEN || secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          source_json=$(gh api repos/Krapaud-Labs/AGENTIC-Starter-Kits)
+          description=$(jq -r '.description // ""' <<<"$source_json")
+          homepage=$(jq -r '.homepage // ""' <<<"$source_json")
+          topics=$(jq -c '.topics // []' <<<"$source_json")
+          payload=$(jq -n --arg description "$description" --arg homepage "$homepage" '{description:$description,homepage:$homepage}')
+          curl --fail-with-body -sS -X PATCH \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/$GITHUB_REPOSITORY" \
+            -d "$payload" || echo "About non mis à jour. Configurer REPO_SETTINGS_TOKEN avec le droit repository administration."
+          topics_payload=$(jq -n --argjson topics "$topics" '{names:$topics}')
+          curl --fail-with-body -sS -X PUT \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/$GITHUB_REPOSITORY/topics" \
+            -d "$topics_payload" || echo "Topics non mis à jour. Configurer REPO_SETTINGS_TOKEN avec le droit repository administration."
+
+      - name: Synchroniser les releases
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          tmp_file=$(mktemp)
+          gh api repos/Krapaud-Labs/AGENTIC-Starter-Kits/releases --paginate > "$tmp_file"
+          jq -c '.[]' "$tmp_file" | while read -r release; do
+            tag=$(jq -r '.tag_name' <<<"$release")
+            title=$(jq -r '.name // .tag_name' <<<"$release")
+            body_file=$(mktemp)
+            jq -r '.body // ""' <<<"$release" > "$body_file"
+            if ! gh release view "$tag" >/dev/null 2>&1; then
+              gh release create "$tag" --title "$title" --notes-file "$body_file" --verify-tag
+            fi
+            rm -f "$body_file"
+          done
+          rm -f "$tmp_file"
