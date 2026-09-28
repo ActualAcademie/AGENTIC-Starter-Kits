@@ -25,6 +25,10 @@
 - goal_budget: [[A_COMPLETER]]
 - goal_blocked_condition: [[A_COMPLETER]]
 - goal_session_id: none
+- goal_delivery_status: not-required
+- integration_branch: none
+- pushed_integration_commit: none
+- pull_request_status: not-required
 - required_action_type: none
 - required_action_id: none
 - required_action_status: none

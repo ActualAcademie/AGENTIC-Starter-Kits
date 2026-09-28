@@ -1,5 +1,14 @@
 ## Unreleased
 
+## 1.12.37 - 2026-09-28
+
+### Livraison obligatoire des goals
+
+- Maintient un goal actif jusqu'à la preuve du push vers `dev` ou `develop` et de la PR d'intégration relue.
+- Ajoute au runtime la branche d'intégration, le commit poussé, l'état de livraison et l'état de la PR.
+- Bloque le garde avant réponse si un goal est déclaré terminé sans preuve de livraison complète.
+- Ajoute un test de régression pour un goal terminé prématurément.
+
 ## 1.12.36 - 2026-09-28
 
 ### Cadence des Pull Requests
