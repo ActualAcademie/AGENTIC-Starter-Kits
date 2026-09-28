@@ -1,5 +1,10 @@
 ## Unreleased
 
+## 1.12.48 - 2026-09-28
+
+- Autorise une PR de déploiement vers `dev` ou `develop` lorsqu'elle est explicitement demandée pour débloquer une revalidation d'environnement.
+- Impose le retour sur la branche de travail et la reprise du Goal après ce checkpoint.
+
 ## 1.12.47 - 2026-09-28
 
 - Interdit de conclure après une preuve négative comme un `404`, un échec de test ou un déploiement absent.
