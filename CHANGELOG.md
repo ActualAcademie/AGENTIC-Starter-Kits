@@ -1,5 +1,10 @@
 ## Unreleased
 
+## 1.12.52 - 2026-09-29
+
+- Sépare explicitement l'onboarding terminé des audits et développements demandés ensuite.
+- Impose un nouveau Goal, un work item et les contrôles complets avant toute PR vers `dev`.
+
 ## 1.12.51 - 2026-09-29
 
 - Ajoute une boucle d'amélioration continue après chaque erreur confirmée.
