@@ -1,5 +1,9 @@
 ## Unreleased
 
+## 1.12.55 - 2026-09-29
+
+- Ajoute un paramètre anti-cache à la vérification distante pour éviter les faux retours de version GitHub Raw.
+
 ## 1.12.54 - 2026-09-29
 
 - Utilise la source officielle par défaut lorsque le projet ne possède pas de manifeste `.workspace.toml`.
