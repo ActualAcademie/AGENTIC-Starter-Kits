@@ -11,6 +11,7 @@
 
 - `SECURITY.md` : sécurité, secrets, responsabilités et signalement.
 - `VERSIONING.md` : versionnement et releases.
+- `VERSION-HISTORY.md` : historique chronologique des versions et évolutions depuis l'origine.
 - `CONTRIBUTING.md` : GitFlow, commits, validation et revue.
 - `starter-kit-codex/.codex/GOVERNANCE.md` : gouvernance opérationnelle Codex.
 - `starter-kit-claude/.claude/GOVERNANCE.md` : gouvernance opérationnelle Claude.

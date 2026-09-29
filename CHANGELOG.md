@@ -1,5 +1,10 @@
 ## Unreleased
 
+## 1.12.49 - 2026-09-29
+
+- Ajoute `VERSION-HISTORY.md`, l’historique chronologique des versions et améliorations depuis l’origine.
+- Ajoute un contrôle CI exigeant la présence de la version courante dans cet historique.
+
 ## 1.12.48 - 2026-09-28
 
 - Autorise une PR de déploiement vers `dev` ou `develop` lorsqu'elle est explicitement demandée pour débloquer une revalidation d'environnement.
