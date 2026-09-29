@@ -18,6 +18,6 @@ case "$source_url" in */VERSION) ;; *) source_url="${source_url}/main/VERSION" ;
 printf 'Version locale du kit: %s\n' "$local_version"
 printf 'Source distante du kit: %s\n' "$source_url"
 if ! command -v curl >/dev/null 2>&1; then echo 'Vérification distante impossible: curl absent' >&2; exit 2; fi
-remote_version="$(curl --fail --silent --show-error --location --max-time 10 "$source_url" | tr -d '[:space:]')" || { echo 'Vérification distante impossible: source indisponible' >&2; exit 2; }
+remote_version="$(curl --fail --silent --show-error --location --max-time 10 "${source_url}?_kit_check=$(date +%s)" | tr -d '[:space:]')" || { echo 'Vérification distante impossible: source indisponible' >&2; exit 2; }
 printf 'Version distante du kit: %s\n' "$remote_version"
 if [ "$local_version" = "$remote_version" ]; then echo 'Kit à jour'; else echo "Mise à jour du kit disponible: $local_version -> $remote_version"; exit 3; fi
