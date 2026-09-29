@@ -1,5 +1,9 @@
 ## Unreleased
 
+## 1.12.56 - 2026-09-29
+
+- Utilise l API GitHub comme repli contre les réponses Raw obsolètes.
+
 ## 1.12.55 - 2026-09-29
 
 - Ajoute un paramètre anti-cache à la vérification distante pour éviter les faux retours de version GitHub Raw.
