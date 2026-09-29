@@ -1,5 +1,10 @@
 ## Unreleased
 
+## 1.12.53 - 2026-09-29
+
+- Vérifie la version distante du kit au démarrage de chaque session manuelle.
+- Impose la prise en compte des nouvelles politiques et scripts avant toute action projet.
+
 ## 1.12.52 - 2026-09-29
 
 - Sépare explicitement l'onboarding terminé des audits et développements demandés ensuite.

@@ -50,6 +50,7 @@ Le dépôt a été initialisé le 21 septembre 2026. Les premiers commits ont é
 | 1.12.50 | 2026-09-29 | Vérification et installation gratuite réutilisable des outils de test. |
 | 1.12.51 | 2026-09-29 | Boucle d'amélioration continue et apprentissage documenté après incident. |
 | 1.12.52 | 2026-09-29 | Nouveau Goal et work item obligatoires après un onboarding terminé. |
+| 1.12.53 | 2026-09-29 | Vérification du kit distant à chaque démarrage de session. |
 
 ## Intégrité de publication
 
