@@ -8,6 +8,7 @@ source_url="${AGENTIC_KIT_SOURCE:-}"
 if [ -z "$source_url" ] && [ -f "$manifest" ]; then
   source_url="$(sed -n 's/^source = "\(.*\)"/\1/p' "$manifest")"
 fi
+source_url="${source_url:-https://raw.githubusercontent.com/Krapaud-Labs/AGENTIC-Starter-Kits/main/VERSION}"
 if [[ "$source_url" == https://github.com/* ]]; then
   source_url="https://raw.githubusercontent.com/${source_url#https://github.com/}"
 fi
