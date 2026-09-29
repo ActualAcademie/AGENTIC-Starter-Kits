@@ -90,6 +90,11 @@ for recovery in \
   }
 done
 
+for kit in codex claude; do
+  [ -x "$root/starter-kit-$kit/.$kit/scripts/ensure-tools.sh" ] || { echo "ECHEC TEST: ensure-tools.sh absent ou non executable pour $kit"; exit 1; }
+  bash -n "$root/starter-kit-$kit/.$kit/scripts/ensure-tools.sh"
+done
+
 for deploy in \
   "$root/starter-kit-codex/.codex/policies/GIT-FLOW.md" \
   "$root/starter-kit-codex/.codex/skills/coordination/SKILL.md" \

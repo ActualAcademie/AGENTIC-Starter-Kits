@@ -47,6 +47,7 @@ Le dépôt a été initialisé le 21 septembre 2026. Les premiers commits ont é
 | 1.12.47 | 2026-09-28 | Reprise automatique après preuve négative, échec ou déploiement absent. |
 | 1.12.48 | 2026-09-28 | PR de checkpoint vers `dev` autorisée sur demande explicite pour déployer et revalider. |
 | 1.12.49 | 2026-09-29 | Historique versionné complet et contrôle de cohérence associé. |
+| 1.12.50 | 2026-09-29 | Vérification et installation gratuite réutilisable des outils de test. |
 
 ## Intégrité de publication
 
