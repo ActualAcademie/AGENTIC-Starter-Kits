@@ -15,6 +15,7 @@
 - `CONTRIBUTING.md` : GitFlow, commits, validation et revue.
 - `starter-kit-codex/.codex/GOVERNANCE.md` : gouvernance opérationnelle Codex.
 - `starter-kit-claude/.claude/GOVERNANCE.md` : gouvernance opérationnelle Claude.
+- `starter-kit-codex/.codex/policies/CONTINUOUS-IMPROVEMENT-POLICY.md` et son équivalent Claude : apprentissage documenté après incident.
 
 ## Orchestration
 

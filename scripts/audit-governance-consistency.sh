@@ -70,6 +70,10 @@ for autonomy_policy in "$codex/policies/AUTONOMY-AND-RECOVERY.md" "$claude/polic
   require_text "$autonomy_policy" "Une demande explicite d'action vaut autorisation"
   require_text "$autonomy_policy" "Ne jamais demander ensuite"
 done
+for improvement in "$codex/policies/CONTINUOUS-IMPROVEMENT-POLICY.md" "$claude/policies/CONTINUOUS-IMPROVEMENT-POLICY.md"; do
+  require_text "$improvement" "test de non-régression"
+  require_text "$improvement" "incidents"
+done
 
 for kit_root in "$codex" "$claude"; do
   require_text "$kit_root/RUNTIME-STATE.md" "goal_status: none"
