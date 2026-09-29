@@ -49,6 +49,8 @@ Le Coordinateur initialise ce Goal avec `scripts/start-goal.sh` avant toute comm
 
 À chaque nouvelle session, lire `RUNTIME-STATE.md`, le dernier work item, le dernier commit et les rapports avant de demander quoi que ce soit. Reprendre directement l’action autorisée.
 
+Si le dernier work item était un onboarding terminé et que la nouvelle demande concerne le code, l'audit, le lint, les tests, TypeScript, la sécurité ou la livraison, créer immédiatement un nouveau Goal et un nouveau work item. L'agent doit inventorier les outils, exécuter les contrôles disponibles, corriger les écarts et conserver la PR fermée jusqu'à la preuve complète.
+
 ## Rapport exigé
 
 ```text

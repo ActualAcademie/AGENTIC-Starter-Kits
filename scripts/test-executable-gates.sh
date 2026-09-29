@@ -90,6 +90,19 @@ for recovery in \
   }
 done
 
+for continuity in \
+  "$root/starter-kit-codex/.codex/policies/SESSION-CONTINUITY-POLICY.md" \
+  "$root/starter-kit-codex/.codex/ORCHESTRATION.md" \
+  "$root/starter-kit-claude/.claude/policies/SESSION-CONTINUITY-POLICY.md" \
+  "$root/starter-kit-claude/.claude/ORCHESTRATION.md"; do
+  grep -q "La clôture de l'onboarding ne clôture que l'onboarding\|dernier work item était un onboarding" "$continuity" || {
+    echo "ECHEC TEST: la séparation onboarding et nouvelle demande est absente de $continuity"; exit 1;
+  }
+  grep -q "nouveau Goal" "$continuity" || {
+    echo "ECHEC TEST: le nouveau Goal après onboarding est absent de $continuity"; exit 1;
+  }
+done
+
 for kit in codex claude; do
   [ -x "$root/starter-kit-$kit/.$kit/scripts/ensure-tools.sh" ] || { echo "ECHEC TEST: ensure-tools.sh absent ou non executable pour $kit"; exit 1; }
   bash -n "$root/starter-kit-$kit/.$kit/scripts/ensure-tools.sh"
