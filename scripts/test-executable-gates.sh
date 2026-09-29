@@ -108,6 +108,12 @@ for kit in codex claude; do
   bash -n "$root/starter-kit-$kit/.$kit/scripts/ensure-tools.sh"
 done
 
+for kit in codex claude; do
+  update_script="$root/starter-kit-$kit/.$kit/scripts/check-kit-update.sh"
+  [ -x "$update_script" ] || { echo "ECHEC TEST: check-kit-update.sh absent ou non executable pour $kit"; exit 1; }
+  bash -n "$update_script"
+done
+
 for deploy in \
   "$root/starter-kit-codex/.codex/policies/GIT-FLOW.md" \
   "$root/starter-kit-codex/.codex/skills/coordination/SKILL.md" \
