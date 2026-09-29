@@ -1,5 +1,10 @@
 ## Unreleased
 
+## 1.12.51 - 2026-09-29
+
+- Ajoute une boucle d'amélioration continue après chaque erreur confirmée.
+- Impose incident, cause, correction, règle préventive, test de non-régression et preuve.
+
 ## 1.12.50 - 2026-09-29
 
 - Ajoute la vérification et l'installation gratuite réutilisable des outils de test et de validation.

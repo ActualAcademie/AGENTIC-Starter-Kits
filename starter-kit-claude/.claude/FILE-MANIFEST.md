@@ -7,6 +7,7 @@
 - Agents optionnels activables dans `agents/` : `produit`, `qa`, `devops`, `performance`, `ux-research`, `accessibilite`, `data`, `documentation`, `release` et `conformite`.
 - `SPECIALIST-AGENTS.md` définit leur activation, leurs livrables et leur ordre de contrôle.
 - `policies/EXCEPTIONAL-REQUESTS.md` définit la classification des demandes exceptionnelles.
+- `policies/CONTINUOUS-IMPROVEMENT-POLICY.md` impose l'apprentissage documenté et les tests de non-régression.
 - `policies/CORE-EXECUTION-CONTRACT.md` centralise les obligations, portes, preuves, reprises et règles de clôture.
 - `templates/obligation-register.tsv` et `scripts/validate-obligations.sh` rendent les huit portes exécutables.
 - `scripts/start-goal.sh` initialise atomiquement un Goal et sa reprise dans `RUNTIME-STATE.md`.
