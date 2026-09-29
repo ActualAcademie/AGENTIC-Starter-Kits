@@ -1,5 +1,10 @@
 ## Unreleased
 
+## 1.12.50 - 2026-09-29
+
+- Ajoute la vérification et l'installation gratuite réutilisable des outils de test et de validation.
+- Journalise les chemins et versions dans un état partagé entre projets.
+
 ## 1.12.49 - 2026-09-29
 
 - Ajoute `VERSION-HISTORY.md`, l’historique chronologique des versions et améliorations depuis l’origine.
