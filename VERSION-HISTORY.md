@@ -10,6 +10,8 @@ Le dépôt a été initialisé le 21 septembre 2026. Les premiers commits ont é
 
 ## Historique chronologique
 
+| 1.12.55 | 2026-09-29 | Neutralisation du cache CDN lors de la vérification distante. |
+
 | 1.12.54 | 2026-09-29 | Fallback officiel pour les projets sans manifeste de source du kit. |
 
 | Version | Date | Évolution principale |
