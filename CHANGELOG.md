@@ -1,5 +1,10 @@
 ## Unreleased
 
+## 1.12.54 - 2026-09-29
+
+- Utilise la source officielle par défaut lorsque le projet ne possède pas de manifeste `.workspace.toml`.
+- Évite les fausses indisponibilités lors de la vérification de session.
+
 ## 1.12.53 - 2026-09-29
 
 - Vérifie la version distante du kit au démarrage de chaque session manuelle.
