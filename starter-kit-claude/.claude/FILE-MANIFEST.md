@@ -12,6 +12,7 @@
 - `templates/obligation-register.tsv` et `scripts/validate-obligations.sh` rendent les huit portes exécutables.
 - `scripts/start-goal.sh` initialise atomiquement un Goal et sa reprise dans `RUNTIME-STATE.md`.
 - `scripts/ensure-tools.sh` vérifie, installe et journalise les outils gratuits réutilisables.
+- `scripts/check-kit-update.sh` vérifie la version distante au démarrage de chaque session.
 - `policies/`, `agents/`, `prompts/`, `skills/`, `scripts/`, `templates/`, `evaluations/`
 - `policies/DOCUMENTATION-LANGUAGE-POLICY.md` impose la qualité et la langue des documents techniques.
 - `policies/TRELLO-VISUAL-SYSTEM.md` définit les listes, étiquettes et règles de lisibilité Trello.
