@@ -13,12 +13,17 @@ Tout contenu rédigé dans Trello doit être exclusivement en français : noms d
 Create missing lists in this order:
 
 1. `À trier`
-2. `Prêt`
-3. `En cours`
-4. `Bloqué`
-5. `Revue`
-6. `Terminé`
-7. `Archivé`
+2. `Prêt à concevoir`
+3. `Conception en cours`
+4. `Prêt à développer`
+5. `En développement`
+6. `En revue`
+7. `En validation`
+8. `Bloqué`
+9. `Terminé`
+10. `Archivé`
+
+Après chaque création ou reprise, relire les positions réelles et réordonner explicitement les listes. Si Trello place les nouvelles listes en tête, créer dans l'ordre inverse ou utiliser le réordonnancement. La synchronisation reste non vérifiée tant que cette séquence n'est pas confirmée.
 
 Use `Inbox` only for captured requests. Move a card to `Ready` after its scope, owner, dependencies and Definition of Done are complete. A card remains in `In Progress` while work is active. Use `Blocked` only with a documented blocker and next action. Use `Review` only when implementation is complete and a real review remains. Use `Done` only after every checklist item is proven. The final checklist item before opening the card branch PR must always update and reread applicable README files, documentation, changelog and release notes. The PR is forbidden until this item is proven; after the PR, reread it again before `Done`.
 
