@@ -1,5 +1,9 @@
 ## Unreleased
 
+## 1.12.61 - 2026-09-30
+
+- Réutilise toujours le navigateur Trello déjà ouvert et connecté avant toute nouvelle session.
+
 ## 1.12.60 - 2026-09-30
 
 - Rend obligatoire la création et la relecture des étiquettes Trello avant toute carte et toute synchronisation vérifiée.
