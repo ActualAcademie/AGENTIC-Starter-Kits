@@ -10,7 +10,9 @@ Le dépôt a été initialisé le 21 septembre 2026. Les premiers commits ont é
 
 ## Historique chronologique
 
-| 1.12.56 | 2026-09-29 | Repli API GitHub contre les réponses Raw obsolètes. |
+| 1.12.57 | 2026-09-30 | Porte de démarrage complète et Goal obligatoire pour l'initialisation. |
+
+| 1.12.57 | 2026-09-29 | Repli API GitHub contre les réponses Raw obsolètes. |
 
 | 1.12.55 | 2026-09-29 | Neutralisation du cache CDN lors de la vérification distante. |
 
