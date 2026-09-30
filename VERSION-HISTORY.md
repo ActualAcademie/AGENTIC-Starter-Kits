@@ -10,6 +10,8 @@ Le dépôt a été initialisé le 21 septembre 2026. Les premiers commits ont é
 
 ## Historique chronologique
 
+| 1.12.68 | 2026-09-30 | PR vers dev obligatoire avant clôture de l'onboarding. |
+
 | 1.12.67 | 2026-09-30 | Audit final complet de chaque carte avant clôture de l'initialisation Trello. |
 
 | 1.12.66 | 2026-09-30 | Connecteur Trello lecture-écriture prioritaire, navigateur en complément contrôlé. |
