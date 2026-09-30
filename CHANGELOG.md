@@ -1,5 +1,9 @@
 ## Unreleased
 
+## 1.12.68 - 2026-09-30
+
+- Interdit de déclarer l'onboarding terminé avant la PR vérifiée vers `dev`.
+
 ## 1.12.67 - 2026-09-30
 
 - Ajoute un audit final carte par carte obligatoire avant la fin de l'initialisation Trello.
