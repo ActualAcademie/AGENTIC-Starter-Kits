@@ -1,5 +1,9 @@
 ## Unreleased
 
+## 1.12.67 - 2026-09-30
+
+- Ajoute un audit final carte par carte obligatoire avant la fin de l'initialisation Trello.
+
 ## 1.12.66 - 2026-09-30
 
 - Précise que le connecteur Trello reste en lecture-écriture prioritaire et que le navigateur complète seulement ses manques après vérification.
