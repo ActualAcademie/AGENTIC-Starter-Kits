@@ -20,6 +20,14 @@ script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 config_root="$(cd "$script_dir/.." && pwd)"
 project_root="$(git -C "$config_root/.." rev-parse --show-toplevel 2>/dev/null || (cd "$config_root/.." && pwd))"
 
+# Première mutation du projet : protéger immédiatement l'installation locale du kit.
+gitignore="$project_root/.gitignore"
+touch "$gitignore"
+for ignored_path in ".codex/" "AGENTS.md"; do
+  grep -Fqx "$ignored_path" "$gitignore" || printf '%s\n' "$ignored_path" >> "$gitignore"
+done
+git -C "$project_root" check-ignore -q "$config_root" || { echo "ÉCHEC: l'installation Codex n'est pas ignorée" >&2; exit 1; }
+
 if [ ! -f "$config_root/ORCHESTRATION.md" ]; then
   echo "Kit Codex introuvable dans $config_root"
   exit 1
@@ -57,17 +65,5 @@ inventory="$config_root/project-inventory.md"
 if git -C "$project_root" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
   bash "$config_root/scripts/install-git-hooks.sh"
 fi
-
-if [ -f "$project_root/.gitignore" ]; then
-  gitignore="$project_root/.gitignore"
-else
-  gitignore="$project_root/.gitignore"
-  touch "$gitignore"
-fi
-for ignored_path in ".codex/" "AGENTS.md"; do
-  if ! grep -Fqx "$ignored_path" "$gitignore"; then
-    printf '%s\n' "$ignored_path" >> "$gitignore"
-  fi
-done
 
 echo "Initialisation terminée: compléter $config_root/project-profile.toml avec le Skill project-onboarding."
