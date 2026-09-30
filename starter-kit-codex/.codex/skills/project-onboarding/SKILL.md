@@ -1,5 +1,9 @@
 # Skill project-onboarding
 
+## Précondition obligatoire
+
+Le Coordinateur applique d'abord la porte de démarrage d'initialisation de `ORCHESTRATION.md`, consigne les instructions relues, puis crée ou reprend le Goal persistant de l'initialisation. Ce Goal couvre tout le flux jusqu'à la livraison vérifiée ; il est obligatoire même sans code et même si Trello sert d'abord de checkpoint.
+
 ## Objectif
 
 Adapter le kit à un nouveau projet avant toute modification du produit.
