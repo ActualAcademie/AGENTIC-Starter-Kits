@@ -11,6 +11,12 @@ Lire également `policies/CONTINUOUS-IMPROVEMENT-POLICY.md` et consulter les inc
 
 ## Cycle obligatoire
 
+### Porte de démarrage d'initialisation
+
+Lorsqu'une session lance ou reprend une initialisation de projet, le Coordinateur charge intégralement les instructions applicables avant toute création de fichier, tableau Trello, carte, délégation ou modification produit. Il relit `AGENTS.md`, `ORCHESTRATION.md`, `START-HERE.md`, `CONVERSATION-MODES.md`, `GOVERNANCE.md`, `FILE-MANIFEST.md`, `PROJECT-DATA-BOUNDARY.md`, `SPECIALIST-AGENTS.md`, `models.toml`, `MODEL-POLICY.md`, `RISK-MATRIX.md`, `COST-AND-EVALUATION.md`, `ADAPTERS.md`, les policies référencées et les Skills `project-intake`, `project-onboarding`, `trello-planning` et `coordination`. Il consigne la liste et la version des documents relus dans le work item ou l'état runtime. Tant que cette relecture n'est pas prouvée, aucune action d'initialisation n'est autorisée.
+
+Après cette relecture, il crée immédiatement le Goal persistant couvrant toute l'initialisation jusqu'à sa livraison vérifiée. Le Goal est obligatoire même si aucun code n'est présent et même si Trello sert d'abord de checkpoint ; il ne devient `complete` qu'après les documents, le tableau, les cartes, les étiquettes, les checklists, le push prévu et la relecture finale.
+
 1. Recevoir et accepter le cahier des charges.
 2. Poser une seule série de questions de complétude avec choix recommandés.
 3. Mettre à jour `RUNTIME-STATE.md` à chaque transition et après chaque erreur.
