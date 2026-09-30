@@ -1,5 +1,9 @@
 ## Unreleased
 
+## 1.12.62 - 2026-09-30
+
+- Définit le navigateur existant comme navigateur généraliste du projet, et non comme navigateur dédié à Trello.
+
 ## 1.12.61 - 2026-09-30
 
 - Réutilise toujours le navigateur Trello déjà ouvert et connecté avant toute nouvelle session.
