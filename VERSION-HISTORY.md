@@ -10,6 +10,10 @@ Le dépôt a été initialisé le 21 septembre 2026. Les premiers commits ont é
 
 ## Historique chronologique
 
+| 1.12.65 | 2026-09-30 | Stratégie hybride connecteur Trello puis navigateur. |
+
+| 1.12.64 | 2026-09-30 | Relecture obligatoire après chaque création de carte. |
+
 | 1.12.63 | 2026-09-30 | Décomposition détaillée obligatoire au-delà des cartes macro. |
 
 | 1.12.62 | 2026-09-30 | Navigateur généraliste partagé pour Trello, GitHub, VPS et Dokploy. |

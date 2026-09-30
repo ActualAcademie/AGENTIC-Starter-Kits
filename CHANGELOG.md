@@ -1,5 +1,13 @@
 ## Unreleased
 
+## 1.12.65 - 2026-09-30
+
+- Implique une stratégie connecteur-premier puis navigateur pour les compléments Trello et la validation visuelle.
+
+## 1.12.64 - 2026-09-30
+
+- Vérifie chaque carte créée avant d'autoriser le passage à la suivante.
+
 ## 1.12.63 - 2026-09-30
 
 - Interdit de considérer des cartes macro seules comme une décomposition complète de conception.
