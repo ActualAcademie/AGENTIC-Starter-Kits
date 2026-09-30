@@ -1,5 +1,9 @@
 ## Unreleased
 
+## 1.12.66 - 2026-09-30
+
+- Précise que le connecteur Trello reste en lecture-écriture prioritaire et que le navigateur complète seulement ses manques après vérification.
+
 ## 1.12.65 - 2026-09-30
 
 - Implique une stratégie connecteur-premier puis navigateur pour les compléments Trello et la validation visuelle.
