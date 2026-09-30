@@ -1,5 +1,10 @@
 ## Unreleased
 
+## 1.12.59 - 2026-09-30
+
+- Utilise automatiquement le navigateur Trello quand l'écriture native n'est pas exposée.
+- Initialise les fichiers de contexte manquants et recherche réellement Python 3.11 ou plus récent avant de bloquer.
+
 ## 1.12.58 - 2026-09-30
 
 - Met à jour `.gitignore` avant toute autre mutation lors de l'initialisation.
