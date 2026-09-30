@@ -1,5 +1,9 @@
 ## Unreleased
 
+## 1.12.58 - 2026-09-30
+
+- Met à jour `.gitignore` avant toute autre mutation lors de l'initialisation.
+
 ## 1.12.57 - 2026-09-30
 
 - Impose la relecture complète des instructions et la création du Goal dès le démarrage de toute initialisation.
