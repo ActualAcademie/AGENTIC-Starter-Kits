@@ -10,6 +10,8 @@ Le dépôt a été initialisé le 21 septembre 2026. Les premiers commits ont é
 
 ## Historique chronologique
 
+| 1.12.61 | 2026-09-30 | Priorité au navigateur existant et à sa session Trello authentifiée. |
+
 | 1.12.60 | 2026-09-30 | Création obligatoire des étiquettes Trello et contrôle de rattachement. |
 
 | 1.12.59 | 2026-09-30 | Fallback Trello, initialisation du contexte et détection Python renforcée. |
