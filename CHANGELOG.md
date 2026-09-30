@@ -1,5 +1,9 @@
 ## Unreleased
 
+## 1.12.63 - 2026-09-30
+
+- Interdit de considérer des cartes macro seules comme une décomposition complète de conception.
+
 ## 1.12.62 - 2026-09-30
 
 - Définit le navigateur existant comme navigateur généraliste du projet, et non comme navigateur dédié à Trello.
