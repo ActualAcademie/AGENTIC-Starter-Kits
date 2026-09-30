@@ -43,6 +43,11 @@ fi
 if [ ! -f "$config_root/project-profile.toml" ]; then
   cp "$config_root/templates/project-profile.toml" "$config_root/project-profile.toml"
 fi
+for context_file in PROJECT-CONTEXT.md PROJECT-DATA-BOUNDARY.md; do
+  if [ ! -f "$config_root/$context_file" ] && [ -f "$config_root/templates/$context_file" ]; then
+    cp "$config_root/templates/$context_file" "$config_root/$context_file"
+  fi
+done
 
 inventory="$config_root/project-inventory.md"
 {

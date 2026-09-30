@@ -10,6 +10,8 @@ Le dépôt a été initialisé le 21 septembre 2026. Les premiers commits ont é
 
 ## Historique chronologique
 
+| 1.12.59 | 2026-09-30 | Fallback Trello, initialisation du contexte et détection Python renforcée. |
+
 | 1.12.58 | 2026-09-30 | Protection Git immédiate avant installation du kit. |
 
 | 1.12.57 | 2026-09-30 | Porte de démarrage complète et Goal obligatoire pour l'initialisation. |
