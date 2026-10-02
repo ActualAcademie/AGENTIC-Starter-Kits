@@ -1,8 +1,13 @@
 ## Unreleased
 
 ## 1.12.80 - 2026-10-02
-
 - Ajoute des simulations d'adaptateurs Trello, navigateur, GitFlow et délégation dans la CI sandbox.
+
+## 1.12.81 - 2026-10-02
+
+- Bloque techniquement le suivi accidentel de `.codex/` et `.claude/` dans les projets consommateurs.
+- Ajoute une correction sûre avec `git rm --cached`, sans suppression des fichiers locaux.
+- Renforce les règles de frontière entre dépôt source du kit et projets utilisant le kit.
 
 ## 1.12.79 - 2026-10-02
 
