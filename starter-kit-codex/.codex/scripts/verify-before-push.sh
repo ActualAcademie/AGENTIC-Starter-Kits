@@ -5,6 +5,8 @@ script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 config="$(cd "$script_dir/.." && pwd)"
 root="$(git -C "$config/.." rev-parse --show-toplevel 2>/dev/null || { echo "Git requis pour valider un push"; exit 1; })"
 
+bash "$script_dir/verify-consumer-index.sh"
+
 if [ -f "$root/.workspace.toml" ]; then
   echo "Mode external détecté: validation du kit et des fichiers publiables uniquement"
   if git -C "$root" ls-files --error-unmatch .codex AGENTS.md >/dev/null 2>&1; then
