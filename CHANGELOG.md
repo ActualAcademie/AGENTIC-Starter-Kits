@@ -1,5 +1,10 @@
 ## Unreleased
 
+## 1.12.82 - 2026-10-02
+
+- Renforce le contrôle frontend item par item des menus et navigations.
+- Interdit de déclarer une correction visuelle sans preuve du rendu réellement observé.
+
 ## 1.12.80 - 2026-10-02
 - Ajoute des simulations d'adaptateurs Trello, navigateur, GitFlow et délégation dans la CI sandbox.
 
