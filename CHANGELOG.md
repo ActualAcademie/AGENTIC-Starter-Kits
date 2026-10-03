@@ -1,5 +1,11 @@
 ## Unreleased
 
+## 1.12.90 - 2026-10-03
+
+- Route explicitement les cartes `Review` vers l’auditeur avant toute demande humaine.
+- Réserve `needs-review` aux décisions humaines réellement exigées par le cahier ou les critères.
+- Ajoute un test de non-régression sur ce routage.
+
 ## 1.12.89 - 2026-10-03
 
 - Corrige le seuil contradictoire de délégation entre deux et trois lots indépendants.

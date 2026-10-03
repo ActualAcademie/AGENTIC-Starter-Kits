@@ -16,6 +16,15 @@ for coordinator in \
   fi
 done
 
+for closure in "$root/starter-kit-codex/.codex/policies/DELIVERY-CLOSURE-POLICY.md" "$root/starter-kit-claude/.claude/policies/DELIVERY-CLOSURE-POLICY.md"; do
+  grep -q 'carte en `Review` déclenche d’abord l’agent `auditeur`' "$closure" || {
+    echo "ECHEC TEST: Review ne route pas explicitement vers l auditeur"; exit 1;
+  }
+  grep -q 'ne demande une validation humaine que si' "$closure" || {
+    echo "ECHEC TEST: conditions de validation humaine absentes"; exit 1;
+  }
+done
+
 for flow in \
   "$root/starter-kit-codex/.codex/policies/GIT-FLOW.md" \
   "$root/starter-kit-claude/.claude/policies/GIT-FLOW.md"; do
