@@ -10,6 +10,8 @@ Le dépôt a été initialisé le 21 septembre 2026. Les premiers commits ont é
 
 ## Historique chronologique
 
+| 1.12.83 | 2026-10-03 | Contrats spécialisés et preuves obligatoires pour tous les agents. |
+
 | 1.12.82 | 2026-10-02 | Contrôle visuel item par item des menus et preuves de correction frontend. |
 
 | 1.12.81 | 2026-10-02 | Garde d’index consommateur empêchant le suivi accidentel des dossiers locaux du kit. |

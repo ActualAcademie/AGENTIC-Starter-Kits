@@ -1,5 +1,10 @@
 ## Unreleased
 
+## 1.12.83 - 2026-10-03
+
+- Ajoute un contrat détaillé de responsabilités, activation, livrables, preuves et sorties pour tous les agents.
+- Renforce le Coordinateur afin qu’il lise et applique ce contrat avant toute délégation.
+
 ## 1.12.82 - 2026-10-02
 
 - Renforce le contrôle frontend item par item des menus et navigations.
