@@ -5,7 +5,7 @@ Cette matrice définit les parcours à rejouer dans un projet temporaire avant t
 | Domaine | Scénario nominal obligatoire | Preuve attendue | Exécuté par |
 |---|---|---|---|
 | Initialisation | Nouveau projet avec cahier accepté | profil, conception et état créés | sandbox |
-| Initialisation | Projet existant avec audit complet | cartes d’audit et couverture de conception | sandbox |
+| Initialisation | Projet existant avec audit complet | cartes d’audit et couverture de conception | sandbox dynamique |
 | Initialisation | Cahier incomplet | arrêt avant code et question consolidée | sandbox |
 | Conception | Documents incomplets | porte de conception bloquante | sandbox |
 | Trello | Tableau neuf | listes ordonnées et labels nommés | sandbox |

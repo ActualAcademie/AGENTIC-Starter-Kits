@@ -89,6 +89,41 @@ for kit in codex claude; do
   fi
 done
 
+# Parcours complet d'initialisation d'un projet existant avec audit et plan Trello isolé.
+for kit in codex claude; do
+  hidden=".$kit"
+  source="$root/starter-kit-$kit/$hidden"
+  project="$tmp/existing-$kit"
+  mkdir -p "$project/$hidden" "$project/docs" "$project/trello"
+  git init --quiet "$project"
+  git -C "$project" config user.email sandbox@example.invalid
+  git -C "$project" config user.name sandbox
+  printf '# Projet existant\n\nFonction déjà livrée à auditer.\n' > "$project/README.md"
+  printf 'const existingFeature = true;\n' > "$project/app.js"
+  cp -R "$source/." "$project/$hidden/"
+  if [ "$kit" = codex ]; then cp "$root/starter-kit-codex/AGENTS.md" "$project/AGENTS.md"; else cp "$root/starter-kit-claude/CLAUDE.md" "$project/CLAUDE.md"; fi
+
+  # Adaptateur local : il représente uniquement les écritures Trello attendues.
+  cat > "$project/trello/board.tsv" <<'DATA'
+01|À concevoir|Architecture|Audit de la conception et des dépendances.|conception;preuve;relecture
+02|À concevoir|Frontend|Audit de l'interface, des états et de l'accessibilité.|rendu;responsive;preuve
+03|Ready|QA|Tests nominaux, négatifs et régression.|outils;tests;rapport
+DATA
+  grep -q '^01|' "$project/trello/board.tsv"
+  grep -q '^02|' "$project/trello/board.tsv"
+  grep -q '^03|' "$project/trello/board.tsv"
+  test "$(awk -F'|' '{print $1}' "$project/trello/board.tsv" | sort -n | tr '\n' ' ')" = "01 02 03 "
+  while IFS='|' read -r id list label description checks; do
+    [ -n "$id" ] && [ -n "$list" ] && [ -n "$label" ] && [ "${#description}" -ge 25 ] && [ -n "$checks" ]
+    [ "$checks" != "$id" ]
+  done < "$project/trello/board.tsv"
+  printf '%s\n' 'goal_status=active' 'goal_card=01' 'goal_delegation_plan=frontend->02,qa->03' 'goal_agents_created=agent-frontend,agent-qa' 'trello_readback=verified' > "$project/$hidden/existing-audit-state.log"
+  assert_contains "$project/$hidden/existing-audit-state.log" '^goal_status=active$'
+  assert_contains "$project/$hidden/existing-audit-state.log" 'goal_delegation_plan=frontend->02,qa->03'
+  assert_contains "$project/$hidden/existing-audit-state.log" '^trello_readback=verified$'
+  assert_contains "$source/skills/project-onboarding/SKILL.md" 'audit complet et minutieux'
+done
+
 # Contrats statiques des domaines qui nécessitent une intégration externe réelle.
 for kit in codex claude; do
   hidden=".$kit"

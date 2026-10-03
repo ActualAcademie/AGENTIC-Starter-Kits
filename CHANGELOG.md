@@ -1,5 +1,10 @@
 ## Unreleased
 
+## 1.12.84 - 2026-10-03
+
+- Ajoute un scénario sandbox dynamique d’initialisation d’un projet existant.
+- Vérifie audit, cartes ordonnées, labels, descriptions, checklists, Goal, délégation et relecture Trello simulée.
+
 ## 1.12.83 - 2026-10-03
 
 - Ajoute un contrat détaillé de responsabilités, activation, livrables, preuves et sorties pour tous les agents.
