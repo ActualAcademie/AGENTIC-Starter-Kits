@@ -34,6 +34,10 @@ Quand elles existent, utiliser les commandes natives de l'environnement : `/goal
 
 ## Activation automatique depuis Trello
 
+Lorsqu’une demande contient « enchaîner les cartes », « poursuivre les cartes », « traiter la suite » ou une formulation équivalente, le Goal porte sur toute la séquence autorisée et non sur la première carte. Le Coordinateur doit inscrire la file ordonnée des cartes, leurs dépendances et la condition finale de livraison dans `RUNTIME-STATE.md` avant la première action.
+
+Le passage d’une carte en `Review` ne termine jamais ce Goal de séquence. Le Coordinateur relit la carte, exécute la revue prévue, puis démarre la prochaine carte éligible dans le même Goal. `Goal achieved`, `complete` ou une réponse finale sont interdits tant qu’une carte autonome de la file reste ouverte ou qu’une décision humaine explicitement requise n’est pas le seul prochain événement.
+
 Lorsqu'une demande explicite porte sur la finalisation d'une carte Trello, le Coordinateur doit créer un objectif persistant dès le début, quel que soit le nombre de cases ouvertes, y compris une seule case. L'objectif doit reprendre le titre de la carte, inclure toutes les cases ouvertes, la Definition of Done, les preuves attendues, les contraintes de branche/PR et la condition de blocage. Une carte à une seule case n'active pas la parallélisation, mais elle active bien le Goal.
 
 Si la checklist contient au moins trois tâches ouvertes indépendantes, ou plusieurs lots clairement parallélisables, le Goal doit aussi inclure avant sa première action un plan de délégation accélérée : agents à créer ou activer, rôle de chacun, partition exacte des tâches, fichiers autorisés, preuves attendues, dépendances et agent intégrateur. Le Coordinateur lance les agents parallèles dans le même cycle d'autorisation lorsque les partitions sont sûres, puis conserve une seule branche et une seule PR finale pour la carte. Il ne crée pas d'agent supplémentaire si les tâches partagent un fichier, un contrat, une migration ou une dépendance séquentielle.
