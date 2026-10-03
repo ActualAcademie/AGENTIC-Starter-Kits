@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-if [ "$#" -lt 4 ] || [ "$#" -gt 7 ]; then
-  echo "Usage: $0 OBJECTIF VERIFICATION CONTRAINTES CONDITION_BLOCAGE [CARTE] [BRANCHE] [DELEGATION]" >&2
+if [ "$#" -lt 4 ] || [ "$#" -gt 9 ]; then
+  echo "Usage: $0 OBJECTIF VERIFICATION CONTRAINTES CONDITION_BLOCAGE [CARTE] [BRANCHE] [DELEGATION] [AGENTS] [AFFECTATIONS]" >&2
   exit 2
 fi
 
@@ -14,6 +14,11 @@ events="$config/runtime-events.log"
 
 export GOAL_OBJECTIVE="$1" GOAL_VERIFICATION="$2" GOAL_CONSTRAINTS="$3" GOAL_BLOCKED="$4"
 export GOAL_CARD="${5:-none}" GOAL_BRANCH="${6:-none}" GOAL_DELEGATION="${7:-none}"
+export GOAL_AGENTS_CREATED="${8:-${GOAL_AGENTS_CREATED:-}}" GOAL_AGENT_ASSIGNMENTS="${9:-${GOAL_AGENT_ASSIGNMENTS:-}}"
+if [ "$GOAL_DELEGATION" != "none" ] && [ "$GOAL_DELEGATION" != "séquentiel justifié" ] && { [ -z "$GOAL_AGENTS_CREATED" ] || [ -z "$GOAL_AGENT_ASSIGNMENTS" ]; }; then
+  echo "GOAL: délégation annoncée sans agents créés et affectations explicites; création obligatoire avant le démarrage" >&2
+  exit 3
+fi
 export GOAL_STARTED_AT="$(date -u '+%Y-%m-%dT%H:%M:%SZ')"
 export GOAL_SESSION_ID="goal-${GOAL_STARTED_AT//:/}"
 
@@ -42,8 +47,8 @@ values = {
     "goal_session_id": os.environ["GOAL_SESSION_ID"],
     "goal_delivery_status": "pending",
     "goal_delegation_plan": os.environ["GOAL_DELEGATION"],
-    "goal_agents_created": "pending-assessment",
-    "goal_agent_assignments": "pending-assessment",
+    "goal_agents_created": os.environ.get("GOAL_AGENTS_CREATED") or ("none" if os.environ["GOAL_DELEGATION"] in ("none", "séquentiel justifié") else "missing"),
+    "goal_agent_assignments": os.environ.get("GOAL_AGENT_ASSIGNMENTS") or ("none" if os.environ["GOAL_DELEGATION"] in ("none", "séquentiel justifié") else "missing"),
     "integration_branch": os.environ["GOAL_BRANCH"],
     "pushed_integration_commit": "none",
     "pull_request_status": "not-required",
