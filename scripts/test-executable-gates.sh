@@ -204,11 +204,18 @@ for kit in codex claude; do
   : > "$goal_root/$hidden/runtime-events.log"
   (cd "$goal_root" && bash "$hidden/scripts/start-goal.sh" \
     "Livrer la carte de test" "preuve CI et PR" "branche dev et outils gratuits" \
-    "decision humaine ou blocage externe prouve" "P01" "dev" "qa,frontend") >/dev/null
+    "decision humaine ou blocage externe prouve" "P01" "dev" "qa,frontend" \
+    "agent-qa,agent-frontend" "qa->tests,frontend->ui") >/dev/null
   grep -q '^- execution_status: running$' "$goal_root/$hidden/RUNTIME-STATE.md"
   grep -q '^- goal_status: active$' "$goal_root/$hidden/RUNTIME-STATE.md"
   grep -q '^- active_card: P01$' "$goal_root/$hidden/RUNTIME-STATE.md"
   grep -q 'delegation=qa,frontend' "$goal_root/$hidden/runtime-events.log"
+  grep -q '^- goal_agents_created: agent-qa,agent-frontend$' "$goal_root/$hidden/RUNTIME-STATE.md"
+  grep -q '^- goal_agent_assignments: qa->tests,frontend->ui$' "$goal_root/$hidden/RUNTIME-STATE.md"
+  if (cd "$goal_root" && bash "$hidden/scripts/start-goal.sh" "bad" "proof" "constraints" "block" "P02" "dev" "qa,frontend") >/dev/null 2>&1; then
+    echo "ECHEC TEST: une délégation sans agents ni affectations aurait dû être bloquée"
+    exit 1
+  fi
   rm -rf "$goal_root"
 done
 
