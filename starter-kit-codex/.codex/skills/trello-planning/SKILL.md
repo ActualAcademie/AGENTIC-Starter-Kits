@@ -59,7 +59,7 @@ Les agents parallèles travaillent dans des espaces isolés si nécessaire. Le C
 
 Pour une famille de tâches homogènes, plusieurs agents du même rôle peuvent travailler en parallèle sur des cartes, fichiers, parcours, lignes de données ou lots de checklist distincts. Le Coordinateur désigne un agent intégrateur, vérifie les partitions avant lancement, interdit les doublons et ne valide qu'après assemblage, tests et relecture de toutes les preuves.
 
-Lors de la création d'un Goal pour une carte contenant au moins trois cases ouvertes indépendantes, inscrire dans le Goal la création ou l'activation des agents parallèles, la partition de chaque lot et l'agent intégrateur avant de commencer. Synchroniser ces responsables dans Trello et conserver une seule branche et une seule PR finale pour la carte.
+Lors de la création d'un Goal pour une carte contenant au moins deux cases ouvertes indépendantes, inscrire dans le Goal la création ou l'activation des agents parallèles, la partition de chaque lot et l'agent intégrateur avant de commencer. Synchroniser ces responsables dans Trello et conserver une seule branche et une seule PR finale pour la carte.
 
 ### Rythme obligatoire des transitions et preuves
 
