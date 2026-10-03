@@ -137,6 +137,8 @@ for kit in codex claude; do
   assert_contains "$source/policies/INITIALIZATION-CLOSURE-POLICY.md" 'Un fichier local décrivant Trello ne constitue pas une preuve Trello'
   assert_contains "$source/policies/INITIALIZATION-CLOSURE-POLICY.md" 'PR vers `dev`'
   assert_contains "$source/policies/INITIALIZATION-CLOSURE-POLICY.md" 'needs-review.*action autonome'
+  assert_contains "$source/policies/SESSION-CONTINUITY-POLICY.md" 'enchaîner les cartes'
+  assert_contains "$source/policies/SESSION-CONTINUITY-POLICY.md" 'Review.*ne termine jamais'
 done
 
 echo "Scénarios sandbox isolés OK"
