@@ -23,14 +23,14 @@ for kit in codex claude; do
   (cd "$scenario" && bash "$hidden/scripts/start-goal.sh" \
     "Livrer une carte multi-lots" "preuves de tests et livraison" \
     "branche dev, aucune dépense" "accès externe manquant" \
-    "P23" "dev" "création de 2 agents; agent intégrateur; lots indépendants") >/dev/null
+    "P23" "dev" "création de 2 agents; agent intégrateur; lots indépendants" \
+    "agent-frontend,agent-qa" "frontend->lot-ui,qa->lot-tests") >/dev/null
   assert_contains "$scenario/$hidden/RUNTIME-STATE.md" '^- goal_status: active$'
   assert_contains "$scenario/$hidden/RUNTIME-STATE.md" 'goal_delegation_plan: création de 2 agents'
-  assert_contains "$scenario/$hidden/RUNTIME-STATE.md" 'goal_agents_created: pending-assessment'
+  assert_contains "$scenario/$hidden/RUNTIME-STATE.md" 'goal_agents_created: agent-frontend,agent-qa'
   assert_contains "$scenario/$hidden/runtime-events.log" 'delegation=création de 2 agents'
 
   # Scenario 2: le Coordinateur active les agents et répartit les lots sans recouvrement.
-  perl -0pi -e 's/goal_agents_created: pending-assessment/goal_agents_created: agent-frontend,agent-qa/; s/goal_agent_assignments: pending-assessment/goal_agent_assignments: frontend->lot-ui,qa->lot-tests/' "$scenario/$hidden/RUNTIME-STATE.md"
   assert_contains "$scenario/$hidden/RUNTIME-STATE.md" 'goal_agents_created: agent-frontend,agent-qa'
   assert_contains "$scenario/$hidden/RUNTIME-STATE.md" 'goal_agent_assignments: frontend->lot-ui,qa->lot-tests'
 

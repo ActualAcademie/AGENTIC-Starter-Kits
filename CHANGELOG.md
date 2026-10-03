@@ -1,5 +1,11 @@
 ## Unreleased
 
+## 1.12.87 - 2026-10-03
+
+- Rend la création des agents et leurs affectations obligatoires avant le démarrage d’un Goal multi-lots.
+- Supprime l’état permissif `pending-assessment` du démarrage des Goals délégués.
+- Ajoute une porte exécutable et un test d’échec lorsqu’une délégation est annoncée sans agents réels.
+
 ## 1.12.86 - 2026-10-03
 
 - Empêche la clôture d’un Goal après une seule carte lorsqu’une demande exige d’enchaîner les cartes.

@@ -10,6 +10,8 @@ Le dépôt a été initialisé le 21 septembre 2026. Les premiers commits ont é
 
 ## Historique chronologique
 
+| 1.12.87 | 2026-10-03 | Création et affectation des agents obligatoires avant tout Goal délégué. |
+
 | 1.12.86 | 2026-10-03 | Goal séquentiel maintenu jusqu’à la fin de toutes les cartes autorisées. |
 
 | 1.12.85 | 2026-10-03 | Porte stricte de clôture et de reprise de l’initialisation. |
