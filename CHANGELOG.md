@@ -1,5 +1,11 @@
 ## Unreleased
 
+## 1.12.86 - 2026-10-03
+
+- Empêche la clôture d’un Goal après une seule carte lorsqu’une demande exige d’enchaîner les cartes.
+- Maintient le Goal actif entre `Review` et la prochaine carte autonome éligible.
+- Ajoute un test de non-régression sur cette clôture prématurée.
+
 ## 1.12.85 - 2026-10-03
 
 - Ajoute une porte de clôture stricte pour l’initialisation et la reprise de projet.
