@@ -10,6 +10,8 @@ Le dépôt a été initialisé le 21 septembre 2026. Les premiers commits ont é
 
 ## Historique chronologique
 
+| 1.12.84 | 2026-10-03 | Scénario dynamique complet d’initialisation d’un projet existant. |
+
 | 1.12.83 | 2026-10-03 | Contrats spécialisés et preuves obligatoires pour tous les agents. |
 
 | 1.12.82 | 2026-10-02 | Contrôle visuel item par item des menus et preuves de correction frontend. |
