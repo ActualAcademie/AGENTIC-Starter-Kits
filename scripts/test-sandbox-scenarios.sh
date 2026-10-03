@@ -134,6 +134,9 @@ for kit in codex claude; do
   assert_contains "$source/policies/PROJECT-BOUNDARY-POLICY.md" 'ne doivent jamais être référencés'
   assert_contains "$source/policies/BROWSER-SESSION-LIFECYCLE.md" 'aucun onglet sensible ouvert'
   assert_contains "$source/skills/documentation-audit/SKILL.md" 'README'
+  assert_contains "$source/policies/INITIALIZATION-CLOSURE-POLICY.md" 'Un fichier local décrivant Trello ne constitue pas une preuve Trello'
+  assert_contains "$source/policies/INITIALIZATION-CLOSURE-POLICY.md" 'PR vers `dev`'
+  assert_contains "$source/policies/INITIALIZATION-CLOSURE-POLICY.md" 'needs-review.*action autonome'
 done
 
 echo "Scénarios sandbox isolés OK"
