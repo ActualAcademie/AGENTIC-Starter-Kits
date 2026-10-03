@@ -7,6 +7,7 @@ Cette matrice définit les parcours à rejouer dans un projet temporaire avant t
 | Initialisation | Nouveau projet avec cahier accepté | profil, conception et état créés | sandbox |
 | Initialisation | Projet existant avec audit complet | cartes d’audit et couverture de conception | sandbox dynamique |
 | Initialisation | Cahier incomplet | arrêt avant code et question consolidée | sandbox |
+| Initialisation | Projet existant interrompu avant livraison | reprise du Goal et refus de clôture prématurée | sandbox dynamique |
 | Conception | Documents incomplets | porte de conception bloquante | sandbox |
 | Trello | Tableau neuf | listes ordonnées et labels nommés | sandbox |
 | Trello | Carte explicitement demandée | création sans confirmation redondante | sandbox |

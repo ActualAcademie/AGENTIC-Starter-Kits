@@ -1,5 +1,11 @@
 ## Unreleased
 
+## 1.12.85 - 2026-10-03
+
+- Ajoute une porte de clôture stricte pour l’initialisation et la reprise de projet.
+- Interdit les déclarations de fin fondées sur un Trello local, une PR non vérifiée ou une action autonome restante.
+- Renforce la preuve du Goal, de la relecture Trello et de la livraison vers `dev`.
+
 ## 1.12.84 - 2026-10-03
 
 - Ajoute un scénario sandbox dynamique d’initialisation d’un projet existant.
