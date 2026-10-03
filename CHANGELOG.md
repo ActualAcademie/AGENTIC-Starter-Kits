@@ -1,5 +1,10 @@
 ## Unreleased
 
+## 1.12.88 - 2026-10-03
+
+- Corrige les incohérences historiques de version et les doublons du changelog détectés par l’audit.
+- Rend le contrôle automatique de cohérence des versions obligatoire avant livraison.
+
 ## 1.12.87 - 2026-10-03
 
 - Rend la création des agents et leurs affectations obligatoires avant le démarrage d’un Goal multi-lots.
@@ -33,14 +38,15 @@
 - Renforce le contrôle frontend item par item des menus et navigations.
 - Interdit de déclarer une correction visuelle sans preuve du rendu réellement observé.
 
-## 1.12.80 - 2026-10-02
-- Ajoute des simulations d'adaptateurs Trello, navigateur, GitFlow et délégation dans la CI sandbox.
-
 ## 1.12.81 - 2026-10-02
 
 - Bloque techniquement le suivi accidentel de `.codex/` et `.claude/` dans les projets consommateurs.
 - Ajoute une correction sûre avec `git rm --cached`, sans suppression des fichiers locaux.
 - Renforce les règles de frontière entre dépôt source du kit et projets utilisant le kit.
+
+## 1.12.80 - 2026-10-02
+
+- Ajoute des simulations d'adaptateurs Trello, navigateur, GitFlow et délégation dans la CI sandbox.
 ## 1.12.79 - 2026-10-02
 
 - Étend les scénarios sandbox aux dépôts Git temporaires et aux parcours d'initialisation Codex et Claude.
@@ -134,7 +140,7 @@
 
 - Impose la relecture complète des instructions et la création du Goal dès le démarrage de toute initialisation.
 
-## 1.12.57 - 2026-09-29
+## 1.12.56 - 2026-09-29
 
 - Utilise l API GitHub comme repli contre les réponses Raw obsolètes.
 
@@ -756,20 +762,18 @@
 - Protège le cahier des charges, l état projet, les décisions et les work items lors des mises à jour.
 - Crée une sauvegarde avant chaque remplacement du moteur du kit.
 
-# Changelog
-
-## 1.12.31
+### Historique 1.12.31
 
 - Réduit la cadence des commentaires Trello pour éviter les cartes qui stagnent sous des micro-mises à jour.
 - Impose des synthèses uniquement lors d'événements significatifs, avec une synthèse finale probante.
-## 1.1.2 - 2026-09-23
+### Historique 1.1.2 - 2026-09-23
 
 ### Corrections
 
 - Ajoute le mode initialisation utilisable dans une conversation déjà ouverte.
 - Rend la porte du cahier des charges explicitement relançable sans redémarrer la session.
 
-## 1.1.2 - 2026-09-23
+### Historique 1.1.2 - 2026-09-23 (complément 1)
 
 ### Corrections
 
@@ -777,7 +781,7 @@
 - Corrige les exemples manuels d’installation Codex et Claude.
 - Clarifie les parcours native et external dans les README.
 
-## 1.1.2 - 2026-09-23
+### Historique 1.1.2 - 2026-09-23 (complément 2)
 
 ### Ajouts
 
@@ -785,14 +789,14 @@
 - Ajoute le manifeste `.workspace.toml` et le workflow de mise à jour externe.
 - Conserve les fichiers d’orchestration localement sans les publier dans le dépôt projet en mode external.
 
-## 1.1.2 - 2026-09-23
+### Historique 1.1.2 - 2026-09-23 (complément 3)
 
 ### Corrections
 
 - Corrige le workflow de mise à jour pour récupérer son script officiel malgré l’ignorance de `.codex/` et `.claude/`.
 - Rend la détection et la mise à jour automatique utilisables dans les projets importateurs.
 
-## 1.1.2 - 2026-09-23
+### Historique 1.1.2 - 2026-09-23 (complément 4)
 
 ### Corrections
 
@@ -801,11 +805,11 @@
 - Rend la validation navigateur obligatoire pour les changements frontend.
 - Ajoute le routage universel des demandes hors cahier des charges initial.
 
-## 1.1.2 - 2026-09-22
+### Historique 1.1.2 - 2026-09-22 (complément 5)
 
 - Corrige la condition de secret du workflow de publication GitHub.
 
-## 1.1.2 - 2026-09-22
+### Historique 1.1.2 - 2026-09-22 (complément 6)
 
 - Fixe le déclenchement et la publication idempotente des Releases GitHub.
 - Maintient la synchronisation documentaire et le contrôle de version.
@@ -850,7 +854,7 @@ Ce projet suit le versionnement sémantique. Les changements publiés sont regro
 - Ajout ou correction : inscrire ici chaque changement visible avant la release.
 - Ajout du synchroniseur non destructif et du workflow de Pull Request automatique pour propager les mises à jour du kit dans les projets utilisateurs.
 
-## 1.1.2 - 2026-09-21
+### Historique 1.1.2 - 2026-09-21
 
 ### Corrections
 
