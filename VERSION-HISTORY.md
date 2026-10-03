@@ -10,6 +10,8 @@ Le dépôt a été initialisé le 21 septembre 2026. Les premiers commits ont é
 
 ## Historique chronologique
 
+| 1.12.88 | 2026-10-03 | Audit de cohérence versionnée et blocage des versions périmées ou dupliquées. |
+
 | 1.12.87 | 2026-10-03 | Création et affectation des agents obligatoires avant tout Goal délégué. |
 
 | 1.12.86 | 2026-10-03 | Goal séquentiel maintenu jusqu’à la fin de toutes les cartes autorisées. |
@@ -122,7 +124,7 @@ Le dépôt a été initialisé le 21 septembre 2026. Les premiers commits ont é
 
 ## Intégrité de publication
 
-La version courante est `1.12.49`. Le changelog, les README et les manifestes `KIT.toml` doivent toujours porter la même version. Les tags historiques disponibles dans ce clone s’arrêtent actuellement à `v1.12.40`; les versions 1.12.41 à 1.12.49 sont documentées et fusionnées mais doivent recevoir leurs tags annotés lors de la prochaine opération de publication. Aucun tag existant ne doit être déplacé ou réutilisé.
+La version courante est lue exclusivement depuis `VERSION` et doit être identique au badge README, aux manifestes `KIT.toml`, au changelog et à l’historique. Les contrôles de publication refusent toute version périmée ou dupliquée.
 
 ## Sources de vérité
 
