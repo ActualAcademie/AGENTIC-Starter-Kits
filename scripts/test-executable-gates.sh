@@ -225,6 +225,10 @@ for kit in codex claude; do
     echo "ECHEC TEST: une délégation sans agents ni affectations aurait dû être bloquée"
     exit 1
   fi
+  if (cd "$goal_root" && bash "$hidden/scripts/start-goal.sh" "bad" "proof" "constraints" "block" "none" "dev") >/dev/null 2>&1; then
+    echo "ECHEC TEST: un travail sans analyse de délégation aurait dû être bloqué"
+    exit 1
+  fi
   rm -rf "$goal_root"
 done
 

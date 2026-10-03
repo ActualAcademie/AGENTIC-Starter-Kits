@@ -1,5 +1,10 @@
 ## Unreleased
 
+## 1.12.91 - 2026-10-03
+
+- Rend l’analyse de délégation obligatoire pour tout travail, même sans carte Trello.
+- Interdit `none` dans un Goal de modification, audit, test, livraison ou action externe.
+
 ## 1.12.90 - 2026-10-03
 
 - Route explicitement les cartes `Review` vers l’auditeur avant toute demande humaine.

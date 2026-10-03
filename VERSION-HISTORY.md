@@ -10,6 +10,8 @@ Le dépôt a été initialisé le 21 septembre 2026. Les premiers commits ont é
 
 ## Historique chronologique
 
+| 1.12.91 | 2026-10-03 | Décision de délégation obligatoire pour tout Goal de travail. |
+
 | 1.12.90 | 2026-10-03 | Routage obligatoire des cartes Review vers l’auditeur. |
 
 | 1.12.89 | 2026-10-03 | Audit des seuils de délégation et suppression d’une contradiction inter-agents. |
