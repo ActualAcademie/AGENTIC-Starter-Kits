@@ -1,5 +1,10 @@
 ## Unreleased
 
+## 1.12.89 - 2026-10-03
+
+- Corrige le seuil contradictoire de délégation entre deux et trois lots indépendants.
+- Ajoute un contrôle de gouvernance qui détecte les seuils divergents entre agents, Goals et Trello.
+
 ## 1.12.88 - 2026-10-03
 
 - Corrige les incohérences historiques de version et les doublons du changelog détectés par l’audit.

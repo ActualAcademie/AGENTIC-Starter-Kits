@@ -10,6 +10,8 @@ Le dépôt a été initialisé le 21 septembre 2026. Les premiers commits ont é
 
 ## Historique chronologique
 
+| 1.12.89 | 2026-10-03 | Audit des seuils de délégation et suppression d’une contradiction inter-agents. |
+
 | 1.12.88 | 2026-10-03 | Audit de cohérence versionnée et blocage des versions périmées ou dupliquées. |
 
 | 1.12.87 | 2026-10-03 | Création et affectation des agents obligatoires avant tout Goal délégué. |
