@@ -1,8 +1,17 @@
+---
+name: github-projects-planning
+description: Planifie et synchronise les Issues et Projects GitHub avec les exigences et le Git Flow.
+---
+
 # Skill github-projects-planning
 
 ## Objectif
 
 Utiliser GitHub Projects comme système de suivi principal du projet, relié aux Issues, aux Pull Requests et au Git Flow.
+
+## Entrées
+
+Cahier des charges accepté, conception validée, profil projet, work items et accès GitHub disponibles.
 
 ## Règle de démarrage
 
@@ -35,3 +44,11 @@ Synchroniser et relire le Project après chaque changement significatif : créat
 ## Sortie
 
 Project GitHub réellement créé ou repris, Issues détaillées et relues, labels et champs vérifiés, couverture du cahier complète, et statut local `verified` uniquement avec preuve distante.
+
+## Mesures
+
+Mesurer la couverture des exigences, le nombre d’Issues relues, les tâches ouvertes, les labels manquants et les preuves distantes confirmées.
+
+## Arrêt
+
+Arrêter et signaler précisément l’écart si l’accès GitHub, le cahier accepté, la conception ou une preuve distante manque. Ne jamais déclarer `verified` sans relecture réelle.
