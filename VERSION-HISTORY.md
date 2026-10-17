@@ -10,6 +10,8 @@ Le dépôt a été initialisé le 21 septembre 2026. Les premiers commits ont é
 
 ## Historique chronologique
 
+| 1.16.44 | 2026-10-17 | Registre central des outils CLI, npm et Python, installation idempotente et environnement partagé. |
+
 | 1.16.43 | 2026-10-17 | Contrôle lint obligatoire par fichier ouvert ou modifié. |
 
 | 1.16.42 | 2026-10-17 | GitHub Projects devient le système de suivi principal. |
