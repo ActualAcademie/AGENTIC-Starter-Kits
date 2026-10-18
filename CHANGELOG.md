@@ -1,5 +1,11 @@
 ## Unreleased
 
+## 1.16.58 - 2026-10-18
+
+- autorise uniquement la commande exacte du synchroniseur pendant la réinitialisation de la porte
+- synchronise automatiquement le kit partagé lorsqu’une mise à jour est détectée
+- supprime le deadlock qui bloquait le synchroniseur derrière son propre hook
+
 ## 1.16.57 - 2026-10-18
 
 - ajoute un registre temporaire de secours quand le registre partagé n’est pas inscriptible
