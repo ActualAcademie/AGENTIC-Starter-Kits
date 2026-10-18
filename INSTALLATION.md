@@ -41,13 +41,13 @@ Si le projet existe déjà, ne pas supprimer ses fichiers. Importer le kit de ma
 
 Le seul mode disponible est `shared`. Il installe une seule copie du kit dans le registre partagé de la machine et place dans chaque projet les liens symboliques, le contexte local et le manifeste de version.
 
-Pour le mode externe Codex :
+Pour Codex :
 
 ```bash
 ./install.sh --kit codex --mode shared --target /chemin/absolu/vers/mon-projet
 ```
 
-Pour le mode externe Claude :
+Pour Claude :
 
 ```bash
 ./install.sh --kit claude --mode shared --target /chemin/absolu/vers/mon-projet
@@ -495,4 +495,4 @@ Pour autoriser l’actualisation automatique de la description et des topics, cr
 Le workflow de publication est idempotent : si une Release portant le tag existe déjà, il la conserve et poursuit la mise à jour About.
 Le workflow de mise à jour doit être ajouté au premier commit du projet. L’installateur affiche les commandes nécessaires et vérifie qu’il n’est pas ignoré.
 
-Les distributions `native` et `external` sont documentées dans le dossier `distributions/`.
+La distribution unique `shared` est documentée dans le dossier `distributions/`.

@@ -5,7 +5,7 @@
 - `README.md` : présentation, capacités, agents et limites.
 - `CAHIER-DES-CHARGES-KITS-AGENTIQUES.md` : exigences, écarts documentaires, sécurité, reprise, tests et Definition of Done des deux kits.
 - `INSTALLATION.md` : installation guidée, initialisation, mises à jour et dépannage.
-- `distributions/README.md` : choix entre les modes `native` et `external`.
+- `distributions/README.md` : installation partagée unique et registre central.
 
 ## Gouvernance et sécurité
 
@@ -38,4 +38,4 @@
 
 ## Choisir rapidement
 
-Un débutant commence par `README.md`, puis suit `INSTALLATION.md`. Une équipe qui choisit `external` lit ensuite `distributions/external/README.md` et exécute le diagnostic local.
+Un débutant commence par `README.md`, puis suit `INSTALLATION.md` et utilise la distribution `shared` avant d’exécuter le diagnostic local.
