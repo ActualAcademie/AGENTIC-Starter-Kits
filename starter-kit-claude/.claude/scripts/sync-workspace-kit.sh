@@ -50,4 +50,5 @@ for local_file in PROJECT-BRIEF.md project-profile.toml RUNTIME-STATE.md; do
 done
 sed -i.bak "s/^kit_version = .*/kit_version = \"\$latest\"/" "$manifest"
 rm -f "$manifest.bak"
+bash "$kit_root/scripts/deliver-workspace-update.sh" "$latest"
 printf 'Kit Claude mis à jour : %s -> %s\nSauvegarde : %s\n' "$installed" "$latest" "$backup_root"
