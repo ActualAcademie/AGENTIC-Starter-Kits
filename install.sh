@@ -156,33 +156,25 @@ if [ -t 0 ]; then
   case "${confirm:-o}" in n|N|non|Non) info "Installation annulée."; exit 0 ;; esac
 fi
 info "Installation de la configuration $label..."
-if [ "$mode" = "shared" ]; then
-  shared_root="${AGENTIC_KIT_HOME:-${XDG_DATA_HOME:-$HOME/.local/share}/agentic-starter-kits/kits}"
-  kit_version="$(sed -n 's/^kit_version = "\(.*\)"/\1/p' "$repo_root/$source_dir/$hidden/KIT.toml")"
-  shared_dir="$shared_root/$kit/$kit_version"
-  mkdir -p "$shared_dir"
-  cp -R "$repo_root/$source_dir/$entry" "$shared_dir/$entry"
-  mkdir -p "$shared_dir/$hidden"
-  cp -R "$repo_root/$source_dir/$hidden/." "$shared_dir/$hidden/"
-  mkdir -p "$target/$hidden"
-  for item in "$repo_root/$source_dir/$hidden"/*; do
-    name="$(basename "$item")"
-    case "$name" in PROJECT-BRIEF.md|project-profile.toml|project-inventory.md|RUNTIME-STATE.md|decisions|work-items|reports|metrics|evaluations) continue ;; esac
-    rm -rf "$target/$hidden/$name"
-    ln -s "$shared_dir/$hidden/$name" "$target/$hidden/$name"
-  done
-  for local_dir in decisions work-items reports metrics evaluations; do mkdir -p "$target/$hidden/$local_dir"; done
-  rm -f "$target/$entry"
-  ln -s "$shared_dir/$entry" "$target/$entry"
-else
-  cp -R "$repo_root/$source_dir/$entry" "$target/$entry"
-  sync_kit_directory "$repo_root/$source_dir/$hidden" "$target/$hidden"
-fi
+shared_root="${AGENTIC_KIT_HOME:-${XDG_DATA_HOME:-$HOME/.local/share}/agentic-starter-kits/kits}"
+kit_version="$(sed -n 's/^kit_version = "\(.*\)"/\1/p' "$repo_root/$source_dir/$hidden/KIT.toml")"
+shared_dir="$shared_root/$kit/$kit_version"
+mkdir -p "$shared_dir" "$shared_dir/$hidden" "$target/$hidden"
+cp -R "$repo_root/$source_dir/$entry" "$shared_dir/$entry"
+cp -R "$repo_root/$source_dir/$hidden/." "$shared_dir/$hidden/"
+for item in "$repo_root/$source_dir/$hidden"/*; do
+  name="$(basename "$item")"
+  case "$name" in PROJECT-BRIEF.md|project-profile.toml|project-inventory.md|RUNTIME-STATE.md|decisions|work-items|reports|metrics|evaluations) continue ;; esac
+  rm -rf "$target/$hidden/$name"
+  ln -s "$shared_dir/$hidden/$name" "$target/$hidden/$name"
+done
+for local_dir in decisions work-items reports metrics evaluations; do mkdir -p "$target/$hidden/$local_dir"; done
+rm -f "$target/$entry"
+ln -s "$shared_dir/$entry" "$target/$entry"
 mkdir -p "$target/.github/workflows"
-if [ "$mode" = "shared" ]; then
-  workflow_path="$target/.github/workflows/update-workspace-kit.yml"
-  cp "$repo_root/distributions/external/update-workspace-kit.yml" "$workflow_path"
-  cat > "$target/.workspace.toml" <<EOF
+workflow_path="$target/.github/workflows/update-workspace-kit.yml"
+cp "$repo_root/distributions/shared/update-workspace-kit.yml" "$workflow_path"
+cat > "$target/.workspace.toml" <<EOF
 orchestrator = "$kit"
 kit_version = "$kit_version"
 source = "https://github.com/Krapaud-Labs/AGENTIC-Starter-Kits"
@@ -190,20 +182,6 @@ kit_mode = "shared"
 kit_home = "$shared_root"
 update_channel = "stable"
 EOF
-elif [ "$mode" = "external" ]; then
-  workflow_path="$target/.github/workflows/update-workspace-kit.yml"
-  cp "$repo_root/distributions/external/update-workspace-kit.yml" "$workflow_path"
-  kit_version="$(sed -n 's/^kit_version = "\(.*\)"/\1/p' "$target/$hidden/KIT.toml")"
-  cat > "$target/.workspace.toml" <<EOF
-orchestrator = "$kit"
-kit_version = "$kit_version"
-source = "https://github.com/Krapaud-Labs/AGENTIC-Starter-Kits"
-update_channel = "stable"
-EOF
-else
-  workflow_path="$target/.github/workflows/update-agentic-starter-kit.yml"
-  cp "$repo_root/$source_dir/$hidden/templates/github/workflows/update-agentic-starter-kit.yml" "$workflow_path"
-fi
 ensure_gitignore
 verify_update_workflow "${workflow_path#$target/}"
 projects_root="$target"
@@ -247,11 +225,7 @@ printf "%s\n" "Les futures mises à jour arriveront par Pull Request vers dev ou
 if git -C "$target" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
   printf "\n%b\n" "${yellow}Avant le premier push${reset}"
   printf "%s\n" "Ajoutez le workflow au premier commit :"
-  if [ "$mode" = "external" ] || [ "$mode" = "shared" ]; then
-    printf "  git add .github/workflows/update-workspace-kit.yml .workspace.toml .gitignore\n"
-  else
-    printf "  git add .github/workflows/update-agentic-starter-kit.yml .gitignore %s\n" "$entry"
-  fi
+  printf "  git add .github/workflows/update-workspace-kit.yml .workspace.toml .gitignore\n"
   printf "  git commit -m \"chore: install agentic starter kit\"\n"
   printf "  git push -u origin \"\$(git branch --show-current)\"\n"
   printf "\n%s\n" "Le workflow doit être visible dans git ls-files avant le push."

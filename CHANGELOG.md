@@ -1,5 +1,11 @@
 ## Unreleased
 
+## 1.16.54 - 2026-10-18
+
+- supprime les références aux modes d’installation obsolètes
+- rend `shared` unique dans l’installateur, les distributions et la documentation
+- renomme la distribution supportée en `distributions/shared`
+
 ## 1.16.53 - 2026-10-18
 
 - suspend le work item dès qu'une mise à jour du kit est détectée

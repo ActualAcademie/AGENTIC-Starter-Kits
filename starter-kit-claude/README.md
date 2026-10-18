@@ -286,9 +286,9 @@ Envoyer cette commande seule depuis la racine du projet. Claude recharge alors l
 
 ## Diagnostic
 
-Le synchroniseur external met à jour directement `.claude/` et conserve les données projet protégées.
+Le synchroniseur partagé met à jour le registre central et conserve les données projet protégées.
 
-Le diagnostic local vérifie la version, le manifeste, le cahier des charges, l état runtime, le workflow external, le point d entrée et les fichiers qui ne doivent pas être suivis par Git :
+Le diagnostic local vérifie la version, le manifeste, le cahier des charges, l’état runtime, le workflow partagé, le point d’entrée et les fichiers qui ne doivent pas être suivis par Git :
 
 ```bash
 bash .claude/scripts/doctor.sh
