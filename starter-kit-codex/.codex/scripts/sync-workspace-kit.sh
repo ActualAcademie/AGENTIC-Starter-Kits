@@ -63,4 +63,5 @@ installed_kit="$(sed -n 's/^kit_version = \"\(.*\)\"/\1/p' "$kit_root/KIT.toml")
   echo "Échec de cohérence de version après synchronisation." >&2
   exit 1
 }
+bash "$kit_root/scripts/deliver-workspace-update.sh" "$latest"
 printf 'Kit Codex mis à jour : %s -> %s\nSauvegarde : %s\n' "$installed" "$latest" "$backup_root"
