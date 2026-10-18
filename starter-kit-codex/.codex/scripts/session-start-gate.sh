@@ -13,8 +13,9 @@ if [ "$status" -ne 0 ]; then
     echo "KIT-SESSION: mise à jour détectée; travail suspendu avant synchronisation et livraison vers dev" >&2
     exit 1
   fi
-  if [ "$status" -eq 3 ] && [ "$mode" = external ] && [ -x "$script_dir/sync-workspace-kit.sh" ]; then
+  if [ "$status" -eq 3 ] && [ -x "$script_dir/sync-workspace-kit.sh" ]; then
     bash "$script_dir/sync-workspace-kit.sh"
+    status=0
   else
     echo "KIT-SESSION: mise à jour requise ou vérification distante impossible" >&2
     exit 1
