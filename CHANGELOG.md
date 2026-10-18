@@ -1,5 +1,11 @@
 ## Unreleased
 
+## 1.16.59 - 2026-10-18
+
+- traite l’indisponibilité réseau comme une limitation récupérable
+- poursuit avec le kit local validé lorsque GitHub ou raw.githubusercontent.com est inaccessible
+- supprime le blocage résiduel après une mise à jour déjà appliquée localement
+
 ## 1.16.58 - 2026-10-18
 
 - autorise uniquement la commande exacte du synchroniseur pendant la réinitialisation de la porte
