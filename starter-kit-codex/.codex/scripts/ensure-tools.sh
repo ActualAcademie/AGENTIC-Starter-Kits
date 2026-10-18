@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+config="$(cd "$script_dir/.." && pwd)"
 source "$script_dir/tool-env.sh"
 mkdir -p "$AGENTIC_TOOLS_HOME/bin" "$AGENTIC_NPM_PREFIX" "$AGENTIC_TOOLS_HOME/cache"
 registry="$AGENTIC_TOOLS_HOME/registry.tsv"
