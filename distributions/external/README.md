@@ -1,4 +1,6 @@
-# Distribution externe
+# Distribution externe historique
+
+Cette distribution est obsolète depuis la version 1.16.52. Utilisez exclusivement le mode `shared`.
 
 ## Objectif
 

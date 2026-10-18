@@ -10,17 +10,21 @@ Le dépôt a été initialisé le 21 septembre 2026. Les premiers commits ont é
 
 ## Historique chronologique
 
-| 1.16.50 | 2026-10-17 | GitFlow consolidé avec moins de branches, commits et PR tout en conservant la traçabilité. |
+| 1.16.52 | 2026-10-18 | Mode `shared` rendu obligatoire comme unique installation supportée, avec registre central et mises à jour unifiées. |
 
-| 1.16.50 | 2026-10-17 | Garde universelle des délégations avec identifiants réels et preuves d'affectation. |
+| 1.16.51 | 2026-10-18 | Installation automatique et idempotente des outils manquants dans le registre partagé, avec revalidation avant blocage. |
 
-| 1.16.50 | 2026-10-17 | Cahiers des charges centralisés hors des dépôts dans le dossier Projets. |
+| 1.16.50 | 2026-10-18 | Bootstrap obligatoire de branche dédiée, refus des branches mélangées et branche/PR unique par feature ou carte GitHub Project. |
 
-| 1.16.50 | 2026-10-17 | Archive automatique des cahiers des charges par projet lors de l'installation. |
+| 1.16.49 | 2026-10-17 | Garde universelle des délégations avec identifiants réels et preuves d'affectation. |
 
-| 1.16.50 | 2026-10-17 | Agent image-generation, routage obligatoire, réalisme, cohérence de thème, provenance, accessibilité et contrôle des artefacts. |
+| 1.16.49 | 2026-10-17 | Cahiers des charges centralisés hors des dépôts dans le dossier Projets. |
 
-| 1.16.50 | 2026-10-17 | Mode shared avec kit global unique et contexte local par projet. |
+| 1.16.49 | 2026-10-17 | Archive automatique des cahiers des charges par projet lors de l'installation. |
+
+| 1.16.49 | 2026-10-17 | Agent image-generation, routage obligatoire, réalisme, cohérence de thème, provenance, accessibilité et contrôle des artefacts. |
+
+| 1.16.49 | 2026-10-17 | Mode shared avec kit global unique et contexte local par projet. |
 
 | 1.16.44 | 2026-10-17 | Registre central des outils CLI, npm et Python, installation idempotente et environnement partagé. |
 
@@ -308,3 +312,99 @@ La version courante est lue exclusivement depuis `VERSION` et doit être identiq
 - `CHANGELOG.md` contient le détail de chaque changement.
 - `VERSIONING.md` définit le processus de publication.
 - Les tags annotés `vX.Y.Z` identifient les versions publiées.
+
+## Référentiel complet des instructions et consignes
+
+Cette section complète la chronologie des versions avec les règles opérationnelles qui ont été ajoutées au kit. Elle permet de comprendre ce que chaque version change dans le comportement attendu des agents.
+
+### Démarrage et initialisation
+
+- Le fichier d’entrée du kit doit être lu avant toute analyse, commande, modification ou réponse opérationnelle.
+- Le Coordinateur doit charger les politiques d’orchestration, de continuité, de routage, de sécurité, de limites de projet et l’état runtime.
+- Toute initialisation commence par la vérification du cahier des charges, de son statut, de son origine et de son emplacement central hors dépôt.
+- Le `.gitignore` est vérifié et complété immédiatement afin que les états locaux du kit, les secrets, caches, rapports temporaires et fichiers machine ne soient jamais suivis.
+- Un projet déjà commencé fait l’objet d’un audit complet avant création des cartes : code, documentation, conception, tests, sécurité, déploiement, Git, dépendances et fonctionnalités manquantes.
+- L’initialisation crée ou vérifie les documents de conception, le profil projet, le runtime, le work item et le plan de livraison avant toute implémentation.
+- L’approbation des hooks est demandée lors de la première installation et après toute modification nécessitant une nouvelle revue.
+- Une synchronisation partielle ou un plan local ne vaut pas initialisation terminée.
+
+### Goal, continuité et autonomie
+
+- Toute demande d’exécution, de correction, de livraison, de carte GitHub Project ou de fonctionnalité démarre ou reprend un Goal natif.
+- Le Goal reste actif jusqu’à la Definition of Done réelle : contrôles terminés, documentation mise à jour, carte clôturée, branche publiée, PR intégrée et branche d’intégration relue.
+- Un commit, une CI verte, une PR ouverte, une fusion ou une synchronisation de suivi sont des checkpoints, jamais une clôture.
+- `current_action`, `next_action`, les obligations ouvertes, les preuves observables et l’état terminal doivent rester synchronisés dans le runtime.
+- Une action autonome encore possible interdit toute réponse finale.
+- Un blocage n’est autorisé que lorsqu’il est réel, prouvé, externe ou nécessite une décision irréversible. Toute action réparable localement doit être exécutée immédiatement.
+- Après deux occurrences identiques d’un blocage, le Coordinateur doit changer d’approche, appeler le spécialiste adapté, installer l’outil manquant ou proposer une alternative vérifiable.
+- Une reprise relit l’état existant et poursuit l’action suivante sans réinitialiser le projet ni demander une confirmation déjà accordée.
+
+### Rôles et délégation agentique
+
+- L’agent principal est toujours le Coordinateur. Il orchestre, répartit, relit et intègre ; il ne remplace pas un spécialiste disponible.
+- Chaque tâche est affectée à l’agent correspondant à son domaine et chaque affectation doit produire une preuve réelle avec identifiant d’agent, périmètre, fichiers autorisés et rapport.
+- Une simple annonce de délégation ou un nom d’agent sans identifiant réel ne constitue pas une délégation.
+- Pour une tâche visuelle, les agents `frontend`, `qa` et `auditeur` sont obligatoires avant modification.
+- Pour les tâches concernées, les agents Backend, Cybersécurité, DevOps, Conformité, Performance, Documentation, Release et `image-generation` sont activés selon le routage réel.
+- Une carte comportant plusieurs lots indépendants peut utiliser plusieurs agents en parallèle, avec worktrees isolés et affectations non chevauchantes.
+- Les agents secondaires restent actifs jusqu’à la production et l’intégration de leur preuve ; ils ne sont pas considérés comme utilisés si le Coordinateur réalise leur travail.
+- Aucun agent ne modifie les fichiers, branches ou responsabilités d’un autre rôle sans transfert explicite et traçable.
+
+### GitFlow et cadence de livraison
+
+- Une feature ou une carte GitHub Project correspond à une branche dédiée unique.
+- Les agents travaillent sur cette branche ou dans des worktrees isolés intégrés par le Coordinateur.
+- Les commits sont regroupés par intention cohérente ; aucun commit n’est créé pour chaque micro-étape, agent, fichier, test ou commentaire.
+- Une seule PR est créée lorsque toute la feature ou toute la carte est terminée et vérifiée.
+- Les PR intermédiaires sont interdites sauf besoin explicite de déploiement ou blocage critique documenté.
+- La PR finale va vers `dev` ou `develop`, selon la branche d’intégration réellement configurée ; aucune PR n’est ouverte directement vers `main` pour le travail courant.
+- Après intégration et relecture de `dev`, une PR de promotion séparée est créée vers `main` selon le flux du projet.
+- Le Goal ne se termine pas à la création de la PR, mais après fusion, relecture distante et vérification que la branche d’intégration contient effectivement le travail.
+- Les verrous Git, notamment `.git/index.lock`, sont diagnostiqués avant toute conclusion d’indisponibilité ; les agents parallèles utilisent des worktrees et ne manipulent pas le checkout partagé simultanément.
+
+### GitHub Projects et suivi du travail
+
+- GitHub Projects est le suivi principal lorsque le projet l’utilise ; Trello reste une compatibilité optionnelle explicitement choisie.
+- Les cartes sont numérotées, ordonnées par dépendances et créées après l’audit complet du MVP et du post-MVP.
+- Chaque carte contient un objectif, un périmètre, les dépendances, les critères d’acceptation, les tests, la documentation attendue, les preuves et le dernier check de mise à jour documentaire avant PR.
+- Une carte n’est clôturée que lorsque tous ses checks sont prouvés et que l’élément « indiquer comme achevé » est effectivement marqué.
+- Toute carte hors périmètre du cahier des charges est écartée ou classée post-MVP ; elle ne doit pas devenir un faux blocage.
+
+### Conception, code et qualité
+
+- La conception complète précède le code : vision, périmètre, architecture, modèle de données, sécurité, UX, flux, erreurs, observabilité, sauvegarde, restauration et critères de validation doivent être cohérents.
+- L’ouverture ou la modification d’un fichier déclenche la vérification du lint approprié et la correction des erreurs relevant du périmètre.
+- Les outils manquants sont recherchés dans le registre central puis installés de manière gratuite, idempotente et réutilisable avant de déclarer un contrôle impossible.
+- Les runtimes Node, npm, Python, linters, typecheckers, tests, Docker et outils GitHub utilisent l’environnement centralisé du kit lorsque disponible.
+- Les tests couvrent les scénarios d’initialisation, reprise, délégation, GitFlow, hooks, GitHub Projects, cartes, outils, erreurs, navigateur, responsive, sécurité, déploiement et clôture.
+- Une CI verte ne remplace ni les tests locaux, ni la preuve navigateur, ni la relecture de l’environnement déployé lorsque celle-ci est requise.
+
+### Hooks et garde-fous
+
+- `SessionStart` initialise ou vérifie le contexte, le kit, les outils et le runtime.
+- `PreToolUse` refuse les actions incompatibles avec l’état, le rôle, le périmètre ou le GitFlow.
+- `PermissionRequest` protège les actions sensibles, les secrets, les services payants et les opérations externes.
+- `PostToolUse` enregistre les preuves et met à jour l’état observable.
+- `SubagentStart` et `SubagentStop` vérifient l’affectation, le rapport et la clôture réelle des agents.
+- `Stop` refuse la clôture si une action autonome, une obligation, une preuve ou une livraison reste ouverte.
+- Les hooks doivent rester réparables : un hook ne doit jamais interdire sa propre récupération, la création du runtime ou l’exécution d’une action de déblocage autorisée.
+
+### Coûts, sécurité et services externes
+
+- Aucun service payant, abonnement, runner facturé, API premium ou activation de facturation ne doit être utilisé sans accord explicite.
+- Les outils gratuits locaux, le registre central et les runners auto-hébergés sont privilégiés lorsque le projet le demande.
+- Les secrets ne sont jamais écrits dans le dépôt, les commentaires, les logs, les cartes ou les rapports.
+- Les preuves distinguent clairement validation locale, préproduction, production publique et preuve opérateur.
+- Une intégration externe indisponible est vérifiée par toutes les voies disponibles avant d’être déclarée inaccessible ; l’agent distingue une limitation de sandbox, un outil absent et une panne réelle.
+
+### Documentation, versionnement et historique
+
+- Toute évolution d’instruction, d’agent, de Skill, de hook, de script, de workflow ou de comportement met à jour le README, le changelog et l’historique dans le même lot.
+- Le cahier des charges est archivé dans `Documents/Projets/Cahier-des-Charges/<nom-du-projet>/cahier-des-charges.md`, jamais dans le dépôt du projet sauf demande explicite.
+- `VERSION`, les manifestes, les badges, `CHANGELOG.md`, `VERSION-HISTORY.md` et les Releases doivent rester cohérents.
+- Une version publiée décrit les fonctionnalités réellement présentes, les migrations, les limitations, les tests et les changements de comportement.
+- L’historique de versions est chronologique ; les entrées ne doivent pas réutiliser une version pour des fonctionnalités différentes ni contenir de lignes de tableau isolées ou ambiguës.
+
+## Limites explicites
+
+Le kit automatise les contrôles, le routage et la continuité, mais ne peut pas inventer une décision métier, un secret, une approbation réglementaire ou une preuve externe absente. Dans ces cas uniquement, il doit conserver le Goal ouvert et formuler précisément la décision ou l’accès requis.

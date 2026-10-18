@@ -3,6 +3,10 @@ set -euo pipefail
 root="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
 config="$root/.claude"
 input="$(cat)"
+if [ ! -f "$config/.session-kit-validated" ]; then
+  printf '{"hookSpecificOutput":{"hookEventName":"PreToolUse","permissionDecision":"deny","permissionDecisionReason":"Porte kit non validée : relancer SessionStart avant toute action."}}\n'
+  exit 0
+fi
 if ! printf '%s' "$input" | jq -e . >/dev/null 2>&1; then
   printf '{"hookSpecificOutput":{"hookEventName":"PreToolUse","permissionDecision":"deny","permissionDecisionReason":"Événement hook JSON invalide."}}\n'
   exit 0

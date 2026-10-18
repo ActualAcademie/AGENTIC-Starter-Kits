@@ -3,6 +3,8 @@ set -euo pipefail
 root="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
 config="$root/.claude"
 tools_script="$config/scripts/ensure-tools.sh"
+gate_script="$config/scripts/session-start-gate.sh"
+if [ -x "$gate_script" ]; then bash "$gate_script"; fi
 tool_context=""
 if [ -x "$tools_script" ]; then
   if ! tool_output="$($tools_script --bootstrap 2>&1)"; then printf '%s\n' "$tool_output" >&2; exit 1; fi

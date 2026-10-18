@@ -50,8 +50,8 @@ verify_update_workflow() {
     fail "Le workflow de mise à jour est ignoré par Git. Retirez cette règle avant de continuer."
   fi
 }
-usage() { printf "%b\n" "Usage : ./install.sh [--kit codex|claude] [--mode native|external|shared] [--target CHEMIN] [--force]"; }
-kit=""; mode="native"; target=""; force=false
+usage() { printf "%b\n" "Usage : ./install.sh [--kit codex|claude] [--mode shared] [--target CHEMIN] [--force]"; }
+kit=""; mode="shared"; target=""; force=false
 while [ "$#" -gt 0 ]; do
   case "$1" in
     --kit) [ "$#" -ge 2 ] || fail "Valeur manquante pour --kit."; kit="$2"; shift 2 ;;
@@ -62,7 +62,7 @@ while [ "$#" -gt 0 ]; do
     *) fail "Option inconnue : $1" ;;
   esac
 done
-case "$mode" in native|external|shared) ;; *) fail "Le mode doit être native, external ou shared." ;; esac
+case "$mode" in shared) ;; *) fail "Le seul mode d'installation autorisé est shared." ;; esac
 title
 if [ -z "$kit" ] && [ -t 0 ]; then
   printf "%b\n" "${bold}Quel orchestrateur souhaitez-vous installer ?${reset}"
@@ -70,19 +70,8 @@ if [ -z "$kit" ] && [ -t 0 ]; then
   read -r choice
   case "${choice:-1}" in 1) kit=codex ;; 2) kit=claude ;; *) fail "Choix invalide." ;; esac
 fi
-if [ -t 0 ] && [ "$mode" = "native" ] && [ -z "${AGENTIC_MODE_SELECTED:-}" ]; then
-  printf "\n%b\n" "${bold}Comment souhaitez-vous installer le kit ?${reset}"
-  printf "  ${cyan}1${reset}) Mode natif : fichiers du kit disponibles directement dans le projet\n"
-  printf "  ${cyan}2${reset}) Mode externe : fichiers du kit ignorés par Git, manifeste discret uniquement\n"
-  printf "  ${cyan}3${reset}) Mode partagé : kit global unique et liens symboliques dans le projet\n\n"
-  printf "Votre choix [1] : "
-  read -r mode_choice
-  case "${mode_choice:-1}" in
-    1) mode=native ;;
-    2) mode=external ;;
-    3) mode=shared ;;
-    *) fail "Choix de distribution invalide." ;;
-  esac
+if [ -t 0 ]; then
+  info "Installation partagée obligatoire : le socle universel sera centralisé et réutilisé par les projets."
 fi
 case "$kit" in
   codex) source_dir=starter-kit-codex; entry=AGENTS.md; hidden=.codex; label="Codex" ;;

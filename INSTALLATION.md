@@ -39,21 +39,21 @@ Si le projet existe déjà, ne pas supprimer ses fichiers. Importer le kit de ma
 
 ## 3. Choisir et copier un kit
 
-Deux distributions sont disponibles. Le mode `native` installe le kit directement dans le projet. Le mode `external` installe le même socle localement dans le projet mais l’ignore dans Git et ne publie que `.workspace.toml` et `update-workspace-kit.yml`. Ce mode est recommandé si le dépôt distant ne doit pas contenir le kit.
+Le seul mode disponible est `shared`. Il installe une seule copie du kit dans le registre partagé de la machine et place dans chaque projet les liens symboliques, le contexte local et le manifeste de version.
 
 Pour le mode externe Codex :
 
 ```bash
-./install.sh --kit codex --mode external --target /chemin/absolu/vers/mon-projet
+./install.sh --kit codex --mode shared --target /chemin/absolu/vers/mon-projet
 ```
 
 Pour le mode externe Claude :
 
 ```bash
-./install.sh --kit claude --mode external --target /chemin/absolu/vers/mon-projet
+./install.sh --kit claude --mode shared --target /chemin/absolu/vers/mon-projet
 ```
 
-Le mode externe conserve les fichiers nécessaires localement pour que Codex ou Claude fonctionne nativement, mais les ajoute au `.gitignore`. Le dépôt distant ne contient que le manifeste `.workspace.toml` et le workflow `.github/workflows/update-workspace-kit.yml`.
+Le mode partagé conserve les fichiers universels dans `AGENTIC_KIT_HOME` et les projets ne conservent que leur état local. Les mises à jour sont donc reçues par tous les projets depuis une source unique.
 
 Définir le chemin local du dépôt source. Adapter ce chemin à votre machine.
 
