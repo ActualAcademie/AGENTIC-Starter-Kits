@@ -3,6 +3,16 @@ set -euo pipefail
 root="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
 config="$root/.claude"
 input="$(cat)"
+if ! printf '%s' "$input" | jq -e . >/dev/null 2>&1; then
+  printf '{"hookSpecificOutput":{"hookEventName":"PreToolUse","permissionDecision":"deny","permissionDecisionReason":"Événement hook JSON invalide."}}\n'
+  exit 0
+fi
+tool_name="$(printf '%s' "$input" | jq -r '.tool_name // empty')"
+command_text="$(printf '%s' "$input" | jq -r '.command // .arguments.command // empty')"
+if [ "$tool_name" = "Bash" ] && [ "$command_text" = "bash .claude/scripts/sync-workspace-kit.sh" ]; then
+  printf '{"hookSpecificOutput":{"hookEventName":"PreToolUse","additionalContext":"Synchroniseur du kit autorisé pour rétablir la porte de session."}}\n'
+  exit 0
+fi
 if [ ! -f "$config/.session-kit-validated" ]; then
   if [ -x "$config/scripts/session-start-gate.sh" ] && bash "$config/scripts/session-start-gate.sh" >/dev/null 2>"$config/.session-kit-bootstrap-error"; then
     rm -f "$config/.session-kit-bootstrap-error"
