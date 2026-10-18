@@ -24,7 +24,7 @@ check_command() {
 install_system_tool() {
   local command_name="$1"
   case "$command_name" in
-    rg|jq|gh|shellcheck)
+    rg|jq|gh|shellcheck|uv)
       if command -v brew >/dev/null 2>&1; then brew install "$command_name"; return 0; fi
       if command -v apt-get >/dev/null 2>&1; then sudo apt-get update && sudo apt-get install -y "$command_name"; return 0; fi
       ;;
@@ -57,6 +57,23 @@ install_python() {
   fi
   record "$package" "$package" "$(version_of "$package")" python-central
 }
+bootstrap_manifest() {
+  local manifest="$1" category package command_name
+  [ -f "$manifest" ] || return 0
+  while IFS=$'\t' read -r category package command_name _; do
+    [ "$category" = "category" ] && continue
+    [ -n "${command_name:-}" ] || continue
+    if command -v "$command_name" >/dev/null 2>&1; then
+      check_command "$command_name"
+      continue
+    fi
+    case "$category" in
+      cli|runtime) bootstrap_command "$command_name" || missing_manifest=1 ;;
+      npm) install_npm "$package" >/dev/null 2>&1 || missing_manifest=1 ;;
+      python) install_python "$package" >/dev/null 2>&1 || missing_manifest=1 ;;
+    esac
+  done < "$manifest"
+}
 install_mode=false
 while [ "$#" -gt 0 ]; do
   case "$1" in
@@ -71,6 +88,9 @@ done
 if [ "$install_mode" = true ]; then
   missing=0
   for command_name in git rg jq gh node npm; do bootstrap_command "$command_name" || missing=1; done
+  missing_manifest=0
+  bootstrap_manifest "${AGENTIC_TOOL_MANIFEST:-$config/tool-manifest.tsv}"
+  [ "$missing_manifest" -eq 0 ] || missing=1
   if [ "$missing" -ne 0 ]; then
     echo 'OUTILS CENTRAUX INDISPONIBLES: installation automatique tentee, aucune tache ne doit commencer.' >&2
     exit 1

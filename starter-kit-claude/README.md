@@ -1,6 +1,6 @@
 # Kit d'orchestration Claude Code portable
 
-![Version du kit](https://img.shields.io/badge/version-1.16.50-blue.svg)
+![Version du kit](https://img.shields.io/badge/version-1.16.52-blue.svg)
 
 Le hook `SessionStart` initialise automatiquement `AGENTIC_TOOLS_HOME` et vérifie les outils de base avant toute tâche. Une session est refusée si une installation automatique ne permet pas de rendre ces outils disponibles.
 
@@ -217,7 +217,7 @@ Le Coordinateur ne les appelle pas tous systématiquement. Il lit `.claude/SPECI
 
 Une CI en cours ne clôture jamais le work item. Le Coordinateur attend les résultats, traite les erreurs, corrige les lints et les dettes historiques du périmètre par lots, puis relance les contrôles jusqu’à la Definition of Done.
 
-Le kit est actuellement en version `1.16.50`. Toute modification du kit doit mettre à jour ce README, le changelog et la version selon `VERSIONING.md`.
+Le kit est actuellement en version `1.16.49`. Toute modification du kit doit mettre à jour ce README, le changelog et la version selon `VERSIONING.md`.
 
 Le contrat central `.claude/policies/CORE-EXECUTION-CONTRACT.md` impose un registre d obligations, huit portes de validation et une reprise persistante. Une tâche ne peut être clôturée tant qu une obligation applicable ne possède pas de preuve.
 
@@ -278,13 +278,11 @@ Une fusion de Pull Request est un checkpoint et non une fin de carte. Le Coordin
 
 Le workflow récupère le script officiel à l’exécution et ne dépend plus d’un script ignoré dans `.claude/`.
 
-L’installateur propose les distributions `native`, `external` et `shared`. Le mode `shared` installe le socle universel une seule fois dans `AGENTIC_KIT_HOME` et conserve dans chaque projet uniquement les liens et le contexte local.
+L’installateur utilise exclusivement le mode `shared`. Il installe le socle universel une seule fois dans `AGENTIC_KIT_HOME` et conserve dans chaque projet uniquement les liens et le contexte local.
 
 Dans une conversation existante, utiliser `Mode initialisation :` pour relancer de façon fiable la porte obligatoire du cahier des charges.
 
 Envoyer cette commande seule depuis la racine du projet. Claude recharge alors les instructions et l'état du kit, vérifie le cahier des charges et n'autorise aucune analyse technique, aucun work item ni aucune modification produit avant sa réception et son acceptation. La procédure détaillée est documentée dans le guide d'installation du dépôt principal.
-
-Phrase prête à copier dans Claude : `Mode initialisation : relis intégralement toutes les instructions, politiques, procédures, agents, outils, hooks et règles du kit, vérifie leur version et leur état, applique-les effectivement à toute la session, crée ou reprends le Goal natif, présente le rapport de cadrage requis, puis initialise le projet jusqu'à la livraison sans commencer aucune analyse, choix technique, modification ou orchestration avant l'acceptation du cahier des charges.`
 
 ## Diagnostic
 

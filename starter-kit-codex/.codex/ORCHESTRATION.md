@@ -34,6 +34,8 @@ Avant l'étape 1, le Coordinateur exécute une préparation de session obligatoi
 
 La préparation de session exécute aussi `scripts/ensure-tools.sh` avec les outils réellement requis par le profil et les validations. Le script réutilise l'installation partagée, installe les outils gratuits connus si nécessaire, vérifie leurs versions et journalise le résultat pour les projets suivants.
 
+Avant toute action, le Coordinateur exécute `scripts/session-start-gate.sh`, y compris lors de la reprise d'une conversation existante. Cette porte vérifie la version du kit, déclenche la synchronisation autorisée, réinstalle les outils partagés, relit le contrat agentic et crée la preuve de session. Tant que cette preuve n'existe pas, aucune commande, délégation, modification ou réponse opérationnelle n'est autorisée.
+
 ## Règles
 
 - Codex est l'unique orchestrateur.

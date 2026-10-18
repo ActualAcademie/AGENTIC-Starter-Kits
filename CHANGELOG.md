@@ -1,10 +1,26 @@
 ## Unreleased
 
-## 1.16.50 - 2026-10-17
+## 1.16.52 - 2026-10-18
 
-- regroupe les demandes cohérentes sur une seule branche et une seule PR par lot
-- interdit les branches et PR créées par agent, fichier, test, preuve ou micro-correction
-- conserve les commits atomiques uniquement lorsqu'une séparation apporte une vraie valeur
+- rend le mode `shared` obligatoire comme unique mode d'installation
+- supprime les divergences entre installations `native`, `external` et `shared`
+- centralise les mises à jour dans un registre unique par orchestrateur
+- conserve les documents et l'état propres à chaque projet
+
+## 1.16.51 - 2026-10-18
+
+- installe automatiquement les outils déclarés absents dans le registre partagé
+- réutilise le préfixe npm et l’environnement Python centraux pour les projets suivants
+- revalide le chemin et la version après installation avant de déclarer un outil indisponible
+- ajoute le manifeste de test isolé pour vérifier ce comportement sans installation externe
+
+## 1.16.50 - 2026-10-18
+
+- ajoute un bootstrap obligatoire de branche dédiée avant toute modification
+- refuse la reprise silencieuse d'une branche de travail potentiellement mélangée
+- impose une branche unique par feature ou carte GitHub Project et une seule PR finale vers `dev` ou `develop`
+- conserve le Goal actif jusqu'à la fusion et la vérification réelle de la branche d'intégration
+- ajoute les tests de syntaxe et de présence des garde-fous GitFlow pour Codex et Claude
 
 ## 1.16.49 - 2026-10-17
 

@@ -23,4 +23,5 @@ if [[ "$source_url" == https://raw.githubusercontent.com/Krapaud-Labs/AGENTIC-St
   remote_version="$(gh api 'repos/Krapaud-Labs/AGENTIC-Starter-Kits/contents/VERSION?ref=main' --jq .content | tr -d '\n' | base64 --decode | tr -d '[:space:]')"
 fi
 printf 'Version distante du kit: %s\n' "$remote_version"
-if [ "$local_version" = "$remote_version" ]; then echo 'Kit à jour'; else echo "Mise à jour du kit disponible: $local_version -> $remote_version"; exit 3; fi
+version_key() { local a b c; IFS=. read -r a b c _ <<< "$1"; printf '%03d%03d%03d' "${a:-0}" "${b:-0}" "${c:-0}"; }
+if [ "$(version_key "$local_version")" -ge "$(version_key "$remote_version")" ]; then echo 'Kit à jour'; else echo "Mise à jour du kit disponible: $local_version -> $remote_version"; exit 3; fi
