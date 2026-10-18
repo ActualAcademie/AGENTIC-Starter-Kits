@@ -370,6 +370,8 @@ Le kit utilise exclusivement le mode `shared`, avec une installation globale uni
 
 À chaque démarrage, le kit vérifie sa version et son registre partagé. Les mises à jour remplacent uniquement le socle universel et conservent le cahier des charges, le profil technique, l'état projet et les work items de chaque projet.
 
+Une mise à jour détectée pendant un work item suspend immédiatement le travail produit. Le Coordinateur sauvegarde `RUNTIME-STATE.md`, met à jour et valide le kit, le livre par PR vers `dev`, vérifie le SHA distant de `dev`, puis restaure l'état et reprend `next_action`. `main` n'est jamais touchée par cette étape.
+
 Pour initialiser un projet dans une conversation déjà ouverte, envoyer `Mode initialisation :`. Ce mode recharge le kit et impose la porte du cahier des charges sans nécessiter une nouvelle conversation.
 
 La commande doit être envoyée seule depuis la conversation qui travaille déjà sur le projet. Elle force l'agent à relire son état, à vérifier le cahier des charges et à suspendre toute modification tant que le cahier n'est pas reçu et accepté. Après cette étape, les questions manquantes sont posées avec une recommandation, puis les documents de conception et le plan de travail sont créés.

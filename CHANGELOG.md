@@ -1,5 +1,12 @@
 ## Unreleased
 
+## 1.16.53 - 2026-10-18
+
+- suspend le work item dès qu'une mise à jour du kit est détectée
+- sauvegarde l'état runtime et reprend `next_action` après livraison vérifiée vers `dev`
+- ajoute les scripts de pause et de reprise pour Codex et Claude
+- ajoute les tests sandbox du bootstrap versionné
+
 ## 1.16.52 - 2026-10-18
 
 - rend le mode `shared` obligatoire comme unique mode d'installation
