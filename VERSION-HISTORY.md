@@ -10,6 +10,8 @@ Le dépôt a été initialisé le 21 septembre 2026. Les premiers commits ont é
 
 ## Historique chronologique
 
+| 1.16.55 | 2026-10-18 | Réamorçage automatique de la porte SessionStart depuis PreToolUse, avec refus explicite uniquement si le bootstrap échoue réellement. |
+
 | 1.16.54 | 2026-10-18 | Mode `shared` rendu unique dans l’installateur, les distributions et toute la documentation active. |
 
 | 1.16.53 | 2026-10-18 | Suspension obligatoire lors d'une mise à jour détectée, sauvegarde runtime, livraison vers `dev`, vérification distante et reprise de `next_action`. |
