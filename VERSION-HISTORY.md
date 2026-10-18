@@ -10,6 +10,8 @@ Le dépôt a été initialisé le 21 septembre 2026. Les premiers commits ont é
 
 ## Historique chronologique
 
+| 1.16.60 | 2026-10-18 | API gh facultative, fallback curl public et mises à jour accessibles aux utilisateurs sans privilège créateur. |
+
 | 1.16.59 | 2026-10-18 | Réseau distant indisponible traité comme limite récupérable lorsque le kit local est cohérent. |
 
 | 1.16.58 | 2026-10-18 | Synchronisation partagée autorisée par une exception de hook strictement exacte et reprise automatique après mise à jour détectée. |
