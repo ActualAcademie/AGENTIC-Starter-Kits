@@ -1,5 +1,10 @@
 ## Unreleased
 
+## 1.16.56 - 2026-10-18
+
+- corrige le bootstrap `ensure-tools.sh` sans dépendance à une variable `config` externe
+- ajoute un test sans variable d’environnement `config`
+
 ## 1.16.55 - 2026-10-18
 
 - réamorce automatiquement la porte kit depuis `PreToolUse` lorsque `SessionStart` n’a pas été rejoué

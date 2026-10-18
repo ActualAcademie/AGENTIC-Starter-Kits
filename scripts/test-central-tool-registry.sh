@@ -20,7 +20,7 @@ tmp="$(mktemp -d)"
 trap 'rm -rf "$tmp"' EXIT
 AGENTIC_TOOLS_HOME="$tmp/tools" bash "$root/starter-kit-codex/.codex/scripts/ensure-tools.sh" git npm >/dev/null
 printf 'category\tname\tcommand\tsource\ncli\tgit\tgit\ttest\ncli\tnpm\tnpm\ttest\n' > "$tmp/manifest.tsv"
-AGENTIC_TOOLS_HOME="$tmp/tools" AGENTIC_TOOL_MANIFEST="$tmp/manifest.tsv" bash "$root/starter-kit-codex/.codex/scripts/ensure-tools.sh" --bootstrap >/dev/null
+env -u config AGENTIC_TOOLS_HOME="$tmp/tools" AGENTIC_TOOL_MANIFEST="$tmp/manifest.tsv" bash "$root/starter-kit-codex/.codex/scripts/ensure-tools.sh" --bootstrap >/dev/null
 test -s "$tmp/tools/registry.tsv"
 grep -Fq $'git\t' "$tmp/tools/registry.tsv"
 grep -Fq $'npm\t' "$tmp/tools/registry.tsv"
