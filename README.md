@@ -55,13 +55,13 @@ Pour choisir le mode dans l’assistant interactif, lancez simplement :
 ./install.sh
 ```
 
-Pour le mode externe :
+Installation partagée :
 
 ```bash
-./install.sh --kit codex --mode external --target /chemin/vers/mon-projet
+./install.sh --kit codex --mode shared --target /chemin/vers/mon-projet
 ```
 
-Le chemin cible doit déjà exister. N’installez jamais les deux orchestrateurs dans le même projet. Le mode natif est recommandé si vous débutez. Le mode externe est recommandé si vous ne voulez pas publier le contenu du kit dans le dépôt distant.
+Le chemin cible doit déjà exister. L’installation partagée est le seul mode supporté et centralise le kit dans le registre commun.
 
 ### 3. Activer les mises à jour
 
@@ -378,6 +378,6 @@ La commande doit être envoyée seule depuis la conversation qui travaille déj�
 
 La procédure complète se trouve dans [INSTALLATION.md](INSTALLATION.md), section « Initialiser une conversation déjà ouverte ».
 
-Le synchroniseur external met à jour directement le répertoire du kit et conserve les données projet protégées.
+Le synchroniseur partagé met à jour le registre central et conserve les données projet protégées.
 La procédure de synchronisation vérifie désormais les fichiers obligatoires et la cohérence de version du kit installé.
 L initialisation demande explicitement la revue et l approbation des hooks avant toute action produit.

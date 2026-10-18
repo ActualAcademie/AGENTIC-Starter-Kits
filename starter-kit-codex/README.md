@@ -255,7 +255,7 @@ L’initialisation installe un workflow GitHub Actions hebdomadaire qui ouvre un
 
 ## Qualité documentaire premium
 
-Le synchroniseur external met à jour directement `.codex/` et conserve les données projet protégées.
+Le synchroniseur partagé met à jour le registre central et conserve les données projet protégées.
 
 Utilisez `documentation-authoring` pour rédiger et `documentation-audit` pour relire. Le contrôle `bash .codex/scripts/validate-documentation.sh` vérifie les métadonnées, les dates et les marqueurs incomplets avant la livraison.
 La version du kit évolue uniquement lorsqu’un changement consommé par un projet importateur le justifie. Après promotion sur `main`, le workflow de release crée automatiquement le tag SemVer et la GitHub Release correspondante.
