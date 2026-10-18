@@ -1,5 +1,11 @@
 ## Unreleased
 
+## 1.16.61 - 2026-10-18
+
+- livre automatiquement `.workspace.toml` dans un worktree isolé basé sur `dev`
+- crée la branche et la PR de mise à jour sans mélanger le travail produit en cours
+- conserve le projet courant intact pendant la livraison du manifeste
+
 ## 1.16.60 - 2026-10-18
 
 - rend l’API `gh` facultative pour les utilisateurs non authentifiés
