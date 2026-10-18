@@ -22,6 +22,11 @@ AGENTIC_TOOLS_HOME="$tmp/tools" bash "$root/starter-kit-codex/.codex/scripts/ens
 printf 'category\tname\tcommand\tsource\ncli\tgit\tgit\ttest\ncli\tnpm\tnpm\ttest\n' > "$tmp/manifest.tsv"
 env -u config AGENTIC_TOOLS_HOME="$tmp/tools" AGENTIC_TOOL_MANIFEST="$tmp/manifest.tsv" bash "$root/starter-kit-codex/.codex/scripts/ensure-tools.sh" --bootstrap >/dev/null
 test -s "$tmp/tools/registry.tsv"
+fallback_tmp="$tmp/readonly"
+mkdir -p "$fallback_tmp"
+chmod a-w "$fallback_tmp"
+fallback_output="$(AGENTIC_TOOLS_HOME="$fallback_tmp" TMPDIR="$tmp" bash "$root/starter-kit-codex/.codex/scripts/ensure-tools.sh" git 2>&1)"
+grep -Fq 'Registre central' <<< "$fallback_output"
 grep -Fq $'git\t' "$tmp/tools/registry.tsv"
 grep -Fq $'npm\t' "$tmp/tools/registry.tsv"
 git init -q "$tmp/repo"

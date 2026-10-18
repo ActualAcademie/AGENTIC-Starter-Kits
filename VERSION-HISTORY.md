@@ -10,6 +10,8 @@ Le dépôt a été initialisé le 21 septembre 2026. Les premiers commits ont é
 
 ## Historique chronologique
 
+| 1.16.57 | 2026-10-18 | Fallback automatique vers un registre temporaire lorsque le registre partagé est inaccessible en écriture. |
+
 | 1.16.56 | 2026-10-18 | Bootstrap des outils rendu autonome et testé sans variable `config` héritée de la session. |
 
 | 1.16.55 | 2026-10-18 | Réamorçage automatique de la porte SessionStart depuis PreToolUse, avec refus explicite uniquement si le bootstrap échoue réellement. |
