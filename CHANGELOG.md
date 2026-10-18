@@ -1,5 +1,11 @@
 ## Unreleased
 
+## 1.16.57 - 2026-10-18
+
+- ajoute un registre temporaire de secours quand le registre partagé n’est pas inscriptible
+- évite que le bootstrap bloque sur une permission locale avant de pouvoir diagnostiquer
+- ajoute un test de fallback du registre des outils
+
 ## 1.16.56 - 2026-10-18
 
 - corrige le bootstrap `ensure-tools.sh` sans dépendance à une variable `config` externe
