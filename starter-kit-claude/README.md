@@ -296,3 +296,5 @@ bash .claude/scripts/doctor.sh
 
 La procédure de synchronisation vérifie désormais les fichiers obligatoires et la cohérence de version du kit installé.
 L initialisation demande explicitement la revue et l approbation des hooks avant toute action produit.
+
+Une mise à jour détectée en cours de work item déclenche la suspension obligatoire. Le Coordinateur sauvegarde l’état, livre la mise à jour par PR vers `dev`, vérifie `dev`, puis exécute `resume-kit-update.sh` et reprend `next_action`.
