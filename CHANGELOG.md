@@ -1,5 +1,11 @@
 ## Unreleased
 
+## 1.16.60 - 2026-10-18
+
+- rend l’API `gh` facultative pour les utilisateurs non authentifiés
+- conserve `curl` public comme source de mise à jour du dépôt
+- évite qu’un échec d’authentification GitHub bloque une mise à jour publique
+
 ## 1.16.59 - 2026-10-18
 
 - traite l’indisponibilité réseau comme une limitation récupérable

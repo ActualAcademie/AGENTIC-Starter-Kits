@@ -20,7 +20,8 @@ printf 'Source distante du kit: %s\n' "$source_url"
 if ! command -v curl >/dev/null 2>&1; then echo 'Vérification distante impossible: curl absent' >&2; exit 2; fi
 remote_version="$(curl --fail --silent --show-error --location --max-time 10 "${source_url}?_kit_check=$(date +%s)" | tr -d '[:space:]')" || { echo 'Vérification distante impossible: source indisponible' >&2; exit 2; }
 if [[ "$source_url" == https://raw.githubusercontent.com/Krapaud-Labs/AGENTIC-Starter-Kits/main/VERSION ]] && command -v gh >/dev/null 2>&1; then
-  remote_version="$(gh api 'repos/Krapaud-Labs/AGENTIC-Starter-Kits/contents/VERSION?ref=main' --jq .content | tr -d '\n' | base64 --decode | tr -d '[:space:]')"
+  gh_version="$(gh api 'repos/Krapaud-Labs/AGENTIC-Starter-Kits/contents/VERSION?ref=main' --jq .content 2>/dev/null | tr -d '\n' | base64 --decode | tr -d '[:space:]' || true)"
+  [ -n "$gh_version" ] && remote_version="$gh_version"
 fi
 printf 'Version distante du kit: %s\n' "$remote_version"
 version_key() { local a b c; IFS=. read -r a b c _ <<< "$1"; printf '%03d%03d%03d' "${a:-0}" "${b:-0}" "${c:-0}"; }

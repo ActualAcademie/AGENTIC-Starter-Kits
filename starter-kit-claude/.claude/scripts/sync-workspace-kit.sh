@@ -14,7 +14,8 @@ esac
 raw_base="${source_url/github.com/raw.githubusercontent.com}"
 latest="$(curl -fsSL "$raw_base/main/VERSION")"
 if command -v gh >/dev/null 2>&1; then
-  latest="$(gh api 'repos/Krapaud-Labs/AGENTIC-Starter-Kits/contents/VERSION?ref=main' --jq .content | tr -d '\n' | base64 --decode | tr -d '[:space:]')"
+  gh_latest="$(gh api 'repos/Krapaud-Labs/AGENTIC-Starter-Kits/contents/VERSION?ref=main' --jq .content 2>/dev/null | tr -d '\n' | base64 --decode | tr -d '[:space:]' || true)"
+  [ -n "$gh_latest" ] && latest="$gh_latest"
 fi
 installed="$(sed -n 's/^kit_version = "\(.*\)"/\1/p' "$manifest")"
 [ "$installed" = "$latest" ] && { echo "Kit Claude déjà à jour : $installed"; exit 0; }
