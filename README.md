@@ -374,7 +374,7 @@ Pour initialiser un projet dans une conversation déjà ouverte, envoyer `Mode i
 
 La commande doit être envoyée seule depuis la conversation qui travaille déjà sur le projet. Elle force l'agent à relire son état, à vérifier le cahier des charges et à suspendre toute modification tant que le cahier n'est pas reçu et accepté. Après cette étape, les questions manquantes sont posées avec une recommandation, puis les documents de conception et le plan de travail sont créés.
 
-Phrase prête à copier : `Mode initialisation : relis intégralement toutes les instructions, politiques, procédures, agents, outils, hooks et règles du kit, vérifie leur version et leur état, applique-les effectivement à toute la session, crée ou reprends le Goal natif, présente le rapport de cadrage requis, puis initialise le projet jusqu'à la livraison sans commencer aucune analyse, choix technique, modification ou orchestration avant l'acceptation du cahier des charges.`
+Phrase prête à copier : `Mode initialisation : relis intégralement toutes les instructions, politiques, procédures, agents, outils, hooks et règles du kit, vérifie leur version et leur état, applique-les effectivement à toute la session, crée ou reprends le Goal natif, puis initialise le projet jusqu'à la livraison sans commencer de travail produit avant l'acceptation du cahier des charges.`
 
 Le GitFlow regroupe par défaut chaque demande cohérente, carte ou Goal sur une seule branche et une seule PR par lot. Les agents parallèles ne créent pas de branches ou de PR séparées ; l'intégrateur rassemble leurs résultats. Les commits séparés restent réservés aux intentions réellement indépendantes, aux migrations, aux lockfiles, à la sécurité ou aux besoins de rollback distincts.
 
