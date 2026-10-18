@@ -1,6 +1,6 @@
 # Kit d'orchestration Codex portable
 
-![Version du kit](https://img.shields.io/badge/version-1.16.51-blue.svg)
+![Version du kit](https://img.shields.io/badge/version-1.16.52-blue.svg)
 
 Le hook `SessionStart` initialise automatiquement `AGENTIC_TOOLS_HOME` et vérifie les outils de base avant toute tâche. Une session est refusée si une installation automatique ne permet pas de rendre ces outils disponibles.
 
@@ -276,7 +276,7 @@ Une fusion de Pull Request est un checkpoint et non une fin de carte. Le Coordin
 
 Le workflow récupère le script officiel à l’exécution et ne dépend plus d’un script ignoré dans `.codex/`.
 
-L’installateur propose les distributions `native`, `external` et `shared`. Le mode `shared` installe le socle universel une seule fois dans `AGENTIC_KIT_HOME` et conserve dans chaque projet uniquement les liens et le contexte local.
+L’installateur utilise exclusivement le mode `shared`. Il installe le socle universel une seule fois dans `AGENTIC_KIT_HOME` et conserve dans chaque projet uniquement les liens et le contexte local.
 
 Dans une conversation existante, utiliser `Mode initialisation :` pour relancer de façon fiable la porte obligatoire du cahier des charges.
 

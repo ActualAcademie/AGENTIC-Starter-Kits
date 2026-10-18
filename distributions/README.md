@@ -1,4 +1,6 @@
-# Distributions du starter kit
+# Distribution du starter kit
+
+Depuis la version 1.16.52, une seule distribution est supportée : `shared`. Les pages `native` et `external` sont conservées comme historique de migration et ne doivent plus être utilisées pour une nouvelle installation.
 
 Le dépôt propose deux modes d’installation. Le noyau des règles reste commun, mais la présence du kit dans le dépôt projet dépend du mode choisi.
 
@@ -11,13 +13,20 @@ Le dépôt propose deux modes d’installation. Le noyau des règles reste commu
 
 Les deux modes utilisent le même noyau de gouvernance, de sécurité, de validation, de versionnement et d’initialisation. Ils ne doivent pas être installés simultanément dans un même projet.
 
-## Mode native
+## Mode shared
 
-Le mode `native` installe le point d’entrée, le dossier d’orchestration et le workflow dans le projet. Il fournit l’expérience la plus directe avec Codex ou Claude. Les mises à jour universelles peuvent être examinées dans une Pull Request du projet.
+Le mode `shared` installe une copie versionnée du kit dans `AGENTIC_KIT_HOME` et crée dans chaque projet les liens symboliques vers cette copie. Les données locales du projet restent séparées et les mises à jour sont centralisées.
 
-## Mode external
+Commande recommandée :
 
-Le mode `external` installe le kit localement, mais le projet ne publie pas `.codex/`, `.claude/`, `AGENTS.md` ou `CLAUDE.md`. Seuls `.workspace.toml`, `.gitignore` et le workflow de mise à jour sont suivis par Git.
+```bash
+./install.sh --kit codex --mode shared --target /chemin/vers/projet
+```
+
+## Anciens modes
+
+Les anciens modes `native` et `external` ne sont plus acceptés par l’installateur. Les projets existants doivent être migrés en mode `shared`.
+
 
 Au démarrage d’une session, le synchroniseur compare la version locale et la version distante, crée une sauvegarde, puis met à jour uniquement le moteur du kit. Le cahier des charges, le profil technique, l’état du projet, les décisions, les work items et les journaux sont conservés.
 

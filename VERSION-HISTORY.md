@@ -10,6 +10,8 @@ Le dépôt a été initialisé le 21 septembre 2026. Les premiers commits ont é
 
 ## Historique chronologique
 
+| 1.16.52 | 2026-10-18 | Mode `shared` rendu obligatoire comme unique installation supportée, avec registre central et mises à jour unifiées. |
+
 | 1.16.51 | 2026-10-18 | Installation automatique et idempotente des outils manquants dans le registre partagé, avec revalidation avant blocage. |
 
 | 1.16.50 | 2026-10-18 | Bootstrap obligatoire de branche dédiée, refus des branches mélangées et branche/PR unique par feature ou carte GitHub Project. |

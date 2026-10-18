@@ -1,5 +1,12 @@
 ## Unreleased
 
+## 1.16.52 - 2026-10-18
+
+- rend le mode `shared` obligatoire comme unique mode d'installation
+- supprime les divergences entre installations `native`, `external` et `shared`
+- centralise les mises à jour dans un registre unique par orchestrateur
+- conserve les documents et l'état propres à chaque projet
+
 ## 1.16.51 - 2026-10-18
 
 - installe automatiquement les outils déclarés absents dans le registre partagé
