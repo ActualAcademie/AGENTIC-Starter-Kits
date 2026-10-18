@@ -4,8 +4,14 @@ root="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
 config="$root/.claude"
 input="$(cat)"
 if [ ! -f "$config/.session-kit-validated" ]; then
-  printf '{"hookSpecificOutput":{"hookEventName":"PreToolUse","permissionDecision":"deny","permissionDecisionReason":"Porte kit non validée : relancer SessionStart avant toute action."}}\n'
-  exit 0
+  if [ -x "$config/scripts/session-start-gate.sh" ] && bash "$config/scripts/session-start-gate.sh" >/dev/null 2>"$config/.session-kit-bootstrap-error"; then
+    rm -f "$config/.session-kit-bootstrap-error"
+  else
+    reason="Porte kit non validée : réamorçage automatique impossible."
+    [ -s "$config/.session-kit-bootstrap-error" ] && reason="$(tr '\n' ' ' < "$config/.session-kit-bootstrap-error")"
+    printf '{"hookSpecificOutput":{"hookEventName":"PreToolUse","permissionDecision":"deny","permissionDecisionReason":"%s"}}\n' "$reason"
+    exit 0
+  fi
 fi
 if ! printf '%s' "$input" | jq -e . >/dev/null 2>&1; then
   printf '{"hookSpecificOutput":{"hookEventName":"PreToolUse","permissionDecision":"deny","permissionDecisionReason":"Événement hook JSON invalide."}}\n'

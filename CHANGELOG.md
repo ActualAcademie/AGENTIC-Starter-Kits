@@ -1,5 +1,11 @@
 ## Unreleased
 
+## 1.16.55 - 2026-10-18
+
+- réamorce automatiquement la porte kit depuis `PreToolUse` lorsque `SessionStart` n’a pas été rejoué
+- supprime le deadlock après rechargement ou mise à jour du kit
+- conserve le refus si le bootstrap échoue réellement et expose la cause observable
+
 ## 1.16.54 - 2026-10-18
 
 - supprime les références aux modes d’installation obsolètes
