@@ -8,6 +8,11 @@ bash "$script_dir/ensure-tools.sh" --bootstrap >/dev/null
 status=0
 bash "$script_dir/check-kit-update.sh" >/dev/null 2>"$config/.kit-update-error" || status=$?
 if [ "$status" -ne 0 ]; then
+  if [ "$status" -eq 3 ] && [ -x "$script_dir/pause-for-kit-update.sh" ]; then
+    bash "$script_dir/pause-for-kit-update.sh"
+    echo "KIT-SESSION: mise à jour détectée; travail suspendu avant synchronisation et livraison vers dev" >&2
+    exit 1
+  fi
   if [ "$status" -eq 3 ] && [ "$mode" = external ] && [ -x "$script_dir/sync-workspace-kit.sh" ]; then
     bash "$script_dir/sync-workspace-kit.sh"
   else
