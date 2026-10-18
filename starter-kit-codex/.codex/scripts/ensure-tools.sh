@@ -3,7 +3,14 @@ set -euo pipefail
 script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 config="$(cd "$script_dir/.." && pwd)"
 source "$script_dir/tool-env.sh"
-mkdir -p "$AGENTIC_TOOLS_HOME/bin" "$AGENTIC_NPM_PREFIX" "$AGENTIC_TOOLS_HOME/cache"
+if ! mkdir -p "$AGENTIC_TOOLS_HOME/bin" "$AGENTIC_NPM_PREFIX" "$AGENTIC_TOOLS_HOME/cache" 2>/dev/null || ! touch "$AGENTIC_TOOLS_HOME/.write-test" 2>/dev/null; then
+  fallback_root="${TMPDIR:-/tmp}/agentic-starter-kits"
+  mkdir -p "$fallback_root/bin" "$fallback_root/cache" "$fallback_root/npm"
+  AGENTIC_TOOLS_HOME="$fallback_root"
+  AGENTIC_NPM_PREFIX="$fallback_root/npm"
+else
+  rm -f "$AGENTIC_TOOLS_HOME/.write-test"
+fi
 registry="$AGENTIC_TOOLS_HOME/registry.tsv"
 [ -f "$registry" ] || printf 'tool\tcommand\tversion\tsource\tlast_checked\n' > "$registry"
 record() {
