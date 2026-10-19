@@ -432,3 +432,10 @@ Le hook PreToolUse autorise uniquement le résolveur de réponse lorsqu une dema
 
 Le message de refus contient la commande exacte à exécuter avec l identifiant de la demande.
 Lorsqu’une demande de livraison cible une branche protégée, le kit conserve le commit et route automatiquement l’opération vers une branche dédiée, puis une PR vers `dev` ou `develop`. Ce refus de push direct ne bloque pas le Goal et ne demande pas de confirmation supplémentaire.
+
+## Conception de jeux
+
+Le script d’initialisation crée désormais un pack local `docs/game/` pour les
+projets de jeux : scénario, indices et fausses pistes, expérience joueur, guide
+encadrant et plan de playtest. Ces documents restent spécifiques au projet et
+peuvent être ignorés par Git.
