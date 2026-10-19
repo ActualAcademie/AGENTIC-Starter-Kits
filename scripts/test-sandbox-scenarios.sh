@@ -25,12 +25,24 @@ for kit in codex claude; do
   assert_contains "$source/policies/TASK-ROUTING-POLICY.md" 'frontend@id,qa@id,auditeur@id'
   delegation="$tmp/delegation-$kit"
   mkdir -p "$delegation"
-  for role in frontend qa auditeur; do printf 'thread=real-%s\nscope=sandbox\n' "$role" > "$delegation/$role.assignment"; done
+  for role in frontend qa auditeur; do printf 'thread=real-%s\nscope=sandbox-%s\ndeliverable=%s-report\nevidence=%s-proof\n' "$role" "$role" "$role" "$role" > "$delegation/$role.assignment"; done
   if bash "$source/scripts/verify-specialist-plan.sh" visual 'frontend,qa,auditeur' "$delegation" >/dev/null 2>&1; then
     echo "ECHEC SANDBOX: délégation sans identifiants acceptée pour $kit" >&2
     exit 1
   fi
   bash "$source/scripts/verify-specialist-plan.sh" visual 'frontend@real-f,qa@real-q,auditeur@real-a' "$delegation" >/dev/null
+  printf 'thread=real-q\nscope=sandbox-frontend\ndeliverable=qa-report\nevidence=qa-proof\n' > "$delegation/qa.assignment"
+  if bash "$source/scripts/verify-specialist-plan.sh" visual 'frontend@real-f,qa@real-q,auditeur@real-a' "$delegation" >/dev/null 2>&1; then
+    echo "ECHEC SANDBOX: chevauchement d agents accepté pour $kit" >&2
+    exit 1
+  fi
+  printf 'thread=real-q\nscope=sandbox-qa\ndeliverable=qa-report\nevidence=qa-proof\n' > "$delegation/qa.assignment"
+  printf 'agent_role: frontend\nagent_id: real-f\nstatus: accepted\nscope: sandbox-frontend\nevidence: frontend-proof\nnext_action: integrate\n' > "$delegation/frontend.report"
+  bash "$source/scripts/verify-agent-report.sh" frontend real-f "$delegation/frontend.report" >/dev/null
+  if sed 's/^evidence:.*/evidence:/' "$delegation/frontend.report" | bash "$source/scripts/verify-agent-report.sh" frontend real-f /dev/stdin >/dev/null 2>&1; then
+    echo "ECHEC SANDBOX: rapport incomplet accepté pour $kit" >&2
+    exit 1
+  fi
   assert_contains "$source/scripts/sync-workspace-kit.sh" 'local_file in PROJECT-BRIEF.md project-profile.toml RUNTIME-STATE.md'
   assert_contains "$source/scripts/init-project.sh" 'local_file in PROJECT-BRIEF.md project-profile.toml'
   assert_contains "$source/scripts/start-goal.sh" 'lots parallèles détectés sans au moins deux agents'

@@ -1,5 +1,12 @@
 ## Unreleased
 
+## 1.16.65 - 2026-10-19
+
+- exige un périmètre, un livrable et une preuve par affectation
+- refuse les chevauchements de lots avant lancement
+- vérifie le rapport réel de chaque agent à son arrêt
+- bloque les rapports sans rôle, identifiant, statut, preuve ou prochaine action
+
 ## 1.16.64 - 2026-10-19
 
 - ajoute une matrice de contrats spécialisés par domaine

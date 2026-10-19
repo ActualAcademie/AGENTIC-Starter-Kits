@@ -25,5 +25,13 @@ for entry in "${all_entries[@]}"; do
     echo "AGENTS: chaque spécialiste doit avoir un identifiant réel au format role@id" >&2; exit 1;
   }
   [ -s "$evidence/$role.assignment" ] || { echo "AGENTS: affectation absente pour $role" >&2; exit 1; }
+  assignment="$evidence/$role.assignment"
+  for field in scope deliverable evidence; do
+    grep -Eq "^${field}=" "$assignment" || { echo "AGENTS: $role.assignment doit préciser $field" >&2; exit 1; }
+  done
 done
+scopes="$(for entry in "${all_entries[@]}"; do grep '^scope=' "$evidence/${entry%@*}.assignment" | cut -d= -f2-; done)"
+[ "$(printf '%s\n' "$scopes" | sort | uniq -d | sed '/^$/d' | wc -l | tr -d ' ')" -eq 0 ] || {
+  echo "AGENTS: chevauchement de périmètres détecté" >&2; exit 1;
+}
 echo "Plan spécialisé vérifié: domaine=$domain agents=$agents preuves=$evidence"
