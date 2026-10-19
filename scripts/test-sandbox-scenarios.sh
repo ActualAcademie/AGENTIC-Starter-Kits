@@ -14,6 +14,8 @@ for kit in codex claude; do
   hidden=".$kit"
   source="$root/starter-kit-$kit/$hidden"
   test -f "$source/SPECIALIST-CONTRACTS.toml"
+  test -x "$source/scripts/reconcile-runtime.sh"
+  test -x "$source/hooks/pre-tool-use.sh"
   contract_count="$(grep -c '^\[[^]]\+\]$' "$source/SPECIALIST-CONTRACTS.toml")"
   agent_count="$(find "$source/agents" -maxdepth 1 -type f | wc -l | tr -d ' ')"
   [ "$contract_count" -eq "$agent_count" ] || { echo "ECHEC SANDBOX: contrats spécialistes incomplets pour $kit" >&2; exit 1; }
@@ -22,6 +24,7 @@ for kit in codex claude; do
     [ "$count" -eq "$contract_count" ] || { echo "ECHEC SANDBOX: champ $field incomplet pour $kit" >&2; exit 1; }
   done
   assert_contains "$source/scripts/verify-specialist-plan.sh" 'identifiant réel au format role@id'
+  assert_contains "$source/hooks/pre-tool-use.sh" 'reconcile-runtime.sh'
   assert_contains "$source/policies/TASK-ROUTING-POLICY.md" 'frontend@id,qa@id,auditeur@id'
   delegation="$tmp/delegation-$kit"
   mkdir -p "$delegation"

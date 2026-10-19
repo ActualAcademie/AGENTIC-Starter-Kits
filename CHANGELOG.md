@@ -1,5 +1,11 @@
 ## Unreleased
 
+## 1.16.66 - 2026-10-19
+
+- ajoute `reconcile-runtime.sh` pour réparer les divergences Goal/runtime
+- autorise uniquement cette commande de réconciliation avant la porte de cohérence
+- ajoute un scénario sandbox de reprise après runtime bloqué et Goal actif
+
 ## 1.16.65 - 2026-10-19
 
 - exige un périmètre, un livrable et une preuve par affectation
