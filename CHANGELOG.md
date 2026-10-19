@@ -1,5 +1,12 @@
 ## Unreleased
 
+## 1.16.64 - 2026-10-19
+
+- ajoute une matrice de contrats spécialisés par domaine
+- vérifie au préflight la parité entre agents déclarés et contrats
+- impose domaine, déclencheur, livrable et relecteur pour chaque agent
+- ajoute un scénario sandbox de cohérence Codex et Claude
+
 ## 1.16.63 - 2026-10-19
 
 - recherche prioritaire des outils dans le registre partagé
