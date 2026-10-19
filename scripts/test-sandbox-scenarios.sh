@@ -13,6 +13,14 @@ assert_contains() {
 for kit in codex claude; do
   hidden=".$kit"
   source="$root/starter-kit-$kit/$hidden"
+  test -f "$source/SPECIALIST-CONTRACTS.toml"
+  contract_count="$(grep -c '^\[[^]]\+\]$' "$source/SPECIALIST-CONTRACTS.toml")"
+  agent_count="$(find "$source/agents" -maxdepth 1 -type f | wc -l | tr -d ' ')"
+  [ "$contract_count" -eq "$agent_count" ] || { echo "ECHEC SANDBOX: contrats spécialistes incomplets pour $kit" >&2; exit 1; }
+  for field in domain activation deliverable reviewer; do
+    count="$(grep -c "^$field = " "$source/SPECIALIST-CONTRACTS.toml")"
+    [ "$count" -eq "$contract_count" ] || { echo "ECHEC SANDBOX: champ $field incomplet pour $kit" >&2; exit 1; }
+  done
   assert_contains "$source/scripts/verify-specialist-plan.sh" 'identifiant réel au format role@id'
   assert_contains "$source/policies/TASK-ROUTING-POLICY.md" 'frontend@id,qa@id,auditeur@id'
   delegation="$tmp/delegation-$kit"

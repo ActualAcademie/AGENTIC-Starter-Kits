@@ -139,6 +139,19 @@ for agent in (config / 'agents').glob('*.toml'):
 if not required_agents.issubset(seen):
     print(f'AGENTS INCOMPLETS: attendus={sorted(required_agents)} obtenus={sorted(seen)}')
     raise SystemExit(1)
+contracts_path = config / 'SPECIALIST-CONTRACTS.toml'
+if not contracts_path.is_file():
+    print(f'CONTRATS SPECIALISTES MANQUANTS: {contracts_path}')
+    raise SystemExit(1)
+contracts = tomllib.loads(contracts_path.read_text())
+if set(contracts) != seen:
+    print(f'CONTRATS SPECIALISTES DESYNCHRONISES: agents={sorted(seen)} contrats={sorted(contracts)}')
+    raise SystemExit(1)
+for role, contract in contracts.items():
+    for field in ('domain', 'activation', 'deliverable', 'reviewer'):
+        if not contract.get(field):
+            print(f'CONTRAT SPECIALISTE INCOMPLET: {role}: {field}')
+            raise SystemExit(1)
 for prompt in ('coordinateur', 'concepteur', 'implementation', 'cybersecurite', 'auditeur'):
     prompt_path = config / 'prompts' / f'{prompt}.md'
     if not prompt_path.is_file():

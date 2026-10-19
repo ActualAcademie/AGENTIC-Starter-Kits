@@ -1,0 +1,104 @@
+# Copie paritaire du contrat exécutable des rôles spécialisés.
+# La version Claude est vérifiée contre la même matrice que la version Codex.
+
+[produit]
+domain = "valeur métier, périmètre, priorités et critères"
+activation = "cahier ambigu, MVP ou arbitrage produit"
+deliverable = "objectifs, priorités, arbitrages et critères métier"
+reviewer = "concepteur"
+
+[concepteur]
+domain = "conception, architecture, flux, contrats et décisions réversibles"
+activation = "nouvelle feature, architecture ou contrat"
+deliverable = "dossier de conception complet et testable"
+reviewer = "auditeur"
+
+[frontend]
+domain = "interface, composants, responsive, états et rendu navigateur"
+activation = "interface ou parcours utilisateur"
+deliverable = "implémentation, tests clients et preuve navigateur comparative"
+reviewer = "qa,auditeur"
+
+[image-generation]
+domain = "création, sélection, retouche et intégration de médias"
+activation = "média ou ressource visuelle"
+deliverable = "brief, média, provenance, accessibilité et preuve d'intégration"
+reviewer = "frontend,auditeur"
+
+[backend]
+domain = "API, logique métier, serveur et observabilité"
+activation = "API ou logique serveur"
+deliverable = "contrat API, validation d'erreurs, tests et rollback"
+reviewer = "qa,cybersecurite"
+
+[data]
+domain = "schéma, migrations, intégrité, rétention et sauvegarde"
+activation = "données, migration ou traitement"
+deliverable = "modèle, migration réversible, qualité et preuves"
+reviewer = "backend,qa"
+
+[cybersecurite]
+domain = "menaces, identité, permissions, secrets et données sensibles"
+activation = "risque de sécurité ou donnée sensible"
+deliverable = "menaces, gravité, preuve, correction et risque résiduel"
+reviewer = "auditeur"
+
+[accessibilite]
+domain = "clavier, focus, contraste, sémantique, zoom et lecteur d'écran"
+activation = "interface ou exigence inclusive"
+deliverable = "matrice d'accessibilité et exceptions prouvées"
+reviewer = "qa,auditeur"
+
+[ux-research]
+domain = "parcours, hypothèses, usages, états vides et erreurs"
+activation = "hypothèse ou parcours utilisateur incertain"
+deliverable = "hypothèses, protocole, observations et recommandations"
+reviewer = "produit,auditeur"
+
+[qa]
+domain = "tests nominaux, négatifs, E2E, régression et preuves d'exécution"
+activation = "fonctionnalité testable ou risque de régression"
+deliverable = "stratégie, cas, outils, résultats, couverture et rapport"
+reviewer = "auditeur"
+
+[performance]
+domain = "latence, mémoire, taille, capacité et disponibilité"
+activation = "budget ou risque de performance déclaré"
+deliverable = "baseline, seuil, mesures, optimisation et comparaison"
+reviewer = "qa,auditeur"
+
+[devops]
+domain = "CI, conteneurs, environnements, déploiement, rollback et observabilité"
+activation = "CI, Docker, VPS, Dokploy ou exploitation"
+deliverable = "procédure, contrôles, rollback, observabilité et coûts"
+reviewer = "cybersecurite,release"
+
+[documentation]
+domain = "README, guides, API, exploitation, changelog et release notes"
+activation = "livraison ou modification d'un parcours documenté"
+deliverable = "documentation cohérente, exemples vérifiés et historique"
+reviewer = "auditeur,release"
+
+[conformite]
+domain = "obligations applicables, licences, vie privée et décisions"
+activation = "donnée personnelle, licence ou obligation avérée"
+deliverable = "exigence applicable, preuve, écart, responsable et décision"
+reviewer = "cybersecurite,auditeur"
+
+[release]
+domain = "versioning, GitFlow, CI, PR, promotion et publication"
+activation = "fin de carte ou livraison"
+deliverable = "checklist, version, CI, PR, docs et preuve distante"
+reviewer = "auditeur"
+
+[auditeur]
+domain = "relecture indépendante, critères, preuves, régressions et clôture"
+activation = "review, gate ou clôture"
+deliverable = "matrice critères/preuves, décision et risques résiduels"
+reviewer = "none"
+
+[coordinateur]
+domain = "routage, orchestration, dépendances, intégration et clôture"
+activation = "toute demande d'exécution"
+deliverable = "plan, affectations réelles, intégration et état final"
+reviewer = "auditeur"

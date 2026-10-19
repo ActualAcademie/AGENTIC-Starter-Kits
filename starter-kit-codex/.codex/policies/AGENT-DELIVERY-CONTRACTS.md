@@ -2,6 +2,8 @@
 
 Le Coordinateur active uniquement les agents dont le domaine est présent dans le périmètre, le profil ou les risques du projet. Chaque agent reçoit un work item avec objectif, fichiers autorisés, critères d’acceptation, dépendances, preuve attendue et état de sortie.
 
+La matrice `SPECIALIST-CONTRACTS.toml` est obligatoire et fait foi pour le routage exécutable. Elle doit contenir exactement un contrat par agent déclaré, avec domaine, déclencheur, livrable et relecteur. Un agent ne peut pas être activé si son contrat manque ou si son livrable ne correspond pas au périmètre.
+
 ## Contrat commun
 
 - Un agent n’exécute que les tâches correspondant à son rôle déclaré et à la matrice d’affectation reçue. Il refuse immédiatement toute tâche hors domaine, toute modification d’un fichier non autorisé et toute validation relevant d’un autre agent.
