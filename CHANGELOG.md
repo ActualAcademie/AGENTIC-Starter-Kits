@@ -1,5 +1,17 @@
 ## Unreleased
 
+## 1.16.63 - 2026-10-19
+
+- recherche prioritaire des outils dans le registre partagé
+- questionnaire unique avant toute installation interactive d un outil manquant
+- suspension explicite en `waiting-for-user` et refus des relances automatiques répétitives
+- reprise du bootstrap après réponse et revalidation du chemin et de la version installée
+
+## 1.16.62 - 2026-10-19
+
+- ajoute l état waiting-for-user pour suspendre les blocages nécessitant une décision
+- évite les boucles de reprise et persiste le questionnaire utilisateur
+
 ## 1.16.61 - 2026-10-18
 
 - livre automatiquement `.workspace.toml` dans un worktree isolé basé sur `dev`
