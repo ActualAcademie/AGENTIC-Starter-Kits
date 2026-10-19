@@ -10,6 +10,8 @@ Les outils manquants sont recherchés dans le registre partagé puis proposés d
 
 La version 1.16.63 suspend le bootstrap une seule fois et reprend après la réponse utilisateur.
 
+Les rapports spécialistes sont maintenant contrôlés par le hook de fin.
+
 Avant toute modification, le kit diagnostique `.git/index.lock`, récupère uniquement un verrou orphelin et bloque sans suppression lorsqu’un processus le détient.
 
 Les outils uv sont installés dans `AGENTIC_TOOLS_HOME/python/uv` et leurs exécutables dans `AGENTIC_TOOLS_HOME/python/bin`.
