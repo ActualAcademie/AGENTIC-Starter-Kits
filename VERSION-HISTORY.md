@@ -10,6 +10,8 @@ Le dépôt a été initialisé le 21 septembre 2026. Les premiers commits ont é
 
 ## Historique chronologique
 
+| 1.16.66 | 2026-10-19 | Réconciliation contrôlée du Goal et du runtime avant reprise, avec voie blanche anti-deadlock et preuve d’état. |
+
 | 1.16.65 | 2026-10-19 | Preuve d’exécution obligatoire des agents, détection des chevauchements et refus des rapports incomplets. |
 
 | 1.16.64 | 2026-10-19 | Contrats spécialisés exécutables, routage par domaine, relecteurs obligatoires et tests de parité Codex/Claude. |
