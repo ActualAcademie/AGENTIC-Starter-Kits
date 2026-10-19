@@ -2,8 +2,6 @@
 
 ## Objet
 
-| 1.16.62 | 2026-10-19 | Ajoute l état waiting-for-user avec questionnaire unique et reprise après réponse. |
-
 Ce document constitue la vue chronologique du projet Agentic Starter Kits. Il complète `CHANGELOG.md`, qui contient le détail opérationnel de chaque entrée. Les versions correspondent aux évolutions consommables du kit Codex ou Claude, et non à chaque commit interne.
 
 ## Origine du projet
@@ -13,6 +11,8 @@ Le dépôt a été initialisé le 21 septembre 2026. Les premiers commits ont é
 ## Historique chronologique
 
 | 1.16.63 | 2026-10-19 | Recherche prioritaire dans le registre partagé, questionnaire unique avant installation interactive et arrêt anti-boucle des hooks en attente de réponse. |
+
+| 1.16.62 | 2026-10-19 | Ajoute l état waiting-for-user avec questionnaire unique et reprise après réponse. |
 
 | 1.16.61 | 2026-10-18 | Livraison automatique de `.workspace.toml` par worktree isolé, branche dédiée et PR vers `dev`. |
 
