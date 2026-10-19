@@ -4,7 +4,16 @@ script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 config="$(cd "$script_dir/.." && pwd)"
 root="$(git rev-parse --show-toplevel 2>/dev/null || cd "$config/.." && pwd)"
 mode="$(sed -n 's/^kit_mode = "\([^"]*\)"/\1/p' "$root/.workspace.toml" 2>/dev/null || echo native)"
-bash "$script_dir/ensure-tools.sh" --bootstrap >/dev/null
+tool_status=0
+bash "$script_dir/ensure-tools.sh" --bootstrap >/dev/null 2>"$config/.tool-bootstrap-error" || tool_status=$?
+if [ "$tool_status" -eq 4 ]; then
+  echo "KIT-SESSION: waiting-for-user; outils absents du registre partagé, réponse requise avant installation" >&2
+  exit 4
+elif [ "$tool_status" -ne 0 ]; then
+  echo "KIT-SESSION: bootstrap des outils impossible" >&2
+  exit "$tool_status"
+fi
+rm -f "$config/.tool-bootstrap-error"
 status=0
 bash "$script_dir/check-kit-update.sh" >/dev/null 2>"$config/.kit-update-error" || status=$?
 if [ "$status" -ne 0 ]; then

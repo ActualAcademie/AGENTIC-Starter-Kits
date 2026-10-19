@@ -12,6 +12,8 @@ else
   rm -f "$AGENTIC_TOOLS_HOME/.write-test"
 fi
 registry="$AGENTIC_TOOLS_HOME/registry.tsv"
+interactive_bootstrap=false
+missing_tools=""
 [ -f "$registry" ] || printf 'tool\tcommand\tversion\tsource\tlast_checked\n' > "$registry"
 record() {
   local name="$1" command_name="$2" version="$3" source="$4"
@@ -27,6 +29,7 @@ check_command() {
     printf 'Disponible %-16s %s\n' "$command_name" "$(command -v "$command_name")"
   else
     printf 'Absent     %-16s installer avec --install ou une commande projet\n' "$command_name"
+    missing_tools="${missing_tools}${missing_tools:+ }$command_name"
   fi
 }
 install_system_tool() {
@@ -42,6 +45,10 @@ install_system_tool() {
 bootstrap_command() {
   local command_name="$1"
   if command -v "$command_name" >/dev/null 2>&1; then check_command "$command_name"; return 0; fi
+  if [ "$interactive_bootstrap" = true ]; then
+    check_command "$command_name"
+    return 1
+  fi
   install_system_tool "$command_name" >/dev/null 2>&1 || true
   check_command "$command_name"
   command -v "$command_name" >/dev/null 2>&1
@@ -77,15 +84,16 @@ bootstrap_manifest() {
     fi
     case "$category" in
       cli|runtime) bootstrap_command "$command_name" || missing_manifest=1 ;;
-      npm) install_npm "$package" >/dev/null 2>&1 || missing_manifest=1 ;;
-      python) install_python "$package" >/dev/null 2>&1 || missing_manifest=1 ;;
+      npm) if [ "$interactive_bootstrap" = true ]; then missing_tools="${missing_tools}${missing_tools:+ }$command_name"; else install_npm "$package" >/dev/null 2>&1 || missing_manifest=1; fi ;;
+      python) if [ "$interactive_bootstrap" = true ]; then missing_tools="${missing_tools}${missing_tools:+ }$command_name"; else install_python "$package" >/dev/null 2>&1 || missing_manifest=1; fi ;;
     esac
   done < "$manifest"
 }
 install_mode=false
 while [ "$#" -gt 0 ]; do
   case "$1" in
-    --install|--bootstrap) install_mode=true; shift ;;
+    --install) install_mode=true; shift ;;
+    --bootstrap) install_mode=true; interactive_bootstrap=true; shift ;;
     --npm) [ "$#" -ge 2 ] || { echo '--npm exige un paquet' >&2; exit 2; }; install_npm "$2"; shift 2 ;;
     --python) [ "$#" -ge 2 ] || { echo '--python exige un paquet' >&2; exit 2; }; install_python "$2"; shift 2 ;;
     --list) awk -F '\t' 'NR > 1 { print $1 "\t" $2 "\t" $3 "\t" $4 }' "$registry"; exit 0 ;;
@@ -100,7 +108,11 @@ if [ "$install_mode" = true ]; then
   bootstrap_manifest "${AGENTIC_TOOL_MANIFEST:-$config/tool-manifest.tsv}"
   [ "$missing_manifest" -eq 0 ] || missing=1
   if [ "$missing" -ne 0 ]; then
-    echo 'OUTILS CENTRAUX INDISPONIBLES: installation automatique tentee, aucune tache ne doit commencer.' >&2
+    if [ "$interactive_bootstrap" = true ] && [ -x "$script_dir/request-user-input.sh" ]; then
+      bash "$script_dir/request-user-input.sh" "install-tools-${missing_tools// /-}" "Des outils manquent dans le registre partagé. Autoriser leur installation gratuite dans le registre central ?" install "Installer $missing_tools" skip "Poursuivre sans ces outils" >&2 || true
+      exit 4
+    fi
+    echo "OUTILS CENTRAUX INDISPONIBLES: $missing_tools" >&2
     exit 1
   fi
 fi
