@@ -4,6 +4,8 @@
 
 ## Construire avec une IA comme avec une équipe senior
 
+Le bootstrap des outils recherche le registre partagé avant toute installation. Un outil absent déclenche une seule question `waiting-for-user`; aucune installation n est lancée sans réponse explicite.
+
 Les blocages nécessitant une décision passent en `waiting-for-user` avec une question unique et des choix numérotés. Le kit suspend les reprises automatiques jusqu'à la réponse.
 
 L'inventaire détaillé des fonctionnalités réellement implémentées, des hooks, des preuves, des limites d'intégration et de la couverture de tests se trouve dans [docs/IMPLEMENTED-FEATURES.md](docs/IMPLEMENTED-FEATURES.md).
