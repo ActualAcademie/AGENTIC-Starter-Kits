@@ -10,6 +10,8 @@ Le dépôt a été initialisé le 21 septembre 2026. Les premiers commits ont é
 
 ## Historique chronologique
 
+| 1.16.65 | 2026-10-19 | Preuve d’exécution obligatoire des agents, détection des chevauchements et refus des rapports incomplets. |
+
 | 1.16.64 | 2026-10-19 | Contrats spécialisés exécutables, routage par domaine, relecteurs obligatoires et tests de parité Codex/Claude. |
 
 | 1.16.63 | 2026-10-19 | Recherche prioritaire dans le registre partagé, questionnaire unique avant installation interactive et arrêt anti-boucle des hooks en attente de réponse. |
