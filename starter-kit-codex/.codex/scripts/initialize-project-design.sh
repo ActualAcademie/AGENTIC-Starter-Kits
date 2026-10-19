@@ -5,7 +5,6 @@ script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 config="$(cd "$script_dir/.." && pwd)"
 root="$(git -C "$config/.." rev-parse --show-toplevel 2>/dev/null || (cd "$config/.." && pwd))"
 docs="$root/docs"
-game_templates="$config/templates/game-design"
 
 write_if_missing() {
   local path="$1"
@@ -13,15 +12,6 @@ write_if_missing() {
   mkdir -p "$(dirname "$path")"
   cat > "$path"
 }
-
-if [ -d "$game_templates" ]; then
-  mkdir -p "$docs/game"
-  for template in "$game_templates"/*.md; do
-    [ -e "$template" ] || continue
-    target="$docs/game/$(basename "$template")"
-    [ -e "$target" ] || cp "$template" "$target"
-  done
-fi
 
 write_if_missing "$docs/README.md" <<'DOC'
 # Dossier de conception du projet
