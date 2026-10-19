@@ -356,3 +356,9 @@ Le hook autorise le résolveur de réponse même lorsque les autres outils sont 
 La validation avant push refuse tout fichier interne staged dans un projet consommateur.
 
 En cas de commande prématurée, le hook indique l identifiant pending et la commande de réconciliation.
+
+## Projets de jeux
+
+Les projets de jeux peuvent utiliser le pack local `docs/game/` généré par
+l'initialisation de conception. Il fournit les modèles génériques du scénario,
+des indices, de l'expérience joueur, du guide encadrant et du playtest.
