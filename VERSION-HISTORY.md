@@ -12,6 +12,8 @@ Le dépôt a été initialisé le 21 septembre 2026. Les premiers commits ont é
 
 ## Historique chronologique
 
+| 1.16.63 | 2026-10-19 | Recherche prioritaire dans le registre partagé, questionnaire unique avant installation interactive et arrêt anti-boucle des hooks en attente de réponse. |
+
 | 1.16.61 | 2026-10-18 | Livraison automatique de `.workspace.toml` par worktree isolé, branche dédiée et PR vers `dev`. |
 
 | 1.16.60 | 2026-10-18 | API gh facultative, fallback curl public et mises à jour accessibles aux utilisateurs sans privilège créateur. |

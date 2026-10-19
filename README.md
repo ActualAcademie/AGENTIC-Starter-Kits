@@ -1,8 +1,10 @@
 # Agentic Starter Kits
 
-[![Version](https://img.shields.io/badge/version-1.16.62-blue.svg)](VERSION)
+[![Version](https://img.shields.io/badge/version-1.16.63-blue.svg)](VERSION)
 
 ## Construire avec une IA comme avec une équipe senior
+
+Le bootstrap des outils recherche le registre partagé avant toute installation. Un outil absent déclenche une seule question `waiting-for-user`; aucune installation n est lancée sans réponse explicite.
 
 Les blocages nécessitant une décision passent en `waiting-for-user` avec une question unique et des choix numérotés. Le kit suspend les reprises automatiques jusqu'à la réponse.
 

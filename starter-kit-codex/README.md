@@ -1,10 +1,12 @@
 # Kit d'orchestration Codex portable
 
-![Version du kit](https://img.shields.io/badge/version-1.16.62-blue.svg)
+![Version du kit](https://img.shields.io/badge/version-1.16.63-blue.svg)
 
 Le hook `SessionStart` initialise automatiquement `AGENTIC_TOOLS_HOME` et vérifie les outils de base avant toute tâche. Une session est refusée si une installation automatique ne permet pas de rendre ces outils disponibles.
 
 Lorsqu'une décision utilisateur est indispensable, le Coordinateur émet un questionnaire unique en état `waiting-for-user` et reprend après la réponse sans répéter le blocage.
+
+Les outils manquants sont recherchés dans le registre partagé puis proposés dans un questionnaire avant toute installation.
 
 Avant toute modification, le kit diagnostique `.git/index.lock`, récupère uniquement un verrou orphelin et bloque sans suppression lorsqu’un processus le détient.
 

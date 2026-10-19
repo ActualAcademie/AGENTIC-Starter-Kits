@@ -17,6 +17,11 @@ if [ ! -f "$config/.session-kit-validated" ]; then
   if [ -x "$config/scripts/session-start-gate.sh" ] && bash "$config/scripts/session-start-gate.sh" >/dev/null 2>"$config/.session-kit-bootstrap-error"; then
     rm -f "$config/.session-kit-bootstrap-error"
   else
+    if [ -f "$config/RUNTIME-STATE.md" ] && grep -q '^- execution_status: waiting-for-user$' "$config/RUNTIME-STATE.md"; then
+      request_id="$(sed -n 's/^- pending_request_id: //p' "$config/RUNTIME-STATE.md" | head -1)"
+      printf '{"hookSpecificOutput":{"hookEventName":"PreToolUse","permissionDecision":"deny","permissionDecisionReason":"Question utilisateur en attente (%s). Répondre au questionnaire avant toute nouvelle action."}}\n' "$request_id"
+      exit 0
+    fi
     reason="Porte kit non validée : réamorçage automatique impossible."
     [ -s "$config/.session-kit-bootstrap-error" ] && reason="$(tr '\n' ' ' < "$config/.session-kit-bootstrap-error")"
     printf '{"hookSpecificOutput":{"hookEventName":"PreToolUse","permissionDecision":"deny","permissionDecisionReason":"%s"}}\n' "$reason"
@@ -38,6 +43,11 @@ next="$(sed -n 's/^- next_action: //p' "$state" | head -1)"
 execution="$(sed -n 's/^- execution_status: //p' "$state" | head -1)"
 goal="$(sed -n 's/^- goal_status: //p' "$state" | head -1)"
 session="$(sed -n 's/^- session_status: //p' "$state" | head -1)"
+if [ "$execution" = "waiting-for-user" ] || [ "$session" = "waiting-for-user" ]; then
+  request_id="$(sed -n 's/^- pending_request_id: //p' "$state" | head -1)"
+  printf '{"hookSpecificOutput":{"hookEventName":"PreToolUse","permissionDecision":"deny","permissionDecisionReason":"Question utilisateur en attente (%s). Ne pas relancer automatiquement l\u2019action; attendre la réponse puis reprendre."}}\n' "$request_id"
+  exit 0
+fi
 case "$tool" in
   Bash|apply_patch|Edit|Write|Agent)
     if [[ "$native" == "required" || "$native" == "none" || "$next" == *A_COMPLETER* || -z "$next" || "$goal" == "none" && "$session" != "not-required" ]]; then
