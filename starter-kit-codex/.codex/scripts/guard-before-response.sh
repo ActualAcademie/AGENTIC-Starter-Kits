@@ -27,6 +27,8 @@ case "$status" in
     exit 0
     ;;
   complete)
+    audit_guard="$script_dir/validate-exhaustive-audit.sh"
+    [ -x "$audit_guard" ] && bash "$audit_guard" "$state" || fail "audit exhaustif non vérifié"
     [[ "$(value pending_request_id)" =~ ^(none|resolved)$ && "$(value required_action_status)" =~ ^(none|resolved|not-required)$ ]] || fail "demande utilisateur encore en attente"
     if [[ "$goal_status" != "none" && "$goal_status" != "not-required" ]]; then
       [[ "$goal_status" == "complete" ]] || fail "goal encore actif: $goal_status"

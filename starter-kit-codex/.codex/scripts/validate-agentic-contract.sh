@@ -15,7 +15,7 @@ for policy in \
 done
 
 for script in \
-  guard-before-response.sh validate-session-state.sh verify-before-work.sh repair-git-index-lock.sh \
+  guard-before-response.sh validate-session-state.sh verify-before-work.sh repair-git-index-lock.sh validate-exhaustive-audit.sh \
   verify-before-push.sh verify-specialist-plan.sh verify-agent-report.sh reconcile-runtime.sh verify-pr-cadence.sh ensure-tools.sh ensure-native-goal.sh \
   request-user-input.sh; do
   [ -x "$root/.codex/scripts/$script" ] || fail "garde-fou absent ou non exécutable: $script"
