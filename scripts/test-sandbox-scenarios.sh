@@ -116,8 +116,12 @@ assert_contains "$source/scripts/validate-entrypoint.sh" 'sed -i.bak'
     exit 1
   }
   specialist_event="$(printf '{\"agent_id\":\"real-f\",\"agent_role\":\"frontend\"}' | (cd "$hook_sandbox" && bash "$hidden/hooks/subagent-stop.sh"))"
-  printf '%s' "$specialist_event" | grep -q 'Rapport spécialiste absent' || {
-    echo "ECHEC SANDBOX: spécialiste sans rapport accepté pour $kit" >&2
+  printf '%s' "$specialist_event" | grep -q 'arrêté' || {
+    echo "ECHEC SANDBOX: arrêt spécialiste sans rapport non récupérable pour $kit" >&2
+    exit 1
+  }
+  printf '%s' "$specialist_event" | grep -q 'relance automatique' || {
+    echo "ECHEC SANDBOX: absence de garde anti-relance pour $kit" >&2
     exit 1
   }
   assert_contains "$source/scripts/sync-workspace-kit.sh" 'local_file in PROJECT-BRIEF.md project-profile.toml RUNTIME-STATE.md'
