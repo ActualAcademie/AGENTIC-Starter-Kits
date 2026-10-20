@@ -109,6 +109,8 @@ bash .codex/scripts/preflight.sh
 
 Après l'onboarding, décrire une tâche avec son résultat attendu et ses critères d'acceptation. Le Coordinateur attribue ensuite les rôles, demande des preuves et impose l'audit avant clôture.
 
+Tout audit suit le [protocole exhaustif](../docs/policies/EXHAUSTIVE-AUDIT-PROTOCOL.md). Une conclusion exige une matrice complète, les spécialistes réellement appelés, les tests négatifs, la recherche de contradictions et une relecture indépendante après correction.
+
 Pour ne pas déclencher la porte projet dans une conversation générale, commencer le message par :
 
 ```text
