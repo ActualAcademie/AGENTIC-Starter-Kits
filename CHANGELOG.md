@@ -1,5 +1,10 @@
 ## Unreleased
 
+## 1.16.73 - 2026-10-20
+
+- Corrige le calcul de racine de l'outbox des rapports kit.
+- Vérifie réellement la génération, l'anonymisation et la déduplication des rapports.
+
 ## 1.16.72 - 2026-10-20
 
 - Relit désormais les rapports kit depuis tous les projets, pas seulement le dépôt du kit.
