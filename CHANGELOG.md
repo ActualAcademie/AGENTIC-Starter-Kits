@@ -1,5 +1,11 @@
 ## Unreleased
 
+## 1.16.72 - 2026-10-20
+
+- Relit désormais les rapports kit depuis tous les projets, pas seulement le dépôt du kit.
+- Rejoue automatiquement l'outbox locale après reconnexion de GitHub.
+- Ajoute les tests de présence des scripts de lecture et d'envoi.
+
 ## 1.16.71 - 2026-10-20
 
 - Renforce la preuve de validation à chaque démarrage de conversation.
