@@ -2,7 +2,7 @@
 
 ## Budget et périmètre obligatoires
 
-L'initialisation est une phase d'intake bornée à 30 minutes de travail actif et 40 actions maximum. Elle ne doit pas réaliser la conception détaillée, l'implémentation produit, l'audit exhaustif du code ou la validation de toutes les stories. Elle collecte le cahier des charges, initialise la structure, audite le périmètre à haut niveau, construit le plan de cartes, prépare la livraison d'onboarding et passe ensuite à la prochaine carte. Si le budget est atteint, le Coordinateur produit un rapport de synthèse et clôt l'initialisation avec les éléments restant à traiter dans des Goals séparés, sans boucle ni répétition.
+L'initialisation est une phase de cadrage complète bornée à 30 minutes de travail actif et 40 actions maximum. Elle doit lire et formaliser le cahier des charges, créer la structure complète des documents de conception, auditer le périmètre, décomposer le MVP et le Post-MVP, créer toutes les cartes détaillées nécessaires avec leurs labels, descriptions, dépendances et checklists, puis préparer la livraison d'onboarding. Elle ne doit pas implémenter les fonctionnalités ni exécuter les cartes. Les Goals suivants réalisent progressivement les cartes et complètent les documents au fil des preuves. Si le budget est atteint, le Coordinateur regroupe les éléments restants en un lot documenté, sans boucle ni répétition.
 
 L’initialisation est un flux livré, pas un simple état de cadrage. Le Coordinateur garde le Goal `active` jusqu’à la preuve de chaque étape suivante.
 
