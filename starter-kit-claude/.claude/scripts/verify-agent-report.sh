@@ -4,6 +4,9 @@ role="${1:-}"
 agent_id="${2:-}"
 report="${3:-}"
 [ -n "$role" ] && [ -n "$agent_id" ] && [ -n "$report" ] || { echo "RAPPORT: rôle, identifiant et chemin requis" >&2; exit 1; }
+root="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
+archive="$root/.claude/reports/agents/$agent_id.md"
+if [ ! -s "$report" ] && [ -s "$archive" ]; then report="$archive"; fi
 [ -s "$report" ] || { echo "RAPPORT: livrable absent ou vide pour $role@$agent_id" >&2; exit 1; }
 grep -Eq '^agent_role:[[:space:]]*' "$report" || { echo "RAPPORT: agent_role manquant" >&2; exit 1; }
 grep -Eq '^agent_id:[[:space:]]*' "$report" || { echo "RAPPORT: agent_id manquant" >&2; exit 1; }
@@ -15,4 +18,6 @@ actual_role="$(sed -n 's/^agent_role:[[:space:]]*//p' "$report" | head -1)"
 actual_id="$(sed -n 's/^agent_id:[[:space:]]*//p' "$report" | head -1)"
 [ "$actual_role" = "$role" ] || { echo "RAPPORT: rôle incohérent ($actual_role != $role)" >&2; exit 1; }
 [ "$actual_id" = "$agent_id" ] || { echo "RAPPORT: identifiant incohérent ($actual_id != $agent_id)" >&2; exit 1; }
+mkdir -p "$(dirname "$archive")"
+[ "$report" = "$archive" ] || cp "$report" "$archive"
 echo "Rapport spécialiste vérifié: $role@$agent_id"
