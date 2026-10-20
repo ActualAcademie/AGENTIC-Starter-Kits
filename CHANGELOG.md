@@ -1,5 +1,11 @@
 ## Unreleased
 
+## 1.16.70 - 2026-10-20
+
+- Ajoute une garde par agent contre les boucles de blocage répétées.
+- Impose un contexte neuf et un périmètre réduit après un échec spécialiste.
+- Ajoute la couverture sandbox de l'arrêt après deux tentatives identiques.
+
 ## 1.16.69 - 2026-10-20
 
 - Ajoute un audit automatisé des volumes de contexte et des doublons de chargement.

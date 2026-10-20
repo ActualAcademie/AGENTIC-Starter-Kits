@@ -12,6 +12,8 @@ Une opération utilise au maximum deux reprises après la tentative initiale. Un
 
 ## Agents
 
+Pour un agent spécialiste, une seconde tentative utilise un contexte neuf et un périmètre réduit. Une troisième tentative avec la même signature de blocage est interdite et déclenche l'arrêt propre des agents, la récupération de leurs rapports et une alternative d'orchestration.
+
 Chaque appel d'agent possède un livrable, un périmètre, un budget et une preuve. Les appels sont plafonnés à trois par Goal, reprises comprises. La délégation récursive est interdite par défaut et les résultats valides sont réutilisés.
 
 ## Métriques
