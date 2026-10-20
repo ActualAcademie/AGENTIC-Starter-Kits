@@ -1,6 +1,6 @@
 # Kit d'orchestration Codex portable
 
-![Version du kit](https://img.shields.io/badge/version-1.16.73-blue.svg)
+![Version du kit](https://img.shields.io/badge/version-1.16.74-blue.svg)
 
 Le hook `SessionStart` initialise automatiquement `AGENTIC_TOOLS_HOME` et vérifie les outils de base avant toute tâche. Une session est refusée si une installation automatique ne permet pas de rendre ces outils disponibles.
 
@@ -108,6 +108,8 @@ bash .codex/scripts/preflight.sh
 ## Utilisation quotidienne
 
 Après l'onboarding, décrire une tâche avec son résultat attendu et ses critères d'acceptation. Le Coordinateur attribue ensuite les rôles, demande des preuves et impose l'audit avant clôture.
+
+Tout audit suit le [protocole exhaustif](../docs/policies/EXHAUSTIVE-AUDIT-PROTOCOL.md). Une conclusion exige une matrice complète, les spécialistes réellement appelés, les tests négatifs, la recherche de contradictions et une relecture indépendante après correction.
 
 Pour ne pas déclencher la porte projet dans une conversation générale, commencer le message par :
 
