@@ -8,6 +8,7 @@ fi
 
 script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 config="$(cd "$script_dir/.." && pwd)"
+[ -x "$script_dir/validate-goal-budget.sh" ] && "$script_dir/validate-goal-budget.sh"
 state="$config/RUNTIME-STATE.md"
 events="$config/runtime-events.log"
 [ -f "$state" ] || { echo "GOAL: RUNTIME-STATE.md absent" >&2; exit 1; }
