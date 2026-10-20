@@ -28,6 +28,8 @@ L'agent peut reprendre automatiquement seulement si l'objectif est actif, que la
 
 Un même blocage ne peut pas être répété plus de deux tours de Goal. Au deuxième tour, le Coordinateur doit changer d'approche et exécuter une action de déblocage concrète, par exemple installer provisoirement un outil gratuit, déléguer une analyse indépendante, utiliser une alternative locale, réduire le périmètre ou demander une décision humaine consolidée avec toutes les alternatives tentées. Il est interdit de produire un troisième tour identique ou de rendre la main avec le même `next_action` sans preuve de changement.
 
+Après deux reprises sans changement, le hook `Stop` doit laisser la session en attente au lieu de bloquer et relancer automatiquement le même message. L'état, la preuve, la cause et l'action attendue restent enregistrés dans `RUNTIME-STATE.md`; une nouvelle reprise ne peut être déclenchée que par une réponse utilisateur, un changement externe vérifié ou une nouvelle action différente.
+
 Un agent spécialiste ne peut pas rester actif sur le même symptôme sans sortie. Le Coordinateur borne chaque agent à deux tentatives par signature de blocage avec `scripts/guard-agent-loop.sh`. Après un échec, toute reprise utilise un contexte neuf par défaut, sans `fork_context` de l'historique saturé, un périmètre réduit et une sortie courte. Après la seconde tentative, l'agent est arrêté proprement, son rapport est récupéré, et le lot est réattribué ou traité par une alternative. Trois agents ne doivent jamais être relancés en boucle sur la même signature.
 
 ## Commandes d'environnement
