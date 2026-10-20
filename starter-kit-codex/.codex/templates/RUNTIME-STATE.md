@@ -25,6 +25,11 @@
 - goal_verification: [[A_COMPLETER]]
 - goal_constraints: [[A_COMPLETER]]
 - goal_budget: [[A_COMPLETER]]
+- audit_matrix_status: not-applicable
+- specialist_audit_status: not-applicable
+- negative_tests_status: not-applicable
+- contradiction_audit_status: not-applicable
+- independent_reaudit_status: not-applicable
 - goal_blocked_condition: none
 - goal_session_id: none
 - native_goal_status: unavailable

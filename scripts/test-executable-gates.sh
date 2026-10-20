@@ -360,7 +360,10 @@ for kit in codex claude; do
     exit 1
   fi
 
-  perl -0pi -e 's/execution_status: .*/execution_status: complete/; s/next_action: .*/next_action: none/; s/open_checklist_items: .*/open_checklist_items: 0/; s/last_observable_evidence: .*/last_observable_evidence: test-evidence/; s/ci_status: .*/ci_status: success/; s/trello_sync_status: .*/trello_sync_status: disabled/; s/goal_agents_created: .*/goal_agents_created: agent-test/; s/goal_agent_evidence: .*/goal_agent_evidence: test-agent-evidence/' "$config/RUNTIME-STATE.md"
+  for audit_key in audit_matrix_status specialist_audit_status negative_tests_status contradiction_audit_status independent_reaudit_status; do
+    grep -q "^- $audit_key:" "$config/RUNTIME-STATE.md" || printf '%s\n' "- $audit_key: not-applicable" >> "$config/RUNTIME-STATE.md"
+  done
+  perl -0pi -e 's/execution_status: .*/execution_status: complete/; s/next_action: .*/next_action: none/; s/open_checklist_items: .*/open_checklist_items: 0/; s/last_observable_evidence: .*/last_observable_evidence: test-evidence/; s/ci_status: .*/ci_status: success/; s/trello_sync_status: .*/trello_sync_status: disabled/; s/goal_agents_created: .*/goal_agents_created: agent-test/; s/goal_agent_evidence: .*/goal_agent_evidence: test-agent-evidence/; s/audit_matrix_status: .*/audit_matrix_status: verified/; s/specialist_audit_status: .*/specialist_audit_status: verified/; s/negative_tests_status: .*/negative_tests_status: verified/; s/contradiction_audit_status: .*/contradiction_audit_status: verified/; s/independent_reaudit_status: .*/independent_reaudit_status: verified/' "$config/RUNTIME-STATE.md"
   if bash "$config/scripts/guard-before-response.sh" >/dev/null 2>&1; then
     echo "ECHEC TEST: une obligation pending aurait dû bloquer complete $kit"
     exit 1

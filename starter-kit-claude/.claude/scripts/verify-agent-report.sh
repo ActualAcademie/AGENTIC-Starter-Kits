@@ -4,6 +4,7 @@ role="${1:-}"
 agent_id="${2:-}"
 report="${3:-}"
 [ -n "$role" ] && [ -n "$agent_id" ] && [ -n "$report" ] || { echo "RAPPORT: rôle, identifiant et chemin requis" >&2; exit 1; }
+if [ "$report" = "/dev/stdin" ]; then report_copy="$(mktemp)"; cat > "$report_copy"; report="$report_copy"; trap 'rm -f "$report_copy"' EXIT; fi
 root="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
 archive="$root/.claude/reports/agents/$agent_id.md"
 if [ ! -s "$report" ] && [ -s "$archive" ]; then report="$archive"; fi

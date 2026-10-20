@@ -7,4 +7,7 @@ branch="$(git -C "$root" branch --show-current)"
 case "$branch" in main|master|dev|develop) echo "GITFLOW: travail interdit directement sur $branch" >&2; exit 1;; feat/*|feature/*|fix/*|hotfix/*|chore/*|docs/*|refactor/*|test/*);; *) echo "GITFLOW: branche dédiée invalide $branch" >&2; exit 1;; esac
 bash "$script_dir/repair-git-index-lock.sh"
 git -C "$root" diff --check
+if [ -f "$config/RUNTIME-STATE.md" ]; then
+  bash "$script_dir/require-specialist-delegation.sh"
+fi
 echo "Validation Git Flow avant travail OK: $branch"
