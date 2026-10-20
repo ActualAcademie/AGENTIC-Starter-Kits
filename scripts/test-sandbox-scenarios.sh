@@ -68,6 +68,7 @@ assert_contains "$source/scripts/validate-entrypoint.sh" 'sed -i.bak'
     assert_contains "$root/starter-kit-claude/CLAUDE.md" 'Ne jamais utiliser de tiret cadratin.'
   fi
   test -x "$source/scripts/report-kit-blocker.sh"
+  assert_contains "$source/scripts/report-kit-blocker.sh" 'if root='
   report_project="$tmp/report-$kit"
   mkdir -p "$report_project/$hidden"
   cp -R "$source/." "$report_project/$hidden/"

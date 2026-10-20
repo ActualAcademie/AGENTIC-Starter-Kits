@@ -6,7 +6,11 @@ summary="Blocage du kit"
 details=""
 repository="${KIT_REPORT_REPOSITORY:-Krapaud-Labs/AGENTIC-Starter-Kits}"
 config="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
-root="$(git -C "$config/.." rev-parse --show-toplevel 2>/dev/null || cd "$config/.." && pwd)"
+if root="$(git -C "$config/.." rev-parse --show-toplevel 2>/dev/null)"; then
+  :
+else
+  root="$(cd "$config/.." && pwd)"
+fi
 outbox="$root/.kit-reports/outbox"
 
 while [ "$#" -gt 0 ]; do
