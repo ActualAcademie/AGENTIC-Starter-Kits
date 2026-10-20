@@ -1,5 +1,11 @@
 ## Unreleased
 
+## 1.16.71 - 2026-10-20
+
+- Renforce la preuve de validation à chaque démarrage de conversation.
+- Distingue vérification distante, mise à jour distante et fallback local contrôlé.
+- Enregistre les empreintes du manifeste et du kit dans la preuve de session.
+
 ## 1.16.70 - 2026-10-20
 
 - Ajoute une garde par agent contre les boucles de blocage répétées.

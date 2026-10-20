@@ -6,6 +6,7 @@ Ce document constitue la vue chronologique du projet Agentic Starter Kits. Il co
 
 | Version | Date | Évolution |
 |---|---|---|
+| 1.16.71 | 2026-10-20 | Preuve de session renforcée avec mode de vérification et empreintes du manifeste et du kit. |
 | 1.16.70 | 2026-10-20 | Garde anti-boucle par agent, contexte neuf après échec et arrêt des relances identiques. |
 | 1.16.69 | 2026-10-20 | Audit des volumes de contexte et budgets exécutables des Goals, avec tests et politique de métriques. |
 | 1.16.68 | 2026-10-20 | Manifeste d'empreintes du contexte généré automatiquement au démarrage et ignoré par Git. |
