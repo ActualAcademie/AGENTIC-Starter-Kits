@@ -1,5 +1,11 @@
 ## Unreleased
 
+## 1.16.74 - 2026-10-20
+
+- Rend les erreurs GitHub de lecture explicites au lieu de les confondre avec l'absence de rapports.
+- Étend la recherche de doublons et ignore les rapports déjà résolus dans le blocage de démarrage.
+- Protège l'écriture concurrente de l'historique des rapports.
+
 ## 1.16.73 - 2026-10-20
 
 - Corrige le calcul de racine de l'outbox des rapports kit.
