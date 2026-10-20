@@ -16,6 +16,8 @@ agents_created="$(value goal_agents_created)"; agent_evidence="$(value goal_agen
 turn_status="$(value last_turn_status)"; tool_failures="$(value tool_failures)"; session_status="$(value session_status)"
 case "$status" in
   complete)
+    audit_guard="$script_dir/validate-exhaustive-audit.sh"
+    [ -x "$audit_guard" ] && bash "$audit_guard" "$state" || fail "audit exhaustif non vérifié"
     [[ "$(value pending_request_id)" =~ ^(none|resolved)$ && "$(value required_action_status)" =~ ^(none|resolved|not-required)$ ]] || fail "demande utilisateur encore en attente"
     if [[ "$goal_status" != "none" && "$goal_status" != "not-required" ]]; then
       [[ "$goal_status" == "complete" ]] || fail "goal encore actif: $goal_status"
