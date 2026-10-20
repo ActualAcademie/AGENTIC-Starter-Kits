@@ -44,6 +44,9 @@ assert_contains "$source/scripts/validate-entrypoint.sh" 'sed -i.bak'
   assert_contains "$source/scripts/sync-workspace-kit.sh" 'Manifest .workspace.toml initialisé'
   assert_contains "$source/ORCHESTRATION.md" 'CONTEXT-EFFICIENCY-POLICY.md'
   assert_contains "$source/ORCHESTRATION.md" 'GOAL-RETRY-AGENT-METRICS.md'
+  assert_contains "$source/scripts/session-start-gate.sh" 'verification_mode'
+  assert_contains "$source/scripts/session-start-gate.sh" 'manifest_sha256'
+  assert_contains "$source/scripts/session-start-gate.sh" 'kit_sha256'
   test -x "$source/scripts/validate-goal-budget.sh"
   "$source/scripts/validate-goal-budget.sh" >/dev/null
   if GOAL_MAX_STEPS=41 "$source/scripts/validate-goal-budget.sh" >/dev/null 2>&1; then
