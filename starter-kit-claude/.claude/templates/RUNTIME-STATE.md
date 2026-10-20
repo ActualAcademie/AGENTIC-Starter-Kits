@@ -16,7 +16,9 @@
 - ci_status: not-applicable
 - trello_sync_status: disabled
 - attempt_count: 0
-- max_attempts: 3
+- max_attempts: 2
+- blocker_repeat_count: 0
+- previous_blocked_action: none
 - redundant_confirmation_requested: no
 - goal_status: none
 - goal_objective: [[A_COMPLETER]]

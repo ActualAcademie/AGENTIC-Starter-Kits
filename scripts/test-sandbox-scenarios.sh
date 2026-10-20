@@ -50,6 +50,12 @@ assert_contains "$source/scripts/validate-entrypoint.sh" 'sed -i.bak'
     echo "ECHEC SANDBOX: budget Goal hors limite accepté pour $kit" >&2
     exit 1
   fi
+  test -x "$source/scripts/guard-agent-loop.sh"
+  "$source/scripts/guard-agent-loop.sh" real-agent 2 repeated-blocker >/dev/null
+  if "$source/scripts/guard-agent-loop.sh" real-agent 3 repeated-blocker >/dev/null 2>&1; then
+    echo "ECHEC SANDBOX: boucle d agent non arrêtée pour $kit" >&2
+    exit 1
+  fi
   test -x "$source/scripts/prepare-context-manifest.sh"
   if [ "$kit" = codex ]; then
     assert_contains "$root/starter-kit-codex/AGENTS.md" 'Ne jamais utiliser de tiret cadratin.'
