@@ -43,6 +43,13 @@ assert_contains "$source/scripts/validate-entrypoint.sh" 'sed -i.bak'
   assert_contains "$source/scripts/init-project.sh" '.kit-reports/'
   assert_contains "$source/scripts/sync-workspace-kit.sh" 'Manifest .workspace.toml initialisé'
   assert_contains "$source/ORCHESTRATION.md" 'CONTEXT-EFFICIENCY-POLICY.md'
+  assert_contains "$source/ORCHESTRATION.md" 'GOAL-RETRY-AGENT-METRICS.md'
+  test -x "$source/scripts/validate-goal-budget.sh"
+  "$source/scripts/validate-goal-budget.sh" >/dev/null
+  if GOAL_MAX_STEPS=41 "$source/scripts/validate-goal-budget.sh" >/dev/null 2>&1; then
+    echo "ECHEC SANDBOX: budget Goal hors limite accepté pour $kit" >&2
+    exit 1
+  fi
   test -x "$source/scripts/prepare-context-manifest.sh"
   if [ "$kit" = codex ]; then
     assert_contains "$root/starter-kit-codex/AGENTS.md" 'Ne jamais utiliser de tiret cadratin.'
