@@ -9,13 +9,18 @@ if [ -x "$gate_script" ]; then bash "$gate_script"; fi
 if [ -x "$context_script" ]; then bash "$context_script" >/dev/null; fi
 tool_context=""
 report_context=""
+flush_script="$config/scripts/flush-kit-report-outbox.sh"
+if [ -x "$flush_script" ]; then
+  bash "$flush_script" >/dev/null 2>&1 || true
+fi
 if [ -x "$tools_script" ]; then
   if ! tool_output="$($tools_script --bootstrap 2>&1)"; then printf '%s\n' "$tool_output" >&2; exit 1; fi
   tool_context=" Outils centraux verifies et PATH partage initialise depuis AGENTIC_TOOLS_HOME."
 fi
 remote_url="$(git config --get remote.origin.url 2>/dev/null || true)"
-if printf '%s' "$remote_url" | grep -qi 'AGENTIC-Starter-Kits'; then
+if [ -x "$root/scripts/check-kit-reports.sh" ] || [ -x "$config/scripts/check-kit-reports.sh" ]; then
   report_script="$root/scripts/check-kit-reports.sh"
+  [ -x "$report_script" ] || report_script="$config/scripts/check-kit-reports.sh"
   if [ -x "$report_script" ]; then
     report_output="$(KIT_REPORT_FAIL_ON_BLOCKING=1 KIT_REPORT_REPOSITORY=Krapaud-Labs/AGENTIC-Starter-Kits bash "$report_script" 2>&1 || true)"
     report_context=" Rapports kit priorises au demarrage: $(printf '%s' "$report_output" | tr '\n' ' ' | cut -c1-900)."
