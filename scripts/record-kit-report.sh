@@ -19,5 +19,13 @@ done
 case "$status" in bloquant|normal|resolved|duplicate) ;; *) echo "Statut invalide: $status" >&2; exit 2 ;; esac
 mkdir -p "$(dirname -- "$history_file")"
 safe_note="$(printf '%s' "$note" | sed -E 's#/(Users|home)/[^ ]+#<local-path>#g; s#(token|secret|password|api[_-]?key)[[:space:]]*=[[:space:]]*[^[:space:]]+#\1=<redacted>#gi' | cut -c1-500)"
-printf '%s\n' "$(jq -cn --arg fingerprint "$fingerprint" --arg status "$status" --arg issue "$issue" --arg note "$safe_note" --arg updated "$(date -u '+%Y-%m-%dT%H:%M:%SZ')" '{fingerprint:$fingerprint,status:$status,issue:$issue,note:$note,updated_at:$updated}')" >> "$history_file"
+lock_dir="${history_file}.lock"
+while ! mkdir "$lock_dir" 2>/dev/null; do sleep 0.05; done
+trap 'rmdir "$lock_dir" 2>/dev/null || true' EXIT
+if [ -f "$history_file" ] && jq -e --arg fp "$fingerprint" 'select(.fingerprint == $fp)' "$history_file" >/dev/null 2>&1; then
+  echo "KIT-REPORT-HISTORY: $fingerprint déjà enregistré"
+  exit 0
+fi
+line="$(jq -cn --arg fingerprint "$fingerprint" --arg status "$status" --arg issue "$issue" --arg note "$safe_note" --arg updated "$(date -u '+%Y-%m-%dT%H:%M:%SZ')" '{fingerprint:$fingerprint,status:$status,issue:$issue,note:$note,updated_at:$updated}')"
+printf '%s\n' "$line" >> "$history_file"
 echo "KIT-REPORT-HISTORY: $fingerprint => $status"

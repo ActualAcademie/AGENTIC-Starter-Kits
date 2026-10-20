@@ -52,7 +52,11 @@ if [ "${KIT_REPORT_DRY_RUN:-0}" = 1 ]; then echo "KIT-REPORT: dry-run $queued"; 
 if ! command -v gh >/dev/null 2>&1 || ! gh auth status >/dev/null 2>&1; then
   echo "KIT-REPORT: rapport mis en file hors ligne $queued" >&2; exit 0
 fi
-existing="$(gh issue list --repo "$repository" --state all --label kit-report --limit 100 --json body,state,labels 2>/dev/null | jq --arg fp "KIT_REPORT_FINGERPRINT:$fingerprint" '[.[] | select((.body // "") | contains($fp))] | length' || echo 0)"
+if ! existing_json="$(gh issue list --repo "$repository" --state all --label kit-report --limit 1000 --json body,state,labels 2>/dev/null)"; then
+  echo "KIT-REPORT: recherche distante impossible, rapport conservé $queued" >&2
+  exit 0
+fi
+existing="$(printf '%s' "$existing_json" | jq --arg fp "KIT_REPORT_FINGERPRINT:$fingerprint" '[.[] | select((.body // "") | contains($fp))] | length')"
 if [ "$existing" -gt 0 ]; then echo "KIT-REPORT: doublon ignoré $fingerprint"; exit 0; fi
 url="$(gh issue create --repo "$repository" --title "[KIT-REPORT][$severity] $safe_summary" --body "$body" --label kit-report 2>/dev/null || true)"
 if [ -n "$url" ]; then rm -f "$queued"; echo "KIT-REPORT: envoyé $url"; else echo "KIT-REPORT: envoi impossible, rapport conservé $queued" >&2; fi

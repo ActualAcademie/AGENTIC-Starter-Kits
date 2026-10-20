@@ -10,10 +10,13 @@ command -v gh >/dev/null 2>&1 || {
   exit 0
 }
 
-args=(issue list --state all --label "$label" --limit 100 --json number,title,body,labels,state,createdAt,closedAt,url)
+args=(issue list --state all --label "$label" --limit 1000 --json number,title,body,labels,state,createdAt,closedAt,url)
 [ -n "$repo" ] && args+=(--repo "$repo")
-json="$(gh "${args[@]}" 2>/dev/null || true)"
-[ -n "$json" ] || { echo "KIT-REPORTS: aucune issue lisible"; exit 0; }
+if ! json="$(gh "${args[@]}" 2>/dev/null)"; then
+  echo "KIT-REPORTS: lecture distante impossible (réseau, authentification ou permissions)" >&2
+  exit 3
+fi
+[ -n "$json" ] || { echo "KIT-REPORTS: aucune issue lisible"; exit 3; }
 history='[]'
 [ -f "$history_file" ] && history="$(jq -s '.' "$history_file" 2>/dev/null || echo '[]')"
 
@@ -25,7 +28,7 @@ printf '%s\n' "$json" | jq --argjson history "$history" -r '
   def history_status:
     ([ $history[] | select(.fingerprint == (fingerprint)) | .status ] | last) // empty;
   if length == 0 then
-    "KIT-REPORTS: aucun rapport ouvert"
+    "KIT-REPORTS: aucun rapport"
   else
     "KIT-REPORTS: rapports ouverts " + (length|tostring),
     (sort_by(if blocking then 0 else 1 end, .createdAt)
