@@ -11,6 +11,7 @@ Lire également `policies/CONTINUOUS-IMPROVEMENT-POLICY.md` et consulter les inc
 Lire `policies/CONTEXT-EFFICIENCY-POLICY.md` au démarrage, puis appliquer son chargement par niveaux et son cache d'empreintes pour éviter les relectures intégrales répétées.
 Lire également `policies/PRODUCT-READINESS-POLICY.md` avant tout aperçu, audit de MVP ou déclaration de produit terminé.
 Lire également `policies/PRIMARY-AGENT-POLICY.md` : l'agent principal est le Coordinateur et n'a aucun rôle spécialisé implicite.
+Lire également `policies/GOAL-RETRY-AGENT-METRICS.md` et exécuter `scripts/validate-goal-budget.sh` avant chaque Goal pour borner durée, étapes, tokens, reprises et agents.
 
 ## Cycle obligatoire
 

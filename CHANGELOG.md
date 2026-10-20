@@ -1,5 +1,11 @@
 ## Unreleased
 
+## 1.16.69 - 2026-10-20
+
+- Ajoute un audit automatisé des volumes de contexte et des doublons de chargement.
+- Ajoute des budgets exécutables pour la durée, les étapes, les tokens, les reprises et les agents d'un Goal.
+- Ajoute les tests sandbox associés et documente la politique de métriques et de reprises.
+
 ## 1.16.68 - 2026-10-20
 
 - Automatise le manifeste local d'empreintes du contexte à chaque démarrage de session.
