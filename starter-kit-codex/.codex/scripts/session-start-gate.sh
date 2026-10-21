@@ -25,6 +25,9 @@ tool_status=0
 bash "$script_dir/ensure-tools.sh" --bootstrap >/dev/null 2>"$project_config/.tool-bootstrap-error" || tool_status=$?
 if [ "$tool_status" -eq 4 ]; then echo "KIT-SESSION: waiting-for-user" >&2; exit 4; elif [ "$tool_status" -ne 0 ]; then echo "KIT-SESSION: bootstrap des outils impossible" >&2; exit "$tool_status"; fi
 rm -f "$project_config/.tool-bootstrap-error"
+if [ -x "$script_dir/flush-kit-report-outbox.sh" ]; then
+  bash "$script_dir/flush-kit-report-outbox.sh" >> "$project_config/kit-report-sync.log" 2>&1 || true
+fi
 status=0
 verification_mode=remote-verified
 bash "$script_dir/check-kit-update.sh" >/dev/null 2>"$project_config/.kit-update-error" || status=$?
