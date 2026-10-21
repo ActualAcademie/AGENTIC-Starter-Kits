@@ -1,5 +1,10 @@
 ## Unreleased
 
+## 1.16.76 - 2026-10-21
+
+- Corrige le calcul de racine Git du synchroniseur partagé.
+- Évite les chemins concaténés lors de l'installation ou de la mise à jour d'un projet.
+
 ## 1.16.75 - 2026-10-21
 
 - Borne l'initialisation à 15 minutes et 20 actions.
