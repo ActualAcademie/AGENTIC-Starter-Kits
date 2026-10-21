@@ -1,5 +1,10 @@
 ## Unreleased
 
+## 1.16.78 - 2026-10-21
+
+- Rend les kit reports exploitables avec cause, action, prochaine action, preuve et état du Goal.
+- Conserve l’anonymisation des chemins, secrets et tokens.
+
 ## 1.16.77 - 2026-10-21
 
 - Aligne le manifeste global `VERSION` avec les manifests Codex et Claude.

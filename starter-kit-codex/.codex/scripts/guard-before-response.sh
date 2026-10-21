@@ -68,7 +68,8 @@ case "$status" in
     reporter="$script_dir/report-kit-blocker.sh"
     if [ -x "$reporter" ]; then
       severity=normal; [ "$status" = blocked ] && severity=bloquant
-      KIT_REPORT_FAIL_ON_BLOCKING=0 bash "$reporter" --severity "$severity" --summary "Garde agentique $severity" --details "execution_status=$status" >/dev/null 2>&1 || true
+      details="execution_status=$status; goal_status=$goal_status; current_action=$status; next_action=$next; last_observable_evidence=$evidence; required_action_status=$required; budget_status=$budget; pending_request_id=$pending_request"
+      KIT_REPORT_FAIL_ON_BLOCKING=0 bash "$reporter" --severity "$severity" --summary "Garde agentique $severity" --details "$details" >/dev/null 2>&1 || true
     fi
     ;;
   running|waiting-ci) fail "état non terminal: $status" ;;
