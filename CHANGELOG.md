@@ -1,5 +1,670 @@
 ## Unreleased
 
+## 1.16.81 - 2026-10-21
+
+- Ajoute l’auto-correction locale des états runtime connus avant l’envoi d’un rapport.
+- Le projet consommateur envoie désormais la preuve de correction, pas seulement le blocage initial.
+
+## 1.16.80 - 2026-10-21
+
+- Ajoute un correcteur central limité à des playbooks sûrs pour traiter automatiquement les rapports connus.
+- Ajoute la validation et l’historisation du résultat de correction sans modification directe de `main`.
+
+## 1.16.79 - 2026-10-21
+
+- Autorise la reprise lorsque l'état `waiting-for-user` est résiduel sans demande en attente.
+- Rend la résolution neutre `none` idempotente et empêche la boucle du hook sur une réponse déjà résolue.
+
+## 1.16.78 - 2026-10-21
+
+- Rend les kit reports exploitables avec cause, action, prochaine action, preuve et état du Goal.
+- Conserve l’anonymisation des chemins, secrets et tokens.
+
+## 1.16.77 - 2026-10-21
+
+- Aligne le manifeste global `VERSION` avec les manifests Codex et Claude.
+- Empêche le synchroniseur de considérer une version ancienne comme déjà à jour.
+
+## 1.16.76 - 2026-10-21
+
+- Corrige le calcul de racine Git du synchroniseur partagé.
+- Évite les chemins concaténés lors de l'installation ou de la mise à jour d'un projet.
+
+## 1.16.75 - 2026-10-21
+
+- Borne l'initialisation à 15 minutes et 20 actions.
+- Sépare explicitement cadrage, documentation, cartes et audits détaillés.
+- Ajoute une garde exécutable de budget d'initialisation.
+- Empêche les boucles de rapports spécialistes et les états runtime ambigus.
+
+## 1.16.74 - 2026-10-20
+
+- Rend les erreurs GitHub de lecture explicites au lieu de les confondre avec l'absence de rapports.
+- Étend la recherche de doublons et ignore les rapports déjà résolus dans le blocage de démarrage.
+- Protège l'écriture concurrente de l'historique des rapports.
+
+## 1.16.73 - 2026-10-20
+
+- Corrige le calcul de racine de l'outbox des rapports kit.
+- Vérifie réellement la génération, l'anonymisation et la déduplication des rapports.
+
+## 1.16.72 - 2026-10-20
+
+- Relit désormais les rapports kit depuis tous les projets, pas seulement le dépôt du kit.
+- Rejoue automatiquement l'outbox locale après reconnexion de GitHub.
+- Ajoute les tests de présence des scripts de lecture et d'envoi.
+
+## 1.16.71 - 2026-10-20
+
+- Renforce la preuve de validation à chaque démarrage de conversation.
+- Distingue vérification distante, mise à jour distante et fallback local contrôlé.
+- Enregistre les empreintes du manifeste et du kit dans la preuve de session.
+
+## 1.16.70 - 2026-10-20
+
+- Ajoute une garde par agent contre les boucles de blocage répétées.
+- Impose un contexte neuf et un périmètre réduit après un échec spécialiste.
+- Ajoute la couverture sandbox de l'arrêt après deux tentatives identiques.
+
+## 1.16.69 - 2026-10-20
+
+- Ajoute un audit automatisé des volumes de contexte et des doublons de chargement.
+- Ajoute des budgets exécutables pour la durée, les étapes, les tokens, les reprises et les agents d'un Goal.
+- Ajoute les tests sandbox associés et documente la politique de métriques et de reprises.
+
+## 1.16.68 - 2026-10-20
+
+- Automatise le manifeste local d'empreintes du contexte à chaque démarrage de session.
+- Ignore ce manifeste pour éviter les artefacts et les commits inutiles.
+- Ajoute les tests de bootstrap du manifeste pour Codex et Claude.
+
+## 1.16.67 - 2026-10-20
+
+- Ajoute un chargement du contexte par niveaux afin d'éviter les relectures intégrales répétées.
+- Ajoute un audit automatisé de l'efficacité du contexte et des délégations.
+- Conserve les preuves, portes et règles de sécurité pendant l'optimisation.
+
+## 1.16.66 - 2026-10-19
+
+- ajoute `reconcile-runtime.sh` pour réparer les divergences Goal/runtime
+- autorise uniquement cette commande de réconciliation avant la porte de cohérence
+- ajoute un scénario sandbox de reprise après runtime bloqué et Goal actif
+
+## 1.16.65 - 2026-10-19
+
+- exige un périmètre, un livrable et une preuve par affectation
+- refuse les chevauchements de lots avant lancement
+- vérifie le rapport réel de chaque agent à son arrêt
+- bloque les rapports sans rôle, identifiant, statut, preuve ou prochaine action
+
+## 1.16.64 - 2026-10-19
+
+- ajoute une matrice de contrats spécialisés par domaine
+- vérifie au préflight la parité entre agents déclarés et contrats
+- impose domaine, déclencheur, livrable et relecteur pour chaque agent
+- ajoute un scénario sandbox de cohérence Codex et Claude
+
+## 1.16.63 - 2026-10-19
+
+- recherche prioritaire des outils dans le registre partagé
+- questionnaire unique avant toute installation interactive d un outil manquant
+- suspension explicite en `waiting-for-user` et refus des relances automatiques répétitives
+- reprise du bootstrap après réponse et revalidation du chemin et de la version installée
+
+## 1.16.62 - 2026-10-19
+
+- ajoute l état waiting-for-user pour suspendre les blocages nécessitant une décision
+- évite les boucles de reprise et persiste le questionnaire utilisateur
+
+## 1.16.61 - 2026-10-18
+
+- livre automatiquement `.workspace.toml` dans un worktree isolé basé sur `dev`
+- crée la branche et la PR de mise à jour sans mélanger le travail produit en cours
+- conserve le projet courant intact pendant la livraison du manifeste
+
+## 1.16.60 - 2026-10-18
+
+- rend l’API `gh` facultative pour les utilisateurs non authentifiés
+- conserve `curl` public comme source de mise à jour du dépôt
+- évite qu’un échec d’authentification GitHub bloque une mise à jour publique
+
+## 1.16.59 - 2026-10-18
+
+- traite l’indisponibilité réseau comme une limitation récupérable
+- poursuit avec le kit local validé lorsque GitHub ou raw.githubusercontent.com est inaccessible
+- supprime le blocage résiduel après une mise à jour déjà appliquée localement
+
+## 1.16.58 - 2026-10-18
+
+- autorise uniquement la commande exacte du synchroniseur pendant la réinitialisation de la porte
+- synchronise automatiquement le kit partagé lorsqu’une mise à jour est détectée
+- supprime le deadlock qui bloquait le synchroniseur derrière son propre hook
+
+## 1.16.57 - 2026-10-18
+
+- ajoute un registre temporaire de secours quand le registre partagé n’est pas inscriptible
+- évite que le bootstrap bloque sur une permission locale avant de pouvoir diagnostiquer
+- ajoute un test de fallback du registre des outils
+
+## 1.16.56 - 2026-10-18
+
+- corrige le bootstrap `ensure-tools.sh` sans dépendance à une variable `config` externe
+- ajoute un test sans variable d’environnement `config`
+
+## 1.16.55 - 2026-10-18
+
+- réamorce automatiquement la porte kit depuis `PreToolUse` lorsque `SessionStart` n’a pas été rejoué
+- supprime le deadlock après rechargement ou mise à jour du kit
+- conserve le refus si le bootstrap échoue réellement et expose la cause observable
+
+## 1.16.54 - 2026-10-18
+
+- supprime les références aux modes d’installation obsolètes
+- rend `shared` unique dans l’installateur, les distributions et la documentation
+- renomme la distribution supportée en `distributions/shared`
+
+## 1.16.53 - 2026-10-18
+
+- suspend le work item dès qu'une mise à jour du kit est détectée
+- sauvegarde l'état runtime et reprend `next_action` après livraison vérifiée vers `dev`
+- ajoute les scripts de pause et de reprise pour Codex et Claude
+- ajoute les tests sandbox du bootstrap versionné
+
+## 1.16.52 - 2026-10-18
+
+- rend le mode `shared` obligatoire comme unique mode d'installation
+- supprime les divergences entre installations `native`, `external` et `shared`
+- centralise les mises à jour dans un registre unique par orchestrateur
+- conserve les documents et l'état propres à chaque projet
+
+## 1.16.51 - 2026-10-18
+
+- installe automatiquement les outils déclarés absents dans le registre partagé
+- réutilise le préfixe npm et l’environnement Python centraux pour les projets suivants
+- revalide le chemin et la version après installation avant de déclarer un outil indisponible
+- ajoute le manifeste de test isolé pour vérifier ce comportement sans installation externe
+
+## 1.16.50 - 2026-10-18
+
+- ajoute un bootstrap obligatoire de branche dédiée avant toute modification
+- refuse la reprise silencieuse d'une branche de travail potentiellement mélangée
+- impose une branche unique par feature ou carte GitHub Project et une seule PR finale vers `dev` ou `develop`
+- conserve le Goal actif jusqu'à la fusion et la vérification réelle de la branche d'intégration
+- ajoute les tests de syntaxe et de présence des garde-fous GitFlow pour Codex et Claude
+
+## 1.16.49 - 2026-10-17
+
+- rend les identifiants réels et les affectations de spécialistes obligatoires avant tout lot
+- refuse les délégations annoncées sans threads et preuves d'affectation vérifiables
+
+## 1.16.48 - 2026-10-17
+
+- centralise les cahiers des charges hors des dépôts dans `Projets/Cahier-des-Charges/<nom-du-projet>`
+- détecte automatiquement le dossier parent `Projets` pour les projets directs ou imbriqués
+
+## 1.16.47 - 2026-10-17
+
+- crée à l'installation une archive `Cahier-des-Charges/<nom-du-projet>/cahier-des-charges.md`
+- demande le nom du projet en mode interactif et utilise le dossier cible en mode automatisé
+
+## 1.16.46 - 2026-10-17
+
+- ajoute l'agent spécialisé `image-generation` pour les médias réalistes et cohérents avec le projet
+- impose le routage, la provenance, le contrôle des artefacts, l'accessibilité et la validation d'intégration des images
+
+## 1.16.45 - 2026-10-17
+
+- ajoute le mode `shared` avec une installation globale unique du kit
+- conserve le contexte et l’état propres à chaque projet via des liens ciblés
+
+## 1.16.44 - 2026-10-17
+
+- centralise les outils CLI, npm et Python dans un emplacement utilisateur unique
+- ajoute un registre de versions et des installations idempotentes réutilisables par les projets
+- branche les contrôles projet sur l’environnement d’outils partagé
+
+## 1.16.43 - 2026-10-17
+
+- impose le contrôle lint après ouverture ou modification d’un fichier
+- oblige la correction et la revalidation des erreurs lint avant toute poursuite
+
+## 1.16.42 - 2026-10-17
+
+- ajoute GitHub Projects comme suivi principal des projets
+- transfère cartes, labels, checklists, statuts et preuves vers Issues et Projects
+- conserve Trello comme compatibilité optionnelle uniquement
+
+## 1.16.41 - 2026-10-15
+
+- rend l’état runtime initial immédiatement valide pour le validateur de session
+- marque explicitement le Goal natif comme indisponible avant sa création orchestrée
+
+## 1.16.40 - 2026-10-15
+
+- normalise l’ancienne URL du dépôt vers `Krapaud-Labs/AGENTIC-Starter-Kits`
+- évite qu’une synchronisation récupère une archive obsolète
+
+## 1.16.39 - 2026-10-15
+
+- rend la synchronisation tolérante aux fichiers locaux exclus des archives
+- aligne les marqueurs de version des points d’entrée Codex et Claude
+
+## 1.16.38 - 2026-10-15
+
+- initialise automatiquement `RUNTIME-STATE.md` lors du démarrage et de l'initialisation
+- ajoute un scénario de projet vierge pour empêcher les blocages de bootstrap
+
+## 1.16.37 - 2026-10-14
+
+- renforce le déclenchement Goal et le routage pour toute demande de feature ou correction
+- interdit au Coordinateur de modifier avant la preuve des agents spécialisés requis
+
+## 1.16.36 - 2026-10-11
+
+- ajoute un manifeste obligatoire avant chaque carte Trello
+- bloque la carte suivante tant que la carte créée n'est pas relue et conforme
+
+## 1.16.35 - 2026-10-11
+
+- consolide les audits visuels, fonctionnels et responsive en une passe globale
+- interdit les micro-audits répétés sans nouvelle preuve
+- impose une matrice partagée et une revalidation finale unique
+
+## 1.16.34 - 2026-10-10
+
+- normalise la structure des commentaires Trello avec six informations ordonnées
+- impose les puces natives et la relecture visuelle après publication
+
+## 1.16.33 - 2026-10-10
+
+- détecte le conflit entre Goal natif actif et runtime local bloqué
+- interdit une reprise aveugle sans réévaluation ni nouvelle action
+
+## 1.16.32 - 2026-10-10
+
+- interdit les blocages globaux lorsqu'une action autonome ou déléguable reste possible
+- transforme les portes récupérables en travail actif ou `needs-review` ciblé
+
+## 1.16.31 - 2026-10-09
+
+- ajoute un garde exécutable contre la répétition d'un même blocage
+- exige un changement d'approche après deux tours identiques
+
+## 1.16.30 - 2026-10-08
+
+- exige la réactivation des agents spécialisés à chaque reprise de Goal
+- interdit de réutiliser une preuve historique comme preuve de la passe courante
+- exige une affectation et un rapport daté pour chaque spécialiste requis
+
+## 1.16.29 - 2026-10-08
+
+- considère la conception, l'audit et la qualité comme des étapes internes jusqu'à `dev`
+- interdit les demandes d'approbation intermédiaires dans un flux déjà autorisé
+- réserve `needs-review` aux décisions réellement sensibles ou hors périmètre
+
+## 1.16.28 - 2026-10-08
+
+- ajoute un garde de reprise native des Goals
+- refuse de présenter un Goal `blocked` ou `paused` comme actif
+- affiche l'action exacte `/goal resume` quand l'interface doit réactiver le Goal
+- teste les états actif, bloqué et indisponible dans Codex et Claude
+
+## 1.16.27 - 2026-10-08
+
+- corrige la résolution de racine des hooks de clôture
+- élimine l'utilisation d'une variable `root` non initialisée
+- ajoute une régression automatisée pour le runtime et le hook Stop
+
+## 1.16.26 - 2026-10-08
+
+- privilégie l’API GitHub authentifiée pour détecter la version du kit
+- évite les mises à jour manquées dues au cache de `raw.githubusercontent.com`
+
+## 1.16.25 - 2026-10-08
+
+- distingue l'accès public aux endpoints de l'accès VPS/Dokploy opérateur
+- active DevOps avant toute conclusion d'absence d'accès
+- empêche une porte préproduction de bloquer les livrables indépendants
+
+## 1.16.24 - 2026-10-08
+
+- limite `needs-review` à la porte réellement dépendante
+- applique les décisions readiness réversibles après délégation explicite
+- poursuit les tâches indépendantes sans blocage global
+
+## 1.16.23 - 2026-10-08
+
+- évite les blocages globaux pour les décisions readiness réversibles
+- applique les défauts documentés après une délégation explicite de l'utilisateur
+- poursuit les portes indépendantes pendant un `needs-review` ciblé
+
+## 1.16.22 - 2026-10-08
+
+- régénère automatiquement les fixtures QA locales et leur storage state périmé
+- interdit de bloquer lorsque seul le mot de passe d’un compte fixture local manque
+
+## 1.16.21 - 2026-10-08
+
+- oblige l'activation de l'agent QA sans credentials externes
+- impose la cible locale, les fixtures isolées et la séparation des preuves locales et préproduction
+
+## 1.16.20 - 2026-10-08
+
+- corrige la détection portable des erreurs réseau de la sandbox
+- valide le diagnostic GitHub sur macOS et Linux
+
+## 1.16.19 - 2026-10-08
+
+- distingue un blocage réseau de la sandbox d’une indisponibilité réelle de GitHub
+- ajoute un diagnostic `gh`, authentification, curl et alternatives IDE/navigateur
+
+## 1.16.18 - 2026-10-08
+
+- interdit de promettre une reprise automatique sans moniteur réellement actif
+- distingue le blocage externe d’une attente surveillable et exige le déclencheur de reprise
+
+## 1.16.17 - 2026-10-08
+
+- accepte un Goal natif `blocked` uniquement avec identifiant, preuve et cause séparés
+- rejette les statuts mélangés comme `blocked (preuve)`
+- ajoute les scénarios de validation Codex et Claude
+
+## 1.16.16 - 2026-10-08
+
+- refuse un état `blocked` lorsque `audit-gate` ou `delivery-gate` reste récupérable
+- force l’exécution de `next_action` avant toute conclusion de reprise
+- ajoute le contrôle exécutable et les tests de scénario des reprises incomplètes
+
+## 1.16.15 - 2026-10-08
+
+- empêche les Goals produit historiques de bloquer une mise à jour externe du kit
+- sépare la validation du kit importé de la validation des obligations produit
+
+## 1.16.14 - 2026-10-08
+
+- corrige le synchroniseur pour utiliser l’archive réelle de `main` au lieu d’un tag de release potentiellement absent
+
+## 1.16.13 - 2026-10-08
+
+- autorise les actions de récupération lorsque le runtime est `blocked` ou `needs-review`
+- empêche le hook de bloquer sa propre réparation
+- ajoute les tests de reprise du runtime incohérent
+
+## 1.16.12 - 2026-10-08
+
+- corrige le script de synchronisation Codex pour utiliser les chemins réels du kit
+- copie `AGENTS.md` à la racine du projet importateur
+- vérifie correctement les fichiers obligatoires après mise à jour
+
+## 1.16.11 - 2026-10-08
+
+- ajoute des timeouts de clôture, rotation et verrouillage des journaux de hooks
+- vérifie le chemin de rapport d’un sous-agent avant sa clôture
+- ajoute les contrôles de parité et les tests de concurrence de journalisation
+
+## 1.16.10 - 2026-10-08
+
+- audite et renforce les hooks avant outil, permission, post-outil et arrêt
+- bloque les états runtime incohérents et les clôtures sans preuves d’agents
+- refuse les événements invalides, déduplique les preuves et étend la détection des actions sensibles
+
+## 1.16.9 - 2026-10-08
+
+- renforce les hooks avant outil et permission avec validation d’état runtime et détection des actions sensibles
+- refuse les événements JSON invalides et déduplique les preuves PostToolUse
+- ajoute les scénarios de non-régression des hooks Codex et Claude
+
+## 1.16.8 - 2026-10-08
+
+- ajoute le démarrage automatique et vérifié du daemon Docker local avant classement en blocage
+- interdit de transformer une commande réessayable ou un service local arrêté en blocage immédiat
+- couvre la découverte, le démarrage et la preuve de disponibilité dans les deux variantes du kit
+
+## 1.16.7 - 2026-10-07
+
+- ajoute un garde-fou exécutable contre les PR de progression et les doublons
+- conserve l'exception explicite de PR de déploiement
+- ajoute les scénarios automatisés de cadence
+
+## 1.16.6 - 2026-10-07
+
+- impose une relecture dédiée des checklists Trello après chaque écriture
+- corrige le cas réel où la lecture d’une carte ne restituait pas les checklists pourtant créées
+- ajoute le contrôle de gouvernance et le scénario de non-régression correspondants
+
+## 1.16.5 - 2026-10-07
+
+- aligne la transparence d'initialisation Claude sur Codex avec la porte d'approbation des hooks
+- ajoute un contrôle de parité qui échoue si une variante omet cette porte
+
+## 1.16.4 - 2026-10-07
+
+- distingue explicitement les parcours externes simulés des preuves réelles dans le préflight d'intégration
+- ajoute l'option `--require-real` qui échoue si Trello, les agents ou le navigateur n'ont pas fourni de preuve
+- interdit de considérer une simple autorisation comme une exécution réelle
+
+## 1.16.3 - 2026-10-07
+
+- rend le validateur de point d'entrée dynamique selon la version du kit
+- corrige les templates Codex et Claude qui conservaient une version obsolète après une mise à jour
+- ajoute la non-régression de cohérence entre template, point d'entrée et manifeste
+
+## 1.16.2 - 2026-10-07
+
+- interdit de demander une confirmation pour ouvrir la PR d'onboarding lorsque la livraison est autorisée et que les prérequis sont vérifiés
+- impose l'ouverture, la relecture et le suivi de la PR dans le même Goal jusqu'à la fusion ou un blocage réel
+- ajoute un scénario de non-régression couvrant une branche publiée avec `audit-gate` et `delivery-gate` ouverts
+
+## 1.16.1 - 2026-10-06
+
+- rend obligatoire l'information et la revue des hooks à la première initialisation
+- rappelle la réapprobation après chaque mise à jour du kit
+- ajoute les contrôles de non-régression sur ces messages de confiance
+
+## 1.16.0 - 2026-10-06
+
+- ajoute PermissionRequest pour bloquer API payantes, branches protégées et commandes destructives
+- ajoute PostToolUse pour journaliser les preuves d'outils
+- renforce la couverture des tests de cycle de vie et de non-régression
+
+## 1.15.1 - 2026-10-06
+
+- corrige le hook SessionStart lorsque le runtime n'est pas encore initialisé
+- conserve un contexte exploitable pendant l'initialisation au lieu d'échouer silencieusement
+
+## 1.15.0 - 2026-10-06
+
+- ajoute les hooks de cycle de vie pour Codex et Claude
+- recharge automatiquement le contrat, le runtime et le Goal à chaque session
+- bloque les outils d'écriture si le Goal ou la prochaine action ne sont pas initialisés
+- enregistre les démarrages et fins de sous-agents
+- empêche la clôture avant validation du garde de réponse
+
+## 1.14.13 - 2026-10-06
+
+- ajoute un garde-fou de mode de facturation sans clé API par défaut
+- distingue explicitement l'abonnement Codex ou Claude des API Agents et SDK facturées
+- bloque l'initialisation si une clé API est détectée sans autorisation explicite
+
+## 1.14.12 - 2026-10-05
+
+- exclut les sauvegardes locales lors de la synchronisation du kit
+- empêche `rsync --delete` d'inspecter ou modifier l'historique local des projets
+
+## 1.14.11 - 2026-10-05
+
+- ajoute un validateur global du contrat agentic pour Codex et Claude
+- bloque l'initialisation si les politiques, l'état runtime ou les garde-fous exécutables manquent
+- vérifie la preuve du rôle Coordinateur et de la délégation réelle avant le démarrage
+- ajoute le contrôle de contrat aux scénarios de validation du kit
+
+## 1.14.10 - 2026-10-05
+
+- vérifie le point d'entrée racine pendant l'initialisation
+- bloque l'installation si AGENTS.md ou CLAUDE.md ne contient pas le contrat versionné
+- empêche un chat VS Code de démarrer avec un point d'entrée incomplet
+- ajoute les marqueurs et contrôles d'intégrité du bootstrap
+
+## 1.14.9 - 2026-10-05
+
+- renforce le point d'entrée racine pour les chats VS Code
+- impose dès le premier tour le rôle Coordinateur, le Goal et la lecture des contrats
+- bloque explicitement les tâches spécialisées sans agents réels
+- ajoute un test des instructions réellement chargées par le chat
+
+## 1.14.8 - 2026-10-05
+
+- ajoute une porte exécutable de plan spécialisé avant toute tâche visuelle
+- exige frontend, QA et auditeur pour un redesign ou audit responsive
+- interdit de remplacer la création réelle d'agents par une simple annonce
+
+## 1.14.7 - 2026-10-04
+
+- définit explicitement l agent principal comme Coordinateur
+- interdit au Coordinateur de devenir implicitement Frontend, Backend, QA ou Auditeur
+- bloque un lot spécialisé si aucun agent réel ne peut être créé
+- ajoute les tests de contrat du rôle principal
+
+## 1.14.6 - 2026-10-04
+
+- impose un identifiant réel d'agent et un rapport produit par l'agent spécialisé
+- interdit au Coordinateur de présenter ses propres contrôles comme une délégation Frontend, QA ou Auditeur
+- renforce le parcours obligatoire Frontend, QA responsive et Auditeur pour les refontes visuelles
+
+## 1.14.5 - 2026-10-04
+
+- ajoute une porte de readiness produit pour distinguer baseline, prototype et MVP
+- interdit de déclarer un MVP complet avec une simple page de titre ou une API seule
+- interdit l'implémentation produit lorsqu'un aperçu est demandé sans autorisation de développement
+- exige la couverture des parcours MVP et de leurs états avant clôture
+
+## 1.14.4 - 2026-10-04
+
+- ajoute une porte Git Flow avant la première modification
+- bloque les branches protégées, les noms invalides et `index.lock`
+- accepte explicitement les préfixes `feat/` et `feature/`
+- ajoute les scénarios de branche et de verrou Git
+
+## 1.14.3 - 2026-10-04
+
+- sélectionne automatiquement le premier Python compatible 3.11 ou supérieur
+- évite l'échec de `tomllib` quand `python3` pointe vers Python 3.9
+- ajoute une vérification réelle du lint avec l'interpréteur compatible
+
+## 1.14.2 - 2026-10-04
+
+- rend la preuve observable des agents obligatoire pour une délégation active
+- valide les champs du Goal natif dans `validate-session-state.sh`
+- ajoute les scénarios de refus d'un état runtime incomplet
+
+## 1.14.1 - 2026-10-04
+
+- rend l'état, l'identifiant et la preuve du Goal natif obligatoires dans l'état runtime
+- bloque `start-goal.sh` sans Goal natif actif ou preuve explicite d'indisponibilité
+- ajoute les scénarios de régression du garde-fou native-first
+
+## 1.14.0 - 2026-10-04
+
+- impose la création ou l'activation du Goal natif avant toute action
+- interdit de présenter `start-goal.sh` comme une création native
+- consigne explicitement le secours local lorsque l'API native est indisponible
+- ajoute un test de non-régression du contrat native-first pour Codex et Claude
+
+## 1.13.9 - 2026-10-04
+
+- Corrige l'installation de `AGENTS.md` à la racine des projets Codex.
+- Ajoute un test d'initialisation qui vérifie réellement la génération du fichier racine.
+
+## 1.13.8 - 2026-10-04
+
+- Ajoute un preflight d'intégration réel et non destructif pour les worktrees et `.git/index.lock`.
+- Rend explicites les tests externes non exécutés faute de connecteur de test autorisé.
+
+## 1.13.7 - 2026-10-04
+
+- Rend obligatoire la matrice de couverture cahier, conception, cartes locales et cartes Trello distantes avant clôture de l'initialisation.
+- Interdit de considérer un plan local ou une synchronisation partielle comme une création Trello complète.
+
+## 1.13.6 - 2026-10-04
+
+- Sécurise l'index Git lors du travail parallèle des agents.
+- Réserve les opérations Git du checkout partagé à l'agent intégrateur.
+- Interdit la suppression aveugle de `.git/index.lock`.
+
+## 1.13.5 - 2026-10-04
+
+- Renforce le pool d'agents et la réutilisation des threads jusqu'à la livraison complète du Goal.
+- Interdit de fermer prématurément un agent ou d'annoncer une création sans identifiant réel.
+- Gère explicitement la limite de threads avec une alternative séquentielle vérifiée.
+
+## 1.13.4 - 2026-10-04
+
+- Ajoute un mode de refonte par phases pour terminer le design global avant l'implémentation et l'audit final.
+
+## 1.13.3 - 2026-10-03
+
+- Renforce le rôle frontend artistique avec une validation comparative obligatoire avant/après.
+- Refuse une refonte visuellement négligeable et la renvoie en `rework`.
+
+## 1.13.2 - 2026-10-03
+
+- Refuse un Goal qui annonce des lots parallèles sans au moins deux agents et affectations distinctes.
+- Rend la création effective des agents parallèles vérifiable dès le démarrage du Goal.
+
+## 1.13.1 - 2026-10-03
+
+- Interdit les transitions contradictoires entre conception, audit et implémentation.
+- Exige la validation complète du `design-gate` avant tout agent de code ou annonce de phase suivante.
+
+## 1.13.0 - 2026-10-03
+
+- Ajoute un contrat universel de récupération applicable à toute action du Coordinateur.
+- Interdit les arrêts sans action suivante, propriétaire, preuve et alternatives vérifiées.
+- Force le classement en `rework` ou `in-progress` lorsqu'une tâche reste réalisable.
+
+## 1.12.99 - 2026-10-03
+
+- Interdit de classer un `design-gate` incomplet en `blocked` lorsque les preuves d'implémentation ou de relecture sont encore réalisables.
+- Force la création des sous-tâches et la délégation aux agents frontend, QA/navigateur et auditeur avant toute conclusion.
+- Ajoute un test de non-régression sur cette distinction `rework` / `blocked`.
+
+## 1.12.98 - 2026-10-03
+
+- Répare l'initialisation et la synchronisation des fichiers obligatoires du runtime, du brief et du profil projet.
+- Corrige les URLs de synchronisation et de workflow vers le dépôt canonique `Krapaud-Labs/AGENTIC-Starter-Kits`.
+- Empêche la perte silencieuse des fichiers locaux exclus par la synchronisation.
+
+## 1.12.97 - 2026-10-03
+
+- Rend obligatoire le refus de toute tâche hors rôle, hors fichiers autorisés ou relevant d’un autre agent.
+- Exige que chaque preuve identifie l’agent ayant réellement produit le livrable.
+
+## 1.12.96 - 2026-10-03
+
+- Interdit au Coordinateur de remplacer un agent spécialisé disponible.
+- Exige une affectation réelle par tâche avec livrable et preuve attendue.
+
+## 1.12.95 - 2026-10-03
+
+- Interdit de clôturer un Goal avec une PR seulement ouverte ou une branche d’intégration non relue.
+- Exige la fusion effective et la preuve que `origin/dev` ou `origin/develop` contient le commit livré.
+- Ajoute un test de non-régression pour une PR verte mais non fusionnée.
+
+## 1.12.94 - 2026-10-03
+
+- Interdit techniquement les push directs vers `dev`, `develop`, `main` et `master`, même avec un profil mal configuré.
+- Vérifie que le hook `pre-push` est réellement configuré avant toute validation GitFlow.
+
+## 1.12.93 - 2026-10-03
+
+- Configure l’identité du bot GitHub Actions avant la création automatique des tags de Release.
+
+## 1.12.92 - 2026-10-03
+
+- Déclenche automatiquement la publication d’une Release après une mise à jour de `main` qui modifie la version ou les documents de release.
+- Crée le tag SemVer manquant de manière idempotente et rend le lancement manuel compatible avec une version explicite.
+- Évite que la section Releases reste vide lorsque personne ne crée le tag à la main.
+
 ## 1.12.91 - 2026-10-03
 
 - Rend l’analyse de délégation obligatoire pour tout travail, même sans carte Trello.

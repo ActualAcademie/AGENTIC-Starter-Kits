@@ -10,7 +10,7 @@ Cette politique ne prétend pas transformer une conversation ordinaire en boucle
 
 Avant activation, enregistrer dans `RUNTIME-STATE.md` :
 
-- `goal_status: active | waiting | paused | complete | blocked | none` ;
+- `goal_status: active | waiting | waiting-for-user | paused | complete | blocked | none` ;
 - `goal_objective` : résultat attendu, formulé de façon vérifiable ;
 - `goal_verification` : tests, fichiers, logs ou artefacts qui prouvent le résultat ;
 - `goal_constraints` : limites à préserver ;
@@ -20,6 +20,8 @@ Avant activation, enregistrer dans `RUNTIME-STATE.md` :
 
 Un objectif actif n'autorise pas une clôture fondée sur une impression. La clôture exige les preuves du work item, l'état terminal local et la vérification du dernier tour. `idle` ou `turn completed` ne signifie pas que les outils ont tous réussi.
 
+Lorsqu'une décision utilisateur est réellement indispensable, le Coordinateur utilise `waiting-for-user`. Il émet une seule question structurée avec un identifiant de demande et des choix numérotés, renseigne `pending_request_id`, `pending_turn_id` et `required_action_status: pending`, puis interdit toute reprise automatique tant qu'une réponse n'est pas reçue. Il ne répète pas la question à chaque tour et ne transforme pas cette attente en `blocked`.
+
 ## Reprise et limites
 
 L'agent peut reprendre automatiquement seulement si l'objectif est actif, que la session est idle, qu'aucune entrée utilisateur n'attend et qu'aucun travail n'est en cours. Un objectif en mode Plan ne doit pas déclencher de continuation d'implémentation. Une interruption volontaire, une limite de budget ou une décision humaine requise met l'objectif en pause ou en blocage et doit être journalisée. Une CI en cours, une intégration temporairement indisponible, une commande réessayable ou une reconnexion attendue sont des états `waiting`, jamais `blocked` et jamais une pause native du Goal. Le Coordinateur conserve `next_action`, enregistre un checkpoint `waiting` et reprend dès que la condition est résolue.
@@ -28,9 +30,17 @@ L'agent peut reprendre automatiquement seulement si l'objectif est actif, que la
 
 Un même blocage ne peut pas être répété plus de deux tours de Goal. Au deuxième tour, le Coordinateur doit changer d'approche et exécuter une action de déblocage concrète, par exemple installer provisoirement un outil gratuit, déléguer une analyse indépendante, utiliser une alternative locale, réduire le périmètre ou demander une décision humaine consolidée avec toutes les alternatives tentées. Il est interdit de produire un troisième tour identique ou de rendre la main avec le même `next_action` sans preuve de changement.
 
+Après deux reprises sans changement, le hook `Stop` doit laisser la session en attente au lieu de bloquer et relancer automatiquement le même message. L'état, la preuve, la cause et l'action attendue restent enregistrés dans `RUNTIME-STATE.md`; une nouvelle reprise ne peut être déclenchée que par une réponse utilisateur, un changement externe vérifié ou une nouvelle action différente.
+
+Un agent spécialiste ne peut pas rester actif sur le même symptôme sans sortie. Le Coordinateur borne chaque agent à deux tentatives par signature de blocage avec `scripts/guard-agent-loop.sh`. Après un échec, toute reprise utilise un contexte neuf par défaut, sans `fork_context` de l'historique saturé, un périmètre réduit et une sortie courte. Après la seconde tentative, l'agent est arrêté proprement, son rapport est récupéré, et le lot est réattribué ou traité par une alternative. Trois agents ne doivent jamais être relancés en boucle sur la même signature.
+
 ## Commandes d'environnement
 
 Quand elles existent, utiliser les commandes natives de l'environnement : `/goal`, `/goal pause`, `/goal resume`, `/goal clear`. Ne pas inventer une commande équivalente et ne pas traiter un mode Agent ou Work locally comme une garantie de persistance.
+
+### Garde native-first
+
+Pour toute demande qui implique une action, le Goal natif doit être créé ou activé avant la première lecture, commande, délégation, modification, test ou interaction externe. Le Coordinateur conserve alors son identifiant et son état dans `RUNTIME-STATE.md`, puis initialise l'état local. `start-goal.sh` ne crée pas le Goal natif et ne peut jamais justifier à lui seul une exécution persistante. Si l'API native n'est pas exposée, le Coordinateur enregistre `native_goal_status=unavailable` avec une preuve observable avant d'utiliser le secours local. Si l'API est exposée mais que l'état natif n'est pas `active`, le travail est refusé et aucune conclusion n'est autorisée.
 
 ## Activation automatique depuis Trello
 
@@ -47,6 +57,14 @@ Cette vérification est une porte obligatoire de création du Goal. Avant toute 
 Tout Goal qui implique une modification, un audit, un test, une livraison ou une action externe doit contenir cette décision de délégation avant de démarrer, même sans carte Trello. La valeur `none` est interdite pour un travail ; seul `séquentiel justifié` ou un registre d’agents réellement créés et affectés permet de poursuivre.
 
 À la création du Goal et à chaque relecture du Goal, le Coordinateur réévalue la checklist restante et le registre des agents. Pour chaque check autonome non attribué, il attribue immédiatement le check à un agent disponible ; si aucun agent compétent n'est disponible et que le check est parallélisable, il crée ou active l'agent requis avant de poursuivre. Il ne laisse pas un agent disponible inactif lorsqu'un check compatible est ouvert. Toute attribution est enregistrée avec le check, le périmètre, la preuve attendue et l'heure de début.
+
+## Pool d'agents et limite de threads
+
+Le Goal maintient un registre vivant des agents `required`, `active`, `available`, `completed` et `closed`, avec identifiant réel, rôle, lot, état et preuve. Un agent `completed` reste réutilisable jusqu'à la fin du Goal et de la carte ; sa fermeture est interdite tant qu'un lot compatible, une relecture ou une reprise peut encore lui être attribué. Avant de créer un nouvel agent, le Coordinateur réutilise d'abord un agent disponible ou réactive un agent terminé. Si la limite de threads est atteinte, il ne prétend jamais avoir créé un agent : il partitionne les lots en séquentiel, consigne la limite et reprend dès qu'un thread se libère. Toute carte comportant plusieurs lots indépendants exige un nombre d'agents égal au nombre de lots exécutés en parallèle, avec une preuve de création ou de réactivation pour chacun.
+
+La présence historique d'un agent ne vaut jamais activation pour le Goal courant. À chaque création ou reprise de Goal, le Coordinateur recalcule les rôles requis, réactive ou crée chaque spécialiste, vérifie son identifiant et son état `active` dans le registre courant, lui affecte un lot et exige un rapport daté pour cette passe. Tant que ces preuves ne sont pas présentes, le coordinateur ne lance aucune validation spécialisée et ne peut pas déclarer l'audit ou la carte terminés.
+
+`start-goal.sh` doit recevoir `GOAL_REQUIRED_ROLES` et refuser tout démarrage si un rôle requis n'a pas un identifiant réel dans `GOAL_AGENTS_CREATED`. La valeur `séquentiel justifié` n'est admise qu'avec `GOAL_SPECIALIST_AVAILABILITY=none` et `GOAL_SEQUENTIAL_REASON` non vide. Le Coordinateur ne peut donc plus choisir silencieusement de travailler seul lorsqu'un spécialiste est disponible.
 
 Le Coordinateur renseigne `goal_status: active`, `goal_objective`, `goal_verification`, `goal_constraints`, `goal_budget`, `goal_blocked_condition` et `goal_session_id` dans `RUNTIME-STATE.md`, puis active `/goal` ou l'API native lorsqu'elle est disponible. Toute demande ciblant une carte à reprendre ou à livrer active automatiquement le Goal, y compris une carte à une seule case ou une reprise ponctuelle. Une simple demande d'information sans travail sur une carte reste hors de ce mécanisme.
 

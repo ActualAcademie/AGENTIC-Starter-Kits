@@ -23,7 +23,7 @@ project_root="$(git -C "$config_root/.." rev-parse --show-toplevel 2>/dev/null |
 # Première mutation du projet : protéger immédiatement l'installation locale du kit.
 gitignore="$project_root/.gitignore"
 touch "$gitignore"
-for ignored_path in ".codex/" "AGENTS.md"; do
+for ignored_path in ".codex/" "AGENTS.md" ".kit-reports/" ".context-manifest.tsv"; do
   grep -Fqx "$ignored_path" "$gitignore" || printf '%s\n' "$ignored_path" >> "$gitignore"
 done
 git -C "$project_root" check-ignore -q "$config_root" || { echo "ÉCHEC: l'installation Codex n'est pas ignorée" >&2; exit 1; }
@@ -35,9 +35,9 @@ fi
 
 mkdir -p "$config_root/work-items/archive" "$config_root/evaluations"
 
-if [ "$updates_mode" != "off" ] && [ ! -f "$project_root/.github/workflows/update-agentic-starter-kit.yml" ]; then
+if [ "$updates_mode" != "off" ] && [ ! -f "$project_root/.github/workflows/update-workspace-kit.yml" ]; then
   mkdir -p "$project_root/.github/workflows"
-  cp "$config_root/templates/github/workflows/update-agentic-starter-kit.yml" "$project_root/.github/workflows/update-agentic-starter-kit.yml"
+  cp "$config_root/templates/github/workflows/update-workspace-kit.yml" "$project_root/.github/workflows/update-workspace-kit.yml"
 fi
 
 if [ ! -f "$config_root/project-profile.toml" ]; then
@@ -48,7 +48,32 @@ for context_file in PROJECT-CONTEXT.md PROJECT-DATA-BOUNDARY.md; do
     cp "$config_root/templates/$context_file" "$config_root/$context_file"
   fi
 done
+if [ ! -f "$project_root/AGENTS.md" ] && [ -f "$config_root/templates/AGENTS.md" ]; then
+  cp "$config_root/templates/AGENTS.md" "$project_root/AGENTS.md"
+fi
+bash "$config_root/scripts/validate-entrypoint.sh"
+# Initialiser les fichiers locaux obligatoires avant de valider le contrat.
+# La validation doit pouvoir lire le cahier et le profil dès la première installation.
+for local_file in PROJECT-BRIEF.md project-profile.toml RUNTIME-STATE.md; do
+  template_file="$local_file"
+  [ "$local_file" = "PROJECT-BRIEF.md" ] && template_file="project-brief.md"
+  if [ ! -f "$config_root/$local_file" ] && [ -f "$config_root/templates/$template_file" ]; then
+    cp "$config_root/templates/$template_file" "$config_root/$local_file"
+  fi
+done
+bash "$config_root/scripts/validate-agentic-contract.sh"
+bash "$config_root/scripts/verify-billing-mode.sh"
+echo "Hooks Codex installés. Avant toute action projet, ouvrir /hooks, relire les hooks du projet et les approuver."
 
+# Les fichiers d'état et d'onboarding sont obligatoires dès l'installation.
+# Ils restent locaux au projet et ne sont jamais écrasés s'ils existent déjà.
+for local_file in PROJECT-BRIEF.md project-profile.toml RUNTIME-STATE.md; do
+  template_file="$local_file"
+  [ "$local_file" = "PROJECT-BRIEF.md" ] && template_file="project-brief.md"
+  if [ ! -f "$config_root/$local_file" ] && [ -f "$config_root/templates/$template_file" ]; then
+    cp "$config_root/templates/$template_file" "$config_root/$local_file"
+  fi
+done
 inventory="$config_root/project-inventory.md"
 {
   echo "# Inventaire de projet"
@@ -72,3 +97,4 @@ if git -C "$project_root" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
 fi
 
 echo "Initialisation terminée: compléter $config_root/project-profile.toml avec le Skill project-onboarding."
+echo "Revue obligatoire: saisir /hooks dans Codex et approuver les hooks avant de commencer le développement."

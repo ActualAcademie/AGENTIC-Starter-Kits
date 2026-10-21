@@ -2,13 +2,35 @@
 set -euo pipefail
 script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 kit_root="$(cd "$script_dir/.." && pwd)"
-project_root="$(cd "$kit_root/.." && pwd)"
+if project_root="$(git -C "${KIT_PROJECT_ROOT:-$PWD}" rev-parse --show-toplevel 2>/dev/null)" && [ -n "$project_root" ]; then
+  :
+else
+  project_root="$(cd "$kit_root/.." && pwd)"
+fi
 manifest="$project_root/.workspace.toml"
-[ -f "$manifest" ] || { echo "Manifest .workspace.toml introuvable." >&2; exit 1; }
+if [ ! -f "$manifest" ]; then
+  cat > "$manifest" <<EOF
+orchestrator = "claude"
+kit_version = "$(sed -n 's/^kit_version = "\([^"]*\)"/\1/p' "$kit_root/KIT.toml")"
+source = "https://github.com/Krapaud-Labs/AGENTIC-Starter-Kits"
+kit_mode = "shared"
+kit_home = "${AGENTIC_KIT_HOME:-${XDG_DATA_HOME:-$HOME/.local/share}/agentic-starter-kits/kits}"
+update_channel = "stable"
+EOF
+  echo "Manifest .workspace.toml initialisé dans $project_root" >&2
+fi
 source_url="$(sed -n 's/^source = "\(.*\)"/\1/p' "$manifest")"
 [ -n "$source_url" ] || { echo "Source du kit absente du manifeste." >&2; exit 1; }
+legacy_source="github.com/""krapaud/AGENTIC-Starter-Kits"
+case "$source_url" in
+  *"$legacy_source"*) source_url="https://github.com/Krapaud-Labs/AGENTIC-Starter-Kits" ;;
+esac
 raw_base="${source_url/github.com/raw.githubusercontent.com}"
 latest="$(curl -fsSL "$raw_base/main/VERSION")"
+if command -v gh >/dev/null 2>&1; then
+  gh_latest="$(gh api 'repos/Krapaud-Labs/AGENTIC-Starter-Kits/contents/VERSION?ref=main' --jq .content 2>/dev/null | tr -d '\n' | base64 --decode | tr -d '[:space:]' || true)"
+  [ -n "$gh_latest" ] && latest="$gh_latest"
+fi
 installed="$(sed -n 's/^kit_version = "\(.*\)"/\1/p' "$manifest")"
 [ "$installed" = "$latest" ] && { echo "Kit Claude déjà à jour : $installed"; exit 0; }
 backup_root="$project_root/.claude/backups/kit-$installed-$(date +%Y%m%d-%H%M%S)"
@@ -31,8 +53,16 @@ curl -fsSL -L "${source_url%/}/archive/refs/tags/v${latest}.tar.gz" -o "$archive
 tar -xzf "$archive" -C "$tmp_dir"
 source_kit="$(find "$tmp_dir" -mindepth 2 -maxdepth 2 -type d -name starter-kit-claude | head -n 1)"
 [ -n "$source_kit" ] || { echo "Kit Claude absent de l'archive." >&2; exit 1; }
-rsync -a --delete --exclude 'PROJECT-BRIEF.md' --exclude 'project-profile.toml' --exclude 'project-inventory.md' --exclude 'RUNTIME-STATE.md' --exclude 'decisions/' --exclude 'work-items/' --exclude 'reports/' --exclude 'metrics/' --exclude 'evaluations/' "$source_kit/.claude/" "$kit_root/.claude/"
+rsync -a --delete --exclude 'backups/' --exclude 'PROJECT-BRIEF.md' --exclude 'project-profile.toml' --exclude 'project-inventory.md' --exclude 'RUNTIME-STATE.md' --exclude 'decisions/' --exclude 'work-items/' --exclude 'reports/' --exclude 'metrics/' --exclude 'evaluations/' "$source_kit/.claude/" "$kit_root/.claude/"
 cp "$source_kit/CLAUDE.md" "$kit_root/CLAUDE.md"
+for local_file in PROJECT-BRIEF.md project-profile.toml RUNTIME-STATE.md; do
+  if [ ! -f "$kit_root/$local_file" ]; then
+    candidate="$source_kit/.claude/$local_file"
+    [ -f "$candidate" ] || candidate="$source_kit/.claude/templates/$local_file"
+    [ -f "$candidate" ] && cp "$candidate" "$kit_root/.claude/$local_file"
+  fi
+done
 sed -i.bak "s/^kit_version = .*/kit_version = \"\$latest\"/" "$manifest"
 rm -f "$manifest.bak"
+bash "$kit_root/scripts/deliver-workspace-update.sh" "$latest"
 printf 'Kit Claude mis à jour : %s -> %s\nSauvegarde : %s\n' "$installed" "$latest" "$backup_root"

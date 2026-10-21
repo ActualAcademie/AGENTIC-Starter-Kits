@@ -1,12 +1,53 @@
 # Agentic Starter Kits
 
-[![Version](https://img.shields.io/badge/version-1.12.91-blue.svg)](VERSION)
+[![Version](https://img.shields.io/badge/version-1.16.81-blue.svg)](VERSION)
 
 ## Construire avec une IA comme avec une équipe senior
+
+Le bootstrap des outils recherche le registre partagé avant toute installation. Un outil absent déclenche une seule question `waiting-for-user`; aucune installation n est lancée sans réponse explicite.
+
+Les blocages nécessitant une décision passent en `waiting-for-user` avec une question unique et des choix numérotés. Le kit suspend les reprises automatiques jusqu'à la réponse.
+
+La version 1.16.63 applique ce même parcours aux outils absents du registre partagé.
+
+Les rapports spécialistes sont maintenant contrôlés avant clôture.
+
+L’audit global couvre désormais le bootstrap shared, la conservation des liens symboliques, le workflow unique `update-workspace-kit.yml` et les scénarios de régression associés.
+
+Les hooks de fin de sous-agent distinguent les événements génériques du Goal des spécialistes réels : une référence de Goal orpheline ne bloque plus la session, tandis qu’un spécialiste identifié sans rapport valide reste bloqué.
+
+Le dépôt central lit automatiquement les issues ouvertes portant le label `kit-report` au démarrage d’une session. Les rapports marqués `bloquant`, `blocker`, `critical` ou `critique` sont prioritaires et doivent être traités avant une nouvelle amélioration ; les autres sont classés `normal`. Cette lecture ne s’active pas dans les projets consommateurs.
+
+Les projets consommateurs disposent de `report-kit-blocker.sh`. Lorsqu’une porte de réponse constate un état `blocked` ou `needs-review`, le kit produit un rapport limité aux métadonnées anonymisées autorisées, calcule une empreinte anti-doublon, le conserve dans `.kit-reports/outbox/` si GitHub est indisponible, puis tente sa publication dans les issues `kit-report` du dépôt central. Le dossier de file d’attente est ignoré par Git.
+
+Le dépôt central conserve `docs/audit/kit-report-history.jsonl`. Le script `scripts/check-kit-reports.sh` relit les issues ouvertes et fermées, reconnaît les rapports déjà enregistrés, et les affiche comme `BLOQUANT`, `NORMAL`, `RESOLU` ou `DOUBLON`. Après traitement, `scripts/record-kit-report.sh` ajoute l’empreinte et le statut à cet historique versionné.
+
+Un rapport dont l’empreinte existe déjà dans une issue ouverte ou fermée n’est jamais renvoyé par un projet consommateur, y compris lorsque son classement précédent est `normal`, `resolved` ou `duplicate`.
+
+Le correcteur local `auto-remediate-kit-report.sh` tente d’abord les corrections connues dans le projet consommateur, exécute les contrôles puis le rapport envoyé indique `correction appliquée` ou `correction impossible`. Une correction inconnue n’est jamais appliquée automatiquement et aucune modification directe de `main` n’est autorisée.
+
+Chaque Goal doit déclarer ses rôles spécialistes requis et leurs identifiants réels avant de commencer. Le Coordinateur ne peut pas travailler seul lorsqu’un spécialiste est disponible ; le mode séquentiel exige une preuve explicite d’indisponibilité.
+
+
+L'inventaire détaillé des fonctionnalités réellement implémentées, des hooks, des preuves, des limites d'intégration et de la couverture de tests se trouve dans [docs/IMPLEMENTED-FEATURES.md](docs/IMPLEMENTED-FEATURES.md).
 
 Agentic Starter Kits est une base portable de gouvernance, de conception, d’orchestration et de contrôle qualité pour construire des projets logiciels avec un agent IA. Le dépôt transforme une conversation en processus de livraison traçable, depuis le cahier des charges jusqu’à la Pull Request et à la maintenance.
 
 Le kit ne fournit pas une simple collection de prompts. Il fournit une méthode de travail complète : règles, agents spécialisés, Skills réutilisables, configuration technologique, documents de conception, journal qualité, contrôles de sécurité, GitFlow, CI et optimisation continue du coût.
+
+Les blocages récupérables ne terminent pas un tour : le Coordinateur conserve le Goal actif, tente les alternatives autorisées et exécute la prochaine action observable. Cette règle est couverte par les scénarios sandbox des deux variantes.
+
+Un audit indépendant en `REWORK` déclenche automatiquement la correction traçable puis une nouvelle relecture par l’auditeur ; il ne devient pas un blocage lorsque ces actions restent réalisables.
+
+La même récupération autonome s’applique à tout blocage local ou réessayable ; `blocked` exige une dépendance externe inaccessible ou une décision humaine indispensable.
+
+Les contrôles et écarts corrigeables sont réparés puis relancés automatiquement avant toute interruption.
+
+Les Skills de documentation produisent ou délèguent les preuves manquantes avant d'escalader un blocage réel.
+
+L'installation crée les fichiers d'état obligatoires avant de lancer les validateurs, afin d'éviter un blocage initial artificiel.
+
+Pendant l'onboarding, les gates ouverts, la conception en revue, l'audit P0 absent, la branche non publiée ou la PR non relue déclenchent la poursuite autonome au lieu d'un blocage.
 
 ## Démarrage rapide
 
@@ -39,13 +80,13 @@ Pour choisir le mode dans l’assistant interactif, lancez simplement :
 ./install.sh
 ```
 
-Pour le mode externe :
+Installation partagée :
 
 ```bash
-./install.sh --kit codex --mode external --target /chemin/vers/mon-projet
+./install.sh --kit codex --mode shared --target /chemin/vers/mon-projet
 ```
 
-Le chemin cible doit déjà exister. N’installez jamais les deux orchestrateurs dans le même projet. Le mode natif est recommandé si vous débutez. Le mode externe est recommandé si vous ne voulez pas publier le contenu du kit dans le dépôt distant.
+Le chemin cible doit déjà exister. L’installation partagée est le seul mode supporté et centralise le kit dans le registre commun.
 
 ### 3. Activer les mises à jour
 
@@ -245,7 +286,13 @@ La politique [WEB-RESEARCH-POLICY.md](starter-kit-codex/.codex/policies/WEB-RESE
 - [Historique des changements](CHANGELOG.md)
 - [Historique chronologique des versions](VERSION-HISTORY.md)
 
-## État fonctionnel de la version 1.12.91
+## État fonctionnel de la version 1.16.49
+
+À chaque démarrage, les hooks initialisent automatiquement l’environnement central des outils. Si un outil de base reste indisponible après tentative d’installation, aucune tâche ne commence.
+
+Les verrous Git orphelins sont détectés et déplacés en quarantaine avant reprise ; un verrou encore utilisé par un processus n’est jamais supprimé.
+
+Les outils Python installés par uv utilisent également `AGENTIC_TOOLS_HOME/python`; les runtimes système et les dépendances applicatives restent séparés.
 
 La version actuelle inclut 16 agents au total : six agents du noyau et dix spécialistes optionnels. Elle inclut leurs politiques de modèles, la gouvernance d’activation, les Skills d’orchestration, les scripts d’initialisation, les checkpoints, le suivi des coûts et les contrôles CI. Les détails contractuels des spécialistes sont dans `SPECIALIST-AGENTS.md` dans chaque kit.
 
@@ -256,6 +303,8 @@ Le dépôt utilise aussi `markdownlint-cli2` avec `.markdownlint.json`. Les conv
 Le cycle de travail prend également en charge les cartes Trello `time-gated`. Une carte dépendante d’une date peut être suspendue avec sa raison, sa date ISO et son checkpoint, tandis que les travaux indépendants continuent. Les règles de versionnement, de README obligatoire et de publication sont définies dans `VERSIONING.md`.
 
 ## Synchronisation d’un fork d’organisation
+
+Pour exiger la preuve des intégrations externes, lancer `bash scripts/test-integration-preflight.sh --require-real`. Sans cette option, le préflight local indique explicitement les scénarios Trello, agents et navigateur non exécutés.
 
 Le dépôt personnel constitue la source de référence du starter kit. Un fork placé dans une organisation ne reçoit pas automatiquement les nouvelles versions. Depuis le clone du fork, ajouter le dépôt personnel comme remote `upstream`, puis synchroniser après chaque version validée :
 
@@ -293,7 +342,7 @@ Lors de l’initialisation, l’agent demande si les mises à jour automatiques 
 
 ## Règle de protection de main
 
-Les mises à jour automatiques ouvrent uniquement une Pull Request vers `develop` ou `dev`. Elles ne peuvent jamais ouvrir ni fusionner automatiquement une Pull Request vers `main`. La promotion vers `main` reste une action humaine, ou une action explicitement demandée par l’utilisateur et documentée dans le work item.
+Les mises à jour automatiques ne poussent jamais directement sur `main`. Le Coordinateur peut toutefois créer, valider et fusionner automatiquement la PR de promotion vers `main` dans le cadre d'une demande de livraison active, après la fusion et la vérification de `dev`.
 
 ## Installateur guidé
 
@@ -309,11 +358,21 @@ Le workflow de mise à jour utilise la branche `develop` si elle existe, sinon `
 
 ## Qualité documentaire premium
 
+Le flux d'initialisation ouvre automatiquement la PR vers `dev` ou `develop` dès que la branche et les contrôles sont prêts. Il ne demande pas une confirmation supplémentaire pour une étape déjà autorisée.
+
 Le kit impose désormais un contrat documentaire : chaque document indique son statut, sa version, sa date, son responsable, son audience, son périmètre, ses faits vérifiés, ses hypothèses, ses inconnues, ses décisions, ses risques et ses critères de validation. Le Skill de rédaction adapte le contenu au lecteur et ajoute les exemples, diagrammes, commandes et références nécessaires. Le Skill d’audit refuse les documents incomplets, vagues ou incohérents avec le code.
+
+### Convention de rédaction
+
+Les agents n'utilisent jamais le tiret cadratin (U+2014) dans leurs réponses, documents, issues, commentaires ou comptes rendus. Ils utilisent une ponctuation simple et compatible avec les interfaces de suivi.
+
+### Optimisation du contexte
+
+Les kits appliquent un chargement par niveaux. Les politiques, historiques et README sont recherchés de façon ciblée, les documents déjà relus sont réutilisés par empreinte inchangée et les agents spécialisés reçoivent uniquement leur périmètre et leur preuve attendue. L'audit `scripts/audit-context-efficiency.sh` vérifie cette configuration sans mesurer ni enregistrer de contenu utilisateur.
 
 ## Release et section About GitHub
 
-Après la promotion humaine vers `main`, la publication d’un tag SemVer `vX.Y.Z` déclenche le workflow `publish-release-and-about.yml`. Il vérifie que le tag correspond à `VERSION`, publie la GitHub Release avec les notes générées, puis met à jour la description et les topics de la section About du dépôt. Le workflow n’est pas déclenché par les branches `dev` ou `develop`.
+Après la promotion vers `main`, une modification de `VERSION`, `CHANGELOG.md` ou `VERSION-HISTORY.md` déclenche le workflow `publish-release-and-about.yml`. Il lit `VERSION`, crée le tag SemVer manquant, publie la GitHub Release avec les notes générées, puis met à jour la description et les topics de la section About du dépôt. Le workflow n’est pas déclenché par les branches `dev` ou `develop` et peut aussi être lancé manuellement avec une version explicite.
 
 ### Autoriser la mise à jour de la section About
 
@@ -340,9 +399,11 @@ Le workflow récupère maintenant le script de mise à jour officiel depuis le d
 
 ## Distributions disponibles
 
-Le kit propose deux modes : `native`, avec intégration directe dans le projet et mises à jour par Pull Request, et `external`, avec kit local hors du dépôt et manifeste `.workspace.toml`. Voir `distributions/README.md`.
+Le kit utilise exclusivement le mode `shared`, avec une installation globale unique et des liens symboliques vers chaque projet. Cette architecture évite les copies divergentes et permet de distribuer une mise à jour depuis un seul registre local.
 
-En mode `external`, le kit vérifie sa version au démarrage de chaque session. Une mise à jour crée une sauvegarde et ne remplace que les instructions et scripts universels. Le cahier des charges, le profil technique, l état projet et les work items sont conservés.
+À chaque démarrage, le kit vérifie sa version et son registre partagé. Les mises à jour remplacent uniquement le socle universel et conservent le cahier des charges, le profil technique, l'état projet et les work items de chaque projet.
+
+Une mise à jour détectée pendant un work item suspend immédiatement le travail produit. Le Coordinateur sauvegarde `RUNTIME-STATE.md`, met à jour et valide le kit, le livre par PR vers `dev`, vérifie le SHA distant de `dev`, puis restaure l'état et reprend `next_action`. `main` n'est jamais touchée par cette étape.
 
 Pour initialiser un projet dans une conversation déjà ouverte, envoyer `Mode initialisation :`. Ce mode recharge le kit et impose la porte du cahier des charges sans nécessiter une nouvelle conversation.
 
@@ -350,4 +411,34 @@ La commande doit être envoyée seule depuis la conversation qui travaille déj�
 
 La procédure complète se trouve dans [INSTALLATION.md](INSTALLATION.md), section « Initialiser une conversation déjà ouverte ».
 
-Le synchroniseur external met à jour directement le répertoire du kit et conserve les données projet protégées.
+Le synchroniseur partagé met à jour le registre central et conserve les données projet protégées.
+La procédure de synchronisation vérifie désormais les fichiers obligatoires et la cohérence de version du kit installé.
+L initialisation demande explicitement la revue et l approbation des hooks avant toute action produit.
+
+## Mise à jour 1.16.68
+
+Le runtime partagé réconcilie désormais l’état dans le projet appelant, y compris lorsque le kit est installé par liens symboliques.
+
+Le bootstrap de session conserve aussi ses marqueurs dans le projet appelant.
+
+La résolution de racine Git du bootstrap est explicite afin d éviter les chemins multi-lignes.
+Les gardes shared relisent le runtime local du projet et non le registre du kit.
+
+Les portes d'entrée shared relisent la racine Git du projet appelant et réparent automatiquement le marqueur de version du contrat avant la validation.
+
+Les fichiers d instructions du projet restent locaux ; seul le kit d exécution est partagé.
+
+Une demande utilisateur maintient le Goal en attente et doit être résolue par le script de réponse avant toute clôture.
+
+Les résolveurs de réponse sont publiés comme exécutables dans les deux distributions.
+
+Les validations avant push refusent tout `AGENTS.md`, `CLAUDE.md`, `.codex/` ou `.claude/` staged dans un projet consommateur.
+
+Si le point d'entrée du projet est un lien symbolique vers une ancienne version, il est repointé vers le fichier de la version active du registre partagé avant le contrôle.
+
+Le validateur d'entrée effectue cette réparation avant le premier garde d'outil, afin qu'un ancien marqueur ne bloque pas la reprise.
+
+Le hook PreToolUse autorise uniquement le résolveur de réponse lorsqu une demande est en attente.
+
+Le message de refus contient la commande exacte à exécuter avec l identifiant de la demande.
+Lorsqu’une demande de livraison cible une branche protégée, le kit conserve le commit et route automatiquement l’opération vers une branche dédiée, puis une PR vers `dev` ou `develop`. Ce refus de push direct ne bloque pas le Goal et ne demande pas de confirmation supplémentaire.

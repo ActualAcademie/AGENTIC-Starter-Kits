@@ -7,6 +7,14 @@ root="$(git -C "$config/.." rev-parse --show-toplevel 2>/dev/null || { echo "Git
 
 bash "$script_dir/verify-consumer-index.sh"
 
+staged_internal="$(git -C "$root" diff --cached --name-only -- AGENTS.md .codex/ .claude/ | sed '/^$/d')"
+if [ -n "$staged_internal" ]; then
+  echo "ECHEC GIT: fichiers internes staged dans le projet consommateur:"
+  printf '%s\n' "$staged_internal"
+  echo "Retirer ces fichiers de l index sans les supprimer du disque."
+  exit 1
+fi
+
 if [ -f "$root/.workspace.toml" ]; then
   echo "Mode external détecté: validation du kit et des fichiers publiables uniquement"
   if git -C "$root" ls-files --error-unmatch .codex AGENTS.md >/dev/null 2>&1; then
@@ -21,11 +29,21 @@ if [ -f "$root/.workspace.toml" ]; then
   workflow="$root/.github/workflows/update-workspace-kit.yml"
   [ -f "$workflow" ] || { echo "ECHEC EXTERNAL: workflow de mise à jour absent"; exit 1; }
   grep -q 'Update workspace kit' "$workflow" || { echo "ECHEC EXTERNAL: workflow invalide"; exit 1; }
-  bash "$script_dir/validate-obligations.sh" --if-present
+  # Une mise à jour externe du kit ne doit pas être bloquée par les Goals produit historiques.
+  # Les obligations produit restent contrôlées dans le projet applicatif, pas dans ce lot de synchronisation.
   echo "Validation external avant push OK"
   exit 0
 fi
 
+source_repository=false
+if [ -d "$root/starter-kit-codex" ] && [ -d "$root/starter-kit-claude" ]; then
+  source_repository=true
+  echo "Dépôt source du kit détecté: profil consommateur non requis"
+  integration_branch="dev"
+  require_feature_branch=true
+  max_files=75
+  max_lines=1200
+else
 "$script_dir/python.sh" - "$config/project-profile.toml" <<'PY'
 import pathlib, sys, tomllib
 profile = tomllib.loads(pathlib.Path(sys.argv[1]).read_text())
@@ -51,15 +69,20 @@ print(
 )
 PY
 )
+fi
 
 branch="$(git -C "$root" branch --show-current)"
+protected_branch=false
+case "$branch" in
+  dev|develop|main|master) protected_branch=true ;;
+esac
+if [ "$protected_branch" = "true" ] || { [ "$require_feature_branch" = "true" ] && [ -z "$branch" ]; }; then
+  echo "ECHEC GITFLOW: push direct interdit vers dev, develop, main ou master. Conserver le commit local, créer immédiatement une branche dédiée depuis ce commit, relancer ce contrôle, pousser la branche et ouvrir la PR vers dev ou develop. Ne pas demander de confirmation et ne pas marquer le Goal bloqué pour ce refus automatique."
+  exit 1
+fi
 if [ "$require_feature_branch" = "true" ]; then
-  if [ -z "$branch" ] || [ "$branch" = "$integration_branch" ] || [ "$branch" = "main" ] || [ "$branch" = "master" ]; then
-    echo "ECHEC GITFLOW: créer une branche de travail avant le push, jamais pousser directement vers $integration_branch ou main"
-    exit 1
-  fi
-  case "$branch" in feature/*|fix/*|hotfix/*|chore/*|docs/*|refactor/*|test/*) ;; *)
-    echo "ECHEC GITFLOW: branche invalide $branch. Utiliser feature/, fix/, hotfix/, chore/, docs/, refactor/ ou test/"
+  case "$branch" in feat/*|feature/*|fix/*|hotfix/*|chore/*|docs/*|refactor/*|test/*) ;; *)
+    echo "ECHEC GITFLOW: branche invalide $branch. Utiliser feat/, feature/, fix/, hotfix/, chore/, docs/, refactor/ ou test/"
     exit 1 ;;
   esac
 fi
@@ -89,6 +112,10 @@ if [ -n "$base" ]; then
 fi
 
 git -C "$root" diff --check
+if [ "$source_repository" = "true" ]; then
+  echo "Validation avant push du dépôt source du kit OK"
+  exit 0
+fi
 bash "$script_dir/validate-obligations.sh" --if-present
 bash "$script_dir/preflight.sh"
 bash "$script_dir/verify-project-boundary.sh"

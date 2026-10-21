@@ -39,21 +39,21 @@ Si le projet existe déjà, ne pas supprimer ses fichiers. Importer le kit de ma
 
 ## 3. Choisir et copier un kit
 
-Deux distributions sont disponibles. Le mode `native` installe le kit directement dans le projet. Le mode `external` installe le même socle localement dans le projet mais l’ignore dans Git et ne publie que `.workspace.toml` et `update-workspace-kit.yml`. Ce mode est recommandé si le dépôt distant ne doit pas contenir le kit.
+Le seul mode disponible est `shared`. Il installe une seule copie du kit dans le registre partagé de la machine et place dans chaque projet les liens symboliques, le contexte local et le manifeste de version.
 
-Pour le mode externe Codex :
-
-```bash
-./install.sh --kit codex --mode external --target /chemin/absolu/vers/mon-projet
-```
-
-Pour le mode externe Claude :
+Pour Codex :
 
 ```bash
-./install.sh --kit claude --mode external --target /chemin/absolu/vers/mon-projet
+./install.sh --kit codex --mode shared --target /chemin/absolu/vers/mon-projet
 ```
 
-Le mode externe conserve les fichiers nécessaires localement pour que Codex ou Claude fonctionne nativement, mais les ajoute au `.gitignore`. Le dépôt distant ne contient que le manifeste `.workspace.toml` et le workflow `.github/workflows/update-workspace-kit.yml`.
+Pour Claude :
+
+```bash
+./install.sh --kit claude --mode shared --target /chemin/absolu/vers/mon-projet
+```
+
+Le mode partagé conserve les fichiers universels dans `AGENTIC_KIT_HOME` et les projets ne conservent que leur état local. Les mises à jour sont donc reçues par tous les projets depuis une source unique.
 
 Définir le chemin local du dépôt source. Adapter ce chemin à votre machine.
 
@@ -411,8 +411,8 @@ Remplacez le chemin par celui de votre projet. L’installateur copie directemen
 Dans le projet, vérifiez la présence de l’une des structures suivantes :
 
 ```text
-Codex : AGENTS.md, .codex/, .github/workflows/update-agentic-starter-kit.yml.
-Claude : CLAUDE.md, .claude/, .github/workflows/update-agentic-starter-kit.yml.
+Codex : AGENTS.md, .codex/, .github/workflows/update-workspace-kit.yml.
+Claude : CLAUDE.md, .claude/, .github/workflows/update-workspace-kit.yml.
 ```
 
 N’installez jamais Codex et Claude ensemble dans le même projet.
@@ -457,7 +457,7 @@ Le choix recommandé est `O`. L’agent peut alors détecter une nouvelle versio
 
 ## Branche des Pull Requests automatiques
 
-Le workflow cible `develop` par défaut. Si votre projet utilise `dev`, définissez la variable de dépôt GitHub `AGENTIC_INTEGRATION_BRANCH` avec la valeur `dev`. Toute autre valeur, notamment `main`, est refusée automatiquement. La Pull Request de promotion vers `main` reste manuelle ou doit être demandée explicitement par l’utilisateur.
+Le workflow cible `develop` par défaut. Si votre projet utilise `dev`, définissez la variable de dépôt GitHub `AGENTIC_INTEGRATION_BRANCH` avec la valeur `dev`. Toute autre valeur, notamment `main`, est refusée automatiquement. Le Coordinateur peut ensuite promouvoir automatiquement vers `main` dans une demande de livraison active, après contrôles verts.
 
 ### Installateur guidé
 
@@ -473,13 +473,13 @@ Dans le sélecteur intégré, les flèches haut et bas parcourent les sous-dossi
 
 ### Gestion automatique du `.gitignore`
 
-L’installation crée `.gitignore` s’il est absent et ajoute uniquement les entrées nécessaires au kit choisi. Codex ajoute `.codex/` et `AGENTS.md`. Claude ajoute `.claude/` et `CLAUDE.md`. Les doublons ne sont pas ajoutés. Le fichier `.github/workflows/update-agentic-starter-kit.yml` reste suivi par Git, car il est nécessaire aux mises à jour automatiques.
+L’installation crée `.gitignore` s’il est absent et ajoute uniquement les entrées nécessaires au kit choisi. Codex ajoute `.codex/` et `AGENTS.md`. Claude ajoute `.claude/` et `CLAUDE.md`. Les doublons ne sont pas ajoutés. Le fichier `.github/workflows/update-workspace-kit.yml` reste suivi par Git, car il est nécessaire aux mises à jour automatiques.
 
 Le workflow détecte automatiquement `develop`, puis `dev`. Il refuse `main` et ne demande aucune variable GitHub Actions supplémentaire.
 
 ## Publication Release et About
 
-La promotion vers `main` reste humaine. Après cette promotion, créez et poussez le tag annoté prévu par le versionnement :
+La promotion vers `main` est effectuée automatiquement par le Coordinateur dans le même GitFlow lorsque la demande de livraison est active. Après cette promotion, le kit crée et pousse le tag annoté prévu par le versionnement :
 
 ```bash
 git tag -a vX.Y.Z -m "Release vX.Y.Z"
@@ -495,4 +495,4 @@ Pour autoriser l’actualisation automatique de la description et des topics, cr
 Le workflow de publication est idempotent : si une Release portant le tag existe déjà, il la conserve et poursuit la mise à jour About.
 Le workflow de mise à jour doit être ajouté au premier commit du projet. L’installateur affiche les commandes nécessaires et vérifie qu’il n’est pas ignoré.
 
-Les distributions `native` et `external` sont documentées dans le dossier `distributions/`.
+La distribution unique `shared` est documentée dans le dossier `distributions/`.

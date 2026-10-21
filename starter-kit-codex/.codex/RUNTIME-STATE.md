@@ -11,6 +11,7 @@
 - active_card: [[A_COMPLETER]]
 - current_action: [[A_COMPLETER]]
 - next_action: [[A_COMPLETER]]
+- recovery_trigger: none
 - open_checklist_items: [[A_COMPLETER]]
 - last_observable_evidence: [[A_COMPLETER]]
 - ci_status: not-applicable
@@ -25,12 +26,18 @@
 - goal_budget: [[A_COMPLETER]]
 - goal_blocked_condition: [[A_COMPLETER]]
 - goal_session_id: none
+- native_goal_status: required | active | unavailable
+- native_goal_id: none
+- native_goal_evidence: [[A_COMPLETER]]
+- native_goal_blocked_condition: none
 - goal_delivery_status: not-required
 - goal_delegation_plan: [[A_COMPLETER]]
 - goal_agents_created: none
 - goal_agent_assignments: none
+- goal_agent_evidence: none
 - integration_branch: none
 - pushed_integration_commit: none
+- integration_remote_evidence: none
 - pull_request_status: not-required
 - required_action_type: none
 - required_action_id: none

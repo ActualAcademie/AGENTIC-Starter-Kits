@@ -16,6 +16,14 @@ Cette matrice définit les parcours à rejouer dans un projet temporaire avant t
 | Trello | Séquence `01`, `02`, `03` | aucune carte suivante lancée hors ordre | sandbox |
 | Goal | Carte à un check | Goal actif avant le premier check | sandbox |
 | Goal | Carte multi-lots | plan d’agents inscrit avant action | sandbox |
+| Hooks | Première initialisation | message de revue et approbation requise avant développement | sandbox |
+| Hooks | Rapport initial sans approbation | la réponse demande explicitement `/hooks` et interdit l action produit avant preuve | sandbox |
+| Hooks | Hook non approuvé ou modifié | avertissement et nouvelle revue obligatoire | documentation officielle |
+| Hooks | Outil d’écriture sans Goal | refus `PreToolUse` observable | sandbox |
+| Hooks | Permission API, branche protégée ou commande destructive | refus `PermissionRequest` observable | sandbox |
+| Hooks | Résultat d’outil | événement `PostToolUse` journalisé | sandbox |
+| Hooks | Sous-agent démarré puis arrêté | identifiant et livrable enregistrés | sandbox |
+| Hooks | Réponse prématurée | continuation par `Stop` | sandbox |
 | Délégation | Lots sans chevauchement | agents, fichiers et preuves attribués | sandbox |
 | Délégation | Lots avec fichier partagé | mode séquentiel justifié | sandbox |
 | Reprise | Goal en attente CI | état waiting et reprise automatique | sandbox |
@@ -35,6 +43,10 @@ Cette matrice définit les parcours à rejouer dans un projet temporaire avant t
 | Sécurité | Secret ou donnée sensible détecté | arrêt et absence de fuite | sandbox |
 | Périmètre | Besoin non prévu | hors périmètre, aucun check ajouté | sandbox |
 | Livraison | Goal complet | garde avant réponse acceptée | sandbox |
+
+## Tests d'intégration réels
+
+`scripts/test-integration-preflight.sh` exécute un test non destructif de worktrees et de détection de `.git/index.lock`. Il affiche séparément `not-executed` pour Trello, l'orchestrateur et le navigateur tant que les connecteurs de test ne sont pas explicitement activés. Une valeur `not-executed` ne constitue jamais une réussite d'intégration.
 
 ## Règle de promotion
 

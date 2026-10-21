@@ -1,8 +1,56 @@
 # Kit d'orchestration Codex portable
 
-![Version du kit](https://img.shields.io/badge/version-1.12.91-blue.svg)
+![Version du kit](https://img.shields.io/badge/version-1.16.81-blue.svg)
+
+Le hook `SessionStart` initialise automatiquement `AGENTIC_TOOLS_HOME` et vérifie les outils de base avant toute tâche. Une session est refusée si une installation automatique ne permet pas de rendre ces outils disponibles.
+
+Lorsqu'une décision utilisateur est indispensable, le Coordinateur émet un questionnaire unique en état `waiting-for-user` et reprend après la réponse sans répéter le blocage.
+
+Les outils manquants sont recherchés dans le registre partagé puis proposés dans un questionnaire avant toute installation.
+
+La version 1.16.63 suspend le bootstrap une seule fois et reprend après la réponse utilisateur.
+
+Les rapports spécialistes sont maintenant contrôlés par le hook de fin.
+
+Avant toute modification, le kit diagnostique `.git/index.lock`, récupère uniquement un verrou orphelin et bloque sans suppression lorsqu’un processus le détient.
+
+Les outils uv sont installés dans `AGENTIC_TOOLS_HOME/python/uv` et leurs exécutables dans `AGENTIC_TOOLS_HOME/python/bin`.
 
 Ce kit installe une gouvernance projet pour Codex. Il ne construit rien tant que le cahier des charges n'a pas été fourni et formalisé.
+
+En mode shared, la porte de session relit la racine Git du projet appelant et répare automatiquement le marqueur de version de `AGENTS.md` avant la validation.
+
+Si `.workspace.toml` est absent lors d'une nouvelle session, le synchroniseur shared l'initialise automatiquement dans la racine Git du projet, sans remplacer les fichiers de contexte locaux.
+
+Cette réparation intervient avant le garde pretool, y compris lors d'une reprise bloquée.
+
+Les liens symboliques `AGENTS.md` obsolètes sont repointés vers le registre partagé courant.
+
+Le validateur traite ce repointage avant toute vérification de contrat.
+
+La cible partagée est résolue depuis la racine de la version active du kit.
+
+`AGENTS.md` reste toujours un fichier local au projet.
+
+Les réponses aux questionnaires sont consommées par `resolve-user-input.sh` avant toute clôture.
+
+Le résolveur est installé avec ses permissions exécutables.
+
+L'inventaire transversal des fonctionnalités, hooks, preuves, limites et scénarios de tests est disponible dans [docs/IMPLEMENTED-FEATURES.md](../docs/IMPLEMENTED-FEATURES.md).
+
+Une conception incomplète ou un blocage récupérable déclenche automatiquement la reprise du Goal avec les agents requis et une prochaine action observable. Le Coordinateur ne demande pas un nouveau message « continue » lorsqu'une action autonome reste possible.
+
+Un audit indépendant en `REWORK` déclenche la correction attribuée et sa nouvelle relecture dans le même Goal.
+
+Les blocages locaux, outils, tests, preuves ou synchronisations récupérables sont traités automatiquement avant toute réponse.
+
+Un échec de contrôle ou un écart documentaire corrigeable déclenche correction, nouvelle validation et nouvelle relecture.
+
+Une preuve documentaire manquante est recherchée ou déléguée avant toute escalade.
+
+Les fichiers locaux d'onboarding sont créés avant la validation structurelle de première installation.
+
+Les gates d'audit et de livraison ouverts déclenchent la suite des actions autonomes jusqu'à leur preuve, sans blocage prématuré.
 
 ## Prérequis
 
@@ -35,6 +83,10 @@ bash .codex/scripts/init-project.sh
 
 Cette commande crée `project-profile.toml` s'il est absent et génère un inventaire des fichiers détectés. Elle ne modifie pas le code du produit.
 
+L'initialisation valide aussi le contrat agentic complet avec `validate-agentic-contract.sh`. Elle bloque si le point d'entrée, l'état runtime, les politiques de coordination, les garde-fous de continuité ou les preuves de délégation sont absents ou incomplets. Ce contrôle est rejouable avant chaque Goal.
+
+Le fichier `.codex/hooks.json` active les hooks de cycle de vie Codex. Ils rechargent le contexte à chaque session, bloquent les outils d'écriture avant initialisation du Goal, enregistrent les sous-agents et relancent automatiquement le travail lorsqu'une clôture n'est pas prouvée. Les hooks doivent être approuvés par Codex avant leur première exécution.
+
 5. Ouvrir Codex à la racine du projet. Envoyer une demande projet normale, par exemple :
 
 ```text
@@ -56,6 +108,8 @@ bash .codex/scripts/preflight.sh
 ## Utilisation quotidienne
 
 Après l'onboarding, décrire une tâche avec son résultat attendu et ses critères d'acceptation. Le Coordinateur attribue ensuite les rôles, demande des preuves et impose l'audit avant clôture.
+
+Tout audit suit le [protocole exhaustif](../docs/policies/EXHAUSTIVE-AUDIT-PROTOCOL.md). Une conclusion exige une matrice complète, les spécialistes réellement appelés, les tests négatifs, la recherche de contradictions et une relecture indépendante après correction.
 
 Pour ne pas déclencher la porte projet dans une conversation générale, commencer le message par :
 
@@ -134,9 +188,20 @@ bash .codex/scripts/initialize-project-design.sh
 
 Le Concepteur complète ensuite `docs/` avec vision, user stories, parcours, architecture, diagrammes, données, contrats, sécurité, roadmap et décisions. Tout document non applicable contient une justification. Chaque work item met à jour les documents touchés et l’Auditeur bloque une livraison si le code diverge de la conception.
 
+## Délégation obligatoire des Goals
+
+Chaque Goal déclare les rôles spécialistes requis et leurs identifiants réels avant la première action. Le Coordinateur ne travaille pas seul lorsqu’un spécialiste est disponible. Le mode séquentiel exige une preuve explicite d’indisponibilité.
+
+Le bootstrap shared conserve le lien symbolique `AGENTS.md` et installe le workflow unique `.github/workflows/update-workspace-kit.yml`.
+
 ## Gitflow obligatoire
 
 Chaque feature, correctif ou tâche documentaire se fait sur une branche dédiée. Les agents ne committent ni ne poussent directement vers `main`, `master` ou la branche d’intégration. Les commits sont atomiques, limités par défaut à 75 fichiers et 1200 lignes, et ne mélangent jamais plusieurs features. `verify-before-push.sh` bloque les écarts.
+
+Si une demande de livraison arrive alors que le checkout est sur une branche protégée, le refus est routé automatiquement vers une branche dédiée puis une PR vers `dev` ou `develop`. Ce contrôle ne doit pas interrompre le Goal ni demander une confirmation supplémentaire.
+
+Après vérification de `dev`, le Coordinateur crée, valide et fusionne automatiquement l’unique PR de promotion vers `main` lorsque la demande de livraison est active.
+
 
 ## Dossier de conception de niveau CDA
 
@@ -170,6 +235,20 @@ Le kit Codex comprend 16 agents : six agents du noyau et dix spécialistes optio
 
 Les spécialistes optionnels sont activés dans `[agents]` de `.codex/project-profile.toml` : `produit`, `qa`, `devops`, `performance`, `ux_research`, `accessibilite`, `data`, `documentation`, `release` et `conformite`. Le Coordinateur les active selon les besoins détectés, le risque et le budget.
 
+Le hook de fin distingue un événement générique du Goal d’un spécialiste identifié. Une référence orpheline ne bloque donc pas en boucle, mais un spécialiste réel sans rapport vérifiable reste bloqué.
+
+Dans le dépôt source du kit, `scripts/check-kit-reports.sh` est lu par `SessionStart`. Il classe les issues `kit-report` en `BLOQUANT` ou `NORMAL` et impose le traitement prioritaire des blocages ; ce contrôle ne s’active pas dans les projets consommateurs.
+
+Dans un projet consommateur, `scripts/report-kit-blocker.sh` est appelé par la garde de réponse pour les états bloqués. Il ne transmet que la gravité, la version du kit, un résumé court et une preuve filtrée, conserve les rapports hors ligne dans `.kit-reports/outbox/` et ignore les doublons grâce à une empreinte stable.
+
+Le correcteur central conserve l’historique dans `docs/audit/kit-report-history.jsonl`. Il doit appeler `scripts/record-kit-report.sh` après chaque traitement pour classer l’empreinte en `bloquant`, `normal`, `resolved` ou `duplicate`. Les blocages prévus par le contrat du kit sont classés `normal` et ne doivent pas interrompre la maintenance.
+
+Un projet consommateur recherche l’empreinte dans toutes les issues `kit-report`, pas uniquement les issues ouvertes. Un problème déjà classé `normal`, `resolved` ou `duplicate` n’est donc plus reporté.
+
+Avant l’envoi, `auto-remediate-kit-report.sh` tente une correction locale connue, valide le runtime et le rapport indique le résultat de cette correction. Les problèmes inconnus restent signalés sans modification automatique.
+
+Le dépôt central peut exécuter `scripts/auto-correct-kit-report.sh --report <fichier> --apply`. Le correcteur n’emploie que des playbooks connus, travaille sur une branche isolée, exécute les tests et produit un statut de correction. Les cas inconnus restent en revue et ne modifient jamais `main`.
+
 | Identifiant | Fichier | Livrable principal |
 | --- | --- | --- |
 | `produit` | `.codex/agents/produit.toml` | Priorités, valeur métier et critères fonctionnels. |
@@ -187,13 +266,15 @@ Le Coordinateur ne les appelle pas tous systématiquement. Il lit `.codex/SPECIA
 
 Une CI en cours ne clôture jamais le work item. Le Coordinateur attend les résultats, traite les erreurs, corrige les lints et les dettes historiques du périmètre par lots, puis relance les contrôles jusqu’à la Definition of Done.
 
-Le kit est actuellement en version `1.12.42`. Toute modification du kit doit mettre à jour ce README, le changelog et la version selon `VERSIONING.md`.
+Le kit est actuellement en version `1.16.49`. Toute modification du kit doit mettre à jour ce README, le changelog et la version selon `VERSIONING.md`.
 
 Le contrat central `.codex/policies/CORE-EXECUTION-CONTRACT.md` impose un registre d obligations, huit portes de validation et une reprise persistante. Une tâche ne peut être clôturée tant qu une obligation applicable ne possède pas de preuve.
 
 Chaque nouveau work item reçoit `obligations.tsv`. `bash .codex/scripts/validate-obligations.sh --require-active` vérifie les huit portes et `verify-before-push.sh` bloque automatiquement une livraison incomplète.
 
 ## Gouvernance complète disponible
+
+Le flux d'initialisation ouvre automatiquement la PR vers `dev` ou `develop` dès que la branche et les contrôles sont prêts. Il ne demande pas une confirmation supplémentaire pour une étape déjà autorisée.
 
 Le fichier `.codex/SPECIALIST-AGENTS.md` définit les conditions d’activation, les livrables et l’ordre de contrôle des dix spécialistes. Le Coordinateur lit ce fichier avant toute délégation, consulte `[agents]` dans le profil et justifie chaque activation dans le work item.
 
@@ -221,14 +302,16 @@ Après une instruction « fais tout », le Coordinateur poursuit jusqu’à la D
 
 ## Synchronisation automatique
 
+Le préflight distingue les simulations des preuves externes. Utiliser `bash scripts/test-integration-preflight.sh --require-real` pour refuser toute campagne où Trello, les agents ou le navigateur n'ont pas fourni de preuve réelle.
+
 L’initialisation installe un workflow GitHub Actions hebdomadaire qui ouvre une Pull Request pour chaque évolution du kit officiel. Le script `.codex/scripts/update-starter-kit.sh` permet aussi une mise à jour manuelle avec un remote, une référence et une branche.
 
 ## Qualité documentaire premium
 
-Le synchroniseur external met à jour directement `.codex/` et conserve les données projet protégées.
+Le synchroniseur partagé met à jour le registre central et conserve les données projet protégées.
 
 Utilisez `documentation-authoring` pour rédiger et `documentation-audit` pour relire. Le contrôle `bash .codex/scripts/validate-documentation.sh` vérifie les métadonnées, les dates et les marqueurs incomplets avant la livraison.
-La version du kit évolue uniquement lorsqu’un changement consommé par un projet importateur le justifie.
+La version du kit évolue uniquement lorsqu’un changement consommé par un projet importateur le justifie. Après promotion sur `main`, le workflow de release crée automatiquement le tag SemVer et la GitHub Release correspondante.
 L’installateur vérifie que le workflow de mise à jour est suivi par Git avant la première publication.
 Le Coordinateur applique une politique universelle de routage pour toute demande nouvelle, corrective ou hors cahier des charges.
 
@@ -246,8 +329,27 @@ Une fusion de Pull Request est un checkpoint et non une fin de carte. Le Coordin
 
 Le workflow récupère le script officiel à l’exécution et ne dépend plus d’un script ignoré dans `.codex/`.
 
-L’installateur propose désormais les distributions native et external, avec conservation du socle local et du contexte projet selon le mode choisi.
+L’installateur utilise exclusivement le mode `shared`. Il installe le socle universel une seule fois dans `AGENTIC_KIT_HOME` et conserve dans chaque projet uniquement les liens et le contexte local.
+
+Une mise à jour détectée en cours de work item déclenche la suspension obligatoire. Le Coordinateur sauvegarde l’état, livre la mise à jour par PR vers `dev`, vérifie `dev`, puis exécute `resume-kit-update.sh` et reprend `next_action`.
 
 Dans une conversation existante, utiliser `Mode initialisation :` pour relancer de façon fiable la porte obligatoire du cahier des charges.
 
 Envoyer cette commande seule depuis la racine du projet. Codex recharge alors les instructions et l'état du kit, vérifie le cahier des charges et n'autorise aucune analyse technique, aucun work item ni aucune modification produit avant sa réception et son acceptation. La procédure détaillée est documentée dans le guide d'installation du dépôt principal.
+La procédure de synchronisation vérifie désormais les fichiers obligatoires et la cohérence de version du kit installé.
+L initialisation demande explicitement la revue et l approbation des hooks avant toute action produit.
+
+## Mise à jour 1.16.68
+
+Le script de réconciliation utilise la racine Git du projet pour préserver le registre shared.
+
+Le bootstrap de session écrit ses marqueurs dans le projet appelant.
+
+La racine Git est résolue sans concaténation de sortie shell.
+Les gardes shared relisent le runtime local du projet et non le registre du kit.
+
+Le hook autorise le résolveur de réponse même lorsque les autres outils sont suspendus.
+
+La validation avant push refuse tout fichier interne staged dans un projet consommateur.
+
+En cas de commande prématurée, le hook indique l identifiant pending et la commande de réconciliation.

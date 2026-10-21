@@ -1,8 +1,10 @@
-# Distribution externe
+# Distribution shared
+
+Cette distribution est la seule distribution supportée. Elle centralise le kit dans `AGENTIC_KIT_HOME` et expose des liens symboliques dans les projets.
 
 ## Objectif
 
-La distribution `external` conserve le kit localement hors du suivi Git du projet. Elle est recommandée lorsque le dépôt distant ne doit contenir aucune copie du kit d’orchestration.
+Le registre partagé conserve une copie versionnée du kit hors du dépôt projet. Le projet conserve uniquement son contexte local, son manifeste et son workflow de mise à jour.
 
 ## Fichiers suivis par Git
 
@@ -19,7 +21,7 @@ Le workflow ouvre une Pull Request pour mettre à jour `.workspace.toml`. Après
 Une mise à jour manuelle reste possible :
 
 ```bash
-./install.sh --kit codex --mode external --target /chemin/vers/projet --force
+./install.sh --kit codex --mode shared --target /chemin/vers/projet --force
 ```
 
 ## Données protégées

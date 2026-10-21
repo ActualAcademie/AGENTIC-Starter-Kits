@@ -2,10 +2,11 @@
 set -euo pipefail
 
 script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-state="$(cd "$script_dir/.." && pwd)/RUNTIME-STATE.md"
+if root="$(git rev-parse --show-toplevel 2>/dev/null)" && [ -f "$root/.codex/RUNTIME-STATE.md" ]; then state="$root/.codex/RUNTIME-STATE.md"; else state="$(cd "$script_dir/.." && pwd)/RUNTIME-STATE.md"; fi
 
 fail() { echo "GARDE REPONSE: $*" >&2; exit 1; }
 [ -f "$state" ] || fail "RUNTIME-STATE.md absent"
+"$script_dir/guard-repeated-blocker.sh" || fail "même blocage répété sans changement d'approche"
 
 value() { sed -n "s/^-[[:space:]]*$1:[[:space:]]*//p; s/^$1:[[:space:]]*//p" "$state" | head -n 1; }
 status="$(value execution_status)"
@@ -15,17 +16,29 @@ evidence="$(value last_observable_evidence)"
 ci="$(value ci_status)"; trello="$(value trello_sync_status)"
 attempts="$(value attempt_count)"; max_attempts="$(value max_attempts)"; redundant="$(value redundant_confirmation_requested)"
 required="$(value required_action_status)"; budget="$(value budget_status)"; environment="$(value environment_status)"; shutdown="$(value environment_shutdown_status)"; pending_request="$(value pending_request_id)"; pending_turn="$(value pending_turn_id)"
-goal_status="$(value goal_status)"; goal_delivery="$(value goal_delivery_status)"; integration_branch="$(value integration_branch)"; pushed_commit="$(value pushed_integration_commit)"; pr_status="$(value pull_request_status)"
+goal_status="$(value goal_status)"; goal_delivery="$(value goal_delivery_status)"; integration_branch="$(value integration_branch)"; pushed_commit="$(value pushed_integration_commit)"; remote_evidence="$(value integration_remote_evidence)"; pr_status="$(value pull_request_status)"
+agents_created="$(value goal_agents_created)"; agent_evidence="$(value goal_agent_evidence)"
 turn_status="$(value last_turn_status)"; tool_failures="$(value tool_failures)"; session_status="$(value session_status)"
 
 case "$status" in
+  waiting-for-user)
+    [[ "$(value pending_request_id)" != "none" && "$(value required_action_status)" == "pending" ]] || fail "questionnaire utilisateur incomplet"
+    echo "Garde réponse OK: réponse utilisateur attendue"
+    exit 0
+    ;;
   complete)
+    audit_guard="$script_dir/validate-exhaustive-audit.sh"
+    if [ -x "$audit_guard" ]; then bash "$audit_guard" "$state" || fail "audit exhaustif non vérifié"; fi
+    [[ "$(value pending_request_id)" =~ ^(none|resolved)$ && "$(value required_action_status)" =~ ^(none|resolved|not-required)$ ]] || fail "demande utilisateur encore en attente"
     if [[ "$goal_status" != "none" && "$goal_status" != "not-required" ]]; then
       [[ "$goal_status" == "complete" ]] || fail "goal encore actif: $goal_status"
       [[ "$goal_delivery" == "verified" ]] || fail "livraison du goal non prouvée: $goal_delivery"
       [[ "$integration_branch" =~ ^(dev|develop)$ ]] || fail "branche d'intégration absente ou invalide: $integration_branch"
       [[ -n "$pushed_commit" && "$pushed_commit" != "none" && "$pushed_commit" != *"A_COMPLETER"* ]] || fail "commit poussé vers l'intégration absent"
-      [[ "$pr_status" =~ ^(open|updated|merged|verified)$ ]] || fail "PR d'intégration absente ou non relue: $pr_status"
+      [[ "$pr_status" == "verified" ]] || fail "PR d'intégration non fusionnée ou branche distante non relue: $pr_status"
+      [[ -n "$remote_evidence" && "$remote_evidence" != "none" && "$remote_evidence" != *"A_COMPLETER"* ]] || fail "preuve de mise à jour de la branche distante absente"
+      [[ -n "$agents_created" && "$agents_created" != "none" && "$agents_created" != *"A_COMPLETER"* ]] || fail "agents du Goal non enregistrés"
+      [[ -n "$agent_evidence" && "$agent_evidence" != "none" && "$agent_evidence" != *"A_COMPLETER"* ]] || fail "preuves des livrables agents absentes"
     fi
     [[ "$next" =~ ^(none|aucune|aucun)$ ]] || fail "next_action reste ouverte: $next"
     [[ "$open" =~ ^(0|none|aucune|aucun)$ ]] || fail "open_checklist_items non nul: $open"
@@ -49,6 +62,15 @@ case "$status" in
     ;;
   needs-review|blocked)
     [[ -n "$evidence" && "$evidence" != *"A_COMPLETER"* ]] || fail "preuve obligatoire absente pour $status"
+    [[ -n "$next" && ! "$next" =~ ^(none|aucune|aucun)$ ]] || fail "next_action absente pour $status"
+    recovery="$script_dir/verify-recovery-state.sh"
+    [ -x "$recovery" ] && bash "$recovery" || fail "blocage récupérable ou état de reprise invalide"
+    reporter="$script_dir/report-kit-blocker.sh"
+    if [ -x "$reporter" ]; then
+      severity=normal; [ "$status" = blocked ] && severity=bloquant
+      details="execution_status=$status; goal_status=$goal_status; current_action=$status; next_action=$next; last_observable_evidence=$evidence; required_action_status=$required; budget_status=$budget; pending_request_id=$pending_request"
+      KIT_REPORT_FAIL_ON_BLOCKING=0 bash "$reporter" --severity "$severity" --summary "Garde agentique $severity" --details "$details" >/dev/null 2>&1 || true
+    fi
     ;;
   running|waiting-ci) fail "état non terminal: $status" ;;
   *) fail "execution_status absent ou invalide: ${status:-absent}" ;;

@@ -8,6 +8,10 @@ Ce répertoire s'importe dans tout nouveau projet. Il adapte les contrôles à p
 
 Lire et appliquer obligatoirement `policies/WEB-RESEARCH-POLICY.md`, `policies/SESSION-CONTINUITY-POLICY.md`, `policies/EXCEPTIONAL-REQUESTS.md`, `policies/TRELLO-VISUAL-SYSTEM.md`, `policies/TRELLO-START-STATE.md` et `policies/DOCUMENTATION-LANGUAGE-POLICY.md`. Le Coordinateur déclenche une recherche externe dès qu'une information peut avoir changé ou engage une décision technique, légale, de sécurité, de coût ou de compatibilité. Les agents concernés consignent les sources et la date de consultation dans les preuves.
 Lire également `policies/CONTINUOUS-IMPROVEMENT-POLICY.md` et consulter les incidents connus avant toute action comparable.
+Lire `policies/CONTEXT-EFFICIENCY-POLICY.md` au démarrage, puis appliquer son chargement par niveaux et son cache d'empreintes pour éviter les relectures intégrales répétées.
+Lire également `policies/PRODUCT-READINESS-POLICY.md` avant tout aperçu, audit de MVP ou déclaration de produit terminé.
+Lire également `policies/PRIMARY-AGENT-POLICY.md` : l'agent principal est le Coordinateur et n'a aucun rôle spécialisé implicite.
+Lire également `policies/GOAL-RETRY-AGENT-METRICS.md` et exécuter `scripts/validate-goal-budget.sh` avant chaque Goal pour borner durée, étapes, tokens, reprises et agents.
 
 ## Cycle obligatoire
 
@@ -32,6 +36,8 @@ Avant l'étape 1, le Coordinateur exécute une préparation de session obligatoi
 
 La préparation de session exécute aussi `scripts/ensure-tools.sh` avec les outils réellement requis par le profil et les validations. Le script réutilise l'installation partagée, installe les outils gratuits connus si nécessaire, vérifie leurs versions et journalise le résultat pour les projets suivants.
 
+Avant toute action, le Coordinateur exécute `scripts/session-start-gate.sh`, y compris lors de la reprise d'une conversation existante. Cette porte vérifie la version du kit, déclenche la synchronisation autorisée, réinstalle les outils partagés, relit le contrat agentic et crée la preuve de session. Tant que cette preuve n'existe pas, aucune commande, délégation, modification ou réponse opérationnelle n'est autorisée.
+
 ## Règles
 
 - Codex est l'unique orchestrateur.
@@ -49,7 +55,7 @@ Lorsque l’utilisateur demande de tout faire ou de poursuivre jusqu’à la liv
 
 Lorsqu'une demande cible une carte Trello à terminer, reprendre, corriger ou livrer, activer ou reprendre le Goal persistant décrit dans `policies/SESSION-CONTINUITY-POLICY.md` avant toute analyse et avant la première case, quel que soit le nombre de cases ouvertes, puis rattacher toutes les preuves au même objectif.
 
-Le Coordinateur initialise ce Goal avec `scripts/start-goal.sh` avant toute commande, délégation ou commentaire externe. Il fournit l'objectif, les preuves attendues, les contraintes, la condition de blocage, la carte, la branche d'intégration et le plan de délégation. Si l'API native du Goal est disponible, il l'active immédiatement après cette écriture et vérifie son état. Sinon, l'état local reste la source de reprise et la limite est consignée.
+Le Coordinateur crée ou active d'abord le Goal natif de l'environnement avant toute commande, lecture, délégation, modification, test ou commentaire externe. Il capture son identifiant et son état actif, puis seulement après exécute `scripts/start-goal.sh` pour réconcilier l'état local avec ce Goal. `start-goal.sh` n'est jamais une création de Goal natif. Si l'API native est indisponible, le Coordinateur doit consigner explicitement `native_goal_status=unavailable` et la preuve de cette indisponibilité ; il peut alors utiliser le mode local de secours, sans le présenter comme un Goal natif. Si l'API est disponible mais que le Goal n'est pas actif, tout travail est interdit jusqu'à sa création ou activation effective.
 
 ## Reprise automatique
 

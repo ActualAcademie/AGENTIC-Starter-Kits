@@ -2,7 +2,7 @@
 
 ## Branches obligatoires
 
-La branche d intégration est définie dans `project-profile.toml`, habituellement `develop`. Toute modification produit commence sur une branche dédiée : `feature/<id>-<sujet>`, `fix/<id>-<sujet>`, `hotfix/<id>-<sujet>`, `chore/<id>-<sujet>`, `docs/<id>-<sujet>`, `refactor/<id>-<sujet>` ou `test/<id>-<sujet>`.
+La branche d intégration est définie dans `project-profile.toml`, habituellement `develop`. Toute modification produit commence sur une branche dédiée : `feat/<id>-<sujet>` ou `feature/<id>-<sujet>`, `fix/<id>-<sujet>`, `hotfix/<id>-<sujet>`, `chore/<id>-<sujet>`, `docs/<id>-<sujet>`, `refactor/<id>-<sujet>` ou `test/<id>-<sujet>`. Avant la première modification, exécuter `scripts/verify-before-work.sh`.
 
 Ne jamais développer, committer ou pousser directement vers `main`, `master` ou la branche d intégration. La promotion vers ces branches passe par une Pull Request validée. Une branche ne porte qu un objectif cohérent et un seul work item actif.
 
@@ -12,9 +12,21 @@ Un commit correspond à une intention vérifiable : une étape de conception, un
 
 Les limites par défaut sont `75` fichiers et `1200` lignes modifiées par commit. Elles sont configurables dans `[delivery]` de `project-profile.toml` seulement après décision explicite et documentée. Un commit massif de code métier est interdit. Un lockfile ou artefact généré incompressible peut dépasser la limite uniquement dans un commit séparé, sans code métier, avec un message conventionnel et une justification dans le work item. L agent isole automatiquement ce commit et ne demande pas une autorisation pour une limite technique connue.
 
+### Consolidation par lot
+
+Le kit minimise le nombre d'objets Git sans sacrifier la traçabilité. Par défaut, une demande cohérente, une carte ou un Goal utilise une seule branche de travail, un seul work item et une seule PR vers la branche d'intégration. Les agents parallèles travaillent dans leurs espaces isolés, puis l'intégrateur regroupe leurs résultats sur cette branche ; ils ne créent ni branche ni PR séparée pour leur sous-tâche.
+
+Les commits restent atomiques et lisibles, mais un commit séparé n'est créé que pour une intention réellement indépendante, une migration ou un lockfile qui doit être isolé, une correction de sécurité, une limite technique documentée ou un besoin de rollback distinct. Les checkpoints, rapports, corrections de lint, mises à jour README, preuves CI et petits ajustements liés restent regroupés dans la branche et la PR du même lot. Le Coordinateur ne crée jamais une branche ou une PR par agent, fichier, test, commentaire, preuve ou erreur corrigée.
+
+Avant la PR, il regroupe les changements cohérents lorsque cela ne détruit pas une preuve ou une possibilité de retour arrière, puis vérifie le diff global depuis la branche d'intégration. Une seule PR de promotion vers `main` est créée par lot cohérent et version.
+
 ## Promotion
 
 Une branche ne passe vers l intégration qu avec work item, conception à jour, tests proportionnés, preflight vert, preuves, audit indépendant et rapport sécurité lorsque la matrice l exige. `main` reçoit seulement des livraisons validées. Ne pas réécrire l historique des branches protégées.
+
+## Verrouillage et agents parallèles
+
+Un seul agent intégrateur manipule l'index Git du checkout principal. Les agents parallèles utilisent des worktrees ou des répertoires de travail isolés et ne lancent jamais `checkout`, `add`, `commit`, `merge` ou `push` dans le checkout partagé. Toute opération Git de livraison est sérialisée par l'intégrateur. En cas de `.git/index.lock`, vérifier d'abord les processus Git actifs, attendre puis réessayer ; ne supprimer un verrou que s'il est prouvé comme orphelin et après journalisation. Une suppression automatique ou concurrente du verrou est interdite.
 
 ## Contrôle de périmètre avant livraison
 
@@ -34,13 +46,17 @@ Si Git est indisponible, le Coordinateur peut préparer le travail et les preuve
 
 ## Pull Requests automatiques
 
-Toute Pull Request créée automatiquement par le starter kit cible exclusivement `develop` ou `dev`. Le workflow refuse toute autre branche cible, notamment `main`. Une promotion vers `main` doit être réalisée par un humain ou demandée explicitement par l’utilisateur dans la conversation, avec une justification et des contrôles verts.
+Une PR de travail cible `develop` ou `dev`. Une fois cette PR fusionnée et vérifiée, le Coordinateur crée automatiquement l'unique PR de promotion vers `main`, attend les contrôles, la fusionne et vérifie le SHA distant lorsque la demande de livraison est active. Aucun push direct vers une branche protégée n'est autorisé.
 
 ## Cadence des Pull Requests
 
 Un push sur une branche de travail ne crée pas automatiquement une nouvelle PR. Le Coordinateur pousse les commits nécessaires sur la branche existante, puis ouvre une seule PR vers la branche d'intégration `dev` ou `develop` uniquement lorsque la carte est prête à intégrer, que les contrôles locaux sont passés et que les preuves de la Definition of Done sont réunies. Si une PR existe déjà pour la carte, elle est mise à jour au lieu d'en créer une autre. Les micro-corrections, commits de checkpoint et changements de documentation liés restent dans la même PR.
 
 La promotion vers `main` est une seule PR depuis `dev` ou `develop` par lot cohérent et version. Elle ne doit pas créer de PR intermédiaire par commit, check, agent, résultat CI ou correction.
+
+### Garde exécutable de cadence
+
+Avant tout appel `gh pr create`, toute action équivalente du connecteur ou toute création via navigateur, le Coordinateur doit recenser les PR ouvertes pour la branche et la carte concernées. Il exécute `scripts/verify-pr-cadence.sh <statut-carte> <nombre-de-PR-existantes>` et bloque l'opération si la carte n'est pas `complete`, si plusieurs PR existent ou si la PR existante doit être mise à jour. Un commit, une preuve, un commentaire Trello, une correction documentaire, un résultat CI ou une délégation ne justifie jamais une PR de progression. La demande utilisateur de déploiement reste la seule exception et doit utiliser le troisième argument `deployment-checkpoint`.
 
 ## Pull Request par carte
 

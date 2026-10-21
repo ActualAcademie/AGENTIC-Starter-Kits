@@ -13,7 +13,7 @@ Les deux distributions doivent rester fonctionnellement paritaires :
 - `starter-kit-codex/.codex/` pour Codex ;
 - `starter-kit-claude/.claude/` pour Claude Code ;
 - scripts de diagnostic, tests, documentation et versionnement au niveau racine ;
-- installation native dans un projet et synchronisation externe sans écraser les données du projet.
+- installation partagée unique dans un registre central sans écraser les données du projet.
 
 Les intégrations distantes sont optionnelles. Le kit local doit fonctionner sans Agents API, sans Trello, sans webhook et sans serveur MCP, avec les valeurs `not-required`, `disabled` ou `not-applicable` explicites.
 

@@ -1,4 +1,9 @@
 # Point d'entrée Claude
+<!-- ENTRYPOINT-CONTRACT: 1.16.81 -->
+
+## Contrat obligatoire de chaque nouveau chat
+
+L'agent principal de ce chat est le Coordinateur. Dès le premier message qui demande une action, il doit charger `.claude/ORCHESTRATION.md`, `PRIMARY-AGENT-POLICY.md`, `SESSION-CONTINUITY-POLICY.md`, `TASK-ROUTING-POLICY.md`, l'état runtime et le work item actif avant toute analyse, commande ou modification. Il doit créer ou reprendre le Goal natif avant toute action, puis enregistrer l'état local. Pour une tâche spécialisée, il doit créer les agents concernés et obtenir leurs identifiants réels avant de commencer. Pour une tâche visuelle, `frontend`, `qa` et `auditeur` sont obligatoires. Une annonce de délégation sans résultat réel bloque le travail. Le Coordinateur assemble les résultats, mais ne remplace jamais un spécialiste disponible.
 
 @.claude/ORCHESTRATION.md
 @.claude/PROJECT-CONTEXT.md
@@ -58,9 +63,13 @@ Chaque ajout, correction, agent, Skill, politique, commande, changement de compo
 
 L'agent responsable exécute `bash .claude/scripts/verify-before-push.sh` et rend ses résultats. Un échec bloque le push. Ne jamais contourner le hook avec `--no-verify`.
 
+Un refus de push direct vers une branche protégée n'est pas un blocage utilisateur. Si la demande est de livrer ou de pousser, conserver le commit, créer automatiquement une branche dédiée depuis le commit courant, relancer le contrôle, pousser cette branche et ouvrir la PR unique vers `dev` ou `develop`. Poursuivre ensuite jusqu'à l'intégration et la promotion prévues, sans demander une confirmation supplémentaire.
+
+La limite d'autonomie est la suivante : tout est exécuté automatiquement jusqu'à la fusion dans `dev` ou `develop`, puis jusqu'à la promotion validée vers `main` lorsque la demande de livraison est active. La création, la relecture, la fusion et la vérification des PR sont des étapes internes du GitFlow. Aucun accord intermédiaire n'est demandé.
+
 ## Installation Git obligatoire
 
-Après l’installation du kit, vérifier que `.github/workflows/update-agentic-starter-kit.yml` existe et n’est pas ignoré. Avant le premier commit, l’ajouter explicitement avec `.gitignore` et `CLAUDE.md`, puis vérifier son suivi avec `git ls-files --error-unmatch .github/workflows/update-agentic-starter-kit.yml`. Le workflow doit être présent dans la première branche publiée. Ne jamais le supprimer, le placer dans `.gitignore` ou le pousser directement vers `main`.
+Après l’installation du kit, vérifier que `.github/workflows/update-workspace-kit.yml` existe et n’est pas ignoré. Avant le premier commit, l’ajouter explicitement avec `.gitignore` et `.workspace.toml`, puis vérifier son suivi avec `git ls-files --error-unmatch .github/workflows/update-workspace-kit.yml`. Le workflow doit être présent dans la première branche publiée. Ne jamais le supprimer, le placer dans `.gitignore` ou le pousser directement vers `main`.
 
 
 ## Contrat du premier message d initialisation
@@ -83,3 +92,4 @@ Si le statut est absent ou pending, répondre uniquement en demandant le cahier 
 ## Synchronisation du kit externe
 
 Si le projet contient .workspace.toml et .claude/scripts/sync-workspace-kit.sh, exécuter ce synchroniseur au début d une nouvelle session avant toute analyse. Il vérifie la version distante, sauvegarde le kit local et ne remplace jamais le cahier des charges, le profil projet, l état d exécution, les décisions, les work items ou les journaux. Si la mise à jour échoue, conserver la version actuelle et poursuivre uniquement avec le kit local après signalement.
+Les outils CLI partagés, npm et Python sont centralisés dans AGENTIC_TOOLS_HOME. Le hook SessionStart source l environnement et lance automatiquement .claude/scripts/ensure-tools.sh --bootstrap. Si un outil de base reste absent après tentative d installation, le démarrage est refusé et aucune tâche ne commence. Les contrôles doivent conserver ce PATH partagé et ne jamais réinstaller un outil dans un projet si le registre central le fournit déjà. Les dépendances applicatives verrouillées par le projet restent locales dans leur environnement afin d éviter les conflits.

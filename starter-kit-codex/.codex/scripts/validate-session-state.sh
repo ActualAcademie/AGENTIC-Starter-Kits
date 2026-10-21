@@ -1,11 +1,34 @@
 #!/usr/bin/env bash
 set -euo pipefail
 script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-state="$(cd "$script_dir/.." && pwd)/RUNTIME-STATE.md"
+if root="$(git rev-parse --show-toplevel 2>/dev/null)" && [ -f "$root/.codex/RUNTIME-STATE.md" ]; then state="$root/.codex/RUNTIME-STATE.md"; else state="$(cd "$script_dir/.." && pwd)/RUNTIME-STATE.md"; fi
 [ -f "$state" ] || { echo "SESSION: RUNTIME-STATE.md absent" >&2; exit 1; }
+schema="$script_dir/validate-runtime-schema.sh"
+[ -x "$schema" ] && bash "$schema" "$state"
 value() { sed -n "s/^-[[:space:]]*$1:[[:space:]]*//p" "$state" | head -n 1; }
-for key in execution_status next_action last_observable_evidence required_action_status pending_request_id pending_turn_id budget_status environment_status session_status; do
+for key in execution_status next_action last_observable_evidence required_action_status pending_request_id pending_turn_id budget_status environment_status session_status native_goal_status native_goal_id native_goal_evidence; do
   v="$(value "$key")"
   [ -n "$v" ] && [[ "$v" != *A_COMPLETER* ]] || { echo "SESSION: champ absent ou incomplet: $key" >&2; exit 1; }
 done
+if [ "$(value execution_status)" = "complete" ]; then
+  case "$(value pending_request_id):$(value required_action_status)" in
+    none:none|none:resolved|resolved:none|resolved:resolved) ;;
+    *) echo "SESSION: Goal terminal avec une demande utilisateur en attente" >&2; exit 1 ;;
+  esac
+fi
+execution="$(value execution_status)"
+if [ "$execution" = "waiting-for-user" ]; then
+  [ "$(value pending_request_id)" != "none" ] || { echo "SESSION: questionnaire sans identifiant" >&2; exit 1; }
+  [ "$(value required_action_status)" = "pending" ] || { echo "SESSION: questionnaire sans réponse attendue" >&2; exit 1; }
+fi
+native_status="$(value native_goal_status)"
+native_id="$(value native_goal_id)"
+native_evidence="$(value native_goal_evidence)"
+native_blocked_condition="$(value native_goal_blocked_condition)"
+case "$native_status" in
+  active) [ "$native_id" != "none" ] && [ -n "$native_evidence" ] || { echo "SESSION: Goal natif actif sans identifiant ou preuve" >&2; exit 1; } ;;
+  unavailable) [ -n "$native_evidence" ] || { echo "SESSION: indisponibilité native sans preuve" >&2; exit 1; } ;;
+  blocked) [ "$native_id" != "none" ] && [ -n "$native_evidence" ] && [ -n "$native_blocked_condition" ] || { echo "SESSION: Goal natif bloqué sans identifiant, preuve ou cause séparée" >&2; exit 1; } ;;
+  *) echo "SESSION: native_goal_status invalide: $native_status" >&2; exit 1 ;;
+esac
 echo "État de session lisible et complet"

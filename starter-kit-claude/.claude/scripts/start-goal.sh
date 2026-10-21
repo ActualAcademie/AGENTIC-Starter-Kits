@@ -8,20 +8,69 @@ fi
 
 script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 config="$(cd "$script_dir/.." && pwd)"
+[ -x "$script_dir/validate-goal-budget.sh" ] && "$script_dir/validate-goal-budget.sh"
 state="$config/RUNTIME-STATE.md"
 events="$config/runtime-events.log"
 [ -f "$state" ] || { echo "GOAL: RUNTIME-STATE.md absent" >&2; exit 1; }
 
+native_status="${NATIVE_GOAL_STATUS:-}"
+native_id="${NATIVE_GOAL_ID:-none}"
+native_evidence="${NATIVE_GOAL_EVIDENCE:-}"
+case "$native_status" in
+  active)
+    [ "$native_id" != "none" ] && [ -n "$native_evidence" ] || { echo "GOAL: preuve, identifiant et état actif du Goal natif requis" >&2; exit 4; }
+    ;;
+  unavailable)
+    [ -n "$native_evidence" ] || { echo "GOAL: preuve d'indisponibilité de l'API native requise" >&2; exit 4; }
+    ;;
+  *)
+    echo "GOAL: NATIVE_GOAL_STATUS doit valoir active ou unavailable avant start-goal.sh" >&2
+    exit 4
+    ;;
+esac
+
 export GOAL_OBJECTIVE="$1" GOAL_VERIFICATION="$2" GOAL_CONSTRAINTS="$3" GOAL_BLOCKED="$4"
 export GOAL_CARD="${5:-none}" GOAL_BRANCH="${6:-none}" GOAL_DELEGATION="${7:-none}"
 export GOAL_AGENTS_CREATED="${8:-${GOAL_AGENTS_CREATED:-}}" GOAL_AGENT_ASSIGNMENTS="${9:-${GOAL_AGENT_ASSIGNMENTS:-}}"
+export GOAL_AGENT_EVIDENCE="${GOAL_AGENT_EVIDENCE:-}"
+export GOAL_REQUIRED_ROLES="${GOAL_REQUIRED_ROLES:-}"
 if [ "$GOAL_DELEGATION" = "none" ]; then
   echo "GOAL: travail sans analyse de délégation; fournir les agents et affectations, ou 'séquentiel justifié' avec sa raison" >&2
   exit 3
 fi
+if [ -z "$GOAL_REQUIRED_ROLES" ]; then
+  echo "GOAL: rôles spécialistes requis absents; définir GOAL_REQUIRED_ROLES avant le démarrage" >&2
+  exit 3
+fi
+if [ "$GOAL_DELEGATION" = "séquentiel justifié" ]; then
+  [ "${GOAL_SPECIALIST_AVAILABILITY:-}" = "none" ] && [ -n "${GOAL_SEQUENTIAL_REASON:-}" ] || {
+    echo "GOAL: séquentiel justifié exige la preuve qu aucun spécialiste n est disponible et une raison explicite" >&2
+    exit 3
+  }
+else
+  IFS=',' read -r -a required_roles <<< "$GOAL_REQUIRED_ROLES"
+  for role in "${required_roles[@]}"; do
+    case ",$GOAL_AGENTS_CREATED," in
+      *,"$role"@*,*) ;;
+      *) echo "GOAL: agent requis absent ou sans identifiant réel: $role" >&2; exit 3 ;;
+    esac
+  done
+fi
 if [ "$GOAL_DELEGATION" != "none" ] && [ "$GOAL_DELEGATION" != "séquentiel justifié" ] && { [ -z "$GOAL_AGENTS_CREATED" ] || [ -z "$GOAL_AGENT_ASSIGNMENTS" ]; }; then
   echo "GOAL: délégation annoncée sans agents créés et affectations explicites; création obligatoire avant le démarrage" >&2
   exit 3
+fi
+if [ "$GOAL_DELEGATION" != "séquentiel justifié" ] && [ -z "$GOAL_AGENT_EVIDENCE" ]; then
+  echo "GOAL: preuve observable de création ou activation des agents requise" >&2
+  exit 3
+fi
+if [[ "$GOAL_DELEGATION" =~ (parall|indépend|multi[-_]t[aâ]che|plusieurs) ]]; then
+  agent_count=$(( $(tr -cd ',' <<< "$GOAL_AGENTS_CREATED" | wc -c) + 1 ))
+  assignment_count=$(( $(tr -cd ',' <<< "$GOAL_AGENT_ASSIGNMENTS" | wc -c) + 1 ))
+  if [ "$agent_count" -lt 2 ] || [ "$assignment_count" -lt 2 ]; then
+    echo "GOAL: lots parallèles détectés sans au moins deux agents et affectations distinctes" >&2
+    exit 3
+  fi
 fi
 export GOAL_STARTED_AT="$(date -u '+%Y-%m-%dT%H:%M:%SZ')"
 export GOAL_SESSION_ID="goal-${GOAL_STARTED_AT//:/}"
@@ -49,12 +98,18 @@ values = {
     "goal_budget": "within-limit",
     "goal_blocked_condition": os.environ["GOAL_BLOCKED"],
     "goal_session_id": os.environ["GOAL_SESSION_ID"],
+    "native_goal_status": os.environ["NATIVE_GOAL_STATUS"],
+    "native_goal_id": os.environ.get("NATIVE_GOAL_ID", "none"),
+    "native_goal_evidence": os.environ["NATIVE_GOAL_EVIDENCE"],
+    "native_goal_blocked_condition": os.environ.get("NATIVE_GOAL_BLOCKED_CONDITION", "none"),
     "goal_delivery_status": "pending",
     "goal_delegation_plan": os.environ["GOAL_DELEGATION"],
     "goal_agents_created": os.environ.get("GOAL_AGENTS_CREATED") or ("none" if os.environ["GOAL_DELEGATION"] in ("none", "séquentiel justifié") else "missing"),
     "goal_agent_assignments": os.environ.get("GOAL_AGENT_ASSIGNMENTS") or ("none" if os.environ["GOAL_DELEGATION"] in ("none", "séquentiel justifié") else "missing"),
+    "goal_agent_evidence": os.environ.get("GOAL_AGENT_EVIDENCE") or ("none" if os.environ["GOAL_DELEGATION"] == "séquentiel justifié" else "missing"),
     "integration_branch": os.environ["GOAL_BRANCH"],
     "pushed_integration_commit": "none",
+    "integration_remote_evidence": "none",
     "pull_request_status": "not-required",
     "last_turn_status": "verified",
     "session_status": "active",
