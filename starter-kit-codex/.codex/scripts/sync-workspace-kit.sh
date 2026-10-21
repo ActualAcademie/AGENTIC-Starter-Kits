@@ -2,7 +2,11 @@
 set -euo pipefail
 script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 kit_root="$(cd "$script_dir/.." && pwd)"
-project_root="$(git -C "${KIT_PROJECT_ROOT:-$PWD}" rev-parse --show-toplevel 2>/dev/null || cd "$kit_root/.." && pwd)"
+if project_root="$(git -C "${KIT_PROJECT_ROOT:-$PWD}" rev-parse --show-toplevel 2>/dev/null)" && [ -n "$project_root" ]; then
+  :
+else
+  project_root="$(cd "$kit_root/.." && pwd)"
+fi
 manifest="$project_root/.workspace.toml"
 if [ ! -f "$manifest" ]; then
   cat > "$manifest" <<EOF
