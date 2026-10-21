@@ -22,6 +22,9 @@ if [ -f "$entry" ] && grep -q '^<!-- ENTRYPOINT-CONTRACT:' "$entry"; then
 fi
 mode="$(sed -n 's/^kit_mode = "\([^"]*\)"/\1/p' "$root/.workspace.toml" 2>/dev/null || echo native)"
 bash "$script_dir/ensure-tools.sh" --bootstrap >/dev/null
+if [ -x "$script_dir/flush-kit-report-outbox.sh" ]; then
+  bash "$script_dir/flush-kit-report-outbox.sh" >> "$project_config/kit-report-sync.log" 2>&1 || true
+fi
 status=0
 verification_mode=remote-verified
 bash "$script_dir/check-kit-update.sh" >/dev/null 2>"$project_config/.kit-update-error" || status=$?
