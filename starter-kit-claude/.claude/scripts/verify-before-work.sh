@@ -8,6 +8,7 @@ case "$branch" in main|master|dev|develop) echo "GITFLOW: travail interdit direc
 bash "$script_dir/repair-git-index-lock.sh"
 git -C "$root" diff --check
 if [ -f "$config/RUNTIME-STATE.md" ]; then
+  [ -x "$script_dir/guard-initialization-budget.sh" ] && bash "$script_dir/guard-initialization-budget.sh" "$config/RUNTIME-STATE.md"
   bash "$script_dir/require-specialist-delegation.sh"
 fi
 echo "Validation Git Flow avant travail OK: $branch"

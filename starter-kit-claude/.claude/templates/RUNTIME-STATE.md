@@ -8,6 +8,9 @@
 - Responsable: Coordinateur
 - execution_session: [[A_COMPLETER]]
 - execution_status: running
+- initialization_status: inactive
+- initialization_started_at: none
+- initialization_actions: 0
 - active_card: none
 - current_action: initialiser le contexte du projet
 - next_action: lire le cahier des charges et créer le Goal natif
