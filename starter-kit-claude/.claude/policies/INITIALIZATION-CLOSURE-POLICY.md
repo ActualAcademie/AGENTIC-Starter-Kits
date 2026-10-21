@@ -2,9 +2,9 @@
 
 ## Budget et périmètre obligatoires
 
-L'initialisation est une phase de cadrage complète bornée à 30 minutes de travail actif et 40 actions maximum. Elle doit lire et formaliser le cahier des charges, créer la structure complète des documents de conception, auditer le périmètre, décomposer le MVP et le Post-MVP, créer toutes les cartes détaillées nécessaires avec leurs labels, descriptions, dépendances et checklists, puis préparer la livraison d'onboarding. Elle ne doit pas implémenter les fonctionnalités ni exécuter les cartes. Les Goals suivants réalisent progressivement les cartes et complètent les documents au fil des preuves. Si le budget est atteint, le Coordinateur regroupe les éléments restants en un lot documenté, sans boucle ni répétition.
+L'initialisation est une phase courte de cadrage bornée à 15 minutes de travail actif et 20 actions maximum. Elle formalise le cahier des charges, crée les documents, décompose le MVP et le Post-MVP et crée les cartes détaillées. Elle ne développe rien, n'exécute aucune carte et ne réalise pas d'audit approfondi; les audits techniques, visuels, sécurité et exploitation deviennent des cartes distinctes.
 
-L’initialisation est un flux livré, pas un simple état de cadrage. Le Coordinateur garde le Goal `active` jusqu’à la preuve de chaque étape suivante.
+L'initialisation est livrée quand les documents, la matrice MVP/Post-MVP, les cartes et la livraison d'onboarding sont vérifiés; elle n'attend pas la readiness globale du produit.
 
 ## Séquence obligatoire
 
@@ -14,9 +14,9 @@ L’initialisation est un flux livré, pas un simple état de cadrage. Le Coordi
 4. Compléter le profil et les documents de conception sans inventer une technologie ou une obligation.
 5. Si Trello est activé, créer ou remettre en conformité les listes, labels nommés, cartes, numéros, dépendances, descriptions et checklists.
 6. Relire réellement chaque carte et enregistrer le nombre, l’ordre, la liste, les labels, la description et les checks observés. Un fichier local décrivant Trello ne constitue pas une preuve Trello.
-7. Pour un projet existant, auditer code, architecture, données, sécurité, UX, accessibilité, tests, documentation, CI, exploitation et risques. Chaque écart applicable devient une carte ; un contrôle hors cahier ou hors périmètre est abandonné et documenté comme non applicable.
+7. Pour un projet existant, inventorier rapidement les écarts visibles et créer les cartes d'audit correspondantes sans les approfondir ni les résoudre pendant l'initialisation.
 7 bis. Construire une matrice de couverture cahier → conception → carte locale → carte distante. Vérifier le nombre, les identifiants, les phases MVP/Post-MVP, les dépendances, les étiquettes, les descriptions, les checklists et les preuves de relecture pour chaque carte. Un fichier local ou un tableau partiellement synchronisé ne constitue jamais une preuve de création complète ; tant que la comparaison distante n'est pas vérifiée, `trello_sync_status` reste `syncing` ou `needs-review` et l'initialisation ne peut pas être déclarée terminée.
-8. Inscrire dans le Goal le plan d’agents, les lots, les fichiers autorisés, les preuves et l’agent intégrateur avant tout travail parallèle.
+8. Inscrire le plan d'agents et les lots d'onboarding. Les agents d'implémentation et les audits détaillés restent réservés aux cartes suivantes.
 9. Créer la branche d’onboarding, committer seulement les artefacts autorisés, pousser, ouvrir la PR vers `dev`, vérifier son état et ses contrôles, puis relire la branche distante.
 
 ## Ouverture autonome de la PR d'onboarding
@@ -34,10 +34,10 @@ Une page GitHub ouverte, un formulaire prérempli ou une PR seulement préparée
 
 ## Reprise obligatoire avant toute conclusion
 
-Si `docs/design/design-readiness.md` est encore en `draft`, `review` ou `rework`, cela signifie que la conception est incomplète, pas que l'initialisation est bloquée. Le Coordinateur conserve le Goal actif, passe l'étape en `conception`, crée ou active les agents Concepteur et Auditeur requis, puis exécute immédiatement la prochaine action de conception inscrite dans `next_action`. Il ne rend pas la main avec un simple constat « conception à terminer » et ne demande pas à l'utilisateur de dire « continue ».
+Si `docs/design/design-readiness.md` est encore en `draft`, `review` ou `rework`, l'initialisation enregistre ce statut et crée les cartes de conception manquantes; elle ne lance pas la réalisation de ces cartes et ne bloque pas l'onboarding.
 
 Un état `blocked` pendant l'initialisation n'est autorisé que si une dépendance externe ou une décision explicitement humaine empêche réellement toute action autonome. Dans ce cas, `next_action` doit identifier l'événement attendu et les tâches indépendantes doivent être terminées ou attribuées. Une conception encore modifiable, un audit non lancé, une carte non créée, une PR non ouverte ou un outil gratuit installable ne sont jamais des blocages.
 
-L'absence de validation indépendante des stories P0, une conception en `review`, une branche d'onboarding non publiée, une PR d'onboarding non ouverte ou non relue, ainsi que des `audit-gate` ou `delivery-gate` ouverts sont des obligations de travail, pas des blocages externes. Le Coordinateur crée ou réactive l'Auditeur, termine la conception, publie la branche, ouvre la PR, attend ses contrôles et relit les gates dans le même Goal. Il ne passe à `blocked` que si l'une de ces actions est techniquement impossible après alternatives vérifiées.
+L'absence de validation indépendante des stories P0, une conception en `review` et des `audit-gate` ouverts sont des cartes de travail à planifier, pas des blocages de l'initialisation. Seuls les artefacts d'onboarding, la branche et la PR d'onboarding doivent être livrés dans ce Goal.
 
 La fin d’onboarding ne demande le démarrage du développement qu’après cette porte complète. Toute autre conclusion est un échec de validation.
