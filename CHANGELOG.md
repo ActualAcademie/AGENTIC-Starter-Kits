@@ -1,5 +1,12 @@
 ## Unreleased
 
+## 1.16.75 - 2026-10-21
+
+- Borne l'initialisation à 15 minutes et 20 actions.
+- Sépare explicitement cadrage, documentation, cartes et audits détaillés.
+- Ajoute une garde exécutable de budget d'initialisation.
+- Empêche les boucles de rapports spécialistes et les états runtime ambigus.
+
 ## 1.16.74 - 2026-10-20
 
 - Rend les erreurs GitHub de lecture explicites au lieu de les confondre avec l'absence de rapports.
