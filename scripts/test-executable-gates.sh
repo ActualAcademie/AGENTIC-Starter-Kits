@@ -300,7 +300,8 @@ EOF
   grep -q 'Événement hook JSON invalide' "$root/starter-kit-$kit/.$kit/hooks/pre-tool-use.sh"
   grep -q 'le runtime et reprendre' "$root/starter-kit-$kit/.$kit/hooks/pre-tool-use.sh"
   grep -q 'tool_use_id' "$root/starter-kit-$kit/.$kit/hooks/post-tool-use.sh"
-  grep -q 'gh.*pr.*create' "$root/starter-kit-$kit/.$kit/hooks/permission-request.sh"
+  grep -Fq 'api[.]' "$root/starter-kit-$kit/.$kit/hooks/permission-request.sh"
+  grep -Fq 'g[h]' "$root/starter-kit-$kit/.$kit/hooks/permission-request.sh"
 done
 
 for kit in codex claude; do

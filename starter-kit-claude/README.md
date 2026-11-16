@@ -115,6 +115,10 @@ bash .claude/scripts/preflight.sh
 
 `Preflight OK` confirme que le cahier est accepté, que le profil est complet et que les contrôles structurels du kit passent.
 
+## Facturation externe
+
+Les scripts d’initialisation parcourent les noms des variables exportées et détectent les familles courantes de credentials API, jetons d’accès et configurations d’authentification cloud. La présence d’un nom correspondant suffit, même si sa valeur est vide; le script ne déréférence ni n’affiche les valeurs. Un credential détecté bloque l’initialisation sauf si `AGENTIC_EXTERNAL_BILLING_APPROVED=1` est défini explicitement; cet opt-in désactive entièrement ce contrôle pour cette exécution. La détection s’appuie sur les noms conventionnels et ne peut pas repérer une valeur placée sous un nom arbitraire; ses motifs larges peuvent aussi bloquer une configuration non facturable. Les tests utilisent uniquement des fixtures synthétiques. Le hook PermissionRequest laisse passer la simple mention d’un nom de credential dans une commande locale; il refuse les clients curl, wget, http et httpie vers les endpoints OpenAI et Anthropic couverts, les commandes de push détectées vers les branches protégées et les commandes destructives. Ce filtre textuel ne garantit pas l’innocuité d’un script arbitraire ou obfusqué.
+
 ## Utilisation quotidienne
 
 Après l'onboarding, décrire une tâche avec son résultat attendu et ses critères d'acceptation. Le Coordinateur attribue ensuite les rôles, demande des preuves et impose l'audit avant clôture.
