@@ -242,6 +242,10 @@ Le kit est conçu avec une politique de sécurité explicite. Il protège le pro
 
 Avant de l’utiliser, lisez [SECURITY.md](SECURITY.md). Il explique les données à anonymiser, les secrets à ne jamais transmettre, les contrôles disponibles, les limites du kit et le signalement responsable. Les décisions de sécurité critiques restent validées par une personne autorisée.
 
+La garde d’initialisation parcourt les noms des variables exportées et bloque les familles conventionnelles de credentials API, jetons d’accès et configurations d’authentification cloud, même si la valeur est vide. Elle ne déréférence ni n’affiche les valeurs; un nom arbitraire peut lui échapper, et un motif large peut bloquer une configuration non facturable. `AGENTIC_EXTERNAL_BILLING_APPROVED=1` désactive entièrement cette garde pour l’exécution concernée.
+
+Le hook PermissionRequest autorise une mention locale de credential et refuse les clients curl, wget, http ou httpie vers les endpoints couverts d’OpenAI et Anthropic, ainsi que les commandes de push détectées vers les branches protégées et les commandes destructives. Ce filtre textuel reste heuristique; il ne garantit pas la détection d’appels indirects ou obfusqués.
+
 ## Installation et premier démarrage
 
 Le guide complet et unique est [INSTALLATION.md](INSTALLATION.md). Il explique les prérequis, la copie du kit, l’initialisation, la conversation obligatoire, le choix du gestionnaire de suivi, la configuration des technologies, la conception, le premier work item, les tests, le GitFlow et la première livraison.
