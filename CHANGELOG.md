@@ -1,6 +1,6 @@
 ## Unreleased
 
-- Étend les contrôles de credentials externes par familles de noms de variables exportées et aligne les hooks PermissionRequest sur les actions détectées, sans lire ni afficher leurs valeurs; documente l’opt-in et ses limites.
+- Étend les contrôles de credentials externes par familles de noms de variables exportées et aligne les hooks PermissionRequest sur les actions détectées, sans lire ni afficher leurs valeurs; documente l’opt-in et ses limites, et réaligne les gates executable/sandbox sur le comportement du hook.
 
 - Bloque la génération de workflows hébergés pour une visibilité privée ou inconnue sans approbation explicite et preuve d’une limite d’usage, avec un délai maximal par job borné.
 - Documente les champs d’attestation locale et précise qu’un timeout par job ne garantit pas un plafond de facturation mensuel.
