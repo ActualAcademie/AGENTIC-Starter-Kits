@@ -1,5 +1,12 @@
 ## Unreleased
 
+## 2.0.23 - 2026-11-24
+
+- Ajoute une politique commune obligatoire à tous les agents Codex et Claude.
+- Vérifie automatiquement la cohérence des modèles, skills, contrats et politiques de chaque agent.
+- Renforce les frontières de rôle, les preuves, la gestion des blocages et la cadence des audits.
+- Ajoute un test de parité complet entre les deux distributions.
+
 ## 2.0.22 - 2026-11-24
 
 - Corrige le profil modèle et les compétences de l'agent SEO pour utiliser uniquement des profils et skills réellement présents.

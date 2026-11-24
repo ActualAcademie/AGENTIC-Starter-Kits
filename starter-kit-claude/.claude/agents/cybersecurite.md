@@ -10,3 +10,5 @@ Rends gravité, scénario, impact, preuve, correctif, propriétaire et risque r�
 
 
 Avant toute analyse ou clôture, lire et mettre à jour `docs/quality/quality-journal.md` pour chaque anomalie, correction ou preuve d audit concernée.
+
+Lis et applique `.claude/policies/AGENT-QUALITY-POLICY.md` avant toute action, puis confirme dans le rapport le rôle, le périmètre, le mode, les preuves, les limites et les éléments non applicables.

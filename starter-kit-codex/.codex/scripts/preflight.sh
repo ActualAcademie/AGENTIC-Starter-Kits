@@ -19,6 +19,8 @@ for file in KIT.toml START-HERE.md ORCHESTRATION.md CONVERSATION-MODES.md PROJEC
   [ -f "$config/$file" ] || { echo "MANQUANT: .codex/$file"; fail=1; }
 done
 
+[ -f "$config/policies/AGENT-QUALITY-POLICY.md" ] || { echo "POLITIQUE AGENTS MANQUANTE: AGENT-QUALITY-POLICY.md"; fail=1; }
+
 if rg -n --hidden --glob '!.git/**' --glob '!node_modules/**' -- '-----BEGIN (RSA|OPENSSH|EC|PRIVATE) KEY-----|AKIA[0-9A-Z]{16}|ghp_[A-Za-z0-9]{20,}|sk-[A-Za-z0-9]{20,}' "$root"; then
   echo "SECRET POTENTIEL DETECTE"; fail=1
 fi
@@ -29,7 +31,7 @@ root = pathlib.Path(sys.argv[1])
 config = root / '.codex'
 found = []
 for path in root.rglob('*'):
-    if path.is_file() and '.git' not in path.parts and 'node_modules' not in path.parts:
+    if path.is_file() and '.git' not in path.parts and 'node_modules' not in path.parts and not ({'work-items', 'reports', 'metrics'} & set(path.parts)):
         if chr(0x2014) in path.read_text(errors='ignore'):
             found.append(str(path))
 if found:
@@ -136,6 +138,13 @@ for agent in (config / 'agents').glob('*.toml'):
     if not profile_data or data['model'] != profile_data['model']:
         print(f'MODELE AGENT INCOHERENT: {agent}')
         raise SystemExit(1)
+    if 'policies/AGENT-QUALITY-POLICY.md' not in ' '.join(data.get('must_read', [])):
+        print(f'POLITIQUE AGENT MANQUANTE: {agent}')
+        raise SystemExit(1)
+    for skill in data.get('skills', []):
+        if not (config / 'skills' / skill / 'SKILL.md').is_file():
+            print(f'SKILL AGENT MANQUANTE: {agent}: {skill}')
+            raise SystemExit(1)
 if not required_agents.issubset(seen):
     print(f'AGENTS INCOMPLETS: attendus={sorted(required_agents)} obtenus={sorted(seen)}')
     raise SystemExit(1)
