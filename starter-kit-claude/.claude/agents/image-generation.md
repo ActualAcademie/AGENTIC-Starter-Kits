@@ -17,3 +17,5 @@ Pour une demande de photo, vise un rendu photoréaliste, naturel, premium et pro
 Documente dans `docs/design/media-inventory.md` le brief, la provenance, l'outil ou la source, l'auteur, la date, la licence, l'attribution, les retouches, le fichier, l'usage, le texte alternatif et les variantes. Une image générée ne peut jamais servir de preuve d'un événement, d'un témoignage ou d'une personne réelle. Ne supprime pas de filigrane et n'imite pas une personne identifiable sans autorisation.
 
 Avant livraison, fournis les rendus observés, le contrôle des artefacts, le poids et le format, l'accessibilité, le comportement au zoom, au mode sombre et sur mobile, puis laisse QA vérifier l'intégration réelle et l'Auditeur relire indépendamment.
+
+Lis et applique `.claude/policies/AGENT-QUALITY-POLICY.md` avant toute action, puis confirme dans le rapport le rôle, le périmètre, le mode, les preuves, les limites et les éléments non applicables.

@@ -1,5 +1,32 @@
 ## Unreleased
 
+## 2.0.23 - 2026-11-24
+
+- Ajoute une politique commune obligatoire à tous les agents Codex et Claude.
+- Vérifie automatiquement la cohérence des modèles, skills, contrats et politiques de chaque agent.
+- Renforce les frontières de rôle, les preuves, la gestion des blocages et la cadence des audits.
+- Ajoute un test de parité complet entre les deux distributions.
+
+## 2.0.22 - 2026-11-24
+
+- Corrige le profil modèle et les compétences de l'agent SEO pour utiliser uniquement des profils et skills réellement présents.
+- Ajoute une politique complète SEO, GEO et E-E-A-T avec périmètre, preuves, sources, revalidation et interdictions anti-fabrication.
+- Enregistre l'agent dans les inventaires et contrats spécialistes Codex et Claude.
+- Ajoute un test dédié qui vérifie le profil, les skills, la politique et le routage SEO.
+
+## 2.0.21 - 2026-11-24
+
+- Ajoute l'agent spécialisé SEO, GEO et E-E-A-T pour les contenus publics et les interfaces trouvables et crédibles.
+- Route automatiquement les demandes de référencement, moteurs génératifs, auteur et confiance vers ce spécialiste.
+- Impose des sources vérifiées et interdit les promesses de classement, faux signaux d'autorité et données structurées trompeuses.
+
+## 2.0.20 - 2026-11-24
+
+- Renforce l'agent frontend avec une politique obligatoire de refonte sur composition indépendante.
+- Impose une architecture modulaire, réutilisable et vérifiable au lieu de composants monolithiques ou de retouches superficielles.
+- Regroupe les audits navigateur, responsive et accessibilité en passe finale pour accélérer l'implémentation sans réduire la preuve de livraison.
+- Ajoute un test de parité du contrat frontend Codex et Claude.
+
 ## 2.0.19 - 2026-11-19
 
 - Supprime automatiquement les branches de travail locales et distantes après fusion vérifiée dans dev ou develop.

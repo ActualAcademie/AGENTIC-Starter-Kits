@@ -6,7 +6,33 @@ Ce document est la référence synthétique du comportement livré par les kits.
 
 | Élément | État | Preuve |
 |---|---|---|
-| Version actuelle | `2.0.19` | `VERSION`, `starter-kit-codex/.codex/KIT.toml`, `starter-kit-claude/.claude/KIT.toml` |
+| Version actuelle | `2.0.23` | `VERSION`, `starter-kit-codex/.codex/KIT.toml`, `starter-kit-claude/.claude/KIT.toml` |
+
+## Version 2.0.23
+
+- Tous les agents lisent et appliquent une politique commune de qualité, rôle, preuves, blocage et clôture.
+- Le preflight refuse un agent dont le profil, le modèle, la skill ou la politique est absent ou incohérent.
+- Un test de parité vérifie les dix-neuf agents Codex et Claude avant livraison.
+
+## Version 2.0.22
+
+- Corrige le profil et les compétences déclarés par l'agent SEO afin qu'ils soient validés par le preflight.
+- Ajoute la politique SEO, GEO et E-E-A-T, les contrats et l'inventaire spécialistes dans les deux kits.
+- Exige une matrice de preuve, les éléments non applicables et une revalidation rattachée au SHA ou au déploiement.
+- Vérifie automatiquement la cohérence du spécialiste SEO dans les deux distributions.
+
+## Version 2.0.21
+
+- Ajoute l'agent SEO spécialisé en SEO technique, GEO et E-E-A-T.
+- Route les demandes publiques de référencement, découvrabilité, sources, auteur et confiance.
+- Exige des preuves et interdit les signaux d'autorité ou données structurées inventés.
+
+## Version 2.0.20
+
+- Force une composition indépendante avant toute refonte frontend au lieu de retoucher aveuglément l'ancien arbre.
+- Exige une architecture séparée entre layouts, composants, primitives, hooks, types, données et styles selon le périmètre.
+- Exige une carte de composition, un inventaire de réutilisation et une preuve visuelle finale rattachée au même SHA.
+- Réserve les audits complets responsive, navigateur, accessibilité et animation à la fin du lot, à une carte dédiée ou à une demande explicite.
 
 ## Version 2.0.8
 
