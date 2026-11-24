@@ -2,6 +2,8 @@
 
 ## Principe
 
+Toute question ou demande adressée à l'utilisateur, quel que soit l'agent et le type de décision, doit passer par l'interface interactive native ou son secours persistant officiel. Un message libre ne constitue jamais une demande valide et ne peut pas suspendre ou clôturer un Goal.
+
 Une demande ponctuelle et un objectif persistant ne sont pas équivalents. Pour un travail multi-étapes, le Coordinateur doit utiliser le mécanisme d'objectif persistant de l'environnement lorsqu'il est disponible, avec une fin mesurable, les preuves attendues, les contraintes, le budget et la condition de blocage.
 
 Cette politique ne prétend pas transformer une conversation ordinaire en boucle autonome. Si l'environnement ne fournit pas d'objectif ou de session persistante, l'agent conserve l'état local et indique clairement que la reprise nécessite un nouveau tour utilisateur.

@@ -1,5 +1,7 @@
 # Historique des versions
 
+| 2.0.26 | 2026-11-24 | Étend les demandes interactives persistantes à tous les agents et tous les types de décisions utilisateur. |
+
 | 2.0.25 | 2026-11-24 | Corrige la persistance des questions interactives dans le projet courant et teste la reprise par identifiant. |
 
 | 2.0.24 | 2026-11-24 | Rend le questionnaire interactif d'initialisation persistant et obligatoire dans Codex et Claude. |

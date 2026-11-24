@@ -21,6 +21,7 @@ Avant activation, enregistrer dans `RUNTIME-STATE.md` :
 Un objectif actif n'autorise pas une clôture fondée sur une impression. La clôture exige les preuves du work item, l'état terminal local et la vérification du dernier tour. `idle` ou `turn completed` ne signifie pas que les outils ont tous réussi.
 
 Lorsqu'une décision utilisateur est réellement indispensable, le Coordinateur utilise `waiting-for-user`. Il émet une seule question structurée avec un identifiant de demande et des choix numérotés, renseigne `pending_request_id`, `pending_turn_id` et `required_action_status: pending`, puis interdit toute reprise automatique tant qu'une réponse n'est pas reçue. Il ne répète pas la question à chaque tour et ne transforme pas cette attente en `blocked`.
+Toute question ou demande adressée à l'utilisateur, quel que soit l'agent et le type de décision, doit passer par l'interface interactive native ou son secours persistant officiel. Un message libre ne constitue jamais une demande valide et ne peut pas suspendre ou clôturer un Goal.
 
 ## Reprise et limites
 
