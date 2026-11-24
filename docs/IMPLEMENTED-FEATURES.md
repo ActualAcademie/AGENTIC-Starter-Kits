@@ -6,7 +6,20 @@ Ce document est la référence synthétique du comportement livré par les kits.
 
 | Élément | État | Preuve |
 |---|---|---|
-| Version actuelle | `2.0.19` | `VERSION`, `starter-kit-codex/.codex/KIT.toml`, `starter-kit-claude/.claude/KIT.toml` |
+| Version actuelle | `2.0.21` | `VERSION`, `starter-kit-codex/.codex/KIT.toml`, `starter-kit-claude/.claude/KIT.toml` |
+
+## Version 2.0.21
+
+- Ajoute l'agent SEO spécialisé en SEO technique, GEO et E-E-A-T.
+- Route les demandes publiques de référencement, découvrabilité, sources, auteur et confiance.
+- Exige des preuves et interdit les signaux d'autorité ou données structurées inventés.
+
+## Version 2.0.20
+
+- Force une composition indépendante avant toute refonte frontend au lieu de retoucher aveuglément l'ancien arbre.
+- Exige une architecture séparée entre layouts, composants, primitives, hooks, types, données et styles selon le périmètre.
+- Exige une carte de composition, un inventaire de réutilisation et une preuve visuelle finale rattachée au même SHA.
+- Réserve les audits complets responsive, navigateur, accessibilité et animation à la fin du lot, à une carte dédiée ou à une demande explicite.
 
 ## Version 2.0.8
 
