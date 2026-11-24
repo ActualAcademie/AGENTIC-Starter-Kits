@@ -6,9 +6,17 @@ Ce document est la référence synthétique du comportement livré par les kits.
 
 | Élément | État | Preuve |
 |---|---|---|
-| Version actuelle | `2.0.30` | `VERSION`, `starter-kit-codex/.codex/KIT.toml`, `starter-kit-claude/.claude/KIT.toml` |
+| Version actuelle | `2.0.31` | `VERSION`, `starter-kit-codex/.codex/KIT.toml`, `starter-kit-claude/.claude/KIT.toml` |
 
 ## Version 2.0.30
+
+## Version 2.0.31
+
+- Ajoute une matrice de récupération bornée pour les outils et le navigateur.
+- Corrige immédiatement les sessions, chemins et permissions avant de changer de voie.
+- Utilise connecteur, CLI/API, contrôle local ou fixture comme alternatives vérifiables.
+- Isole uniquement la tâche dépendante et poursuit les tâches indépendantes sans boucle globale.
+- Ajoute un test de non-régression commun à Codex et Claude.
 
 - Le plan spécialiste vérifie le registre officiel des rôles dans les deux kits.
 - Le Coordinateur ne peut jamais être présenté comme agent additionnel.

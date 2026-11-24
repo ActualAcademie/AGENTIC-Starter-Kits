@@ -1,5 +1,12 @@
 ## Unreleased
 
+## 2.0.31 - 2026-11-24
+
+- Renforce la récupération autonome des outils et du navigateur.
+- Impose une correction immédiate, une alternative vérifiable et une limite de deux échecs identiques.
+- Empêche l'indisponibilité du navigateur de bloquer les tâches indépendantes.
+- Ajoute les tests de non-boucle et met à jour la documentation Codex et Claude.
+
 ## 2.0.30 - 2026-11-24
 
 - Renforce la séparation des rôles dans Codex et Claude avec le registre officiel obligatoire.

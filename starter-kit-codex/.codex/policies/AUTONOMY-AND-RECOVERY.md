@@ -88,6 +88,8 @@ Avant de déclarer un blocage, l'agent doit :
 
 Une intégration absente, une commande indisponible, une CI en attente, un plugin non activé ou une API temporairement inaccessible ne justifie pas l'arrêt global. L'agent utilise le mode local documenté, prépare les données à synchroniser, conserve un checkpoint et reprend la synchronisation dès que l'intégration est disponible.
 
+Pour un outil ou un navigateur défaillant, appliquer la matrice de récupération du registre des outils: diagnostiquer, corriger la session ou le chemin, relancer une fois, changer de voie après deux échecs identiques, puis isoler la seule tâche dépendante. Le Coordinateur doit ensuite passer à la prochaine tâche indépendante; il ne répète pas le même message de blocage et ne clôture pas le Goal tant qu'une action autonome reste possible.
+
 ## Interdictions
 
 Ne jamais inventer une source, masquer un échec, désactiver un contrôle pour obtenir du vert, utiliser `--no-verify`, contourner une sécurité ou déclarer une validation non exécutée. Une recherche internet informe une décision, mais ne remplace pas un test local. Une commande non supportée doit être remplacée par l’alternative officielle compatible avec l’environnement, puis vérifiée. Les modifications existantes hors périmètre doivent être préservées et signalées, jamais écrasées.
