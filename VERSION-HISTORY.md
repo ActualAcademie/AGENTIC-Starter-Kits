@@ -1,5 +1,7 @@
 # Historique des versions
 
+| 2.0.31 | 2026-11-24 | Ajoute la récupération bornée des outils et du navigateur, les alternatives vérifiables et la poursuite des tâches indépendantes. |
+
 | 2.0.30 | 2026-11-24 | Renforce la séparation exécutable des rôles spécialistes, exige la correspondance thread/identifiant et ajoute les tests de non-substitution. |
 
 | 2.0.29 | 2026-11-24 | Centralise l'autonomie continue, le routage spécialiste et la classification stricte des blocages. |
