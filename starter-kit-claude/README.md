@@ -2,7 +2,7 @@
 
 La version 2.0 inclut le runtime canonique, la migration shared et les contrôles de release multi-plateforme.
 
-![Version du kit](https://img.shields.io/badge/version-2.0.28-blue.svg)
+![Version du kit](https://img.shields.io/badge/version-2.0.29-blue.svg)
 
 Les gestionnaires sélectionnables (local, Trello ou GitHub Projects) suivent la politique commune dans `starter-kit-claude/.claude/policies/PROJECT-TRACKER-VISUAL-SYSTEM.md`.
 

@@ -6,7 +6,14 @@ Ce document est la référence synthétique du comportement livré par les kits.
 
 | Élément | État | Preuve |
 |---|---|---|
-| Version actuelle | `2.0.28` | `VERSION`, `starter-kit-codex/.codex/KIT.toml`, `starter-kit-claude/.claude/KIT.toml` |
+| Version actuelle | `2.0.29` | `VERSION`, `starter-kit-codex/.codex/KIT.toml`, `starter-kit-claude/.claude/KIT.toml` |
+
+## Version 2.0.29
+
+- Politique commune de continuation autonome et de classement des blocages.
+- Enchaînement automatique des cartes autorisées GitHub Projects et Trello.
+- Blocage humain limité aux décisions critiques, irréversibles ou sensibles.
+- Test de parité Codex/Claude ajouté.
 
 ## Version 2.0.28
 
