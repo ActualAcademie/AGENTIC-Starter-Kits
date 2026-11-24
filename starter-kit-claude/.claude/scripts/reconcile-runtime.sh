@@ -9,15 +9,35 @@ else
 fi
 [ -f "$state" ] || { echo "RECONCILIATION: RUNTIME-STATE.md absent" >&2; exit 1; }
 native="$(sed -n 's/^- native_goal_status: //p' "$state" | head -1)"
+next="$(sed -n 's/^- next_action: //p' "$state" | head -1)"
+condition="$(sed -n 's/^- goal_blocked_condition: //p' "$state" | head -1)"
+[ -n "$condition" ] || condition="$(sed -n 's/^- native_goal_blocked_condition: //p' "$state" | head -1)"
 case "$native" in
   active) execution=running; session=active; goal=active; evidence="native-goal-active-runtime-reconciled" ;;
-  blocked) execution=blocked; session=blocked; goal=blocked; evidence="native-goal-blocked-runtime-reconciled" ;;
+  blocked)
+    case "$condition" in
+      *"externe inaccessible"*|*"décision humaine"*|*"decision humaine"*)
+        execution=blocked; session=blocked; goal=blocked; evidence="native-goal-blocked-runtime-reconciled" ;;
+      *)
+        if [ -n "$next" ] && [[ ! "$next" =~ ^(none|aucune|aucun|A_COMPLETER)$ ]]; then
+          execution=needs-review; session=active; goal=active; evidence="native-goal-blocked-local-recovery-available"
+        else
+          execution=blocked; session=blocked; goal=blocked; evidence="native-goal-blocked-runtime-reconciled"
+        fi ;;
+    esac
+    ;;
   paused) execution=paused; session=paused; goal=paused; evidence="native-goal-paused-runtime-reconciled" ;;
-  unavailable) execution=needs-review; session=active; goal=active; evidence="native-goal-unavailable-runtime-reconciled" ;;
+  unavailable)
+    native_id="$(sed -n 's/^- native_goal_id: //p' "$state" | head -1)"
+    if [ -n "$native_id" ] && [ "$native_id" != "none" ]; then
+      native=active; execution=running; session=active; goal=active; evidence="native-goal-id-preserved-runtime-reconciled"
+    else
+      execution=needs-review; session=active; goal=active; evidence="native-goal-unavailable-runtime-reconciled"
+    fi ;;
   *) echo "RECONCILIATION: statut natif inconnu ou requis: $native" >&2; exit 4 ;;
 esac
 now="$(date -u '+%Y-%m-%dT%H:%M:%SZ')"
 tmp="$state.reconcile.$$"
-sed -e "s/^- execution_status: .*/- execution_status: $execution/" -e "s/^- session_status: .*/- session_status: $session/" -e "s/^- goal_status: .*/- goal_status: $goal/" -e "s/^- last_observable_evidence: .*/- last_observable_evidence: $now | $evidence/" "$state" > "$tmp"
+sed -e "s/^- execution_status: .*/- execution_status: $execution/" -e "s/^- native_goal_status: .*/- native_goal_status: $native/" -e "s/^- session_status: .*/- session_status: $session/" -e "s/^- goal_status: .*/- goal_status: $goal/" -e "s/^- last_observable_evidence: .*/- last_observable_evidence: $now | $evidence/" "$state" > "$tmp"
 mv "$tmp" "$state"
 printf 'RUNTIME RECONCILIÉ: native_goal_status=%s execution_status=%s goal_status=%s\n' "$native" "$execution" "$goal"

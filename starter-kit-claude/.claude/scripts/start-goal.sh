@@ -12,6 +12,7 @@ config="$(cd "$script_dir/.." && pwd)"
 state="$config/RUNTIME-STATE.md"
 events="$config/runtime-events.log"
 [ -f "$state" ] || { echo "GOAL: RUNTIME-STATE.md absent" >&2; exit 1; }
+[ -x "$script_dir/prepare-context-manifest.sh" ] && bash "$script_dir/prepare-context-manifest.sh" >/dev/null
 
 native_status="${NATIVE_GOAL_STATUS:-}"
 native_id="${NATIVE_GOAL_ID:-none}"
@@ -64,6 +65,10 @@ if [ "$GOAL_DELEGATION" != "séquentiel justifié" ] && [ -z "$GOAL_AGENT_EVIDEN
   echo "GOAL: preuve observable de création ou activation des agents requise" >&2
   exit 3
 fi
+if [ "$GOAL_DELEGATION" != "séquentiel justifié" ]; then
+  [ -d "$GOAL_AGENT_EVIDENCE" ] || { echo "GOAL: dossier d’affectations spécialistes absent" >&2; exit 3; }
+  bash "$script_dir/verify-specialist-plan.sh" "${GOAL_DOMAIN:-general}" "$GOAL_AGENTS_CREATED" "$GOAL_AGENT_EVIDENCE" >/dev/null
+fi
 if [[ "$GOAL_DELEGATION" =~ (parall|indépend|multi[-_]t[aâ]che|plusieurs) ]]; then
   agent_count=$(( $(tr -cd ',' <<< "$GOAL_AGENTS_CREATED" | wc -c) + 1 ))
   assignment_count=$(( $(tr -cd ',' <<< "$GOAL_AGENT_ASSIGNMENTS" | wc -c) + 1 ))
@@ -74,6 +79,7 @@ if [[ "$GOAL_DELEGATION" =~ (parall|indépend|multi[-_]t[aâ]che|plusieurs) ]]; 
 fi
 export GOAL_STARTED_AT="$(date -u '+%Y-%m-%dT%H:%M:%SZ')"
 export GOAL_SESSION_ID="goal-${GOAL_STARTED_AT//:/}"
+[ -x "$script_dir/bind-session.sh" ] && bash "$script_dir/bind-session.sh" "${NATIVE_GOAL_ID:-$GOAL_SESSION_ID}" >/dev/null
 
 python3 - "$state" <<'PY'
 import os

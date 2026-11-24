@@ -8,7 +8,12 @@ if ! printf '%s' "$input" | jq -e . >/dev/null 2>&1; then
   exit 0
 fi
 tool_name="$(printf '%s' "$input" | jq -r '.tool_name // empty')"
-command_text="$(printf '%s' "$input" | jq -r '.command // .arguments.command // empty')"
+# Accept all supported event layouts emitted by Codex.
+command_text="$(printf '%s' "$input" | jq -r '.command // .cmd // .arguments.command // .arguments.cmd // .tool_input.command // .tool_input.cmd // empty')"
+if [ -x "$config/scripts/is-recovery-command.sh" ] && bash "$config/scripts/is-recovery-command.sh" "$tool_name" "$command_text"; then
+  printf '{"hookSpecificOutput":{"hookEventName":"PreToolUse","additionalContext":"Commande de récupération autorisée pour réparer l’état sans contourner les contrôles de livraison."}}\n'
+  exit 0
+fi
 if [ "$tool_name" = "Bash" ] && [ "$command_text" = "bash .codex/scripts/sync-workspace-kit.sh" ]; then
   printf '{"hookSpecificOutput":{"hookEventName":"PreToolUse","additionalContext":"Synchroniseur du kit autorisé pour rétablir la porte de session."}}\n'
   exit 0
@@ -68,7 +73,11 @@ if [ "$execution" = "waiting-for-user" ] || [ "$session" = "waiting-for-user" ];
 fi
 case "$tool" in
   Bash|apply_patch|Edit|Write|Agent)
-    if [[ "$native" == "required" || "$native" == "none" || "$next" == *A_COMPLETER* || -z "$next" || "$goal" == "none" && "$session" != "not-required" ]]; then
+    terminal_without_goal=false
+    if [[ "$execution" == "complete" && "$goal" == "none" && "$session" == "completed" ]]; then
+      terminal_without_goal=true
+    fi
+    if [[ "$native" == "required" || "$native" == "none" || "$next" == *A_COMPLETER* || -z "$next" || ( "$goal" == "none" && "$session" != "not-required" && "$terminal_without_goal" != true ) ]]; then
       printf '{"hookSpecificOutput":{"hookEventName":"PreToolUse","permissionDecision":"deny","permissionDecisionReason":"Action bloquée : état runtime, Goal ou prochaine action incohérents."}}\n'
       exit 0
     fi

@@ -1,11 +1,84 @@
 # Historique des versions
 
+| 2.0.19 | 2026-11-19 | Supprime les branches de travail après fusion vérifiée dans dev ou develop. |
+
+| 2.0.18 | 2026-11-19 | Isole les conversations, Goals, branches et rapports par scope persistant. |
+
+| 2.0.17 | 2026-11-19 | Récupère les verrous de démarrage périmés et distingue les processus actifs. |
+
+| 2.0.16 | 2026-11-19 | Ajoute l agent juriste, son routage, ses sources et ses garde-fous de décision humaine. |
+
+| 2.0.15 | 2026-11-18 | Livre systématiquement `.workspace.toml` avec le travail en cours et réaligne le contrat d entrée Codex. |
+
+| 2.0.14 | 2026-11-18 | Sérialise les sessions et protège le registre shared contre les collisions concurrentes. |
+
+| 2.0.13 | 2026-11-18 | Rend les corrections courantes rapides et reporte les audits lourds à la fin ou sur demande explicite. |
+
+| 2.0.12 | 2026-11-18 | Réduit les contrôles réseau et les recalculs SHA coûteux au démarrage tout en conservant une vérification forcée disponible. |
+
+| 2.0.11 | 2026-11-14 | Réduit le contexte des Goals et évite la réinjection des historiques complets. |
+
+| 2.0.10 | 2026-11-14 | Traite l épuisement du budget natif comme un arrêt technique du Goal et non comme un blocage projet. |
+
+| 2.0.9 | 2026-11-07 | Harmonise tous les agents spécialistes et impose des audits proportionnels regroupés en fin de carte ou réservés au mode audit. |
+
+| 2.0.8 | 2026-11-07 | Ajoute les modes d'exécution et limite les audits exhaustifs aux cartes d'audit, demandes explicites ou risques critiques. |
+
+| 2.0.7 | 2026-11-07 | Sépare les contrôles de régression indispensables des audits complets, regroupés en fin d'implémentation ou sur demande. |
+
+| 2.0.6 | 2026-11-07 | Corrige les faux blocages GitHub et la détection de branche d intégration. |
+
+| 2.0.5 | 2026-11-07 | Renforce la détection Docker multi-contexte et distingue CLI, daemon, socket et stack. |
+
+| 2.0.4 | 2026-11-06 | Autorise la reprise d initialisation sur un runtime terminé sans Goal actif. |
+
+| 2.0.3 | 2026-11-06 | Corrige l extraction du mode shared dans le diagnostic Codex. |
+
+| 2.0.2 | 2026-11-06 | Corrige la résolution de la racine Git depuis un kit shared lié symboliquement. |
+
+| 2.0.1 | 2026-11-06 | Corrige l affichage du mode shared dans le diagnostic Codex et aligne les manifestes. |
+
+| 2.0.0 | 2026-11-06 | Première fondation Agentic 2.0 : migration, runtime, orchestration spécialisée et portes de release. |
+
+| 1.18.2 | 2026-11-06 | Renforce la sécurité, l anonymisation et la validation des rapports produits par les deux kits. |
+
+| 1.18.1 | 2026-11-06 | Rend la cadence GitFlow et l'unicité de la PR par carte vérifiables par script et scénarios CI. |
+
 ## Objet
 
 Ce document constitue la vue chronologique du projet Agentic Starter Kits. Il complète `CHANGELOG.md`, qui contient le détail opérationnel de chaque entrée. Les versions correspondent aux évolutions consommables du kit Codex ou Claude, et non à chaque commit interne.
 
 | Version | Date | Évolution |
 |---|---|---|
+| 1.18.0 | 2026-11-06 | Rend les budgets Goal et les contrôles de contexte exécutables, avec scénarios négatifs et audit strict. |
+| 1.17.9 | 2026-11-06 | Ajoute la politique et le vérificateur du registre central des outils avec contrôle de parité Codex/Claude dans la CI. |
+| 1.17.8 | 2026-11-06 | Renforce le correcteur local des rapports, la déduplication, la pagination, l outbox atomique et les tests Codex/Claude. |
+| 1.17.7 | 2026-11-06 | Rend la synchronisation shared transactionnelle avec verrou, phases, rollback complet, préservation des fichiers consommateurs et tests dédiés. |
+| 1.17.6 | 2026-11-06 | Ajoute les scénarios comportementaux d initialisation et de reprise Codex/Claude, corrige le budget runtime initial et persiste la réconciliation du Goal natif. |
+| 1.17.5 | 2026-11-05 | Réduit la surproduction documentaire par une politique canonique, un audit de structure et l archivage des rapports temporaires. |
+| 1.17.4 | 2026-11-04 | Évite le blocage lorsque le Goal natif existe mais que le runtime le déclare temporairement indisponible. |
+| 1.17.3 | 2026-11-04 | Force la relecture complète des instructions et du runtime après toute mise à jour du kit. |
+| 1.17.2 | 2026-11-04 | Rend la synchronisation résiliente aux échecs DNS et distingue les canaux et causes de blocage. |
+| 1.17.1 | 2026-11-04 | Répare le runtime incomplet et le deadlock de reprise lorsque le statut Goal natif manque. |
+| 1.17.0 | 2026-10-25 | Regroupe les lots spécialisés, limite les relances et interdit les micro-audits sans changement d'état. |
+| 1.16.99 | 2026-10-25 | Simplifie les tableaux à trois colonnes stables : Backlog, In progress et Done. |
+| 1.16.98 | 2026-10-25 | Interdit les cartes GitHub Project terminées en brouillon et impose la conversion des brouillons suivis en Issues réelles. |
+| 1.16.97 | 2026-10-25 | Rend automatique la transition terminale après preuve complète et interdit les confirmations intermédiaires artificielles. |
+| 1.16.96 | 2026-10-24 | Ajoute un parcours de reprise rapide pour les projets existants, avec inventaire borné et audits détaillés reportés dans des cartes dédiées. |
+| 1.16.95 | 2026-10-24 | Ajoute les modèles de cahier universel, vierge, de reconstitution et de changement Post-MVP ainsi que le registre de rangement et déduplication. |
+| 1.16.94 | 2026-10-23 | Conserve les éléments natifs de GitHub Projects et applique le français uniquement au contenu géré par le kit. |
+| 1.16.93 | 2026-10-23 | Unifie les règles Trello et GitHub Projects dans une politique commune avec adaptation des statuts, labels, tâches, commentaires, synchronisation et livraison. |
+| 1.16.92 | 2026-10-23 | Rend le cahier initial du MVP immuable et crée une demande de changement séparée pour toute évolution postérieure. |
+| 1.16.91 | 2026-10-23 | Archive automatiquement le cahier dans un dossier projet versionné et dédupliqué, hors des répertoires locaux ignorés. |
+| 1.16.90 | 2026-10-23 | Autorise la reconstitution documentaire explicite d un cahier absent sans contourner la validation ni démarrer l implémentation. |
+| 1.16.89 | 2026-10-22 | Répare le deadlock du runtime absent par bootstrap automatique et idempotent avant la validation de session. |
+| 1.16.88 | 2026-10-22 | Corrige le routage des commandes de récupération dans les hooks Codex et Claude, avec régression sur les formes d événements supportées. |
+| 1.16.87 | 2026-10-22 | Preuves de connecteurs externes vérifiables, récentes et relues, avec rejet des attestations fictives et sensibles. |
+| 1.16.86 | 2026-10-21 | Registre pending idempotent et récupération fiable des rapports de sous-agents absents. |
+| 1.16.85 | 2026-10-21 | Délégation spécialiste vérifiable au démarrage avec affectations par rôle et refus des chevauchements. |
+| 1.16.84 | 2026-10-21 | Reprise du Goal natif avec fallback local lorsqu’une action autonome reste disponible, sans masquer les blocages externes. |
+| 1.16.83 | 2026-10-21 | Élimine le deadlock des hooks en autorisant uniquement les commandes de récupération sûres, avec scénarios Codex/Claude. |
+| 1.16.82 | 2026-10-21 | Canonisation automatique et idempotente de `RUNTIME-STATE.md` au démarrage, avec test Codex/Claude. |
 | 1.16.81 | 2026-10-21 | Auto-correction locale des problèmes connus et rapport anonymisé de correction. |
 | 1.16.80 | 2026-10-21 | Correcteur automatique contrôlé des rapports avec playbooks, tests et historique de correction. |
 | 1.16.79 | 2026-10-21 | Corrige la boucle de reprise lorsque l'état utilisateur est résiduel sans demande en attente. |

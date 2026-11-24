@@ -1,6 +1,10 @@
 # Kit d'orchestration Claude Code portable
 
-![Version du kit](https://img.shields.io/badge/version-1.16.81-blue.svg)
+La version 2.0 inclut le runtime canonique, la migration shared et les contrôles de release multi-plateforme.
+
+![Version du kit](https://img.shields.io/badge/version-2.0.19-blue.svg)
+
+Les gestionnaires sélectionnables (local, Trello ou GitHub Projects) suivent la politique commune dans `starter-kit-claude/.claude/policies/PROJECT-TRACKER-VISUAL-SYSTEM.md`.
 
 Le hook `SessionStart` initialise automatiquement `AGENTIC_TOOLS_HOME` et vérifie les outils de base avant toute tâche. Une session est refusée si une installation automatique ne permet pas de rendre ces outils disponibles.
 
@@ -49,6 +53,10 @@ Une preuve documentaire manquante est recherchée ou déléguée avant toute esc
 Les fichiers locaux d'onboarding sont créés avant la validation structurelle de première installation.
 
 Les gates d'audit et de livraison ouverts déclenchent la suite des actions autonomes jusqu'à leur preuve, sans blocage prématuré.
+
+Tout rebuild vérifie que le checkout correspond au dernier commit de `origin/dev` ou `origin/main`, puis compare le SHA de l'image et du conteneur avec ce commit via `verify-build-freshness.sh`.
+
+Un rebuild sans cible explicite `dev` ou `main` est refusé, comme tout rebuild lancé depuis une branche de fonctionnalité.
 
 ## Prérequis
 
@@ -106,6 +114,10 @@ bash .claude/scripts/preflight.sh
 ```
 
 `Preflight OK` confirme que le cahier est accepté, que le profil est complet et que les contrôles structurels du kit passent.
+
+## Facturation externe
+
+Les scripts d’initialisation parcourent les noms des variables exportées et détectent les familles courantes de credentials API, jetons d’accès et configurations d’authentification cloud. La présence d’un nom correspondant suffit, même si sa valeur est vide; le script ne déréférence ni n’affiche les valeurs. Un credential détecté bloque l’initialisation sauf si `AGENTIC_EXTERNAL_BILLING_APPROVED=1` est défini explicitement; cet opt-in désactive entièrement ce contrôle pour cette exécution. La détection s’appuie sur les noms conventionnels et ne peut pas repérer une valeur placée sous un nom arbitraire; ses motifs larges peuvent aussi bloquer une configuration non facturable. Les tests utilisent uniquement des fixtures synthétiques. Le hook PermissionRequest laisse passer la simple mention d’un nom de credential dans une commande locale; il refuse les clients curl, wget, http et httpie vers les endpoints OpenAI et Anthropic couverts, les commandes de push détectées vers les branches protégées et les commandes destructives. Ce filtre textuel ne garantit pas l’innocuité d’un script arbitraire ou obfusqué.
 
 ## Utilisation quotidienne
 
@@ -166,7 +178,7 @@ Après l’onboarding, générer si nécessaire le workflow GitHub Actions du pr
 bash .claude/scripts/generate-github-ci.sh
 ```
 
-Le générateur refuse de remplacer un workflow existant. Relire le fichier produit, définir les secrets dans GitHub et garder tout déploiement soumis aux validations décrites dans les politiques.
+La génération des runners GitHub hébergés est conditionnée par la visibilité déclarée dans `[delivery].github_repository_visibility`. Une visibilité `public` explicitement confirmée par le propriétaire suffit; `private` ou `unknown` exige `github_actions_private_billing_approved = true` et une référence de limite vérifiée dans `github_actions_usage_limit_evidence`. L’approbation vaut `false` et la preuve est vide par défaut; les clés absentes d’un ancien profil prennent les mêmes valeurs prudentes. Ces champs sont des attestations locales, non des vérifications en direct. `github_actions_max_minutes_per_run` (1 à 360, défaut 30) borne un job sans plafonner le cumul mensuel. Le workflow généré accorde uniquement `contents: read` et utilise une concurrence par workflow et référence avec annulation des exécutions obsolètes. Si la garde échoue, le générateur ne crée aucun workflow; il ne configure pas de runner auto-hébergé. Voir les politiques CI/CD et zéro dépense avant génération.
 
 ## Compatibilité machine
 
@@ -194,7 +206,7 @@ Le Concepteur complète ensuite `docs/` avec vision, user stories, parcours, arc
 
 Chaque Goal déclare les rôles spécialistes requis et leurs identifiants réels avant la première action. Le Coordinateur ne travaille pas seul lorsqu’un spécialiste est disponible. Le mode séquentiel exige une preuve explicite d’indisponibilité.
 
-Le bootstrap shared conserve le lien symbolique `CLAUDE.md` et installe le workflow unique `.github/workflows/update-workspace-kit.yml`.
+Le bootstrap shared conserve le lien symbolique `CLAUDE.md`; l’updater `.github/workflows/update-workspace-kit.yml` est absent par défaut et créé uniquement après demande explicite et validation de la garde de facturation.
 
 ## Gitflow obligatoire
 
@@ -202,7 +214,7 @@ Chaque feature, correctif ou tâche documentaire se fait sur une branche dédié
 
 Si une demande de livraison arrive alors que le checkout est sur une branche protégée, le refus est routé automatiquement vers une branche dédiée puis une PR vers `dev` ou `develop`. Ce contrôle ne doit pas interrompre le Goal ni demander une confirmation supplémentaire.
 
-Après vérification de `dev`, le Coordinateur crée, valide et fusionne automatiquement l’unique PR de promotion vers `main` lorsque la demande de livraison est active.
+Après vérification de `dev`, le Coordinateur peut préparer l’unique PR de promotion vers `main`, mais sa création ou sa fusion exige toujours une demande humaine explicite.
 
 
 ## Dossier de conception de niveau CDA
@@ -212,11 +224,11 @@ Le générateur de conception produit des documents structurés, mais aucun marq
 
 Le journal qualité partagé est `docs/quality/quality-journal.md`. Il est alimenté par tous les audits et toutes les corrections. Une anomalie possède un identifiant stable, une preuve, un propriétaire, une correction et une vérification indépendante.
 
-## Choix Trello obligatoire
+## Choix du gestionnaire de suivi
 
-Après acceptation du cahier des charges, l’agent demande une réponse explicite : `Veux-tu que je prépare un Trello complet avec toutes les tâches détaillées du projet ? Réponds oui ou non.` Le choix est enregistré dans `project-profile.toml`.
+Après acceptation du cahier des charges, choisir un seul mode dans `[tracking].mode` : `local` (recommandé par défaut), `github` ou `trello`. Le mode local conserve les work items dans le dépôt sans intégration externe. GitHub Projects organise des Issues, dont les tâches restent dans le corps Markdown; les champs disponibles dépendent du Project. Trello organise les cartes et checklists lorsqu’il est explicitement choisi.
 
-Avec `oui`, le Coordinateur et le Skill `trello-planning` construisent toujours `docs/project-management/trello-board.md` avec toutes les petites features, les cartes détaillées, les dépendances, les membres, les responsables, les checklists Definition of Done, les critères, les preuves, les tâches de sécurité, les tests, la documentation, l’audit et la livraison. Le fichier est ensuite synchronisé avec Trello si l’intégration est autorisée. Avec `non`, le projet continue sans tableau Trello.
+Le profil active uniquement le service distant sélectionné. Si l’intégration n’est pas disponible, le suivi reste local avec `pending_activation`; aucune synchronisation distante n’est déclarée sans relecture. Les statuts de travail communs sont `Todo`, `In Progress` et `Done`; le blocage et la revue sont des étiquettes ou métadonnées, pas des colonnes supplémentaires. Dans Trello, les membres assignés et la phase MVP/Post-MVP se suivent sur la carte; ils ne créent pas de colonnes.
 
 ## Documentation d’installation
 
@@ -235,7 +247,7 @@ Le kit Claude Code comprend 16 agents : six agents du noyau et dix spécialistes
 | `.claude/agents/cybersecurite.md` | Cybersécurité | menaces, vulnérabilités, contrôles et blocage critique |
 | `.claude/agents/auditeur.md` | Auditeur | vérification indépendante, preuves, régressions et décision |
 
-Les spécialistes optionnels sont activés dans `[agents]` de `.claude/project-profile.toml` : `produit`, `qa`, `devops`, `performance`, `ux_research`, `accessibilite`, `data`, `documentation`, `release` et `conformite`. Le Coordinateur les active selon les besoins détectés, le risque et le budget.
+Les spécialistes optionnels sont activés dans `[agents]` de `.claude/project-profile.toml` : `produit`, `qa`, `devops`, `performance`, `ux_research`, `accessibilite`, `data`, `documentation`, `release`, `conformite` et `juriste`. Le Coordinateur les active selon les besoins détectés, le risque et le budget.
 
 Le hook de fin distingue un événement générique du Goal d’un spécialiste identifié. Une référence orpheline ne bloque donc pas en boucle, mais un spécialiste réel sans rapport vérifiable reste bloqué.
 
@@ -263,12 +275,13 @@ Le dépôt central peut exécuter `scripts/auto-correct-kit-report.sh --report <
 | `documentation` | `.claude/agents/documentation.md` | Documentation utilisateur, API et exploitation. |
 | `release` | `.claude/agents/release.md` | Version, changelog, migration et notes de livraison. |
 | `conformite` | `.claude/agents/conformite.md` | Exigences RGPD, licences et preuves de conformité. |
+| `juriste` | `.claude/agents/juriste.md` | Recherche juridique sourcée et décision humaine attendue. |
 
 Le Coordinateur ne les appelle pas tous systématiquement. Il lit `.claude/SPECIALIST-AGENTS.md`, vérifie la condition d’activation, inscrit la justification dans le work item et exige le livrable correspondant.
 
 Une CI en cours ne clôture jamais le work item. Le Coordinateur attend les résultats, traite les erreurs, corrige les lints et les dettes historiques du périmètre par lots, puis relance les contrôles jusqu’à la Definition of Done.
 
-Le kit est actuellement en version `1.16.49`. Toute modification du kit doit mettre à jour ce README, le changelog et la version selon `VERSIONING.md`.
+Le kit est actuellement en version `2.0.19`. Toute modification du kit doit mettre à jour ce README, le changelog et la version selon `VERSIONING.md`.
 
 Le contrat central `.claude/policies/CORE-EXECUTION-CONTRACT.md` impose un registre d obligations, huit portes de validation et une reprise persistante. Une tâche ne peut être clôturée tant qu une obligation applicable ne possède pas de preuve.
 
@@ -304,9 +317,9 @@ Après une instruction « fais tout », le Coordinateur poursuit jusqu’à la D
 
 ## Synchronisation automatique
 
-Le préflight distingue les simulations des preuves externes. Utiliser `bash scripts/test-integration-preflight.sh --require-real` pour refuser toute campagne où Trello, les agents ou le navigateur n'ont pas fourni de preuve réelle.
+Le préflight distingue les simulations des preuves externes. Utiliser `CONNECTOR_EVIDENCE_FILE=/chemin/evidence.json bash scripts/test-integration-preflight.sh --require-real` pour refuser toute campagne où GitHub, Trello, les agents ou le navigateur n'ont pas fourni une preuve réelle anonymisée avec relecture distante.
 
-L’initialisation installe un workflow GitHub Actions hebdomadaire qui ouvre une Pull Request pour chaque évolution du kit officiel. Le script `.claude/scripts/update-starter-kit.sh` permet aussi une mise à jour manuelle avec un remote, une référence et une branche.
+L’initialisation propose par défaut le déclenchement manuel (`workflow_dispatch`); en mode non interactif `ask`, le choix est `dispatch` et en mode interactif oui choisit `pr`, non choisit `off`. La garde de facturation s’applique à tout updater hébergé, même manuel, car une exécution peut consommer du quota facturable : visibilité `public` confirmée par le propriétaire, ou pour `private`/`unknown`, `github_actions_private_billing_approved = true` et `github_actions_usage_limit_evidence` non vide et non placeholder. Les attestations sont locales et non vérifiées via API. Si la garde échoue, aucun nouveau workflow updater n’est installé. Après validation, `dispatch` reste manuel et seul `--updates pr` active le calendrier; `--updates off` ne crée aucun nouvel updater mais n’en désactive pas un préexistant. Les workflows existants sont conservés et ne sont jamais migrés ou écrasés; un workflow personnalisé ou un mode discordant fait échouer l’opération avant mutation et demande une revue manuelle. L’installateur `./install.sh` conserve `off` par défaut. Le script `.claude/scripts/update-starter-kit.sh` permet aussi une mise à jour manuelle avec un remote, une référence et une branche.
 
 ## Qualité documentaire premium
 
@@ -317,11 +330,11 @@ Le Coordinateur applique une politique universelle de routage pour toute demande
 
 La validation navigateur est obligatoire pour les changements frontend et doit être documentée dans le work item.
 
-La synchronisation Trello est obligatoire immédiatement après chaque étape livrée, avec relecture de la carte et de sa checklist.
+Le gestionnaire de suivi configuré est utilisé. Après chaque écriture distante et aux checkpoints importants (fin de lot, blocage ou reprise, livraison, PR, CI, fusion), relire les champs concernés. Regrouper les mises à jour liées à un même checkpoint et éviter les synchronisations après chaque micro-événement local.
 
 Le Coordinateur distingue désormais les tâches terminées, les sous-tâches en attente d’autorisation et les blocages réels.
 
-Une carte ne passe dans `Terminé` qu’après validation complète, y compris juridique ou externe si elle est requise.
+Une carte ne passe dans `Done` qu’après validation complète, y compris juridique ou externe si elle est requise.
 
 Les descriptions Trello utilisent de vrais retours à la ligne et sont relues après synchronisation.
 

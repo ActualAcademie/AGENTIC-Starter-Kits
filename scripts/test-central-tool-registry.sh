@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+bash "$root/scripts/verify-central-tool-registry.sh"
 for kit in codex claude; do
   hidden=".$kit"
   script="$root/starter-kit-$kit/$hidden/scripts/ensure-tools.sh"
@@ -15,6 +16,7 @@ for kit in codex claude; do
   grep -Fq 'npm\teslint' "$manifest"
   grep -Fq 'python\truff' "$manifest"
   test -f "$env_script"
+  bash "$root/scripts/verify-central-tool-registry.sh" >/dev/null
 done
 tmp="$(mktemp -d)"
 trap 'rm -rf "$tmp"' EXIT
@@ -29,6 +31,14 @@ fallback_output="$(AGENTIC_TOOLS_HOME="$fallback_tmp" TMPDIR="$tmp" bash "$root/
 grep -Fq 'Registre central' <<< "$fallback_output"
 grep -Fq $'git\t' "$tmp/tools/registry.tsv"
 grep -Fq $'npm\t' "$tmp/tools/registry.tsv"
+AGENTIC_TOOLS_HOME="$tmp/tools" bash "$root/starter-kit-codex/.codex/scripts/ensure-tools.sh" git >/dev/null &
+registry_pid_a=$!
+AGENTIC_TOOLS_HOME="$tmp/tools" bash "$root/starter-kit-codex/.codex/scripts/ensure-tools.sh" npm >/dev/null &
+registry_pid_b=$!
+wait "$registry_pid_a"
+wait "$registry_pid_b"
+awk -F '\t' 'NR == 1 || NF == 5' "$tmp/tools/registry.tsv" >/dev/null
+test ! -e "$tmp/tools/registry.tsv.lock"
 git init -q "$tmp/repo"
 git -C "$tmp/repo" checkout -q -b feat/lock-test
 touch "$tmp/repo/.git/index.lock"

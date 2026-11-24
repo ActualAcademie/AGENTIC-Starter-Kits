@@ -1,5 +1,289 @@
 ## Unreleased
 
+## 2.0.19 - 2026-11-19
+
+- Supprime automatiquement les branches de travail locales et distantes après fusion vérifiée dans dev ou develop.
+- Protège les branches principales et refuse le nettoyage si la branche n est pas réellement fusionnée ou si le worktree est sale.
+
+## 2.0.18 - 2026-11-19
+
+- Isole les conversations par scope persistant lié au Goal, à la branche et au work item.
+- Empêche une conversation de réutiliser silencieusement l état d une autre branche.
+- Ajoute un manifeste de session et un test d isolation Codex/Claude.
+
+## 2.0.17 - 2026-11-19
+
+- Récupère les verrous de démarrage abandonnés après interruption ou processus disparu.
+- Évite de confondre une initialisation concurrente réelle avec un verrou périmé.
+
+## 2.0.16 - 2026-11-19
+
+- Ajoute l agent juriste pour les recherches juridiques sourcées et la qualification prudente des obligations.
+- Route automatiquement les demandes juridiques applicables sans confondre recherche documentaire et avis d avocat.
+
+## 2.0.15 - 2026-11-18
+
+- Rend obligatoire la livraison de `.workspace.toml` lorsqu il est modifié ou en attente dans le lot courant.
+- Aligne le contrat d entrée Codex sur la version publiée.
+
+## 2.0.14 - 2026-11-18
+
+- Sérialise le bootstrap de session par projet pour éviter les reprises concurrentes entre fenêtres.
+- Protège le registre d'outils partagé contre les écritures concurrentes et ajoute un test de concurrence.
+
+## 2.0.13 - 2026-11-18
+
+- Rend le mode `quick-fix` prioritaire pour les corrections et modifications courantes.
+- Diffère les audits lourds, responsive exhaustif et relectures indépendantes à la passe finale ou à une demande explicite.
+- Clarifie le routage des agents pour éviter les audits longs pendant l'implémentation.
+
+## 2.0.12 - 2026-11-18
+
+- Réduit le coût local des contrôles de session grâce à un cache distant court et au réemploi du hash du kit lorsque sa version n’a pas changé.
+- Conserve la vérification forcée avec `AGENTIC_KIT_CHECK_FORCE=1` et la validation complète après toute mise à jour.
+
+- Étend les contrôles de credentials externes par familles de noms de variables exportées et aligne les hooks PermissionRequest sur les actions détectées, sans lire ni afficher leurs valeurs; documente l’opt-in et ses limites, et réaligne les gates executable/sandbox sur le comportement du hook.
+
+- Bloque la génération de workflows hébergés pour une visibilité privée ou inconnue sans approbation explicite et preuve d’une limite d’usage, avec un délai maximal par job borné.
+- Documente les champs d’attestation locale et précise qu’un timeout par job ne garantit pas un plafond de facturation mensuel.
+- Désactive l’installation du workflow updater par défaut; dispatch manuel et calendrier explicite exigent tous deux les attestations de visibilité/facturation requises, et seul `--updates pr` planifie les exécutions. Les workflows préexistants ne sont ni supprimés ni migrés automatiquement.
+- Limite les permissions du CI généré à `contents: read` et annule les exécutions obsolètes par workflow et référence.
+
+- Aligne l’onboarding sur le gestionnaire choisi dans le profil : suivi local, GitHub Projects ou Trello, avec leurs capacités documentées.
+- Normalise les statuts de travail à `Todo`, `In Progress` et `Done` dans les parcours GitHub Projects.
+- Garde les tableaux Trello à trois colonnes et suit membres et phases dans les métadonnées de carte.
+
+- Harmonise les statuts de suivi sur `Todo`, `In Progress` et `Done`; les états exceptionnels restent des étiquettes ou métadonnées.
+- Fait primer le gestionnaire configuré et les limites spécifiques de tâche, et précise les checkpoints de relecture distante.
+- Définit les runners GitHub standards comme choix par défaut et encadre l’usage explicite des runners auto-hébergés.
+- Clarifie la priorité des substitutions de risque des modèles, la frontière d’interaction orchestrateur/scripts et la langue française des documents.
+
+## 2.0.11 - 2026-11-14
+
+- Réduit le contexte initial des Goals au work item, au manifeste, au runtime et aux preuves concernées.
+- Interdit la réinjection complète de l historique et des anciens rapports.
+- Génère automatiquement le manifeste de contexte au démarrage du Goal.
+
+## 2.0.10 - 2026-11-14
+
+- Distingue `budgetLimited` d'un blocage réel du projet.
+- Préserve les preuves et indique la création d'un nouveau Goal comme prochaine action.
+- Autorise la validation du runtime avec `native_goal_status: budget-limited`.
+
+## 2.0.9 - 2026-11-07
+
+- Harmonise tous les agents spécialistes avec les modes `quick-fix`, `feature` et `audit`.
+- Réserve les audits exhaustifs aux cartes d audit, à la validation finale, aux risques critiques ou aux demandes explicites.
+- Exige pour chaque affectation un mode, un périmètre, un livrable et une preuve rattachée au SHA observé.
+- Empêche les relectures répétées sans changement d état ou de preuve.
+
+## 2.0.8 - 2026-11-07
+
+- Ajoute les modes `quick-fix`, `feature` et `audit`.
+- Rend l'audit exhaustif, la relecture indépendante et la validation responsive globale conditionnels.
+- Allège les livrables obligatoires des agents frontend et auditeur pendant l'implémentation.
+
+## 2.0.7 - 2026-11-07
+
+- Sépare les contrôles rapides de régression des audits complets.
+- Regroupe les audits visuels, responsive, accessibilité, navigateur et indépendants en fin d'implémentation ou sur demande explicite.
+- Empêche les relectures exhaustives répétées après chaque modification.
+## 2.0.6 - 2026-11-07
+
+- Corrige les faux blocages GitHub lorsque `gh api` fonctionne mais que `curl` échoue.
+- Corrige la détection de branche d intégration du contrôle de frontière projet.
+
+## 2.0.5 - 2026-11-07
+
+- Renforce la détection Docker multi-contexte et son diagnostic.
+- Évite de déclarer Docker indisponible lorsque Docker Desktop est accessible dans un autre contexte.
+
+## 2.0.4 - 2026-11-06
+
+- Autorise la reprise d initialisation sur un runtime terminé sans Goal actif.
+
+## 2.0.3 - 2026-11-06
+
+- Corrige l extraction du mode shared dans le diagnostic Codex.
+
+## 2.0.2 - 2026-11-06
+
+- Corrige la résolution de la racine Git dans le diagnostic shared.
+
+## 2.0.1 - 2026-11-06
+
+- Corrige le diagnostic du mode d'installation partagé Codex.
+- Aligne les versions, manifestes et README sur 2.0.1.
+
+## 2.0.0 - 2026-11-06
+
+- Regroupe les audits lourds responsive, visuels, navigateur, accessibilité et performance en fin d implémentation.
+- Conserve uniquement les contrôles rapides de non-régression pendant le développement.
+- Ajoute des exceptions explicites pour une demande utilisateur, un risque critique ou une preuve nécessaire au choix technique.
+
+## 1.18.2 - 2026-11-06
+
+- Ajoute une validation de sécurité commune des rapports pour Codex et Claude.
+- Expurge tokens, secrets, clés, chemins personnels et adresses e-mail avant publication.
+- Couvre les entrées valides, les données sensibles et les formats invalides par des tests dédiés.
+
+## 1.18.1 - 2026-11-06
+
+- Ajoute un garde GitFlow testable pour imposer une branche dédiée, une seule PR finale par carte et la cible `dev` ou `develop`.
+- Refuse les PR dupliquées, les branches protégées et les pushes directs vers `main` ou `master`.
+- Ajoute les scénarios négatifs et l'exécution CI de cette vérification.
+
+## 1.18.0 - 2026-11-06
+
+- Rend les contrôles de budget Goal et de contexte agentique exécutables dans la CI.
+- Ajoute les scénarios négatifs de dépassement des minutes, étapes, tokens, reprises et agents.
+- Ajoute le mode strict de l audit de contexte.
+
+## 1.17.9 - 2026-11-06
+
+- Ajoute un registre central documenté et vérifiable pour les outils Codex et Claude.
+- Contrôle la parité des manifestes, les doublons et les commandes déclarées dans la CI.
+- Rend l emplacement et les règles d installation des outils explicites.
+
+## 1.17.8 - 2026-11-06
+
+- Renforce le correcteur local des rapports avec une résolution de chemin fiable dans Codex et Claude.
+- Évite les faux blocages pour les rapports déjà résolus ou dupliqués.
+- Étend la pagination, refuse les erreurs distantes silencieuses et rend l écriture de l outbox atomique.
+- Ajoute les tests de reprise du correcteur local.
+
+## 1.17.7 - 2026-11-06
+
+- Rend la synchronisation shared transactionnelle avec verrou exclusif, phases d opération et rollback complet.
+- Préserve les fichiers du projet consommateur, notamment `AGENTS.md`, et restaure le manifeste en cas d échec.
+- Ajoute les contrôles de transaction aux scénarios de test.
+
+## 1.17.6 - 2026-11-06
+
+- Ajoute un scénario comportemental d initialisation idempotente et de reprise du Goal pour Codex et Claude.
+- Corrige l initialisation du budget runtime et la persistance du statut natif lors de la réconciliation.
+- Vérifie la préservation des fichiers existants et exécute le scénario dans la CI.
+
+## 1.17.5 - 2026-11-05
+
+- Ajoute une politique de documentation canonique pour limiter les fichiers redondants.
+- Ajoute un audit de structure qui détecte artefacts, collisions de numérotation et croissance des preuves.
+- Impose la consolidation des audits et l archivage des rapports temporaires dans les kits Codex et Claude.
+
+## 1.17.4 - 2026-11-04
+
+- Préserve un Goal natif actif lorsqu'un identifiant réel existe malgré un statut runtime `unavailable`.
+- Reconstruit automatiquement `next_action` lorsqu'elle est absente.
+- Ajoute une régression contre le deadlock de reprise observé dans Skkup.
+
+## 1.17.3 - 2026-11-04
+
+- Impose automatiquement la relecture complète du kit après chaque mise à jour.
+- Signale au hook SessionStart les fichiers et politiques à recharger avant toute reprise.
+- Conserve la suspension du travail projet jusqu'à validation du nouveau contexte.
+
+## 1.17.2 - 2026-11-04
+
+- Rend la synchronisation tolérante à l'indisponibilité DNS de raw.githubusercontent.com en testant ensuite l'API GitHub via gh.
+- Distingue l'absence de canal de version vérifiable de l'impossibilité de télécharger l'archive.
+- Ajoute le canal utilisé et une prochaine action explicite sans déclarer GitHub indisponible à tort.
+
+## 1.17.1 - 2026-11-04
+
+- Répare la récupération lorsque `native_goal_status` manque dans `RUNTIME-STATE.md`.
+- Infère le statut natif depuis `goal_status` et accepte les deux noms de condition de blocage.
+- Ajoute les tests de régression Codex et Claude contre ce deadlock.
+
+## 1.17.0 - 2026-10-25
+
+- Regroupe l'exécution d'une carte en une passe spécialisée, une correction groupée et une revalidation finale.
+- Limite les relances identiques et interdit les micro-audits sans changement d'état.
+- Ajoute la politique d'efficacité commune aux kits Codex et Claude avec test de non-régression.
+
+## 1.16.99 - 2026-10-25
+
+- Simplifie les gestionnaires de projet à trois colonnes uniquement : `Backlog`, `In progress` et `Done`, sans colonnes artificielles par phase ou par personne.
+
+## 1.16.98 - 2026-10-25
+
+- Interdit les cartes GitHub Project terminées en brouillon et convertit les brouillons suivis en Issues réelles lors de l'audit.
+
+## 1.16.97 - 2026-10-25
+
+- Rend automatique la transition vers l état terminal lorsque la Definition of Done est prouvée, sans confirmation intermédiaire ni remise artificielle de la livraison en attente.
+
+## 1.16.96 - 2026-10-24
+
+- Ajoute un parcours accéléré et borné pour l'initialisation des projets existants afin d'éviter les audits documentaires interminables.
+
+## 1.16.95 - 2026-10-24
+
+- Ajoute des modèles complets de cahier universel, vierge, de reconstitution et de changement Post-MVP, ainsi qu'un registre officiel pour éviter les doublons de cahiers dans les projets.
+
+## 1.16.94 - 2026-10-23
+
+- Conserve les champs, statuts, vues, couleurs et paramètres natifs de GitHub Projects et limite la règle française au contenu créé ou édité par le kit.
+
+## 1.16.93 - 2026-10-23
+
+- Unifie les règles Trello et GitHub Projects dans une politique commune couvrant statuts, labels, tâches, commentaires, synchronisation, délégation et clôture.
+
+## 1.16.92 - 2026-10-23
+
+- Protège le cahier initial du MVP par empreinte persistante et transforme toute modification ultérieure en demande de changement séparée, sans réécrire l historique.
+
+## 1.16.91 - 2026-10-23
+
+- Archive automatiquement chaque cahier accepté ou reconstitué dans `docs/project-management/cahier-des-charges/<projet>/`, avec déduplication par empreinte pour le préserver hors de `.codex/` et `.claude/`.
+
+## 1.16.90 - 2026-10-23
+
+- Autorise la reconstitution documentaire explicite d un cahier des charges absent, avec statut provisoire, sources, hypothèses et inconnues, sans autoriser l implémentation avant validation.
+
+## 1.16.89 - 2026-10-22
+
+- Recrée automatiquement et de façon idempotente `RUNTIME-STATE.md` depuis le modèle lorsqu il est absent, avant toute validation de session, et autorise explicitement ce bootstrap dans les hooks Codex et Claude.
+
+## 1.16.88 - 2026-10-22
+
+- Corrige l extraction des commandes des hooks PreToolUse pour accepter les formes `command`, `cmd`, `arguments.command`, `arguments.cmd` et `tool_input`, afin que les voies de récupération autorisées ne soient plus bloquées par le format de l événement.
+
+## 1.16.87 - 2026-10-22
+
+- Rend les preuves de connecteurs externes vérifiables et récentes, avec référence distante, SHA complet, relecture confirmée et méthode d'observation obligatoire.
+- Refuse les manifestes contenant des valeurs factices, expirées ou des champs sensibles.
+- Ajoute les scénarios négatifs du préflight réel pour les preuves simulées et sans relecture.
+
+## 1.16.86 - 2026-10-21
+
+- Enregistre les rapports de sous-agents absents dans un registre pending idempotent.
+- Résout automatiquement l’entrée pending lors de la validation du rapport retrouvé.
+- Ajoute un scénario Codex/Claude couvrant l’arrêt sans rapport puis la récupération sans relance en boucle.
+
+## 1.16.85 - 2026-10-21
+
+- Rend les affectations spécialistes vérifiables au démarrage d’un Goal.
+- Refuse une délégation qui ne fournit pas un dossier réel d’affectations par rôle ou qui recouvre les périmètres.
+- Renforce les scénarios d’exécution Codex et Claude pour couvrir les identifiants absents et les chevauchements.
+
+## 1.16.84 - 2026-10-21
+
+- Renforce la reprise du Goal natif lorsqu’un blocage natif conserve une action locale autonome.
+- Distingue désormais un blocage récupérable d’une dépendance externe ou d’une décision humaine réellement bloquante.
+- Ajoute un scénario Codex/Claude vérifiant le fallback local puis le maintien du blocage externe.
+
+## 1.16.83 - 2026-10-21
+
+- Autorise explicitement les commandes de récupération sûres avant la porte de session.
+- Élimine le deadlock où l’initialisation, la réconciliation ou la résolution d’une réponse utilisateur était bloquée par le hook lui-même.
+- Ajoute les scénarios Codex et Claude couvrant l’amorçage, la reprise, la résolution d’input et le refus d’une commande de livraison.
+
+## 1.16.82 - 2026-10-21
+
+- Canonise automatiquement `RUNTIME-STATE.md` au démarrage des kits Codex et Claude.
+- Déduplique les clés runtime en conservant la dernière valeur, valide le schéma et évite les sauvegardes inutiles lorsque l’état est déjà canonique.
+- Ajoute un test d’intégration commun aux deux variantes pour vérifier la migration et son idempotence.
+
 ## 1.16.81 - 2026-10-21
 
 - Ajoute l’auto-correction locale des états runtime connus avant l’envoi d’un rapport.

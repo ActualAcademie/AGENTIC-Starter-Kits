@@ -6,7 +6,114 @@ Ce document est la référence synthétique du comportement livré par les kits.
 
 | Élément | État | Preuve |
 |---|---|---|
-| Version actuelle | `1.16.50` | `VERSION`, `starter-kit-codex/.codex/KIT.toml`, `starter-kit-claude/.claude/KIT.toml` |
+| Version actuelle | `2.0.19` | `VERSION`, `starter-kit-codex/.codex/KIT.toml`, `starter-kit-claude/.claude/KIT.toml` |
+
+## Version 2.0.8
+
+- Ajoute les modes `quick-fix`, `feature` et `audit`.
+- Désactive l'audit exhaustif et la relecture indépendante par défaut pour les corrections ciblées.
+- Rend la validation navigateur et responsive finale conditionnelle au mode et au périmètre.
+
+## Version 2.0.7
+
+- Sépare les contrôles rapides de régression des audits complets.
+- Regroupe les audits lourds en fin d'implémentation, sur une carte dédiée ou sur demande explicite.
+- Interdit les relectures exhaustives répétées après chaque modification.
+
+## Version 2.0.6
+
+- Réutilise une API GitHub accessible par `gh` avant de conclure à une indisponibilité réseau.
+- Déduit la branche d intégration configurée avant de différer le contrôle de frontière Git.
+
+## Version 2.0.5
+
+- Distingue Docker CLI, daemon, contexte, socket et serveur réel.
+- Sélectionne automatiquement `desktop-linux` sur macOS lorsqu un autre contexte est invalide.
+
+## Version 2.0.4
+
+- Autorise la reprise d initialisation lorsque le runtime est terminé et qu aucun Goal n est actif.
+
+## Version 2.0.3
+
+- Corrige l extraction du mode shared dans le diagnostic Codex.
+
+## Version 2.0.2
+
+- Corrige la résolution de la racine Git depuis un kit shared appelé par lien symbolique.
+
+## Version 2.0.1
+
+- Le diagnostic Codex affiche le mode réel du manifeste, notamment `shared`, au lieu d'un mode `external` codé en dur.
+
+## Version 2.0.0
+
+- Contrôles négatifs des budgets Goal exécutés pour les deux variantes.
+- Audit de contexte doté d un mode strict pour bloquer les alertes critiques.
+- Contrôles intégrés à la CI afin de détecter les dépassements avant livraison.
+
+## Version 1.17.9
+
+- Registre central des outils documenté dans `docs/policies/CENTRAL-TOOL-REGISTRY-POLICY.md`.
+- Vérificateur de parité Codex/Claude exécuté par la CI.
+- Détection des commandes dupliquées ou absentes dans les manifestes.
+
+## Version 1.17.8
+
+- Correcteur local Codex et Claude aligné sur l historique des rapports.
+- Rapports résolus ou dupliqués exclus des blocages actifs.
+- Erreurs GitHub conservées comme erreurs récupérables au lieu de créer des doublons.
+- Outbox écrite de façon atomique et empreintes SHA-256 validées.
+
+## Version 1.17.7
+
+- Synchronisation shared protégée par un verrou exclusif et des phases `prepared`, `applied`, `validated` et `committed`.
+- Rollback complet du kit et de `.workspace.toml` en cas d échec.
+- Préservation de `AGENTS.md` et des fichiers du projet consommateur.
+- Scénarios de contrôle transactionnel pour les variantes Codex et Claude.
+
+## Version 1.17.6
+
+- Scénario comportemental partagé Codex/Claude couvrant une initialisation répétée, la préservation d un fichier projet, le bootstrap runtime et la reprise d un Goal natif.
+- Budget runtime initial borné et valide dès la première initialisation.
+- Réconciliation persistante de `native_goal_status` quand un identifiant de Goal permet la reprise locale.
+
+## Version 1.17.5
+
+- Documentation canonique, audit de structure et archivage des rapports temporaires.
+
+## Version 1.17.4
+
+- Préserve le Goal natif identifié et reconstruit une prochaine action lors de la récupération runtime.
+
+## Version 1.17.3
+
+- Après une mise à jour distante, SessionStart signale et impose la relecture complète du contexte du kit avant toute reprise projet.
+
+## Version 1.17.2
+
+- Synchronisation GitHub multi-canal avec repli API après échec DNS du canal raw.
+- Classification distincte entre version non vérifiable et archive non téléchargeable.
+
+## Version 1.17.1
+
+- Réparation automatique de `native_goal_status` manquant et compatibilité des clés de condition de blocage.
+
+## Version 1.17.0
+
+- Exécution consolidée des cartes avec lots spécialisés, corrections groupées, relance bornée et revalidation finale unique.
+
+## Version 1.16.99
+
+- Trois colonnes stables pour les gestionnaires de projet : Backlog, In progress et Done.
+
+## Version 1.16.98
+
+- GitHub Projects refuse les cartes terminées en Draft et convertit les éléments suivis en Issues réelles.
+
+## Version 1.16.97
+
+- Transition terminale autonome après preuves complètes, sans confirmation intermédiaire artificielle.
 | Variante Codex | Implémentée | `starter-kit-codex/` |
 | Variante Claude | Implémentée | `starter-kit-claude/` |
 | Mise à jour des consommateurs | Implémentée | `sync-workspace-kit.sh` |
@@ -39,18 +146,18 @@ Ce document est la référence synthétique du comportement livré par les kits.
 |---|---|---|
 | `SessionStart` | recharge version, runtime, Goal et consignes | contexte automatique |
 | `PreToolUse` | bloque les écritures sans Goal ou état valide | blocage exécutable |
-| `PermissionRequest` | refuse API payante, branche protégée et commande destructive | blocage exécutable |
+| `PermissionRequest` | refuse curl, wget, http et httpie vers les endpoints OpenAI et Anthropic couverts, les commandes de push détectées vers les branches protégées et les commandes destructives; une mention seule dans une commande locale est permise | blocage exécutable |
 | `PostToolUse` | journalise outil et identifiant de preuve | traçabilité |
 | `SubagentStart` | enregistre l'identifiant et le type du sous-agent | traçabilité |
 | `SubagentStop` | demande la vérification du livrable indépendant | contrôle |
 | `Stop` | appelle le garde avant réponse et continue si la livraison est incomplète | continuité |
 
-Les hooks locaux doivent être relus et approuvés dans Codex avec `/hooks` après chaque installation ou modification. Le dépôt ne peut pas s'auto-approuver auprès du runtime.
+Les hooks locaux doivent être relus et approuvés dans Codex avec `/hooks` après chaque installation ou modification. Le dépôt ne peut pas s'auto-approuver auprès du runtime. Le filtre PermissionRequest analyse le texte de la commande et ne peut pas certifier qu’un script arbitraire ou obfusqué ne déclenchera pas un appel externe.
 
 ## Facturation et outils externes
 
 - Le mode par défaut utilise l'authentification abonnement de Codex ou Claude.
-- Les clés `OPENAI_API_KEY`, `CODEX_API_KEY`, `ANTHROPIC_API_KEY` et `ANTHROPIC_AUTH_TOKEN` bloquent l'initialisation sans autorisation explicite.
+- Les noms exportés correspondant aux familles conventionnelles de credentials API, jetons d’accès et configurations d’authentification cloud bloquent l’initialisation sans autorisation explicite, même si leur valeur est vide. La garde compare les noms sans déréférencer les valeurs; les noms arbitraires restent hors de sa portée et les motifs larges peuvent bloquer des configurations non facturables.
 - Les Agents API, Agents SDK, gateways et fournisseurs cloud sont hors périmètre abonnement par défaut.
 - GitHub Actions, Trello, navigateur, Docker et autres services restent soumis à leur disponibilité et à leurs propres quotas.
 - Une intégration non disponible ne doit jamais être déclarée comme exécutée.
@@ -61,7 +168,7 @@ Les hooks locaux doivent être relus et approuvés dans Codex avec `/hooks` apr�
 - Les commits sont atomiques et contrôlés avant push.
 - Une PR prématurée est refusée tant que la carte et sa checklist ne sont pas terminées.
 - La branche d'intégration doit être relue après fusion.
-- La promotion vers `main` suit la CI et la documentation du kit.
+- La promotion vers `main` reste soumise à une demande humaine explicite après la CI et la documentation du kit.
 - La version, le changelog, l'historique et les README sont mis à jour pour les changements consommés.
 
 ## Trello

@@ -4,6 +4,8 @@
 
 - Projet: [[A_COMPLETER]]
 - Work item actif: none
+- work_item_mode: quick-fix | feature | audit
+- exhaustive_audit_required: no
 - Dernière mise à jour: [[A_COMPLETER]]
 - Responsable: Coordinateur
 - execution_session: [[A_COMPLETER]]
@@ -27,7 +29,7 @@
 - goal_objective: [[A_COMPLETER]]
 - goal_verification: [[A_COMPLETER]]
 - goal_constraints: [[A_COMPLETER]]
-- goal_budget: [[A_COMPLETER]]
+- goal_budget: 100000
 - audit_matrix_status: not-applicable
 - specialist_audit_status: not-applicable
 - negative_tests_status: not-applicable
@@ -35,6 +37,7 @@
 - independent_reaudit_status: not-applicable
 - goal_blocked_condition: none
 - goal_session_id: none
+<!-- native_goal_status accepts active, unavailable, complete, blocked, budget-limited, paused -->
 - native_goal_status: unavailable
 - native_goal_id: none
 - native_goal_evidence: Goal natif à créer par l'orchestrateur au démarrage

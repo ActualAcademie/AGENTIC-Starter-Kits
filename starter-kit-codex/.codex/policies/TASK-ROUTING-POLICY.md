@@ -6,7 +6,7 @@ Cette politique s’applique à toute demande reçue après l’acceptation du c
 
 Le Coordinateur ne transmet jamais une demande directement à un agent sans la qualifier. Il identifie le résultat attendu, le périmètre, le risque, les contraintes, les fichiers concernés, les dépendances, les preuves attendues et la Definition of Done.
 
-Avant toute route vers un agent d'implémentation, vérifier la porte `DESIGN-FIRST-GATE.md` et le preflight. Si `docs/design/design-readiness.md` n'est pas `Status: approved` avec toutes les cases fermées, router la demande vers la conception et l'audit, jamais vers le code.
+Avant toute route vers un agent d'implémentation, vérifier la porte `DESIGN-FIRST-GATE.md` et le preflight. Router vers la conception uniquement si la carte introduit ou modifie une décision structurante ou si les documents directement concernés sont absents ou incohérents. Une readiness globale en `review` ne suffit pas à détourner une carte fonctionnelle déjà couverte par une conception acceptée. Dans ce cas, router vers l'agent d'implémentation compétent et réserver l'audit complet à la fin du lot ou à une demande explicite.
 
 Une demande hors cahier des charges devient une évolution tracée du périmètre vivant. Le cahier initial reste historique et ne doit pas être réécrit pour masquer l’ajout.
 
@@ -20,6 +20,7 @@ Une demande hors cahier des charges devient une évolution tracée du périmètr
 | Image, photo, illustration, texture, icône ou média | Image Generation | Frontend, Concepteur, QA, Auditeur |
 | API, logique métier, données ou intégration | Backend | Concepteur, Cybersécurité, QA, Data |
 | Menace, vulnérabilité, secret, permission ou conformité | Cybersécurité | Backend, Frontend, DevOps, Auditeur, Conformité |
+| Question juridique, RGPD, licence, contrat ou juridiction | Juriste | Conformité, Cybersécurité, Produit, Auditeur |
 | Tests, régression ou qualité de livraison | QA | Agent technique concerné, Auditeur |
 | Pipeline, déploiement, conteneurs ou observabilité | DevOps | Backend, Cybersécurité, Performance |
 | Performance, coût ou capacité | Performance | Backend, Frontend, DevOps, Coordinateur |
@@ -35,7 +36,7 @@ Une demande hors cahier des charges devient une évolution tracée du périmètr
 
 Toute formulation qui demande de terminer, corriger, améliorer, construire, brancher, tester, auditer ou livrer une feature, un écran, un parcours, une extension, une API, un rapport ou un bouton déclenche obligatoirement le Goal et le routage spécialisé avant la première lecture technique ou modification. Les formulations « termine cette feature », « corrige ce problème », « rends-le fonctionnel », « branche ce bouton » et leurs équivalents ne sont jamais des tâches directes du Coordinateur.
 
-La porte de démarrage exige une preuve de Goal actif, une matrice de rôles requis et l'identifiant réel de chaque agent spécialisé. Pour une extension ou un frontend, activer au minimum `frontend` et `qa`, puis `auditeur` avant la validation finale ; ajouter `backend`, `devops`, `accessibilite` ou `securite` selon le périmètre. Sans cette preuve, aucune modification produit, test spécialisé ou validation ne peut commencer.
+La porte de démarrage exige une preuve de Goal actif, une matrice de rôles requis et l'identifiant réel de chaque agent spécialisé. En mode `quick-fix`, activer uniquement le propriétaire du changement et les contrôles directement concernés ; ne pas lancer `auditeur`, responsive exhaustif ou navigateur complet. En mode `feature`, activer les agents d'implémentation au début, puis `qa` et `auditeur` dans une seule passe finale. Pour un audit visuel final ou une demande explicite d'audit, activer au minimum `frontend`, `qa` et `auditeur`, puis ajouter `backend`, `devops`, `accessibilite` ou `securite` selon le périmètre. Sans la preuve correspondant au mode choisi, aucune modification produit ni validation spécialisée ne peut commencer.
 4. Sélectionner l’agent responsable et les agents associés nécessaires.
 5. Justifier chaque activation et choisir le modèle selon le risque et la complexité.
 6. Exécuter les travaux indépendants en parallèle uniquement si les contrats et fichiers ne se chevauchent pas.
@@ -47,7 +48,7 @@ La porte de démarrage exige une preuve de Goal actif, une matrice de rôles req
 
 Pour chaque tâche spécialisée, le Coordinateur doit enregistrer avant le démarrage le rôle, l'identifiant réel du thread ou de l'agent, le périmètre, le livrable et le fichier de rapport attendu. Après exécution, le rapport doit provenir de cet agent et contenir la tâche, les fichiers ou parcours observés, les commandes ou captures, le résultat et les limites. Une action effectuée par le Coordinateur, même dans un navigateur, ne constitue pas la preuve d'exécution du Frontend, de QA, de l'Auditeur ou d'un autre spécialiste. Si l'agent spécialisé n'a pas été réellement créé ou si son rapport n'est pas lisible, le lot reste `blocked` et aucune validation spécialisée ne peut être annoncée.
 
-Pour une interface ou une refonte visuelle, le Frontend produit les changements et la preuve comparative, QA exécute les parcours responsive et l'Auditeur relit indépendamment. Le Coordinateur assemble les rapports mais ne remplace aucun de ces trois rôles lorsqu'ils sont requis.
+Pour une interface ou une refonte visuelle en mode `feature`, le Frontend produit d'abord les changements. QA exécute ensuite les parcours directement concernés et l'Auditeur relit dans la passe finale unique. Pour un `quick-fix` visuel, le Frontend et un contrôle ciblé suffisent ; la preuve comparative complète, le responsive exhaustif et l'audit indépendant sont différés, sauf demande explicite ou risque critique. Le Coordinateur assemble les rapports mais ne remplace aucun rôle lorsqu'il est requis.
 
 Pour un audit QA sans credentials, l'agent QA reste obligatoire. Il utilise d'abord la cible locale, les fixtures isolées et les comptes de test non sensibles disponibles dans le projet. Le rapport doit séparer les parcours validés localement de ceux qui nécessitent encore une préproduction authentifiée ; l'absence de cette dernière ne bloque pas les vérifications réalisables.
 Pour toute tâche visuelle, responsive ou de redesign, exécuter `scripts/verify-specialist-plan.sh` avant la première modification. Le minimum obligatoire est `frontend`, `qa` et `auditeur`. Une phrase comme « je vais lancer les agents » ne constitue pas une création ; seul le résultat réel de l'orchestrateur avec identifiants et preuve autorise le démarrage.

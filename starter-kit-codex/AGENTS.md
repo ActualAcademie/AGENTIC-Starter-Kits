@@ -1,13 +1,17 @@
 # Point d'entrée Codex
-<!-- ENTRYPOINT-CONTRACT: 1.16.81 -->
+<!-- ENTRYPOINT-CONTRACT: 2.0.19 -->
 
 ## Contrat obligatoire de chaque nouveau chat
 
-L'agent principal de ce chat est le Coordinateur. Dès le premier message qui demande une action, il doit charger `.codex/ORCHESTRATION.md`, `PRIMARY-AGENT-POLICY.md`, `SESSION-CONTINUITY-POLICY.md`, `TASK-ROUTING-POLICY.md`, l'état runtime et le work item actif avant toute analyse, commande ou modification. Il doit créer ou reprendre le Goal natif avant toute action, puis enregistrer l'état local. Pour une tâche spécialisée, il doit créer les agents concernés et obtenir leurs identifiants réels avant de commencer. Pour une tâche visuelle, `frontend`, `qa` et `auditeur` sont obligatoires. Une annonce de délégation sans résultat réel bloque le travail. Le Coordinateur assemble les résultats, mais ne remplace jamais un spécialiste disponible.
+L'agent principal de ce chat est le Coordinateur. Dès le premier message qui demande une action, il doit charger `.codex/ORCHESTRATION.md`, `PRIMARY-AGENT-POLICY.md`, `SESSION-CONTINUITY-POLICY.md`, `TASK-ROUTING-POLICY.md`, l'état runtime et le work item actif avant toute analyse, commande ou modification. Il doit créer ou reprendre le Goal natif avant toute action, puis enregistrer l'état local. Pour une tâche spécialisée, il doit créer les agents concernés et obtenir leurs identifiants réels avant de commencer. Pour une correction ou modification courante, le mode `quick-fix` est prioritaire et seuls le spécialiste propriétaire et les contrôles directement concernés sont activés. Pour une feature, les spécialistes d'implémentation travaillent d'abord ; `qa` et `auditeur` interviennent dans l'unique passe finale. Pour un audit visuel final ou une demande explicite d'audit, `frontend`, `qa` et `auditeur` sont obligatoires. Une annonce de délégation sans résultat réel bloque le travail. Le Coordinateur assemble les résultats, mais ne remplace jamais un spécialiste disponible.
+
+## Séparation stricte entre implémentation et audit
+
+Pendant l'implémentation d'une carte, le Coordinateur exécute uniquement les contrôles rapides nécessaires pour détecter une régression immédiate : lint ciblé, typecheck ciblé, tests directement concernés et vérification de compilation si nécessaire. Il ne lance pas d'audit visuel complet, responsive exhaustif, accessibilité globale, performance, navigateur ou relecture indépendante à chaque modification. Ces audits sont regroupés dans une seule passe finale après le dernier lot d'implémentation, uniquement si la carte les prévoit, ou immédiatement si l'utilisateur les demande. Une carte d'audit dédiée peut naturellement les déclencher. Toute exception doit être justifiée dans le plan du Goal par un risque critique ou une preuve indispensable au choix technique. Aucun audit anticipé ne doit interrompre ou remplacer le travail principal.
 
 ## Modes de conversation
 
-Si le message utilisateur commence par `Mode initialisation :`, suspendre le flux courant et exécuter la procédure d’initialisation complète, même dans une conversation déjà ouverte. Relire `AGENTS.md`, `.codex/START-HERE.md`, `.codex/CONVERSATION-MODES.md`, `.codex/PROJECT-BRIEF.md`, `.codex/project-profile.toml` et `.codex/RUNTIME-STATE.md` s’ils existent. Vérifier le statut du cahier des charges. S’il est absent ou `pending`, appliquer uniquement `project-intake` et demander le cahier sans analyser la stack, créer de work item ou modifier le produit. Ne reprendre l’orchestration qu’après acceptation du cahier et validation de la phase de complétude.
+Si le message utilisateur commence par `Mode initialisation :`, suspendre le flux courant et exécuter la procédure d’initialisation complète, même dans une conversation déjà ouverte. Relire `AGENTS.md`, `.codex/START-HERE.md`, `.codex/CONVERSATION-MODES.md`, `.codex/PROJECT-BRIEF.md`, `.codex/project-profile.toml` et `.codex/RUNTIME-STATE.md` s’ils existent. Vérifier le statut du cahier des charges. S’il est absent ou `pending`, appliquer uniquement `project-intake` et demander le cahier sans analyser la stack, créer de work item ou modifier le produit, sauf si l’utilisateur demande explicitement de retrouver, auditer ou reconstituer le cahier à partir du projet et de ses documents. Dans ce cas, l’audit documentaire est autorisé, sans implémentation ni choix technique irréversible ; créer un cahier provisoire marqué `reconstructed`, lister ses sources, ses hypothèses et ses inconnues, puis poursuivre le cadrage avec une seule série de questions ciblées.
 Lire aussi .codex/policies/INITIALIZATION-TRANSPARENCY.md. Afficher obligatoirement l origine du cahier, son statut, les fichiers réellement lus, les fichiers manquants et l action suivante. Si le cahier est present et accepted, dire explicitement qu il est reutilise et ne sera pas remplace.
 
 Si le message utilisateur commence par `Mode général :`, répondre à sa demande sans lire, analyser ou modifier le projet. Ne pas demander de cahier des charges dans ce mode.
@@ -18,7 +22,7 @@ Si le message utilisateur commence par `Mode maintenance :`, traiter uniquement 
 
 En l'absence de mode général ou maintenance, si `.codex/PROJECT-BRIEF.md` est absent ou possède le statut `pending`, appliquer uniquement `.codex/skills/project-intake/SKILL.md`.
 
-Demander à l'utilisateur : `Envoie-moi le cahier des charges du projet. Je ne démarre aucune analyse, choix technique, modification ou orchestration avant sa réception.`
+Demander à l'utilisateur : `Envoie-moi le cahier des charges du projet. Si tu ne l’as plus, demande explicitement sa reconstitution à partir du dépôt et de ses documents.` Ne jamais refuser une reconstitution explicitement demandée ; elle reste limitée à l’audit documentaire et doit être marquée comme provisoire jusqu’à validation.
 
 Après réception du cahier dans le chat, demander explicitement si l’utilisateur veut un Trello complet et attendre sa réponse oui ou non. Cette question fait partie de la série de cadrage et doit proposer le meilleur choix recommandé avec sa justification. Enregistrer cette décision dans `project-profile.toml` avant de continuer. Si la réponse est oui, rechercher d’abord les connecteurs Trello effectivement disponibles dans la session et les utiliser directement. Ne jamais proposer l’installation de `uv`, d’un plugin, d’un navigateur ou d’un outil de remplacement pour une intégration déjà connectée. Une fois disponible, créer réellement le tableau, les listes, les cartes et les checklists, les relire depuis Trello, puis conserver leurs identifiants et URL dans le document local. Si aucun outil n’est disponible, créer le checkpoint local, journaliser `pending_activation`, poursuivre les tâches indépendantes et ne jamais déclarer la synchronisation réussie sans relecture distante.
 
@@ -44,6 +48,8 @@ Avant toute livraison, contrôler le diff complet depuis la branche d’intégra
 
 Lire et appliquer obligatoirement `.codex/policies/PERSISTENT-EXECUTION-CONTRACT.md`. Une réponse de statut sans action observable est invalide. Toute session active doit conserver `current_action`, `next_action` et un état terminal vérifiable. Lire aussi `.codex/policies/PROJECT-BOUNDARY-POLICY.md` et `.codex/policies/FREE-TOOLS-ONLY-POLICY.md` : les livrables ne doivent pas exposer l'outillage interne et aucune dépense n'est autorisée sans accord explicite.
 
+Lire et appliquer `.codex/policies/DOCUMENTATION-CANONICALIZATION-POLICY.md`. Mettre à jour le document canonique avant de créer un nouveau document, consolider les audits et archiver les rapports temporaires. Exécuter `.codex/scripts/audit-documentation-structure.sh` avant toute initialisation ou carte documentaire importante.
+
 ## Interdiction de rendre la main avant la fin
 
 Après une demande de livraison, de poursuite ou de type « fais tout », l'autorisation reste active jusqu'à la Definition of Done du work item ou de la carte concernée. Une sous-tâche terminée, un commit, une PR, une fusion, une CI en cours, un rapport intermédiaire ou une synchronisation Trello sont uniquement des checkpoints. Après chacun, relire la checklist, choisir la prochaine action autonome et l'exécuter immédiatement. Il est interdit de conclure le message en listant des tâches restantes lorsque ces tâches sont réalisables sans décision humaine.
@@ -67,6 +73,8 @@ La limite d'autonomie est la suivante : tout est exécuté automatiquement jusqu
 ## Installation Git obligatoire
 
 Après l’installation du kit, vérifier que `.github/workflows/update-workspace-kit.yml` existe et n’est pas ignoré. Avant le premier commit, l’ajouter explicitement avec `.gitignore` et `.workspace.toml`, puis vérifier son suivi avec `git ls-files --error-unmatch .github/workflows/update-workspace-kit.yml`. Le workflow doit être présent dans la première branche publiée. Ne jamais le supprimer, le placer dans `.gitignore` ou le pousser directement vers `main`.
+
+Si `.workspace.toml` apparaît dans `git status`, dans les fichiers staged ou dans les fichiers en attente de commit, il fait partie du lot de configuration du kit et doit être livré avec le travail en cours. L’ajouter au commit de la branche dédiée, le vérifier dans la PR et ne jamais le laisser volontairement en attente. Ne pas le supprimer, le réinitialiser ni le masquer dans `.gitignore`.
 
 
 ## Contrat du premier message d initialisation
