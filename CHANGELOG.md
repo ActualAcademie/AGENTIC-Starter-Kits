@@ -1,5 +1,12 @@
 ## Unreleased
 
+## 2.0.20 - 2026-11-24
+
+- Renforce l'agent frontend avec une politique obligatoire de refonte sur composition indépendante.
+- Impose une architecture modulaire, réutilisable et vérifiable au lieu de composants monolithiques ou de retouches superficielles.
+- Regroupe les audits navigateur, responsive et accessibilité en passe finale pour accélérer l'implémentation sans réduire la preuve de livraison.
+- Ajoute un test de parité du contrat frontend Codex et Claude.
+
 ## 2.0.19 - 2026-11-19
 
 - Supprime automatiquement les branches de travail locales et distantes après fusion vérifiée dans dev ou develop.

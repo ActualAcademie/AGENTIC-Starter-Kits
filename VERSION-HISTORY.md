@@ -1,5 +1,7 @@
 # Historique des versions
 
+| 2.0.20 | 2026-11-24 | Renforce le frontend premium, les refontes sur composition indépendante, l'architecture réutilisable et la cadence d'audit finale. |
+
 | 2.0.19 | 2026-11-19 | Supprime les branches de travail après fusion vérifiée dans dev ou develop. |
 
 | 2.0.18 | 2026-11-19 | Isole les conversations, Goals, branches et rapports par scope persistant. |
