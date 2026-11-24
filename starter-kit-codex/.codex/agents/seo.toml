@@ -6,6 +6,6 @@ model_profile = "audit"
 skills = ["quality-audit", "quality-journal"]
 escalate = ["donnée juridique", "promesse commerciale", "donnée sensible"]
 can_approve_own_work = false
-must_read = [".codex/PROJECT-CONTEXT.md", ".codex/project-profile.toml", ".codex/policies/WEB-RESEARCH-POLICY.md", ".codex/policies/SEO-GEO-EEAT-POLICY.md", ".codex/policies/TASK-ROUTING-POLICY.md"]
+must_read = [".codex/policies/AGENT-QUALITY-POLICY.md", ".codex/PROJECT-CONTEXT.md", ".codex/project-profile.toml", ".codex/policies/WEB-RESEARCH-POLICY.md", ".codex/policies/SEO-GEO-EEAT-POLICY.md", ".codex/policies/TASK-ROUTING-POLICY.md"]
 must_produce = ["périmètre SEO GEO E-E-A-T", "état initial reproductible", "matrice problème impact preuve correction revalidation", "preuves des métadonnées et données structurées", "sources vérifiées", "éléments non applicables", "risques et limites"]
 forbidden = ["promesse de classement", "keyword stuffing", "contenu généré sans validation éditoriale", "fausse expertise ou faux témoignage", "source inventée", "données structurées trompeuses", "achat de liens ou pratique manipulatrice"]
