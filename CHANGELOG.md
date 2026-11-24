@@ -1,5 +1,12 @@
 ## Unreleased
 
+## 2.0.29 - 2026-11-24
+
+- Centralise la continuation autonome et la classification des blocages.
+- Interdit l'attente d'un message « continue » lorsqu'une action est autorisée.
+- Rend obligatoire le routage spécialiste, les alternatives et l'enchaînement des cartes GitHub Projects et Trello.
+- Ajoute les tests de parité de la politique d'autonomie.
+
 ## 2.0.28 - 2026-11-24
 
 - Ajoute une auto-réparation runtime commune à Codex et Claude.

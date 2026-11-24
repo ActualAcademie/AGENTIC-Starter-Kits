@@ -3,7 +3,7 @@
 La branche 2.0 ajoute les lots de migration, chaos testing, observabilité et compatibilité multi-plateforme.
 La promotion vers `main` reste soumise à une demande humaine explicite après validation de `dev`.
 
-[![Version](https://img.shields.io/badge/version-2.0.28-blue.svg)](VERSION)
+[![Version](https://img.shields.io/badge/version-2.0.29-blue.svg)](VERSION)
 
 Pendant l'implémentation, seuls les contrôles rapides directement nécessaires à la régression sont exécutés. Les audits visuels, responsive, accessibilité, navigateur, performance et indépendants sont regroupés en une seule passe finale, sur une carte dédiée ou sur demande explicite.
 
@@ -47,6 +47,8 @@ Agentic Starter Kits est une base portable de gouvernance, de conception, d’or
 Le kit ne fournit pas une simple collection de prompts. Il fournit une méthode de travail complète : règles, agents spécialisés, Skills réutilisables, configuration technologique, documents de conception, journal qualité, contrôles de sécurité, GitFlow, CI et optimisation continue du coût.
 
 Les blocages récupérables ne terminent pas un tour : le Coordinateur conserve le Goal actif, tente les alternatives autorisées et exécute la prochaine action observable. Cette règle est couverte par les scénarios sandbox des deux variantes.
+
+La politique `AUTONOMOUS-CONTINUATION-POLICY.md` classe chaque blocage, route automatiquement les tâches vers les spécialistes, limite l'escalade humaine aux décisions critiques et enchaîne les cartes autorisées GitHub Projects ou Trello sans attendre une demande « continue ».
 
 Un audit indépendant en `REWORK` déclenche automatiquement la correction traçable puis une nouvelle relecture par l’auditeur ; il ne devient pas un blocage lorsque ces actions restent réalisables.
 
