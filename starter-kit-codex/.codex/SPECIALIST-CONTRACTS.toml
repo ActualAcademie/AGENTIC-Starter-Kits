@@ -49,6 +49,12 @@ activation = "interface ou exigence inclusive"
 deliverable = "matrice d'accessibilité et exceptions prouvées"
 reviewer = "qa,auditeur"
 
+[seo]
+domain = "SEO technique, GEO, E-E-A-T, contenu public et découvrabilité"
+activation = "page publique, contenu, marque, métadonnée ou exigence de référencement"
+deliverable = "périmètre, état initial, matrice problème impact preuve correction revalidation, sources et limites"
+reviewer = "frontend,documentation,produit,auditeur"
+
 [ux-research]
 domain = "parcours, hypothèses, usages, états vides et erreurs"
 activation = "hypothèse ou parcours utilisateur incertain"
