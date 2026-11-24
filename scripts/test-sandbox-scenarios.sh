@@ -101,18 +101,20 @@ assert_contains "$source/scripts/guard-before-response.sh" 'demande utilisateur 
   assert_contains "$source/policies/TASK-ROUTING-POLICY.md" 'frontend@id,qa@id,auditeur@id'
   delegation="$tmp/delegation-$kit"
   mkdir -p "$delegation/$hidden/reports/agents"
-  for role in frontend qa auditeur; do printf 'thread=real-%s\nscope=sandbox-%s\ndeliverable=%s-report\nevidence=%s-proof\n' "$role" "$role" "$role" "$role" > "$delegation/$role.assignment"; done
+  printf 'thread=real-f\nscope=sandbox-frontend\ndeliverable=frontend-report\nevidence=frontend-proof\nreport=reports/frontend.md\n' > "$delegation/frontend.assignment"
+  printf 'thread=real-q\nscope=sandbox-qa\ndeliverable=qa-report\nevidence=qa-proof\nreport=reports/qa.md\n' > "$delegation/qa.assignment"
+  printf 'thread=real-a\nscope=sandbox-auditeur\ndeliverable=auditeur-report\nevidence=auditeur-proof\nreport=reports/auditeur.md\n' > "$delegation/auditeur.assignment"
   if bash "$source/scripts/verify-specialist-plan.sh" visual 'frontend,qa,auditeur' "$delegation" >/dev/null 2>&1; then
     echo "ECHEC SANDBOX: délégation sans identifiants acceptée pour $kit" >&2
     exit 1
   fi
   bash "$source/scripts/verify-specialist-plan.sh" visual 'frontend@real-f,qa@real-q,auditeur@real-a' "$delegation" >/dev/null
-  printf 'thread=real-q\nscope=sandbox-frontend\ndeliverable=qa-report\nevidence=qa-proof\n' > "$delegation/qa.assignment"
+  printf 'thread=real-q\nscope=sandbox-frontend\ndeliverable=qa-report\nevidence=qa-proof\nreport=reports/qa.md\n' > "$delegation/qa.assignment"
   if bash "$source/scripts/verify-specialist-plan.sh" visual 'frontend@real-f,qa@real-q,auditeur@real-a' "$delegation" >/dev/null 2>&1; then
     echo "ECHEC SANDBOX: chevauchement d agents accepté pour $kit" >&2
     exit 1
   fi
-  printf 'thread=real-q\nscope=sandbox-qa\ndeliverable=qa-report\nevidence=qa-proof\n' > "$delegation/qa.assignment"
+  printf 'thread=real-q\nscope=sandbox-qa\ndeliverable=qa-report\nevidence=qa-proof\nreport=reports/qa.md\n' > "$delegation/qa.assignment"
   printf 'agent_role: frontend\nagent_id: real-f\nstatus: accepted\nscope: sandbox-frontend\nevidence: frontend-proof\nnext_action: integrate\n' > "$delegation/frontend.report"
   (cd "$delegation" && bash "$source/scripts/verify-agent-report.sh" frontend real-f "$delegation/frontend.report") >/dev/null
   if (cd "$delegation" && sed 's/^evidence:.*/evidence:/' "$delegation/frontend.report" | bash "$source/scripts/verify-agent-report.sh" frontend real-f /dev/stdin) >/dev/null 2>&1; then
@@ -158,10 +160,11 @@ assert_contains "$source/scripts/guard-before-response.sh" 'demande utilisateur 
   scenario="$tmp/$kit"
   mkdir -p "$scenario/$hidden/scripts" "$scenario/agent-evidence"
   cp "$source/RUNTIME-STATE.md" "$scenario/$hidden/"
+  cp "$source/SPECIALIST-CONTRACTS.toml" "$scenario/$hidden/"
   cp "$source/scripts/start-goal.sh" "$scenario/$hidden/scripts/"
   cp "$source/scripts/verify-specialist-plan.sh" "$scenario/$hidden/scripts/"
-  printf 'scope=lot-ui\ndeliverable=frontend report\nevidence=ui evidence\n' > "$scenario/agent-evidence/frontend.assignment"
-  printf 'scope=lot-tests\ndeliverable=qa report\nevidence=test evidence\n' > "$scenario/agent-evidence/qa.assignment"
+  printf 'thread=agent-frontend\nscope=lot-ui\ndeliverable=frontend report\nevidence=ui evidence\nreport=reports/frontend.md\n' > "$scenario/agent-evidence/frontend.assignment"
+  printf 'thread=agent-qa\nscope=lot-tests\ndeliverable=qa report\nevidence=test evidence\nreport=reports/qa.md\n' > "$scenario/agent-evidence/qa.assignment"
   : > "$scenario/$hidden/runtime-events.log"
 
   # Scenario 1: démarrer une carte multi-lots crée le Goal et son plan d'agents.

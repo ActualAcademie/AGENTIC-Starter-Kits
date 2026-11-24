@@ -1,5 +1,7 @@
 # Historique des versions
 
+| 2.0.30 | 2026-11-24 | Renforce la séparation exécutable des rôles spécialistes, exige la correspondance thread/identifiant et ajoute les tests de non-substitution. |
+
 | 2.0.29 | 2026-11-24 | Centralise l'autonomie continue, le routage spécialiste et la classification stricte des blocages. |
 
 | 2.0.28 | 2026-11-24 | Renforce l'auto-réparation runtime, préserve les liens shared et isole les traces de session par projet. |

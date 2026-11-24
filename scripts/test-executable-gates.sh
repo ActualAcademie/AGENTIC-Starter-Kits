@@ -468,10 +468,11 @@ for kit in codex claude; do
   goal_root="$(mktemp -d)"
   mkdir -p "$goal_root/$hidden/scripts" "$goal_root/agent-evidence"
   cp "$source_config/RUNTIME-STATE.md" "$goal_root/$hidden/"
+  cp "$source_config/SPECIALIST-CONTRACTS.toml" "$goal_root/$hidden/"
   cp "$source_config/scripts/start-goal.sh" "$goal_root/$hidden/scripts/"
   cp "$source_config/scripts/verify-specialist-plan.sh" "$goal_root/$hidden/scripts/"
-  printf 'scope=tests\ndeliverable=qa report\nevidence=qa evidence\n' > "$goal_root/agent-evidence/qa.assignment"
-  printf 'scope=ui\ndeliverable=frontend report\nevidence=frontend evidence\n' > "$goal_root/agent-evidence/frontend.assignment"
+  printf 'thread=agent-qa\nscope=tests\ndeliverable=qa report\nevidence=qa evidence\nreport=reports/qa.md\n' > "$goal_root/agent-evidence/qa.assignment"
+  printf 'thread=agent-frontend\nscope=ui\ndeliverable=frontend report\nevidence=frontend evidence\nreport=reports/frontend.md\n' > "$goal_root/agent-evidence/frontend.assignment"
   : > "$goal_root/$hidden/runtime-events.log"
   (cd "$goal_root" && NATIVE_GOAL_STATUS=unavailable NATIVE_GOAL_EVIDENCE='sandbox API native non exposée' GOAL_AGENT_EVIDENCE="$goal_root/agent-evidence" GOAL_REQUIRED_ROLES='qa,frontend' bash "$hidden/scripts/start-goal.sh" \
     "Livrer la carte de test" "preuve CI et PR" "branche dev et outils gratuits" \

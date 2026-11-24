@@ -1,5 +1,12 @@
 ## Unreleased
 
+## 2.0.30 - 2026-11-24
+
+- Renforce la séparation des rôles dans Codex et Claude avec le registre officiel obligatoire.
+- Refuse les substitutions du Coordinateur, les rôles inconnus et les threads incohérents.
+- Exige un rapport attendu pour chaque agent additionnel déclaré.
+- Ajoute des tests de non-régression sur la délégation réelle.
+
 ## 2.0.29 - 2026-11-24
 
 - Centralise la continuation autonome et la classification des blocages.
