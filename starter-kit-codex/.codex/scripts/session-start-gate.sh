@@ -41,12 +41,6 @@ fi
 entry="$root/AGENTS.md"
 kit_version="$(sed -n 's/^kit_version = "\([^\"]*\)"/\1/p' "$config/KIT.toml")"
 if [ -f "$entry" ] && grep -q '^<!-- ENTRYPOINT-CONTRACT:' "$entry"; then
-  if [ -L "$entry" ]; then
-    local_entry="$(mktemp "$root/.AGENTS.md.XXXXXX")"
-    cp "$entry" "$local_entry"
-    rm "$entry"
-    mv "$local_entry" "$entry"
-  fi
   sed -i.bak "s/^<!-- ENTRYPOINT-CONTRACT:.*-->$/<!-- ENTRYPOINT-CONTRACT: $kit_version -->/" "$entry"
   rm -f "$entry.bak"
 fi
@@ -66,8 +60,8 @@ if [ "$status" -ne 0 ]; then
   elif [ "$status" -eq 2 ]; then echo "KIT-SESSION: source distante indisponible; utilisation contrôlée du kit local" >&2; status=0; verification_mode=local-fallback
   else echo "KIT-SESSION: mise à jour requise ou vérification distante impossible" >&2; exit 1; fi
 fi
-if [ -s "$project_config/RUNTIME-STATE.md" ] && [ -x "$script_dir/normalize-runtime-state.sh" ]; then
-  bash "$script_dir/normalize-runtime-state.sh" "$project_config/RUNTIME-STATE.md" >/dev/null
+if [ -x "$script_dir/auto-repair-runtime.sh" ]; then
+  bash "$script_dir/auto-repair-runtime.sh" >/dev/null
 fi
 bash "$script_dir/validate-agentic-contract.sh" >/dev/null
 cached_kit_mtime="$(sed -n 's/^kit_mtime=//p' "$project_config/.session-kit-validated" 2>/dev/null | head -1 || true)"
