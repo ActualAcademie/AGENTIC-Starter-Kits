@@ -8,6 +8,7 @@ Ce répertoire s'importe dans tout nouveau projet. Il adapte les contrôles à p
 
 Lire et appliquer obligatoirement `policies/WEB-RESEARCH-POLICY.md`, `policies/SESSION-CONTINUITY-POLICY.md`, `policies/EXCEPTIONAL-REQUESTS.md`, `policies/PROJECT-TRACKER-VISUAL-SYSTEM.md`, `policies/TRELLO-VISUAL-SYSTEM.md`, `policies/TRELLO-START-STATE.md` et `policies/DOCUMENTATION-LANGUAGE-POLICY.md`. Le Coordinateur applique cette politique commune au gestionnaire sélectionné dans le profil du projet, par exemple Trello ou GitHub Projects, et déclenche une recherche externe dès qu'une information peut avoir changé ou engage une décision technique, légale, de sécurité, de coût ou de compatibilité. Les agents concernés consignent les sources et la date de consultation dans les preuves.
 Lire également `policies/CONTINUOUS-IMPROVEMENT-POLICY.md` et consulter les incidents connus avant toute action comparable.
+Lire et appliquer `policies/AUTONOMOUS-CONTINUATION-POLICY.md` avant toute décision de blocage, reprise ou enchaînement de cartes.
 Lire `policies/CONTEXT-EFFICIENCY-POLICY.md` au démarrage, puis appliquer son chargement par niveaux et son cache d'empreintes pour éviter les relectures intégrales répétées.
 Lire également `policies/EXECUTION-EFFICIENCY-POLICY.md` : un plan unique, une passe spécialisée consolidée, une correction groupée et une revalidation finale. Les micro-audits et relances identiques sans changement d'état sont interdits.
 Lire également `policies/PRODUCT-READINESS-POLICY.md` avant tout aperçu, audit de MVP ou déclaration de produit terminé.
