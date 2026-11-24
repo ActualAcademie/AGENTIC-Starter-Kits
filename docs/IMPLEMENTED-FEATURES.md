@@ -6,7 +6,12 @@ Ce document est la référence synthétique du comportement livré par les kits.
 
 | Élément | État | Preuve |
 |---|---|---|
-| Version actuelle | `2.0.25` | `VERSION`, `starter-kit-codex/.codex/KIT.toml`, `starter-kit-claude/.claude/KIT.toml` |
+| Version actuelle | `2.0.26` | `VERSION`, `starter-kit-codex/.codex/KIT.toml`, `starter-kit-claude/.claude/KIT.toml` |
+
+## Version 2.0.26
+
+- Toute demande adressée à l'utilisateur passe par l'interface interactive native ou son secours persistant.
+- Les demandes libres dans le chat ne peuvent plus suspendre un Goal, demander une validation ou déclencher une reprise.
 
 ## Version 2.0.25
 

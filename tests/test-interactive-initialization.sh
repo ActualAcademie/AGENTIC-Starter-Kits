@@ -10,6 +10,7 @@ for kit in codex claude; do
   grep -Fq 'interface interactive native' "$root/starter-kit-$kit/$hidden/skills/project-intake/SKILL.md"
   grep -Fq 'pending_request_id' "$root/starter-kit-$kit/$hidden/skills/project-intake/SKILL.md"
   grep -Fq 'INTERACTIVE-INPUT-POLICY.md' "$root/starter-kit-$kit/$hidden/ORCHESTRATION.md"
+  grep -Fq "Toute demande adressée à l'utilisateur" "$root/starter-kit-$kit/$hidden/policies/INTERACTIVE-INPUT-POLICY.md"
   bash -n "$root/starter-kit-$kit/$hidden/scripts/request-user-input.sh"
 done
 echo "Initialisation interactive persistante Codex/Claude: OK"

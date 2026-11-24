@@ -1,5 +1,11 @@
 ## Unreleased
 
+## 2.0.26 - 2026-11-24
+
+- Étend l'interface interactive à toute demande adressée à l'utilisateur par n'importe quel agent.
+- Interdit les demandes libres dans le chat pour les décisions, validations, accès, blocages ou informations manquantes.
+- Renforce la continuité afin qu'aucun agent ne puisse suspendre ou clôturer un Goal sans demande structurée persistée.
+
 ## 2.0.25 - 2026-11-24
 
 - Corrige le chemin de persistance des questionnaires pour écrire dans le `.codex` ou `.claude` du projet courant.
