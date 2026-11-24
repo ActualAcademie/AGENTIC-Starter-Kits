@@ -1,463 +1,173 @@
 # Agentic Starter Kits
 
-La branche 2.0 ajoute les lots de migration, chaos testing, observabilité et compatibilité multi-plateforme.
-La promotion vers `main` reste soumise à une demande humaine explicite après validation de `dev`.
+Kit partagé d'orchestration pour Codex et Claude Code. Il transforme une demande en processus de travail traçable, avec cahier des charges, conception, agents spécialisés, tests, GitFlow, contrôles de livraison et reprise autonome.
+
+Version actuelle : **2.0.31**.
 
 [![Version](https://img.shields.io/badge/version-2.0.31-blue.svg)](VERSION)
 
-Pendant l'implémentation, seuls les contrôles rapides directement nécessaires à la régression sont exécutés. Les audits visuels, responsive, accessibilité, navigateur, performance et indépendants sont regroupés en une seule passe finale, sur une carte dédiée ou sur demande explicite.
+La branche `dev` peut être alimentée automatiquement par les agents autorisés. La promotion vers `main` reste soumise à une demande humaine explicite.
 
-Chaque work item utilise le mode `quick-fix`, `feature` ou `audit`. Le mode est enregistré dans l'état runtime et détermine les agents, les tests et la profondeur de validation.
+## Ce que garantit le kit
 
-## Construire avec une IA comme avec une équipe senior
+- Le Coordinateur est le seul orchestrateur de la session.
+- Chaque tâche spécialisée est confiée à l'agent compétent avant modification ou validation.
+- Un spécialiste réel doit avoir un identifiant, un thread correspondant, un périmètre et un rapport attendu.
+- Le Coordinateur ne peut pas se déclarer spécialiste ni remplacer silencieusement un agent disponible.
+- Les agents parallèles sont créés uniquement pour des lots indépendants et leurs résultats sont intégrés par le Coordinateur.
+- Une erreur récupérable déclenche immédiatement diagnostic, correction, test et reprise.
+- Un outil absent est recherché dans le registre partagé avant toute installation.
+- Un navigateur indisponible déclenche une récupération puis une alternative vérifiable.
+- Après deux échecs identiques, la stratégie change et seule la tâche dépendante est isolée.
+- Les tâches indépendantes continuent sans boucle globale ni demande artificielle de « continue ».
+- `blocked` est réservé à une dépendance externe réellement inaccessible ou à une décision humaine indispensable.
+- Une conclusion exige des preuves, un état runtime cohérent et une livraison vérifiée.
 
-Le bootstrap des outils recherche le registre partagé avant toute installation. Un outil absent déclenche une seule question `waiting-for-user`; aucune installation n est lancée sans réponse explicite.
+Le détail des fonctionnalités et des tests est disponible dans [docs/IMPLEMENTED-FEATURES.md](docs/IMPLEMENTED-FEATURES.md).
 
-Les blocages nécessitant une décision passent en `waiting-for-user` avec une question unique et des choix numérotés. Le kit suspend les reprises automatiques jusqu'à la réponse.
+## Installation shared uniquement
 
-La version 1.16.63 applique ce même parcours aux outils absents du registre partagé.
+Le kit est installé une seule fois dans le registre partagé `AGENTIC_KIT_HOME`. Chaque projet conserve uniquement ses liens symboliques, son contexte local, son cahier des charges et son état d'exécution.
 
-Les rapports spécialistes sont maintenant contrôlés avant clôture.
+Les anciennes installations par copie manuelle ne sont pas supportées.
 
-L’audit global couvre désormais le bootstrap shared, la conservation des liens symboliques, le workflow unique `update-workspace-kit.yml` et les scénarios de régression associés.
+### Prérequis
 
-Les hooks de fin de sous-agent distinguent les événements génériques du Goal des spécialistes réels : une référence de Goal orpheline ne bloque plus la session, tandis qu’un spécialiste identifié sans rapport valide reste bloqué.
+- macOS ou Linux.
+- Git.
+- Codex ou Claude Code selon l'orchestrateur choisi.
+- Un projet déjà présent sur le disque.
+- Aucun service payant supplémentaire n'est activé par défaut.
 
-Le dépôt central lit automatiquement les issues ouvertes portant le label `kit-report` au démarrage d’une session. Les rapports marqués `bloquant`, `blocker`, `critical` ou `critique` sont prioritaires et doivent être traités avant une nouvelle amélioration ; les autres sont classés `normal`. Cette lecture ne s’active pas dans les projets consommateurs.
-
-Les rebuilds et déploiements sont verrouillés sur le dernier SHA de `origin/dev` ou `origin/main`. Le kit refuse une image ou un conteneur construit depuis un checkout ancien ou un SHA divergent.
-
-La branche cible doit être fournie explicitement à chaque rebuild.
-
-Les projets consommateurs disposent de `report-kit-blocker.sh`. Lorsqu’une porte de réponse constate un état `blocked` ou `needs-review`, le kit produit un rapport limité aux métadonnées anonymisées autorisées, calcule une empreinte anti-doublon, le conserve dans `.kit-reports/outbox/` si GitHub est indisponible, puis tente sa publication dans les issues `kit-report` du dépôt central. Le dossier de file d’attente est ignoré par Git.
-
-Le dépôt central conserve `docs/audit/kit-report-history.jsonl`. Le script `scripts/check-kit-reports.sh` relit les issues ouvertes et fermées, reconnaît les rapports déjà enregistrés, et les affiche comme `BLOQUANT`, `NORMAL`, `RESOLU` ou `DOUBLON`. Après traitement, `scripts/record-kit-report.sh` ajoute l’empreinte et le statut à cet historique versionné.
-
-Un rapport dont l’empreinte existe déjà dans une issue ouverte ou fermée n’est jamais renvoyé par un projet consommateur, y compris lorsque son classement précédent est `normal`, `resolved` ou `duplicate`.
-
-Le correcteur local `auto-remediate-kit-report.sh` tente d’abord les corrections connues dans le projet consommateur, exécute les contrôles puis le rapport envoyé indique `correction appliquée` ou `correction impossible`. Une correction inconnue n’est jamais appliquée automatiquement et aucune modification directe de `main` n’est autorisée.
-
-Chaque Goal doit déclarer ses rôles spécialistes requis et leurs identifiants réels avant de commencer. Le Coordinateur ne peut pas travailler seul lorsqu’un spécialiste est disponible ; le mode séquentiel exige une preuve explicite d’indisponibilité.
-
-
-L'inventaire détaillé des fonctionnalités réellement implémentées, des hooks, des preuves, des limites d'intégration et de la couverture de tests se trouve dans [docs/IMPLEMENTED-FEATURES.md](docs/IMPLEMENTED-FEATURES.md).
-
-Agentic Starter Kits est une base portable de gouvernance, de conception, d’orchestration et de contrôle qualité pour construire des projets logiciels avec un agent IA. Le dépôt transforme une conversation en processus de livraison traçable, depuis le cahier des charges jusqu’à la Pull Request et à la maintenance.
-
-Le kit ne fournit pas une simple collection de prompts. Il fournit une méthode de travail complète : règles, agents spécialisés, Skills réutilisables, configuration technologique, documents de conception, journal qualité, contrôles de sécurité, GitFlow, CI et optimisation continue du coût.
-
-Les blocages récupérables ne terminent pas un tour : le Coordinateur conserve le Goal actif, tente les alternatives autorisées et exécute la prochaine action observable. Cette règle est couverte par les scénarios sandbox des deux variantes.
-
-La politique `AUTONOMOUS-CONTINUATION-POLICY.md` classe chaque blocage, route automatiquement les tâches vers les spécialistes, limite l'escalade humaine aux décisions critiques et enchaîne les cartes autorisées GitHub Projects ou Trello sans attendre une demande « continue ».
-
-Un audit indépendant en `REWORK` déclenche automatiquement la correction traçable puis une nouvelle relecture par l’auditeur ; il ne devient pas un blocage lorsque ces actions restent réalisables.
-
-La même récupération autonome s’applique à tout blocage local ou réessayable ; `blocked` exige une dépendance externe inaccessible ou une décision humaine indispensable.
-
-Les contrôles et écarts corrigeables sont réparés puis relancés automatiquement avant toute interruption.
-
-Les Skills de documentation produisent ou délèguent les preuves manquantes avant d'escalader un blocage réel.
-
-L'installation crée les fichiers d'état obligatoires avant de lancer les validateurs, afin d'éviter un blocage initial artificiel.
-
-Pendant l'onboarding, les gates ouverts, la conception en revue, l'audit P0 absent, la branche non publiée ou la PR non relue déclenchent la poursuite autonome au lieu d'un blocage.
-
-## Démarrage rapide
-
-L’installation est exclusivement `shared`. L’installateur installe le socle une fois dans le registre commun puis crée des liens symboliques dans chaque projet. L’updater reste désactivé par défaut (`--updates off`) et ne peut être demandé qu’après configuration du profil et validation de la garde d’usage hébergé.
-
-### 1. Télécharger le kit
+### Installation Codex
 
 ```bash
-git clone https://github.com/krapaud/AGENTIC-Starter-Kits.git
-cd AGENTIC-Starter-Kits
+./install.sh --kit codex --mode shared \
+  --target "/chemin/absolu/vers/mon-projet" \
+  --updates off
 ```
 
-### 2. Installer Codex ou Claude
-
-Pour Codex :
+### Installation Claude Code
 
 ```bash
-./install.sh --kit codex --mode shared --target /chemin/vers/mon-projet --updates off
+./install.sh --kit claude --mode shared \
+  --target "/chemin/absolu/vers/mon-projet" \
+  --updates off
 ```
 
-Pour Claude :
+Le chemin cible doit exister. L'installateur demande le dossier commun des cahiers des charges lorsqu'il n'est pas fourni. Pour utiliser l'assistant interactif, lancer simplement `./install.sh`.
 
-```bash
-./install.sh --kit claude --mode shared --target /chemin/vers/mon-projet --updates off
+Le guide complet se trouve dans [docs/INSTALLATION.md](docs/INSTALLATION.md).
+
+## Premier lancement
+
+1. Ouvrir le projet à sa racine dans Codex ou Claude Code.
+2. Envoyer le cahier des charges complet.
+3. Laisser le Coordinateur charger les instructions, les politiques, les Skills, le profil, le runtime et les outils partagés.
+4. Répondre aux questions de cadrage via l'interface lorsqu'une décision est réellement nécessaire.
+5. Laisser l'onboarding auditer le projet existant, la structure, les outils, la documentation et le suivi configuré.
+6. Laisser l'agent créer les cartes ou Issues nécessaires, avec descriptions, labels, priorités, dépendances et checklists conformes.
+7. Le développement commence uniquement après la conception exigée par le périmètre.
+
+Pour initialiser une conversation déjà ouverte, envoyer seul :
+
+```text
+Mode initialisation :
 ```
 
-Pour choisir l’orchestrateur, le projet et le dossier des cahiers dans l’assistant interactif, lancez simplement :
+Le Coordinateur reprend l'état existant sans recréer le Goal, les cartes, les agents ou les changements déjà prouvés.
 
-```bash
-./install.sh
-```
+## Orchestration et agents
 
-Le chemin cible doit déjà exister. Le mode `shared` est obligatoire et centralise le kit dans le registre commun. Le guide complet explique aussi `AGENTIC_KIT_HOME`, `--briefs-root`, les projets existants, les mises à jour et les vérifications.
+Le kit comprend six agents du noyau et dix spécialistes optionnels. Les spécialistes sont activés selon le périmètre réel, le risque et les lots indépendants.
 
-### 3. Activer les mises à jour
+Les agents du noyau couvrent notamment le Coordinateur, la conception, le frontend, le backend, la cybersécurité et l'audit. Les spécialistes optionnels couvrent le produit, la QA, le DevOps, la performance, la recherche UX, l'accessibilité, le SEO, la data, la documentation, la release, la conformité et le juridique selon le registre du kit.
 
-Pour activer l’updater, demandez explicitement `--updates dispatch` (manuel) ou `--updates pr` (calendrier hebdomadaire) et confirmez que la garde de visibilité/facturation passe. Sans cette configuration, aucun nouvel updater n’est installé. Les workflows préexistants sont conservés; l’installateur ne les supprime ni ne les migre automatiquement.
+Avant une tâche spécialisée, le plan doit être validé par `verify-specialist-plan.sh`. Le contrôle refuse un rôle absent du registre officiel, `coordinateur` comme spécialiste, un identifiant fictif, un thread différent de l'identifiant, une affectation incomplète ou des périmètres qui se chevauchent.
 
-### 4. Premier échange avec l’agent
+Pour une refonte visuelle ou un audit explicitement demandé, `frontend`, `qa` et `auditeur` sont obligatoires. Pour un correctif ciblé, seuls le spécialiste propriétaire et les contrôles directement concernés sont activés, sauf risque démontré.
 
-Ouvrez le projet à sa racine dans Codex ou Claude et envoyez le cahier des charges complet. L’agent pose ensuite les questions manquantes, prépare les documents de conception et attend les décisions nécessaires avant de coder.
+## Récupération des outils et du navigateur
 
-Le guide détaillé est disponible dans [docs/INSTALLATION.md](docs/INSTALLATION.md).
+Avant de déclarer un outil indisponible, le Coordinateur vérifie le `PATH`, les emplacements système et utilisateur, le registre partagé, les environnements du projet, les binaires de l'IDE et les intégrations de la session.
 
-## Ce que le projet permet de faire
+Pour un navigateur, il vérifie et répare d'abord la session utilisateur déjà ouverte, puis utilise le connecteur équivalent, une CLI ou une API authentifiée, et enfin un contrôle local ou une fixture vérifiable. Après deux échecs identiques, la voie change obligatoirement et seule la tâche dépendante est isolée.
 
-Avec un seul kit importé dans un nouveau dépôt, l’IA peut :
+Un navigateur vierge ne doit pas être créé lorsqu'une session existante est contrôlable. Le navigateur généraliste peut être utilisé pour Trello, GitHub, VPS, Dokploy et les autres services autorisés. Les tâches indépendantes continuent sans boucle globale.
 
-- Refuser de commencer tant qu’un cahier des charges réel n’est pas fourni et accepté.
-- Analyser la machine, le dépôt existant, la stack et les commandes disponibles.
-- Adapter son comportement aux technologies déclarées dans `project-profile.toml`.
-- Produire une conception complète de niveau Concepteur Développeur d’Applications.
-- Générer vision, objectifs, user stories, parcours, architecture, données, API, sécurité, roadmap et diagrammes.
-- Proposer le suivi local, GitHub Projects ou Trello, selon le choix explicite de l’utilisateur.
-- Répartir le travail entre les six agents du noyau et les dix agents spécialistes optionnels.
-- Construire des interfaces premium avec direction artistique, design system, motion design et validation visuelle.
-- Rechercher ou générer des médias réalistes avec provenance, licence et retouches documentées.
-- Développer le frontend, le backend, les tests et la documentation par petits changements.
-- Enregistrer bugs, vulnérabilités, défauts visuels et corrections dans un journal partagé.
-- Auditer indépendamment chaque livraison avant sa clôture.
-- Bloquer un push si les contrôles, tests, audits ou documents requis échouent.
-- Livrer avec des branches, commits atomiques, Pull Requests et versionnement SemVer.
-- Mesurer et améliorer progressivement la qualité, la performance et le coût d’utilisation des agents.
+## Autonomie et limites
 
-## Architecture générale
+Une demande comme « fais tout », « termine », « corrige » ou « livre » autorise les étapes réversibles nécessaires jusqu'à la livraison vers `dev` : correction, tests, documentation, branche, commit, push, PR, CI, fusion et synchronisation de `dev`.
 
-```mermaid
-flowchart TD
-    U[Utilisateur] --> C[Agent Coordinateur]
-    C --> I[ Cahier des charges accepté ]
-    I --> D[Concepteur]
-    D --> DOC[docs de conception]
-    C --> F[Frontend artiste]
-    C --> B[Backend]
-    C --> S[Cybersécurité]
-    F --> Q[Auditeur indépendant]
-    B --> Q
-    S --> Q
-    Q --> J[Journal qualité partagé]
-    Q --> PR[Pull Request validée]
-    PR --> R[Release et main]
-```
+Une demande humaine reste nécessaire pour la promotion ou la fusion vers `main`, un secret ou un accès manquant, une dépense ou un service payant, une action destructive, une décision métier, juridique ou réglementaire non déductible, ou une action de production sensible non autorisée.
 
-## Les deux kits disponibles
+Le kit ne simule jamais une preuve et ne prétend pas garantir la sécurité de production à lui seul.
 
-| Kit | Fichier racine | Dossier | Orchestrateur | Usage |
-| --- | --- | --- | --- | --- |
-| Codex | `AGENTS.md` | `.codex/` | Codex | Kit natif pour une orchestration avec Codex |
-| Claude Code | `CLAUDE.md` | `.claude/` | Claude Code | Kit natif avec agents et Skills Claude |
+## GitFlow et livraison
 
-Choisir un seul kit par projet. Les deux kits sont fonctionnellement alignés, mais leurs formats suivent leur outil respectif.
+Chaque carte, Issue ou feature utilise une branche dédiée. Les agents ne poussent jamais directement vers `dev` ou `main`.
 
-## Les six agents du noyau
+1. Créer une branche depuis `dev`.
+2. Regrouper le travail de la feature sur cette branche.
+3. Effectuer les commits et contrôles nécessaires.
+4. Pousser la branche et créer une seule PR vers `dev` à la fin de la carte.
+5. Attendre et corriger la CI, puis fusionner vers `dev`.
+6. Vérifier que le checkout local et `origin/dev` sont alignés.
+7. Demander explicitement la promotion vers `main` lorsque nécessaire.
+8. Supprimer les branches fusionnées localement et sur le remote.
 
-### Coordinateur
+Une PR n'est pas un journal de progression. Les corrections intermédiaires restent sur la branche de la carte.
 
-Il est le chef d’orchestre. Il contrôle le périmètre, les dépendances, le découpage, les priorités, les budgets de raisonnement, les preuves attendues et la clôture. Il ne remplace pas les spécialistes et ne peut pas transformer une hypothèse en fait vérifié.
+## Suivi du projet
 
-### Concepteur
+Le suivi est choisi explicitement dans `[tracking].mode` : `local`, `github` ou `trello`.
 
-Il transforme le besoin accepté en dossier exploitable. Il produit et maintient les user stories, critères d’acceptation, parcours, architecture, modèle de données, contrats, sécurité, roadmap, décisions et diagrammes éditables.
+- `local` conserve les work items dans le dépôt.
+- `github` utilise les Issues et GitHub Projects.
+- `trello` utilise les cartes et checklists.
 
-### Frontend, artiste digital
+Les règles de contenu, labels, priorités, colonnes, checklists, commentaires, relecture et statut sont communes aux modes GitHub Projects et Trello. Une carte ou Issue n'est jamais créée sans description détaillée, propriétaire, périmètre, dépendances, critères d'acceptation, preuves attendues et Definition of Done.
 
-Il ne se limite pas à assembler des composants. Il définit une direction artistique singulière, un design system, une hiérarchie visuelle, des états complets, des micro-interactions et des animations utiles. Il vérifie le rendu sur plusieurs viewports, l’accessibilité, la performance et `prefers-reduced-motion`. Il documente la provenance et la licence de chaque média.
+Les statuts communs sont `Todo`, `In Progress` et `Done`. La revue et le blocage sont des métadonnées ou labels, pas des colonnes supplémentaires par défaut.
 
-### Backend
+## Conception, audits et tests
 
-Il construit les contrats, la logique métier, les API, les données, les migrations, l’observabilité, les erreurs et les tests. Il respecte le principe du changement minimal et escalade tout changement de contrat ou de donnée sensible.
+Le mode `quick-fix` effectue uniquement les contrôles rapides directement nécessaires. Le mode `feature` regroupe la validation finale proportionnée. Le mode `audit` active la matrice exhaustive.
 
-### Cybersécurité
+Les audits visuels, responsive, accessibilité, performance et navigateur ne sont pas relancés à chaque modification. Ils sont réalisés en une passe finale, sur une carte dédiée ou sur demande explicite.
 
-Il analyse les actifs, menaces, permissions, entrées, secrets, dépendances, sessions, données sensibles et contrôles réseau. Il qualifie les risques, conserve les preuves et peut bloquer une livraison critique.
+Les contrôles locaux, les tests projet, les tests sandbox Codex et Claude, la CI et les preuves externes sont distingués. Une CI verte ne remplace pas une vérification navigateur ou une preuve de déploiement demandée.
 
-### Auditeur
+## Runtime, hooks et continuité
 
-Il ne corrige pas ce qu’il vient d’approuver. Il vérifie les critères, le diff, les tests, la conception, la sécurité, le rendu visuel, les licences médias et les risques résiduels. Sa décision est `accepted`, `rework` ou `blocked`.
+Chaque projet possède un `RUNTIME-STATE.md` local. Le kit shared ne mélange jamais le runtime de deux projets ou de deux conversations.
 
-## Les dix agents spécialistes optionnels
+Le runtime conserve le Goal, l'état d'exécution, l'action courante, la prochaine action, les portes ouvertes, les agents créés et les preuves. `guard-before-response.sh` refuse une conclusion si une action autonome, une preuve ou une livraison reste ouverte.
 
-Le kit comprend aussi un registre de spécialistes activables dans `[agents]` du profil projet. Le Coordinateur choisit automatiquement les agents nécessaires et conserve les autres désactivés pour maîtriser le coût.
+Les hooks doivent être relus et approuvés dans l'interface de l'orchestrateur avant la première action projet. Si un hook se bloque lui-même, le kit utilise la procédure de bootstrap ou de réconciliation prévue, sans supprimer le runtime ni créer un second Goal.
 
-| Identifiant | Responsabilité principale |
-| --- | --- |
-| `produit` | Priorités métier, objectifs, valeur utilisateur et arbitrages fonctionnels. |
-| `qa` | Stratégie de tests, couverture, régression et validation fonctionnelle. |
-| `devops` | CI/CD, environnements, déploiement, observabilité et disponibilité. |
-| `performance` | Temps de réponse, ressources, bundle, requêtes et budgets de performance. |
-| `ux_research` | Parcours utilisateurs, friction, ergonomie et validation des hypothèses. |
-| `accessibilite` | WCAG, clavier, contraste, lecteurs d’écran et navigation inclusive. |
-| `data` | Modèle de données, qualité, migrations, traitements et indicateurs. |
-| `documentation` | Documentation utilisateur, développeur, API et exploitation. |
-| `release` | Versionnement, changelog, migrations, notes de version et livraison. |
-| `conformite` | RGPD, conservation, consentement, licences et exigences réglementaires. |
-| `juriste` | Recherche juridique, juridiction, contrats, licences et sources officielles. |
+## Rapports du kit
 
-Chaque spécialiste possède un fichier Codex, un fichier Claude, un modèle cohérent, des livrables, des interdictions, des escalades et une intégration au journal qualité. Aucun spécialiste ne peut s’auto-approuver.
+Les projets consommateurs peuvent produire des rapports anonymisés dans `.kit-reports/outbox/`. Le dépôt central conserve l'historique dans `docs/audit/kit-report-history.jsonl`.
 
-## Ce qui est généré dans chaque projet
+Une empreinte déjà classée `normal`, `resolved` ou `duplicate` n'est pas renvoyée. Les corrections connues peuvent être appliquées automatiquement par le correcteur central sur une branche isolée. Les cas inconnus restent en revue et ne modifient jamais `main` directement.
 
-Après le cahier accepté, l’initialisation crée un dossier `docs/` structuré :
+## Mise à jour du kit
 
-- `product/` pour la vision, le périmètre, les stories et les parcours.
-- `design/` pour l’architecture, les données, les contrats, la sécurité, la direction artistique et l’inventaire médias.
-- `diagrams/` pour les sources Mermaid ou éditables.
-- `delivery/` pour la roadmap et les décisions.
-- `quality/quality-journal.md` pour les anomalies et vérifications.
-- `project-management/trello-board.md` si l’utilisateur choisit Trello.
+Le kit vérifie sa version au démarrage et utilise le registre partagé. Une mise à jour détectée pendant un work item suspend le travail produit, sauvegarde le runtime, met à jour le kit par son propre GitFlow, vérifie `dev`, puis reprend la prochaine action.
 
-Les marqueurs `[[A_COMPLETER]]` bloquent le preflight. Le projet ne peut donc pas passer directement d’un modèle vide à l’implémentation.
+L'updater est désactivé par défaut avec `--updates off`. Les modes `dispatch` et `pr` nécessitent une configuration explicite et la validation de la garde d'usage hébergé. Aucun paiement ni workflow hébergé supplémentaire n'est activé sans autorisation.
 
-## Les garanties de gouvernance
+## Documentation et références
 
-Le kit impose :
-
-- Cahier des charges obligatoire.
-- Profil de technologies explicite.
-- Conception maintenue pendant toute la durée du projet.
-- Journal unique pour bugs, failles, défauts visuels et corrections.
-- Vérification indépendante avant clôture.
-- GitFlow avec une branche par feature, correctif ou documentation.
-- Commits atomiques et taille limitée.
-- Lint, tests, sécurité et vérification avant push.
-- CI GitHub pour les imports Codex, Claude et PowerShell.
-- Distinction claire entre vérifié, non vérifié, inconnu et risque résiduel.
-
-## Contrat central et mémoire d exécution
-
-Les kits Codex et Claude appliquent un contrat central commun. Chaque work item produit un registre d obligations avec responsable, déclencheur, preuve, état et prochaine vérification. Huit portes contrôlent l intake, la conception, le périmètre Git, les validations, la documentation, les intégrations, l audit et la livraison. Une porte non prouvée interdit la clôture sans interrompre les tâches indépendantes.
-
-`RUNTIME-STATE.md` conserve les obligations ouvertes, la prochaine action, la dernière preuve, l état CI et les intégrations. Une nouvelle conversation reprend cette action avant tout résumé. Chaque work item possède aussi un registre `obligations.tsv` vérifié automatiquement avant push et livraison. Les scripts `scripts/audit-governance-consistency.sh`, `scripts/test-executable-gates.sh` et `guard-before-response.sh` bloquent les divergences, les portes sans preuve et les réponses finales prématurées.
-
-## Sécurité et confiance
-
-Le kit est conçu avec une politique de sécurité explicite. Il protège le processus par des contrôles avant push, une analyse dédiée Cybersécurité, un audit indépendant, une CI bloquante et une traçabilité des risques. Il ne collecte pas automatiquement les secrets et ne prétend pas garantir la sécurité de production.
-
-Avant de l’utiliser, lisez [SECURITY.md](SECURITY.md). Il explique les données à anonymiser, les secrets à ne jamais transmettre, les contrôles disponibles, les limites du kit et le signalement responsable. Les décisions de sécurité critiques restent validées par une personne autorisée.
-
-La garde d’initialisation parcourt les noms des variables exportées et bloque les familles conventionnelles de credentials API, jetons d’accès et configurations d’authentification cloud, même si la valeur est vide. Elle ne déréférence ni n’affiche les valeurs; un nom arbitraire peut lui échapper, et un motif large peut bloquer une configuration non facturable. `AGENTIC_EXTERNAL_BILLING_APPROVED=1` désactive entièrement cette garde pour l’exécution concernée.
-
-Le hook PermissionRequest autorise une mention locale de credential et refuse les clients curl, wget, http ou httpie vers les endpoints couverts d’OpenAI et Anthropic, ainsi que les commandes de push détectées vers les branches protégées et les commandes destructives. Ce filtre textuel reste heuristique; il ne garantit pas la détection d’appels indirects ou obfusqués.
-
-## Installation et premier démarrage
-
-Le guide complet et unique est [INSTALLATION.md](INSTALLATION.md). Il explique les prérequis, la copie du kit, l’initialisation, la conversation obligatoire, le choix du gestionnaire de suivi, la configuration des technologies, la conception, le premier work item, les tests, le GitFlow et la première livraison.
-
-La génération CI hébergée vérifie d’abord la visibilité déclarée du dépôt : `public` confirmé par son propriétaire permet le runner standard; `private` ou `unknown` requiert une approbation explicite et une référence à une limite ou un budget GitHub vérifié. Le workflow généré reçoit uniquement `contents: read` et annule les exécutions obsolètes de la même branche. Le délai maximal par job ne plafonne pas le cumul mensuel; le kit ne vérifie pas ces attestations en direct.
-
-Guides rapides :
-
-- [Kit Codex](starter-kit-codex/README.md)
-- [Kit Claude Code](starter-kit-claude/README.md)
-
-## Fonctionnement quotidien
-
-1. Ouvrir l’agent à la racine du projet.
-2. Fournir le cahier des charges dans le chat.
-3. Choisir le gestionnaire de suivi; Trello reste facultatif.
-
-4. Valider le profil de technologies détecté.
-5. Compléter la conception générée.
-6. Demander un work item précis.
-7. Laisser le Coordinateur distribuer le travail.
-8. Vérifier les tests, lint, sécurité et documentation.
-9. Faire auditer la livraison.
-10. Commiter sur la branche dédiée et ouvrir la Pull Request.
-
-Le choix est enregistré dans `[tracking].mode` : `local` (défaut recommandé), `github` ou `trello`. GitHub Projects relie les Issues aux champs disponibles du Project; Trello utilise des cartes et checklists; le mode local conserve les work items dans le dépôt. Les statuts de travail communs sont `Todo`, `In Progress` et `Done`. Dans Trello, les responsables et phases MVP/Post-MVP restent des informations de carte, sans colonnes supplémentaires.
-
-Pour une conversation sans construction de projet, utiliser explicitement `Mode général`. Pour maintenir le kit, utiliser `Mode maintenance`.
-
-## Performance et coût
-
-Le Coordinateur choisit un niveau de raisonnement proportionné au risque. Les tâches répétitives, contrôlables ou documentaires utilisent le profil le plus économique compatible. Les décisions d’architecture, de sécurité et d’audit utilisent un raisonnement plus approfondi. Les évaluations enregistrent les résultats, les relances, les défauts détectés, le temps et le coût afin d’améliorer les règles sans dégrader la qualité.
-
-Le fichier `.codex/metrics/usage.jsonl` ou `.claude/metrics/usage.jsonl` conserve la télémétrie interne des délégations. Elle aide le Coordinateur à réduire le contexte, éviter les relances, regrouper les tâches et sélectionner le modèle cohérent avec le risque. Utiliser `bash .codex/scripts/cost-tracker.sh report` ou son équivalent Claude pour consulter un résumé. Les tarifs sont facultatifs et ne sont jamais inventés.
-
-## Mode autonome jusqu’à la livraison
-
-Après réception et acceptation du cahier des charges, une instruction comme « fais tout » autorise le Coordinateur à exécuter la chaîne complète du work item : conception, implémentation, tests, audits, corrections, documentation, commit et Pull Request. Il ne demande pas « Continue » pour une étape déjà couverte par cette autorisation. Il s’arrête uniquement pour une décision irréversible, un secret, une autorisation externe ou un choix métier impossible à déduire.
-
-## Limites importantes
-
-Le kit ne devine pas les décisions métier, ne crée pas de secret, ne simule pas une preuve, ne garantit pas à lui seul la sécurité de production et ne peut pas confirmer une licence sans source vérifiable. Une image générée ou trouvée sur internet doit rester traçable et compatible avec son usage. Les validations critiques et les choix irréversibles peuvent nécessiter une décision humaine.
-
-## Documentation du dépôt
-
-La carte complète de navigation documentaire se trouve dans [DOCUMENTATION-MAP.md](DOCUMENTATION-MAP.md).
-
-## Recherche Internet et exactitude dans le temps
-
-Les agents ne doivent pas se fier à une connaissance potentiellement obsolète. Le Coordinateur active une recherche externe pour les réglementations, vulnérabilités, versions, API, frameworks, licences, tarifs, limites, compatibilités, outils CI/CD, recommandations d'architecture et services externes. Les agents Backend, Frontend, Cybersécurité, DevOps, Conformité, Performance, Concepteur et Documentation sont directement concernés selon leur périmètre.
-
-La politique [WEB-RESEARCH-POLICY.md](starter-kit-codex/.codex/policies/WEB-RESEARCH-POLICY.md) impose des sources primaires, une vérification de la version et de la date, la consignation des URL et des décisions influencées, ainsi que l'anonymisation des données. La recherche complète les tests et les audits locaux, mais ne les remplace pas. Les résultats encore valides sont réutilisés pour limiter le coût.
-
-- [Installation complète](INSTALLATION.md)
+- [Installation](docs/INSTALLATION.md)
+- [Fonctionnalités implémentées](docs/IMPLEMENTED-FEATURES.md)
 - [Contribution et GitFlow](CONTRIBUTING.md)
 - [Sécurité](SECURITY.md)
 - [Versionnement](VERSIONING.md)
-- [Historique des changements](CHANGELOG.md)
-- [Historique chronologique des versions](VERSION-HISTORY.md)
-
-## État fonctionnel de la version 1.16.49
-
-À chaque démarrage, les hooks initialisent automatiquement l’environnement central des outils. Si un outil de base reste indisponible après tentative d’installation, aucune tâche ne commence.
-
-Les verrous Git orphelins sont détectés et déplacés en quarantaine avant reprise ; un verrou encore utilisé par un processus n’est jamais supprimé.
-
-Les outils Python installés par uv utilisent également `AGENTIC_TOOLS_HOME/python`; les runtimes système et les dépendances applicatives restent séparés.
-
-La version actuelle inclut 16 agents au total : six agents du noyau et dix spécialistes optionnels. Elle inclut leurs politiques de modèles, la gouvernance d’activation, les Skills d’orchestration, les scripts d’initialisation, les checkpoints, le suivi des coûts et les contrôles CI. Les détails contractuels des spécialistes sont dans `SPECIALIST-AGENTS.md` dans chaque kit.
-
-Après un ordre « fais tout », l’agent reste actif pendant l’attente de la CI, traite les erreurs suivantes, corrige les lints et les dettes historiques du périmètre par lots, puis relance les contrôles. Il ne clôture pas la conversation avec « CI en cours » ou « erreur détectée ».
-
-Le dépôt utilise aussi `markdownlint-cli2` avec `.markdownlint.json`. Les conventions de longueur, de frontmatter Claude et de tableaux sont explicites dans cette configuration. Tout vrai défaut Markdown restant bloque la CI.
-
-Le cycle de travail prend également en charge les cartes Trello `time-gated`. Une carte dépendante d’une date peut être suspendue avec sa raison, sa date ISO et son checkpoint, tandis que les travaux indépendants continuent. Les règles de versionnement, de README obligatoire et de publication sont définies dans `VERSIONING.md`.
-
-## Synchronisation d’un fork d’organisation
-
-Pour exiger la preuve des intégrations externes, lancer `bash scripts/test-integration-preflight.sh --require-real`. Sans cette option, le préflight local indique explicitement les scénarios Trello, agents et navigateur non exécutés.
-
-En mode `--require-real`, le préflight exige désormais `CONNECTOR_EVIDENCE_FILE` et valide un manifeste anonymisé couvrant GitHub, Trello, navigateur et agents. Chaque entrée doit contenir une référence distante, un SHA complet, une relecture confirmée, une méthode d'observation et une preuve récente. Une simulation, une autorisation seule, une valeur factice ou un champ sensible est refusé.
-
-Le dépôt personnel constitue la source de référence du starter kit. Un fork placé dans une organisation ne reçoit pas automatiquement les nouvelles versions. Depuis le clone du fork, ajouter le dépôt personnel comme remote `upstream`, puis synchroniser après chaque version validée :
-
-```bash
-git fetch upstream
-git switch main
-git merge upstream/main
-git push origin main
-```
-
-Pour préserver le GitFlow, effectuer cette synchronisation sur une branche dédiée et ouvrir une Pull Request vers `main` lorsque le dépôt de l’organisation contient des adaptations propres.
-
-## Dépannage rapide
-
-- `Preflight` échoue : lire la première erreur, compléter le profil ou le cahier, puis relancer le contrôle.
-- Trello n’est pas disponible : le plan local reste créé ; activer l’intégration puis demander une synchronisation vérifiée.
-- Un outil manque sur la machine : lancer `doctor.sh`. Le Coordinateur utilise les outils disponibles et documente la limite.
-- Une commande projet est inconnue : renseigner les champs `[commands]` du profil au lieu d’inventer une validation.
-
-## Règle de documentation continue
-
-Chaque ajout, correction, agent, Skill, politique, commande ou changement de comportement doit mettre à jour le README concerné dans le même work item. La documentation doit expliquer le fonctionnement, l’installation, l’usage, les prérequis, les limites et les effets sur l’orchestration. Une modification sans documentation correspondante est incomplète.
-
-## Échéances Trello
-
-Une échéance ne bloque que la carte concernée et ses dépendances directes. Les cartes indépendantes continuent. Une carte réellement dépendante passe en état `time-gated`, avec date ISO, raison et checkpoint de reprise. À la date prévue, le Coordinateur relit l’état Trello et reprend la carte sans contourner les contrôles.
-
-## Mises à jour automatiques
-
-L’installation `./install.sh` n’installe aucun updater par défaut (`--updates off`). Après avoir renseigné et confirmé le profil `[delivery]`, `--updates dispatch` demande explicitement un workflow manuel, ou `--updates pr` demande aussi son calendrier hebdomadaire. Dans le parcours `init-project.sh`, `ask` interactif propose le mode PR; `ask` sans terminal choisit `dispatch`. Dans les deux parcours, la garde s’applique à tout updater hébergé, y compris au déclenchement manuel, car celui-ci peut consommer du quota facturable : une visibilité `public` confirmée par le propriétaire suffit; `private` ou `unknown` exige `github_actions_private_billing_approved = true` et une référence non vide et non placeholder dans `github_actions_usage_limit_evidence`. Ces valeurs sont des attestations du propriétaire, non vérifiées en direct. Si la garde échoue, aucun nouveau workflow updater n’est installé; tout workflow préexistant est conservé et nécessite une revue manuelle. Après validation de la garde, `dispatch` reste manuel et `pr` active le calendrier. Le synchroniseur met à jour le socle universel et préserve le profil projet, les décisions, les journaux, les travaux, les rapports et l’état d’exécution. La fusion reste soumise à la CI et au GitFlow du projet.
-
-### Choix des mises à jour à l’initialisation
-
-Lors de l’initialisation, l’agent demande si les mises à jour automatiques doivent être activées. Le choix recommandé est `Oui, Pull Request automatique`, qui active le calendrier uniquement si la garde de visibilité/facturation est satisfaite. Pour tout déclencheur hébergé, y compris manuel, cette garde est préalable; si elle échoue, aucun nouveau workflow updater n’est installé. `--updates off` signifie ne pas installer d’updater; si un workflow existe déjà, l’opération échoue avant mutation, le conserve et demande une revue manuelle, car il peut rester actif. `--updates dispatch` demande un déclencheur manuel après validation de la garde; `--updates pr` est le consentement explicite au calendrier, lui aussi conditionné par la garde. En mode non interactif `ask`, le défaut est `dispatch`; en mode interactif, oui choisit `pr` et non choisit `off`. L’installateur `./install.sh` a un défaut distinct : il conserve `off` sauf option `--updates` explicite. Aucun workflow préexistant n’est migré ou écrasé : il est accepté uniquement s’il correspond exactement au modèle attendu pour le mode demandé; sinon l’opération échoue sans modification.
-
-## Règle de protection de main
-
-Les mises à jour automatiques ne poussent jamais directement sur `main`. Le Coordinateur peut toutefois créer, valider et fusionner automatiquement la PR de promotion vers `main` dans le cadre d'une demande de livraison active, après la fusion et la vérification de `dev`.
-
-## Installateur guidé
-
-Sans option, `./install.sh` affiche un assistant terminal avec choix de Codex ou Claude, chemin cible, résumé et confirmation. Pour les scripts automatisés, utilisez `--kit`, `--target` et éventuellement `--force`. Le terminal peut être rendu silencieux avec `NO_COLOR=1`.
-
-Le sélecteur de dossier intégré fonctionne sans dépendance obligatoire : les flèches parcourent les sous-dossiers, la flèche droite ou Entrée entre dans le dossier sélectionné, la flèche gauche ou Backspace revient au parent, et `s` sélectionne explicitement le dossier courant.
-
-La navigation et la sélection sont distinctes : entrer dans un dossier sert uniquement à le parcourir, tandis que `s` confirme le dossier courant comme projet. Cette distinction évite de sélectionner par erreur un dossier parent contenant plusieurs projets.
-
-L’installateur met également à jour ou crée `.gitignore` sans doublons. Il ignore le dossier de gouvernance choisi et son fichier d’entrée (`AGENTS.md` ou `CLAUDE.md`); lorsque l’updater est demandé et que sa garde passe, son workflow reste suivi dans Git afin que les futures Pull Requests fonctionnent. Un updater préexistant n’est jamais supprimé ni modifié automatiquement; tout workflow non conforme au mode demandé exige une revue manuelle.
-
-Le workflow de mise à jour utilise la branche `develop` si elle existe, sinon `dev`. Il refuse `main` et ne dépend d’aucune variable GitHub Actions non déclarée.
-
-## Qualité documentaire premium
-
-Le flux d'initialisation ouvre automatiquement la PR vers `dev` ou `develop` dès que la branche et les contrôles sont prêts. Il ne demande pas une confirmation supplémentaire pour une étape déjà autorisée.
-
-Le kit impose désormais un contrat documentaire : chaque document indique son statut, sa version, sa date, son responsable, son audience, son périmètre, ses faits vérifiés, ses hypothèses, ses inconnues, ses décisions, ses risques et ses critères de validation. Le Skill de rédaction adapte le contenu au lecteur et ajoute les exemples, diagrammes, commandes et références nécessaires. Le Skill d’audit refuse les documents incomplets, vagues ou incohérents avec le code.
-
-### Convention de rédaction
-
-Les agents n'utilisent jamais le tiret cadratin (U+2014) dans leurs réponses, documents, issues, commentaires ou comptes rendus. Ils utilisent une ponctuation simple et compatible avec les interfaces de suivi.
-
-### Optimisation du contexte
-
-Les kits appliquent un chargement par niveaux. Les politiques, historiques et README sont recherchés de façon ciblée, les documents déjà relus sont réutilisés par empreinte inchangée et les agents spécialisés reçoivent uniquement leur périmètre et leur preuve attendue. L'audit `scripts/audit-context-efficiency.sh` vérifie cette configuration sans mesurer ni enregistrer de contenu utilisateur.
-
-## Release et section About GitHub
-
-Après la promotion vers `main`, une modification de `VERSION`, `CHANGELOG.md` ou `VERSION-HISTORY.md` déclenche le workflow `publish-release-and-about.yml`. Il lit `VERSION`, crée le tag SemVer manquant, publie la GitHub Release avec les notes générées, puis met à jour la description et les topics de la section About du dépôt. Le workflow n’est pas déclenché par les branches `dev` ou `develop` et peut aussi être lancé manuellement avec une version explicite.
-
-### Autoriser la mise à jour de la section About
-
-La création de Release fonctionne avec le token GitHub standard. La modification de la description et des topics nécessite un secret de dépôt nommé `REPO_SETTINGS_TOKEN`, contenant un token GitHub autorisé à modifier les métadonnées du dépôt. Sans ce secret, la Release est publiée normalement et la mise à jour About est ignorée avec un avertissement non bloquant.
-
-Le workflow Release utilise le motif de tag compatible `v*.*.*` et peut être relancé sans erreur si la Release existe déjà.
-La gouvernance de versionnement distingue désormais les évolutions consommées des opérations de maintenance internes.
-L’installation vérifie désormais le workflow de mise à jour et affiche les commandes exactes pour l’ajouter au premier commit.
-Le routage des demandes est universel : chaque nouvelle demande est qualifiée puis confiée aux agents concernés, quel que soit son domaine.
-
-La validation navigateur est obligatoire pour les changements frontend et doit être documentée dans le work item.
-
-Le gestionnaire de suivi configuré est utilisé. Après chaque écriture distante et aux checkpoints importants (fin de lot, blocage ou reprise, livraison, PR, CI, fusion), relire les champs concernés. Regrouper les mises à jour liées à un même checkpoint et éviter les synchronisations après chaque micro-événement local.
-
-Le kit distingue désormais les tâches terminées, les sous-tâches en attente d’autorisation et les blocages réels.
-
-Les validations externes sont maintenant des conditions de fin obligatoires, et les dépendances entre cartes sont respectées.
-
-Les descriptions Trello sont normalisées avec de vrais retours à la ligne et relues pour éviter les séquences littérales `\n`.
-
-Une fusion de Pull Request est un checkpoint et non une fin de carte. Le Coordinateur doit reprendre automatiquement la prochaine étape ouverte.
-
-Le workflow récupère maintenant le script de mise à jour officiel depuis le dépôt source, car .codex/ et .claude/ restent volontairement ignorés dans les projets importateurs.
-
-## Distributions disponibles
-
-Le kit utilise exclusivement le mode `shared`, avec une installation globale unique et des liens symboliques vers chaque projet. Cette architecture évite les copies divergentes et permet de distribuer une mise à jour depuis un seul registre local.
-
-À chaque démarrage, le kit vérifie sa version et son registre partagé. Les mises à jour remplacent uniquement le socle universel et conservent le cahier des charges, le profil technique, l'état projet et les work items de chaque projet.
-
-Une mise à jour détectée pendant un work item suspend immédiatement le travail produit. Le Coordinateur sauvegarde `RUNTIME-STATE.md`, met à jour et valide le kit, le livre par PR vers `dev`, vérifie le SHA distant de `dev`, puis restaure l'état et reprend `next_action`. `main` n'est jamais touchée par cette étape.
-
-Pour initialiser un projet dans une conversation déjà ouverte, envoyer `Mode initialisation :`. Ce mode recharge le kit et impose la porte du cahier des charges sans nécessiter une nouvelle conversation.
-
-La commande doit être envoyée seule depuis la conversation qui travaille déjà sur le projet. Elle force l'agent à relire son état, à vérifier le cahier des charges et à suspendre toute modification tant que le cahier n'est pas reçu et accepté. Après cette étape, les questions manquantes sont posées avec une recommandation, puis les documents de conception et le plan de travail sont créés.
-
-La procédure complète se trouve dans [INSTALLATION.md](INSTALLATION.md), section « Initialiser une conversation déjà ouverte ».
-
-Le synchroniseur partagé met à jour le registre central et conserve les données projet protégées.
-La procédure de synchronisation vérifie désormais les fichiers obligatoires et la cohérence de version du kit installé.
-L initialisation demande explicitement la revue et l approbation des hooks avant toute action produit.
-
-## Mise à jour 1.16.68
-
-Le runtime partagé réconcilie désormais l’état dans le projet appelant, y compris lorsque le kit est installé par liens symboliques.
-
-Le bootstrap de session conserve aussi ses marqueurs dans le projet appelant.
-
-La résolution de racine Git du bootstrap est explicite afin d éviter les chemins multi-lignes.
-Les gardes shared relisent le runtime local du projet et non le registre du kit.
-
-Les portes d'entrée shared relisent la racine Git du projet appelant et réparent automatiquement le marqueur de version du contrat avant la validation.
-
-Les fichiers d instructions du projet restent locaux ; seul le kit d exécution est partagé.
-
-Une demande utilisateur maintient le Goal en attente et doit être résolue par le script de réponse avant toute clôture.
-
-Les résolveurs de réponse sont publiés comme exécutables dans les deux distributions.
-
-Les validations avant push refusent tout `AGENTS.md`, `CLAUDE.md`, `.codex/` ou `.claude/` staged dans un projet consommateur.
-
-Si le point d'entrée du projet est un lien symbolique vers une ancienne version, il est repointé vers le fichier de la version active du registre partagé avant le contrôle.
-
-Le validateur d'entrée effectue cette réparation avant le premier garde d'outil, afin qu'un ancien marqueur ne bloque pas la reprise.
-
-Le hook PreToolUse autorise uniquement le résolveur de réponse lorsqu une demande est en attente.
-
-Le message de refus contient la commande exacte à exécuter avec l identifiant de la demande.
-Lorsqu’une demande de livraison cible une branche protégée, le kit conserve le commit et route automatiquement l’opération vers une branche dédiée, puis une PR vers `dev` ou `develop`. Ce refus de push direct ne bloque pas le Goal et ne demande pas de confirmation supplémentaire.
+- [Changelog](CHANGELOG.md)
+- [Historique complet](VERSION-HISTORY.md)
+- [README Codex](starter-kit-codex/README.md)
+- [README Claude Code](starter-kit-claude/README.md)
+
+Toute modification du kit doit mettre à jour la documentation concernée, les tests, le changelog et le versionnement dans le même work item.

@@ -12,7 +12,7 @@ Lorsqu'une décision utilisateur est indispensable, le Coordinateur émet un que
 
 Les outils manquants sont recherchés dans le registre partagé puis proposés dans un questionnaire avant toute installation.
 
-La version 1.16.63 suspend le bootstrap une seule fois et reprend après la réponse utilisateur.
+La version 2.0.31 applique un bootstrap shared vérifiable et reprend après une réponse utilisateur uniquement lorsqu'une décision est réellement nécessaire.
 
 Les rapports spécialistes sont maintenant contrôlés par le hook de fin.
 
@@ -213,7 +213,7 @@ Chaque feature, correctif ou tâche documentaire se fait sur une branche dédié
 
 Si une demande de livraison arrive alors que le checkout est sur une branche protégée, le refus est routé automatiquement vers une branche dédiée puis une PR vers `dev` ou `develop`. Ce contrôle ne doit pas interrompre le Goal ni demander une confirmation supplémentaire.
 
-Après vérification de `dev`, le Coordinateur peut préparer l’unique PR de promotion vers `main`, mais sa création ou sa fusion exige toujours une demande humaine explicite.
+Après vérification de `dev`, le Coordinateur prépare l’unique PR de promotion vers `main`, mais sa création ou sa fusion exige toujours une demande humaine explicite.
 
 
 ## Dossier de conception de niveau CDA
@@ -353,7 +353,11 @@ Envoyer cette commande seule depuis la racine du projet. Codex recharge alors le
 La procédure de synchronisation vérifie désormais les fichiers obligatoires et la cohérence de version du kit installé.
 L initialisation demande explicitement la revue et l approbation des hooks avant toute action produit.
 
-## Mise à jour 1.16.68
+## Récupération des outils et du navigateur
+
+Le Coordinateur recherche d'abord le registre shared, le `PATH`, les environnements du projet, les binaires de l'IDE et les intégrations exposées. Pour un navigateur, il répare la session existante, puis utilise un connecteur, une CLI ou API authentifiée, ou un contrôle local. Après deux échecs identiques, il change de voie, isole uniquement la tâche dépendante et poursuit les tâches indépendantes.
+
+## Mise à jour du kit
 
 Le script de réconciliation utilise la racine Git du projet pour préserver le registre shared.
 
