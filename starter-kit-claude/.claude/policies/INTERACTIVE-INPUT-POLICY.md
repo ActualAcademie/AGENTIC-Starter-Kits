@@ -1,10 +1,10 @@
 # Politique d'interaction utilisateur structurée
 
-## Règle d'initialisation
+## Règle générale
 
-Les questions obligatoires de `project-intake` doivent être présentées avec l'interface interactive structurée de l'orchestrateur, et non comme un simple paragraphe dans le chat. Chaque question possède un identifiant stable, une réponse obligatoire, deux ou trois choix explicites dont un choix recommandé, un libellé et une option de réponse personnalisée.
+Toute demande adressée à l'utilisateur par n'importe quel agent doit être présentée avec l'interface interactive structurée de l'orchestrateur, et non comme un simple paragraphe dans le chat. Cela inclut les questions d'initialisation, décisions métier, choix d'outil, accès, blocages, validations, informations manquantes et demandes de reprise. Chaque demande possède un identifiant stable, une réponse obligatoire, deux ou trois choix explicites dont un choix recommandé lorsque c'est pertinent, un libellé et une option de réponse personnalisée.
 
-L'orchestrateur doit appeler son API d'interaction native lorsque celle-ci est disponible. L'interface doit empêcher la poursuite avant la réponse ou permettre une réponse personnalisée clairement associée à la question. Le Coordinateur ne doit pas lancer l'onboarding, écrire les décisions ou clôturer l'intake avant la réception de la réponse.
+L'orchestrateur doit appeler son API d'interaction native lorsque celle-ci est disponible. L'interface doit empêcher la poursuite avant la réponse ou permettre une réponse personnalisée clairement associée à la demande. Aucun agent ne doit demander une décision dans un message libre, une phrase isolée ou une instruction qui oblige l'utilisateur à répondre « continue ». Le Coordinateur ne doit pas lancer l'onboarding, écrire les décisions, débloquer une porte ou clôturer un work item avant la réception de la réponse.
 
 ## Persistance et reprise
 
