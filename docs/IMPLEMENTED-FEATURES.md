@@ -6,7 +6,14 @@ Ce document est la référence synthétique du comportement livré par les kits.
 
 | Élément | État | Preuve |
 |---|---|---|
-| Version actuelle | `2.0.21` | `VERSION`, `starter-kit-codex/.codex/KIT.toml`, `starter-kit-claude/.claude/KIT.toml` |
+| Version actuelle | `2.0.22` | `VERSION`, `starter-kit-codex/.codex/KIT.toml`, `starter-kit-claude/.claude/KIT.toml` |
+
+## Version 2.0.22
+
+- Corrige le profil et les compétences déclarés par l'agent SEO afin qu'ils soient validés par le preflight.
+- Ajoute la politique SEO, GEO et E-E-A-T, les contrats et l'inventaire spécialistes dans les deux kits.
+- Exige une matrice de preuve, les éléments non applicables et une revalidation rattachée au SHA ou au déploiement.
+- Vérifie automatiquement la cohérence du spécialiste SEO dans les deux distributions.
 
 ## Version 2.0.21
 

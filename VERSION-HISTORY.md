@@ -1,5 +1,7 @@
 # Historique des versions
 
+| 2.0.22 | 2026-11-24 | Corrige et renforce l'agent SEO, GEO et E-E-A-T, ses modèles, politiques, inventaires et contrats. |
+
 | 2.0.21 | 2026-11-24 | Ajoute le spécialiste SEO, GEO et E-E-A-T et son routage vérifiable. |
 
 | 2.0.20 | 2026-11-24 | Renforce le frontend premium, les refontes sur composition indépendante, l'architecture réutilisable et la cadence d'audit finale. |
