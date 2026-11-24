@@ -6,7 +6,13 @@ Ce document est la référence synthétique du comportement livré par les kits.
 
 | Élément | État | Preuve |
 |---|---|---|
-| Version actuelle | `2.0.22` | `VERSION`, `starter-kit-codex/.codex/KIT.toml`, `starter-kit-claude/.claude/KIT.toml` |
+| Version actuelle | `2.0.23` | `VERSION`, `starter-kit-codex/.codex/KIT.toml`, `starter-kit-claude/.claude/KIT.toml` |
+
+## Version 2.0.23
+
+- Tous les agents lisent et appliquent une politique commune de qualité, rôle, preuves, blocage et clôture.
+- Le preflight refuse un agent dont le profil, le modèle, la skill ou la politique est absent ou incohérent.
+- Un test de parité vérifie les dix-neuf agents Codex et Claude avant livraison.
 
 ## Version 2.0.22
 

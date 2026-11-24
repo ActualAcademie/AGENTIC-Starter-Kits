@@ -1,5 +1,7 @@
 # Historique des versions
 
+| 2.0.23 | 2026-11-24 | Renforce tous les agents avec une politique commune et un test de parité modèles, skills, contrats et documentation. |
+
 | 2.0.22 | 2026-11-24 | Corrige et renforce l'agent SEO, GEO et E-E-A-T, ses modèles, politiques, inventaires et contrats. |
 
 | 2.0.21 | 2026-11-24 | Ajoute le spécialiste SEO, GEO et E-E-A-T et son routage vérifiable. |
