@@ -1,5 +1,12 @@
 ## Unreleased
 
+## 2.0.22 - 2026-11-24
+
+- Corrige le profil modèle et les compétences de l'agent SEO pour utiliser uniquement des profils et skills réellement présents.
+- Ajoute une politique complète SEO, GEO et E-E-A-T avec périmètre, preuves, sources, revalidation et interdictions anti-fabrication.
+- Enregistre l'agent dans les inventaires et contrats spécialistes Codex et Claude.
+- Ajoute un test dédié qui vérifie le profil, les skills, la politique et le routage SEO.
+
 ## 2.0.21 - 2026-11-24
 
 - Ajoute l'agent spécialisé SEO, GEO et E-E-A-T pour les contenus publics et les interfaces trouvables et crédibles.

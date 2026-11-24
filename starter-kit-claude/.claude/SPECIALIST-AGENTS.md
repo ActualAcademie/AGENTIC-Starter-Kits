@@ -19,6 +19,7 @@ L’activation est déclarée dans `[agents]` de `.claude/project-profile.toml`.
 | `ux_research` | Une hypothèse utilisateur doit être validée ou un parcours est incertain. | Hypothèses, parcours, risques d’usage et protocole de validation. |
 | `image-generation` | Une image, photo, illustration, texture, icône ou ressource média doit être créée, sélectionnée, retouchée ou auditée. | Brief visuel, média réaliste et cohérent, contrôles d’artefacts, provenance, licence, accessibilité et preuves d’intégration. |
 | `accessibilite` | Une interface utilisateur est livrée ou une exigence inclusive existe. | Contrôles clavier, contraste, sémantique, lecteur d’écran et exceptions. |
+| `seo` | Une page publique, un contenu, une marque ou une exigence de découvrabilité est livré. | Matrice SEO, GEO et E-E-A-T, sources, preuves techniques, éléments non applicables et revalidation. |
 | `data` | Le projet possède un schéma, des migrations, des indicateurs ou des traitements. | Modèle, qualité, migrations, règles de rétention et preuves. |
 | `documentation` | Une API, une installation, une exploitation ou un parcours utilisateur est livré. | Documentation ciblée, exemples vérifiés et procédure de maintenance. |
 | `release` | Une version, une migration ou une livraison externe est préparée. | Changelog, version, checklist, migration, rollback et notes de livraison. |
