@@ -6,7 +6,18 @@ Ce document est la référence synthétique du comportement livré par les kits.
 
 | Élément | État | Preuve |
 |---|---|---|
-| Version actuelle | `2.0.23` | `VERSION`, `starter-kit-codex/.codex/KIT.toml`, `starter-kit-claude/.claude/KIT.toml` |
+| Version actuelle | `2.0.25` | `VERSION`, `starter-kit-codex/.codex/KIT.toml`, `starter-kit-claude/.claude/KIT.toml` |
+
+## Version 2.0.25
+
+- Les scripts de questionnaire et de résolution ciblent toujours le runtime du projet courant lorsqu'ils sont lancés depuis un dépôt Git.
+- Une interruption ou une nouvelle conversation ne perd plus une question d'initialisation persistée.
+
+## Version 2.0.24
+
+- Les questions obligatoires de l'initialisation utilisent l'interface interactive native lorsqu'elle est disponible.
+- Les demandes sont persistées avec `pending_request_id` et ne peuvent pas être perdues entre deux messages ou conversations.
+- Le secours textuel reste bloquant et passe par le même résolveur officiel.
 
 ## Version 2.0.23
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-if root="$(git rev-parse --show-toplevel 2>/dev/null)" && [ -f "$root/.claude/RUNTIME-STATE.md" ]; then state="$root/.claude/RUNTIME-STATE.md"; else state="$(cd "$script_dir/.." && pwd)/RUNTIME-STATE.md"; fi
+if root="$(git rev-parse --show-toplevel 2>/dev/null)"; then state="$root/.claude/RUNTIME-STATE.md"; else state="$(cd "$script_dir/.." && pwd)/RUNTIME-STATE.md"; fi
 [ "$#" -ge 2 ] || { echo "Usage: $0 REQUEST_ID ANSWER" >&2; exit 2; }
 request_id="$1"; answer="$2"
 value() { sed -n "s/^-\{0,1\}[[:space:]]*$1:[[:space:]]*//p" "$state" | head -n 1; }
