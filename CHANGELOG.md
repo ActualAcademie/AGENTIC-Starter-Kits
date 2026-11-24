@@ -1,5 +1,11 @@
 ## Unreleased
 
+## 2.0.21 - 2026-11-24
+
+- Ajoute l'agent spécialisé SEO, GEO et E-E-A-T pour les contenus publics et les interfaces trouvables et crédibles.
+- Route automatiquement les demandes de référencement, moteurs génératifs, auteur et confiance vers ce spécialiste.
+- Impose des sources vérifiées et interdit les promesses de classement, faux signaux d'autorité et données structurées trompeuses.
+
 ## 2.0.20 - 2026-11-24
 
 - Renforce l'agent frontend avec une politique obligatoire de refonte sur composition indépendante.

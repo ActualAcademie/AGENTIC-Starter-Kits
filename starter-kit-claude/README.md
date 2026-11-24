@@ -2,7 +2,7 @@
 
 La version 2.0 inclut le runtime canonique, la migration shared et les contrôles de release multi-plateforme.
 
-![Version du kit](https://img.shields.io/badge/version-2.0.20-blue.svg)
+![Version du kit](https://img.shields.io/badge/version-2.0.21-blue.svg)
 
 Les gestionnaires sélectionnables (local, Trello ou GitHub Projects) suivent la politique commune dans `starter-kit-claude/.claude/policies/PROJECT-TRACKER-VISUAL-SYSTEM.md`.
 
@@ -247,7 +247,7 @@ Le kit Claude Code comprend 16 agents : six agents du noyau et dix spécialistes
 | `.claude/agents/cybersecurite.md` | Cybersécurité | menaces, vulnérabilités, contrôles et blocage critique |
 | `.claude/agents/auditeur.md` | Auditeur | vérification indépendante, preuves, régressions et décision |
 
-Les spécialistes optionnels sont activés dans `[agents]` de `.claude/project-profile.toml` : `produit`, `qa`, `devops`, `performance`, `ux_research`, `accessibilite`, `data`, `documentation`, `release`, `conformite` et `juriste`. Le Coordinateur les active selon les besoins détectés, le risque et le budget.
+Les spécialistes optionnels sont activés dans `[agents]` de `.claude/project-profile.toml` : `produit`, `qa`, `devops`, `performance`, `ux_research`, `accessibilite`, `seo`, `data`, `documentation`, `release`, `conformite` et `juriste`. Le Coordinateur les active selon les besoins détectés, le risque et le budget.
 
 Le hook de fin distingue un événement générique du Goal d’un spécialiste identifié. Une référence orpheline ne bloque donc pas en boucle, mais un spécialiste réel sans rapport vérifiable reste bloqué.
 
@@ -281,7 +281,7 @@ Le Coordinateur ne les appelle pas tous systématiquement. Il lit `.claude/SPECI
 
 Une CI en cours ne clôture jamais le work item. Le Coordinateur attend les résultats, traite les erreurs, corrige les lints et les dettes historiques du périmètre par lots, puis relance les contrôles jusqu’à la Definition of Done.
 
-Le kit est actuellement en version `2.0.20`. Toute modification du kit doit mettre à jour ce README, le changelog et la version selon `VERSIONING.md`.
+Le kit est actuellement en version `2.0.21`. Toute modification du kit doit mettre à jour ce README, le changelog et la version selon `VERSIONING.md`.
 
 Le contrat central `.claude/policies/CORE-EXECUTION-CONTRACT.md` impose un registre d obligations, huit portes de validation et une reprise persistante. Une tâche ne peut être clôturée tant qu une obligation applicable ne possède pas de preuve.
 
