@@ -41,12 +41,6 @@ fi
 entry="$root/CLAUDE.md"
 kit_version="$(sed -n 's/^kit_version = "\([^"]*\)"/\1/p' "$config/KIT.toml")"
 if [ -f "$entry" ] && grep -q '^<!-- ENTRYPOINT-CONTRACT:' "$entry"; then
-  if [ -L "$entry" ]; then
-    local_entry="$(mktemp "$root/.CLAUDE.md.XXXXXX")"
-    cp "$entry" "$local_entry"
-    rm "$entry"
-    mv "$local_entry" "$entry"
-  fi
   sed -i.bak "s/^<!-- ENTRYPOINT-CONTRACT:.*-->$/<!-- ENTRYPOINT-CONTRACT: $kit_version -->/" "$entry"
   rm -f "$entry.bak"
 fi
@@ -70,13 +64,15 @@ if [ "$status" -ne 0 ]; then
     exit 1
   fi
 fi
-if [ -s "$project_config/RUNTIME-STATE.md" ] && [ -x "$script_dir/normalize-runtime-state.sh" ]; then
-  bash "$script_dir/normalize-runtime-state.sh" "$project_config/RUNTIME-STATE.md" >/dev/null
+if [ -x "$script_dir/auto-repair-runtime.sh" ]; then
+  bash "$script_dir/auto-repair-runtime.sh" >/dev/null
 fi
 bash "$script_dir/validate-agentic-contract.sh" >/dev/null
-cached_kit_mtime="$(sed -n 's/^kit_mtime=//p' "$config/.session-kit-validated" 2>/dev/null | head -1 || true)"
-cached_kit_hash="$(sed -n 's/^kit_sha256=//p' "$config/.session-kit-validated" 2>/dev/null | head -1 || true)"
+cached_kit_mtime="$(sed -n 's/^kit_mtime=//p' "$project_config/.session-kit-validated" 2>/dev/null | head -1 || true)"
+cached_kit_hash="$(sed -n 's/^kit_sha256=//p' "$project_config/.session-kit-validated" 2>/dev/null | head -1 || true)"
 printf 'kit_version=%s\nvalidated_at=%s\nmode=%s\n' "$(sed -n 's/^kit_version = "\([^"]*\)"/\1/p' "$config/KIT.toml")" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" "$mode" > "$config/.session-kit-validated"
+cp "$config/.session-kit-validated" "$project_config/.session-kit-validated"
+rm -f "$config/.session-kit-validated"
 manifest_hash="missing"
 [ -f "$root/.workspace.toml" ] && manifest_hash="$(shasum -a 256 "$root/.workspace.toml" | awk '{print $1}')"
 if stat -f %m "$config/KIT.toml" >/dev/null 2>&1; then kit_mtime="$(stat -f %m "$config/KIT.toml")"; else kit_mtime="$(stat -c %Y "$config/KIT.toml")"; fi
