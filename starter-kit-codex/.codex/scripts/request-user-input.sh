@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-if root="$(git rev-parse --show-toplevel 2>/dev/null)" && [ -f "$root/.codex/RUNTIME-STATE.md" ]; then state="$root/.codex/RUNTIME-STATE.md"; else state="$(cd "$script_dir/.." && pwd)/RUNTIME-STATE.md"; fi
+if root="$(git rev-parse --show-toplevel 2>/dev/null)"; then config="$root/.codex"; else config="$(cd "$script_dir/.." && pwd)"; fi
+mkdir -p "$config"
+state="$config/RUNTIME-STATE.md"
 [ "$#" -ge 5 ] || { echo "Usage: $0 <id> <question> <choice-id> <choice-label> ..." >&2; exit 2; }
 request_id="$1"; question="$2"; shift 2
 [ $(( $# % 2 )) -eq 0 ] || { echo "Chaque choix doit avoir un identifiant et un libellé." >&2; exit 2; }
