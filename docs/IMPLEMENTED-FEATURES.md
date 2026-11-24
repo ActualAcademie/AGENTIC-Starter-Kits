@@ -6,7 +6,14 @@ Ce document est la référence synthétique du comportement livré par les kits.
 
 | Élément | État | Preuve |
 |---|---|---|
-| Version actuelle | `2.0.29` | `VERSION`, `starter-kit-codex/.codex/KIT.toml`, `starter-kit-claude/.claude/KIT.toml` |
+| Version actuelle | `2.0.30` | `VERSION`, `starter-kit-codex/.codex/KIT.toml`, `starter-kit-claude/.claude/KIT.toml` |
+
+## Version 2.0.30
+
+- Le plan spécialiste vérifie le registre officiel des rôles dans les deux kits.
+- Le Coordinateur ne peut jamais être présenté comme agent additionnel.
+- Chaque affectation exige un identifiant réel, un thread identique à cet identifiant et un rapport attendu.
+- Des tests négatifs vérifient les rôles inconnus, les threads divergents et les rapports manquants.
 
 ## Version 2.0.29
 
