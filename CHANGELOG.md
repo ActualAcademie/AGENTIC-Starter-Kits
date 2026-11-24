@@ -1,5 +1,11 @@
 ## Unreleased
 
+## 2.0.27 - 2026-11-24
+
+- Ajoute un guide complet pour l'installation shared uniquement.
+- Documente le registre commun, les cahiers externes, les projets existants et les mises à jour.
+- Supprime des README la procédure obsolète de copie locale manuelle.
+
 ## 2.0.26 - 2026-11-24
 
 - Étend l'interface interactive à toute demande adressée à l'utilisateur par n'importe quel agent.
