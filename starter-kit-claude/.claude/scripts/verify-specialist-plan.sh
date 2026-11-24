@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 domain="${1:-}"; agents="${2:-}"; evidence="${3:-}"
+script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+contracts="$(cd "$script_dir/.." && pwd)/SPECIALIST-CONTRACTS.toml"
 [ -n "$domain" ] && [ -n "$agents" ] && [ -n "$evidence" ] || { echo "AGENTS: domaine, agents et preuve requis" >&2; exit 1; }
 case "$domain" in
   visual|frontend|responsive)
@@ -24,11 +26,14 @@ for entry in "${all_entries[@]}"; do
   [ "$role" != "$entry" ] && [ -n "$role" ] && [ -n "$agent_id" ] && [ "$agent_id" != "pending" ] || {
     echo "AGENTS: chaque spécialiste doit avoir un identifiant réel au format role@id" >&2; exit 1;
   }
+  [ "$role" != "coordinateur" ] || { echo "AGENTS: le Coordinateur ne peut pas être déclaré spécialiste" >&2; exit 1; }
+  grep -Fqx "[$role]" "$contracts" || { echo "AGENTS: rôle absent du registre officiel: $role" >&2; exit 1; }
   [ -s "$evidence/$role.assignment" ] || { echo "AGENTS: affectation absente pour $role" >&2; exit 1; }
   assignment="$evidence/$role.assignment"
-  for field in scope deliverable evidence; do
+  for field in thread scope deliverable evidence report; do
     grep -Eq "^${field}=" "$assignment" || { echo "AGENTS: $role.assignment doit préciser $field" >&2; exit 1; }
   done
+  grep -Eq "^thread=${agent_id}$" "$assignment" || { echo "AGENTS: thread incohérent pour $role" >&2; exit 1; }
 done
 scopes="$(for entry in "${all_entries[@]}"; do grep '^scope=' "$evidence/${entry%@*}.assignment" | cut -d= -f2-; done)"
 [ "$(printf '%s\n' "$scopes" | sort | uniq -d | sed '/^$/d' | wc -l | tr -d ' ')" -eq 0 ] || {

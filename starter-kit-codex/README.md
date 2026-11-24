@@ -2,7 +2,7 @@
 
 La version 2.0 inclut le runtime canonique, la migration shared et les contrôles de release multi-plateforme.
 
-![Version du kit](https://img.shields.io/badge/version-2.0.23-blue.svg)
+![Version du kit](https://img.shields.io/badge/version-2.0.31-blue.svg)
 
 Les gestionnaires sélectionnables (local, Trello ou GitHub Projects) suivent la politique commune dans `starter-kit-codex/.codex/policies/PROJECT-TRACKER-VISUAL-SYSTEM.md`.
 
@@ -68,6 +68,14 @@ Un rebuild sans cible explicite `dev` ou `main` est refusé, comme tout rebuild 
 
 ## Installation pas à pas
 
+L'installation officielle est exclusivement `shared`. Ne copiez pas manuellement `AGENTS.md` ou `.codex`. Utilisez le guide commun [docs/INSTALLATION.md](../docs/INSTALLATION.md) et l'installateur racine :
+
+```bash
+bash install.sh --kit codex --mode shared --target "/chemin/absolu/vers/mon-projet" --updates off
+```
+
+Les anciennes commandes `cp` ne sont pas une méthode d'installation supportée.
+
 1. Ouvrir un terminal dans le nouveau projet.
 
 2. Définir le chemin du kit source :
@@ -76,14 +84,7 @@ Un rebuild sans cible explicite `dev` ou `main` est refusé, comme tout rebuild 
 KIT_SOURCE="/chemin/vers/agentic-starter-kits/starter-kit-codex"
 ```
 
-3. Copier le point d'entrée obligatoire et toute la configuration :
-
-```bash
-cp "$KIT_SOURCE/AGENTS.md" ./AGENTS.md
-cp -R "$KIT_SOURCE/.codex" ./.codex
-```
-
-4. Lancer l'initialisation non destructive :
+3. Lancer l'initialisation non destructive depuis le projet installé :
 
 ```bash
 bash .codex/scripts/init-project.sh
@@ -279,7 +280,7 @@ Le Coordinateur ne les appelle pas tous systématiquement. Il lit `.codex/SPECIA
 
 Une CI en cours ne clôture jamais le work item. Le Coordinateur attend les résultats, traite les erreurs, corrige les lints et les dettes historiques du périmètre par lots, puis relance les contrôles jusqu’à la Definition of Done.
 
-Le kit est actuellement en version `2.0.23`. Toute modification du kit doit mettre à jour ce README, le changelog et la version selon `VERSIONING.md`.
+Le kit est actuellement en version `2.0.31`. Toute modification du kit doit mettre à jour ce README, le changelog et la version selon `VERSIONING.md`.
 
 Le contrat central `.codex/policies/CORE-EXECUTION-CONTRACT.md` impose un registre d obligations, huit portes de validation et une reprise persistante. Une tâche ne peut être clôturée tant qu une obligation applicable ne possède pas de preuve.
 

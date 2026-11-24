@@ -7,7 +7,7 @@ for kit in codex claude; do
   tmp="$(mktemp -d)"
   mkdir -p "$tmp/.${kit}/hooks" "$tmp/.${kit}/scripts"
   cp "$hidden/hooks/hook-runtime.sh" "$hidden/hooks/subagent-stop.sh" "$tmp/.${kit}/hooks/"
-  cp "$hidden/scripts/verify-agent-report.sh" "$tmp/.${kit}/scripts/"
+  cp "$hidden/scripts/verify-agent-report.sh" "$hidden/scripts/report_security.py" "$tmp/.${kit}/scripts/"
   git -C "$tmp" init -q
   event='{"agent_id":"agent-recovery","agent_role":"qa"}'
   pending_output="$(cd "$tmp" && printf '%s' "$event" | bash ".${kit}/hooks/subagent-stop.sh")"

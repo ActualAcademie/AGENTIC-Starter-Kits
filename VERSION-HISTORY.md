@@ -1,5 +1,21 @@
 # Historique des versions
 
+| 2.0.31 | 2026-11-24 | Ajoute la récupération bornée des outils et du navigateur, les alternatives vérifiables et la poursuite des tâches indépendantes. |
+
+| 2.0.30 | 2026-11-24 | Renforce la séparation exécutable des rôles spécialistes, exige la correspondance thread/identifiant et ajoute les tests de non-substitution. |
+
+| 2.0.29 | 2026-11-24 | Centralise l'autonomie continue, le routage spécialiste et la classification stricte des blocages. |
+
+| 2.0.28 | 2026-11-24 | Renforce l'auto-réparation runtime, préserve les liens shared et isole les traces de session par projet. |
+
+| 2.0.27 | 2026-11-24 | Clarifie l'installation shared, le registre commun, les cahiers externes, les mises à jour et le dépannage. |
+
+| 2.0.26 | 2026-11-24 | Étend les demandes interactives persistantes à tous les agents et tous les types de décisions utilisateur. |
+
+| 2.0.25 | 2026-11-24 | Corrige la persistance des questions interactives dans le projet courant et teste la reprise par identifiant. |
+
+| 2.0.24 | 2026-11-24 | Rend le questionnaire interactif d'initialisation persistant et obligatoire dans Codex et Claude. |
+
 | 2.0.23 | 2026-11-24 | Renforce tous les agents avec une politique commune et un test de parité modèles, skills, contrats et documentation. |
 
 | 2.0.22 | 2026-11-24 | Corrige et renforce l'agent SEO, GEO et E-E-A-T, ses modèles, politiques, inventaires et contrats. |

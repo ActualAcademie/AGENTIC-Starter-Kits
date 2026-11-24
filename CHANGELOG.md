@@ -1,5 +1,58 @@
 ## Unreleased
 
+## 2.0.31 - 2026-11-24
+
+- Renforce la récupération autonome des outils et du navigateur.
+- Impose une correction immédiate, une alternative vérifiable et une limite de deux échecs identiques.
+- Empêche l'indisponibilité du navigateur de bloquer les tâches indépendantes.
+- Ajoute les tests de non-boucle et met à jour la documentation Codex et Claude.
+
+## 2.0.30 - 2026-11-24
+
+- Renforce la séparation des rôles dans Codex et Claude avec le registre officiel obligatoire.
+- Refuse les substitutions du Coordinateur, les rôles inconnus et les threads incohérents.
+- Exige un rapport attendu pour chaque agent additionnel déclaré.
+- Ajoute des tests de non-régression sur la délégation réelle.
+
+## 2.0.29 - 2026-11-24
+
+- Centralise la continuation autonome et la classification des blocages.
+- Interdit l'attente d'un message « continue » lorsqu'une action est autorisée.
+- Rend obligatoire le routage spécialiste, les alternatives et l'enchaînement des cartes GitHub Projects et Trello.
+- Ajoute les tests de parité de la politique d'autonomie.
+
+## 2.0.28 - 2026-11-24
+
+- Ajoute une auto-réparation runtime commune à Codex et Claude.
+- Bootstrappe, normalise et valide automatiquement un état absent ou incohérent.
+- Préserve les liens symboliques shared des fichiers d'entrée.
+- Conserve les traces de validation dans le projet consommateur.
+- Ajoute les scénarios de régression correspondants.
+
+## 2.0.27 - 2026-11-24
+
+- Ajoute un guide complet pour l'installation shared uniquement.
+- Documente le registre commun, les cahiers externes, les projets existants et les mises à jour.
+- Supprime des README la procédure obsolète de copie locale manuelle.
+
+## 2.0.26 - 2026-11-24
+
+- Étend l'interface interactive à toute demande adressée à l'utilisateur par n'importe quel agent.
+- Interdit les demandes libres dans le chat pour les décisions, validations, accès, blocages ou informations manquantes.
+- Renforce la continuité afin qu'aucun agent ne puisse suspendre ou clôturer un Goal sans demande structurée persistée.
+
+## 2.0.25 - 2026-11-24
+
+- Corrige le chemin de persistance des questionnaires pour écrire dans le `.codex` ou `.claude` du projet courant.
+- Aligne les scripts de création et de résolution des réponses Codex et Claude.
+- Ajoute la preuve comportementale qu'une question ne peut pas être perdue entre deux messages.
+
+## 2.0.24 - 2026-11-24
+
+- Rend l'interface interactive structurée obligatoire pour les questions d'initialisation.
+- Persiste chaque questionnaire avec un identifiant, bloque la suite et reprend automatiquement après résolution.
+- Ajoute le script Claude manquant, la politique commune et le test de scénario Codex/Claude.
+
 ## 2.0.23 - 2026-11-24
 
 - Ajoute une politique commune obligatoire à tous les agents Codex et Claude.

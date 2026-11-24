@@ -6,7 +6,52 @@ Ce document est la référence synthétique du comportement livré par les kits.
 
 | Élément | État | Preuve |
 |---|---|---|
-| Version actuelle | `2.0.23` | `VERSION`, `starter-kit-codex/.codex/KIT.toml`, `starter-kit-claude/.claude/KIT.toml` |
+| Version actuelle | `2.0.31` | `VERSION`, `starter-kit-codex/.codex/KIT.toml`, `starter-kit-claude/.claude/KIT.toml` |
+
+## Version 2.0.30
+
+## Version 2.0.31
+
+- Ajoute une matrice de récupération bornée pour les outils et le navigateur.
+- Corrige immédiatement les sessions, chemins et permissions avant de changer de voie.
+- Utilise connecteur, CLI/API, contrôle local ou fixture comme alternatives vérifiables.
+- Isole uniquement la tâche dépendante et poursuit les tâches indépendantes sans boucle globale.
+- Ajoute un test de non-régression commun à Codex et Claude.
+
+- Le plan spécialiste vérifie le registre officiel des rôles dans les deux kits.
+- Le Coordinateur ne peut jamais être présenté comme agent additionnel.
+- Chaque affectation exige un identifiant réel, un thread identique à cet identifiant et un rapport attendu.
+- Des tests négatifs vérifient les rôles inconnus, les threads divergents et les rapports manquants.
+
+## Version 2.0.29
+
+- Politique commune de continuation autonome et de classement des blocages.
+- Enchaînement automatique des cartes autorisées GitHub Projects et Trello.
+- Blocage humain limité aux décisions critiques, irréversibles ou sensibles.
+- Test de parité Codex/Claude ajouté.
+
+## Version 2.0.28
+
+- Répare automatiquement un runtime absent, incomplet ou non canonique avant les contrôles de session.
+- Préserve les liens symboliques `AGENTS.md` et `CLAUDE.md` au lieu de les convertir en copies locales.
+- Conserve les traces de validation du kit dans le projet consommateur, jamais dans le registre partagé.
+- Ajoute des scénarios Codex et Claude pour le bootstrap, la normalisation et la prévention des régressions shared.
+
+## Version 2.0.26
+
+- Toute demande adressée à l'utilisateur passe par l'interface interactive native ou son secours persistant.
+- Les demandes libres dans le chat ne peuvent plus suspendre un Goal, demander une validation ou déclencher une reprise.
+
+## Version 2.0.25
+
+- Les scripts de questionnaire et de résolution ciblent toujours le runtime du projet courant lorsqu'ils sont lancés depuis un dépôt Git.
+- Une interruption ou une nouvelle conversation ne perd plus une question d'initialisation persistée.
+
+## Version 2.0.24
+
+- Les questions obligatoires de l'initialisation utilisent l'interface interactive native lorsqu'elle est disponible.
+- Les demandes sont persistées avec `pending_request_id` et ne peuvent pas être perdues entre deux messages ou conversations.
+- Le secours textuel reste bloquant et passe par le même résolveur officiel.
 
 ## Version 2.0.23
 

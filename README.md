@@ -3,7 +3,7 @@
 La branche 2.0 ajoute les lots de migration, chaos testing, observabilité et compatibilité multi-plateforme.
 La promotion vers `main` reste soumise à une demande humaine explicite après validation de `dev`.
 
-[![Version](https://img.shields.io/badge/version-2.0.23-blue.svg)](VERSION)
+[![Version](https://img.shields.io/badge/version-2.0.31-blue.svg)](VERSION)
 
 Pendant l'implémentation, seuls les contrôles rapides directement nécessaires à la régression sont exécutés. Les audits visuels, responsive, accessibilité, navigateur, performance et indépendants sont regroupés en une seule passe finale, sur une carte dédiée ou sur demande explicite.
 
@@ -48,6 +48,8 @@ Le kit ne fournit pas une simple collection de prompts. Il fournit une méthode 
 
 Les blocages récupérables ne terminent pas un tour : le Coordinateur conserve le Goal actif, tente les alternatives autorisées et exécute la prochaine action observable. Cette règle est couverte par les scénarios sandbox des deux variantes.
 
+La politique `AUTONOMOUS-CONTINUATION-POLICY.md` classe chaque blocage, route automatiquement les tâches vers les spécialistes, limite l'escalade humaine aux décisions critiques et enchaîne les cartes autorisées GitHub Projects ou Trello sans attendre une demande « continue ».
+
 Un audit indépendant en `REWORK` déclenche automatiquement la correction traçable puis une nouvelle relecture par l’auditeur ; il ne devient pas un blocage lorsque ces actions restent réalisables.
 
 La même récupération autonome s’applique à tout blocage local ou réessayable ; `blocked` exige une dépendance externe inaccessible ou une décision humaine indispensable.
@@ -62,7 +64,7 @@ Pendant l'onboarding, les gates ouverts, la conception en revue, l'audit P0 abse
 
 ## Démarrage rapide
 
-Vous n’avez pas besoin de déplacer manuellement les dossiers du dépôt. L’installateur choisit une seule variante et la copie au bon emplacement. L’updater reste désactivé par défaut (`--updates off`) et ne peut être demandé qu’après configuration du profil et validation de la garde d’usage hébergé.
+L’installation est exclusivement `shared`. L’installateur installe le socle une fois dans le registre commun puis crée des liens symboliques dans chaque projet. L’updater reste désactivé par défaut (`--updates off`) et ne peut être demandé qu’après configuration du profil et validation de la garde d’usage hébergé.
 
 ### 1. Télécharger le kit
 
@@ -76,28 +78,22 @@ cd AGENTIC-Starter-Kits
 Pour Codex :
 
 ```bash
-./install.sh --kit codex --target /chemin/vers/mon-projet
+./install.sh --kit codex --mode shared --target /chemin/vers/mon-projet --updates off
 ```
 
 Pour Claude :
 
 ```bash
-./install.sh --kit claude --target /chemin/vers/mon-projet
+./install.sh --kit claude --mode shared --target /chemin/vers/mon-projet --updates off
 ```
 
-Pour choisir le mode dans l’assistant interactif, lancez simplement :
+Pour choisir l’orchestrateur, le projet et le dossier des cahiers dans l’assistant interactif, lancez simplement :
 
 ```bash
 ./install.sh
 ```
 
-Installation partagée :
-
-```bash
-./install.sh --kit codex --mode shared --target /chemin/vers/mon-projet
-```
-
-Le chemin cible doit déjà exister. L’installation partagée est le seul mode supporté et centralise le kit dans le registre commun.
+Le chemin cible doit déjà exister. Le mode `shared` est obligatoire et centralise le kit dans le registre commun. Le guide complet explique aussi `AGENTIC_KIT_HOME`, `--briefs-root`, les projets existants, les mises à jour et les vérifications.
 
 ### 3. Activer les mises à jour
 
@@ -107,7 +103,7 @@ Pour activer l’updater, demandez explicitement `--updates dispatch` (manuel) o
 
 Ouvrez le projet à sa racine dans Codex ou Claude et envoyez le cahier des charges complet. L’agent pose ensuite les questions manquantes, prépare les documents de conception et attend les décisions nécessaires avant de coder.
 
-Le guide détaillé est disponible dans [INSTALLATION.md](INSTALLATION.md).
+Le guide détaillé est disponible dans [docs/INSTALLATION.md](docs/INSTALLATION.md).
 
 ## Ce que le projet permet de faire
 
