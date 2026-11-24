@@ -1,5 +1,13 @@
 ## Unreleased
 
+## 2.0.28 - 2026-11-24
+
+- Ajoute une auto-réparation runtime commune à Codex et Claude.
+- Bootstrappe, normalise et valide automatiquement un état absent ou incohérent.
+- Préserve les liens symboliques shared des fichiers d'entrée.
+- Conserve les traces de validation dans le projet consommateur.
+- Ajoute les scénarios de régression correspondants.
+
 ## 2.0.27 - 2026-11-24
 
 - Ajoute un guide complet pour l'installation shared uniquement.

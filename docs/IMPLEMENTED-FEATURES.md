@@ -6,7 +6,14 @@ Ce document est la référence synthétique du comportement livré par les kits.
 
 | Élément | État | Preuve |
 |---|---|---|
-| Version actuelle | `2.0.27` | `VERSION`, `starter-kit-codex/.codex/KIT.toml`, `starter-kit-claude/.claude/KIT.toml` |
+| Version actuelle | `2.0.28` | `VERSION`, `starter-kit-codex/.codex/KIT.toml`, `starter-kit-claude/.claude/KIT.toml` |
+
+## Version 2.0.28
+
+- Répare automatiquement un runtime absent, incomplet ou non canonique avant les contrôles de session.
+- Préserve les liens symboliques `AGENTS.md` et `CLAUDE.md` au lieu de les convertir en copies locales.
+- Conserve les traces de validation du kit dans le projet consommateur, jamais dans le registre partagé.
+- Ajoute des scénarios Codex et Claude pour le bootstrap, la normalisation et la prévention des régressions shared.
 
 ## Version 2.0.26
 
