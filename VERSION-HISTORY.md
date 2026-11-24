@@ -1,5 +1,9 @@
 # Historique des versions
 
+| 2.0.25 | 2026-11-24 | Corrige la persistance des questions interactives dans le projet courant et teste la reprise par identifiant. |
+
+| 2.0.24 | 2026-11-24 | Rend le questionnaire interactif d'initialisation persistant et obligatoire dans Codex et Claude. |
+
 | 2.0.23 | 2026-11-24 | Renforce tous les agents avec une politique commune et un test de parité modèles, skills, contrats et documentation. |
 
 | 2.0.22 | 2026-11-24 | Corrige et renforce l'agent SEO, GEO et E-E-A-T, ses modèles, politiques, inventaires et contrats. |

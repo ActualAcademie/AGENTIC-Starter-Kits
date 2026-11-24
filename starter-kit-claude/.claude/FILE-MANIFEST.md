@@ -22,7 +22,7 @@
 
 ## Attentes de qualité
 
-Chaque Skill Claude est placé dans `skills/<nom>/SKILL.md` et commence par un frontmatter YAML avec `name` et `description`. Chaque sous-agent Claude est un fichier Markdown dans `agents/` avec frontmatter YAML. Chaque script est non interactif : il échoue explicitement en cas de précondition manquante et ne détruit pas de fichier existant. Les questions et attentes utilisateur appartiennent à l’orchestrateur, qui recueille la réponse avant d’appeler le script et lui transmet des paramètres explicites. Un script ne bloque jamais en attente d’une saisie interactive.
+Chaque Skill Claude est placé dans `skills/<nom>/SKILL.md` et commence par un frontmatter YAML avec `name` et `description`. Chaque sous-agent Claude est un fichier Markdown dans `agents/` avec frontmatter YAML. Chaque script est non interactif : il échoue explicitement en cas de précondition manquante et ne détruit pas de fichier existant. Les questions d'initialisation sont affichées par l'interface interactive native de l'orchestrateur, persistées avec `pending_request_id`, puis résolues par le script officiel. Un script ne bloque jamais en attente d'une saisie interactive.
 
 ## Auto-contrôle
 

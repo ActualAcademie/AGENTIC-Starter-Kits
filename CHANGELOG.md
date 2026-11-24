@@ -1,5 +1,17 @@
 ## Unreleased
 
+## 2.0.25 - 2026-11-24
+
+- Corrige le chemin de persistance des questionnaires pour écrire dans le `.codex` ou `.claude` du projet courant.
+- Aligne les scripts de création et de résolution des réponses Codex et Claude.
+- Ajoute la preuve comportementale qu'une question ne peut pas être perdue entre deux messages.
+
+## 2.0.24 - 2026-11-24
+
+- Rend l'interface interactive structurée obligatoire pour les questions d'initialisation.
+- Persiste chaque questionnaire avec un identifiant, bloque la suite et reprend automatiquement après résolution.
+- Ajoute le script Claude manquant, la politique commune et le test de scénario Codex/Claude.
+
 ## 2.0.23 - 2026-11-24
 
 - Ajoute une politique commune obligatoire à tous les agents Codex et Claude.
