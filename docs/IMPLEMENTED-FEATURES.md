@@ -6,7 +6,14 @@ Ce document est la référence synthétique du comportement livré par les kits.
 
 | Élément | État | Preuve |
 |---|---|---|
-| Version actuelle | `2.0.31` | `VERSION`, `starter-kit-codex/.codex/KIT.toml`, `starter-kit-claude/.claude/KIT.toml` |
+| Version actuelle | `2.0.32` | `VERSION`, `starter-kit-codex/.codex/KIT.toml`, `starter-kit-claude/.claude/KIT.toml` |
+
+## Version 2.0.32
+
+- Persiste les questions et choix interactifs dans le runtime avant affichage.
+- Refuse l'écrasement d'une question en attente et les réponses vides ou invalides.
+- Enregistre l'identifiant et le type de réponse pour une reprise fiable.
+- Rend la résolution idempotente après interruption ou nouvelle session.
 
 ## Version 2.0.30
 

@@ -8,9 +8,9 @@ L'orchestrateur doit appeler son API d'interaction native lorsque celle-ci est d
 
 ## Persistance et reprise
 
-Avant d'afficher l'interface, créer ou mettre à jour `RUNTIME-STATE.md` avec `execution_status=waiting-for-user`, `session_status=waiting-for-user`, `pending_request_id`, `pending_turn_id`, `required_action_status=pending` et `next_action=resume-after-user-response`. Enregistrer la question et les choix dans le work item ou le manifeste de session sans secret ni donnée sensible.
+Avant d'afficher l'interface, créer ou mettre à jour `RUNTIME-STATE.md` avec `execution_status=waiting-for-user`, `session_status=waiting-for-user`, `pending_request_id`, `pending_turn_id`, `required_action_status=pending` et `next_action=resume-after-user-response`. Persister aussi `pending_request_question` et `pending_request_choices` avant l'affichage, sans secret ni donnée sensible. Une demande déjà en attente est réaffichée de manière idempotente et ne peut pas être écrasée par une nouvelle question.
 
-Après la réponse, l'orchestrateur doit valider l'identifiant, enregistrer la valeur choisie et passer par le résolveur officiel. Il relit ensuite le runtime avant de reprendre automatiquement `next_action`. Une réponse libre non rattachée à un identifiant ne suffit pas.
+Après la réponse, l'orchestrateur doit valider l'identifiant, refuser une réponse vide ou un choix numérique inexistant, convertir un numéro en identifiant stable, enregistrer `user_response`, `user_response_id` et `user_response_kind`, puis passer par le résolveur officiel. Il relit ensuite le runtime avant de reprendre automatiquement `next_action`. Une réponse libre reste possible uniquement comme réponse personnalisée rattachée à la demande en attente.
 
 ## Perte d'interface ou interruption
 
@@ -18,4 +18,4 @@ Si l'interface interactive n'est pas disponible, le Coordinateur doit afficher u
 
 ## Contrôles
 
-Une question en attente interdit toute modification produit, choix technique, création de carte, délégation ou clôture non liée à sa résolution. Le hook autorise uniquement le résolveur officiel et les commandes de récupération nécessaires. Toute question posée pendant l'intake doit apparaître dans le rapport d'initialisation avec sa réponse, son statut et sa preuve.
+Une question en attente interdit toute modification produit, choix technique, création de carte, délégation ou clôture non liée à sa résolution. Le hook autorise uniquement le résolveur officiel et les commandes de récupération nécessaires. Toute question posée pendant l'intake doit apparaître dans le rapport d'initialisation avec sa réponse, son statut et sa preuve. Une réponse déjà résolue est idempotente et ne doit pas relancer le travail ni créer une seconde demande.
