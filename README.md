@@ -2,9 +2,9 @@
 
 Kit partagé d'orchestration pour Codex et Claude Code. Il transforme une demande en processus de travail traçable, avec cahier des charges, conception, agents spécialisés, tests, GitFlow, contrôles de livraison et reprise autonome.
 
-Version actuelle : **2.0.31**.
+Version actuelle : **2.0.33**.
 
-[![Version](https://img.shields.io/badge/version-2.0.31-blue.svg)](VERSION)
+[![Version](https://img.shields.io/badge/version-2.0.33-blue.svg)](VERSION)
 
 La branche `dev` peut être alimentée automatiquement par les agents autorisés. La promotion vers `main` reste soumise à une demande humaine explicite.
 

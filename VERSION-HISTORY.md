@@ -1,5 +1,9 @@
 # Historique des versions
 
+| 2.0.33 | 2026-11-27 | Corrige la sauvegarde récursive `rsync`, sécurise le verrou shared et corrige la cible imbriquée Claude. |
+
+| 2.0.32 | 2026-11-26 | Fiabilise la persistance, la validation et la reprise idempotente des questions interactives Codex et Claude. |
+
 | 2.0.31 | 2026-11-24 | Ajoute la récupération bornée des outils et du navigateur, les alternatives vérifiables et la poursuite des tâches indépendantes. |
 
 | 2.0.30 | 2026-11-24 | Renforce la séparation exécutable des rôles spécialistes, exige la correspondance thread/identifiant et ajoute les tests de non-substitution. |

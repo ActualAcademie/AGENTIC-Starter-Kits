@@ -1,5 +1,19 @@
 ## Unreleased
 
+## 2.0.33 - 2026-11-27
+
+- Corrige le deadlock `rsync` causé par une sauvegarde placée dans le dossier source du kit.
+- Place la sauvegarde dans un répertoire temporaire externe et libère le verrou après chaque issue.
+- Corrige la synchronisation Claude afin d'éviter une cible `.claude/.claude` imbriquée.
+- Ajoute un test d'isolation des sauvegardes Codex et Claude.
+
+## 2.0.32 - 2026-11-26
+
+- Fiabilise les questions interactives persistantes dans Codex et Claude.
+- Persiste les questions et choix avant affichage, valide les réponses et refuse les doublons.
+- Rend la reprise après interruption et la résolution idempotente.
+- Ajoute un scénario de test avec choix invalides, reprise et caractères spéciaux.
+
 ## 2.0.31 - 2026-11-24
 
 - Renforce la récupération autonome des outils et du navigateur.

@@ -48,12 +48,13 @@ fi
 installed="$(sed -n 's/^kit_version = "\(.*\)"/\1/p' "$manifest")"
 [ -n "$installed" ] || { echo "Version installée absente du manifeste." >&2; exit 1; }
 [ "$installed" = "$latest" ] && { echo "Kit Codex déjà à jour : $installed (source: $remote_channel)"; exit 0; }
-backup_root="$project_root/.codex/backups/kit-$installed-$(date +%Y%m%d-%H%M%S)"
+backup_parent="$(mktemp -d "${TMPDIR:-/tmp}/agentic-kit-backup.XXXXXX")"
+backup_root="$backup_parent/kit-$installed-$(date +%Y%m%d-%H%M%S)"
 mkdir -p "$backup_root"
 printf 'prepared\n' > "$backup_root/operation.phase"
 mkdir -p "$backup_root/codex-before-update"; rsync -a --exclude backups/ "$kit_root/" "$backup_root/codex-before-update/"
 cp "$manifest" "$backup_root/workspace.toml.before-update"
-tmp_dir="$(mktemp -d)"
+tmp_dir=""
 rollback_dir="$backup_root/codex-before-update"
 cleanup() {
   status="$?"
@@ -62,10 +63,12 @@ cleanup() {
     rsync -a --delete --exclude backups/ "$rollback_dir/" "$kit_root/"
     cp "$backup_root/workspace.toml.before-update" "$manifest"
   fi
-  rm -rf "$tmp_dir"
+  [ -z "$tmp_dir" ] || rm -rf "$tmp_dir"
+  rmdir "$lock_dir" 2>/dev/null || true
   exit "$status"
 }
 trap cleanup EXIT
+tmp_dir="$(mktemp -d)"
 archive="$tmp_dir/kit.tar.gz"
 if ! curl -fsSL --connect-timeout 5 --max-time 30 -L "${source_url%/}/archive/refs/heads/main.tar.gz" -o "$archive"; then
   echo "KIT_SYNC_BLOCKED: version distante $latest détectée via $remote_channel, mais l'archive GitHub est inaccessible." >&2

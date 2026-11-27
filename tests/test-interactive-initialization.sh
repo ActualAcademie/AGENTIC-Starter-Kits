@@ -9,6 +9,8 @@ for kit in codex claude; do
   test -f "$root/starter-kit-$kit/$hidden/scripts/request-user-input.sh"
   grep -Fq 'interface interactive native' "$root/starter-kit-$kit/$hidden/skills/project-intake/SKILL.md"
   grep -Fq 'pending_request_id' "$root/starter-kit-$kit/$hidden/skills/project-intake/SKILL.md"
+  grep -Fq 'pending_request_choices' "$root/starter-kit-$kit/$hidden/policies/INTERACTIVE-INPUT-POLICY.md"
+  grep -Fq 'user_response_kind' "$root/starter-kit-$kit/$hidden/policies/INTERACTIVE-INPUT-POLICY.md"
   grep -Fq 'INTERACTIVE-INPUT-POLICY.md' "$root/starter-kit-$kit/$hidden/ORCHESTRATION.md"
   grep -Fq "Toute demande adressée à l'utilisateur" "$root/starter-kit-$kit/$hidden/policies/INTERACTIVE-INPUT-POLICY.md"
   bash -n "$root/starter-kit-$kit/$hidden/scripts/request-user-input.sh"

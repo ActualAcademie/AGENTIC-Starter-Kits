@@ -2,7 +2,7 @@
 
 La version 2.0 inclut le runtime canonique, la migration shared et les contrôles de release multi-plateforme.
 
-![Version du kit](https://img.shields.io/badge/version-2.0.31-blue.svg)
+![Version du kit](https://img.shields.io/badge/version-2.0.33-blue.svg)
 
 Les gestionnaires sélectionnables (local, Trello ou GitHub Projects) suivent la politique commune dans `starter-kit-codex/.codex/policies/PROJECT-TRACKER-VISUAL-SYSTEM.md`.
 
@@ -12,7 +12,7 @@ Lorsqu'une décision utilisateur est indispensable, le Coordinateur émet un que
 
 Les outils manquants sont recherchés dans le registre partagé puis proposés dans un questionnaire avant toute installation.
 
-La version 2.0.31 applique un bootstrap shared vérifiable et reprend après une réponse utilisateur uniquement lorsqu'une décision est réellement nécessaire.
+La version 2.0.33 applique un bootstrap shared vérifiable et reprend après une réponse utilisateur uniquement lorsqu'une décision est réellement nécessaire.
 
 Les rapports spécialistes sont maintenant contrôlés par le hook de fin.
 
