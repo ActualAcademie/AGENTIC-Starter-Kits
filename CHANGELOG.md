@@ -1,5 +1,12 @@
 ## Unreleased
 
+## 2.0.34 - 2026-11-27
+
+- Ajout d'un délai maximal de synchronisation au démarrage.
+- Basculement automatique vers le kit local en cas de synchronisation lente ou échouée.
+- Ajout d'un coupe-circuit par session pour éviter les relances en boucle.
+- Ajout d'un test de non-régression Codex et Claude.
+
 ## 2.0.33 - 2026-11-27
 
 - Corrige le deadlock `rsync` causé par une sauvegarde placée dans le dossier source du kit.

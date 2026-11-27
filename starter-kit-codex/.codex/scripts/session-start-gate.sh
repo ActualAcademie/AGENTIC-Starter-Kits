@@ -56,9 +56,45 @@ status=0
 verification_mode=remote-verified
 bash "$script_dir/check-kit-update.sh" >/dev/null 2>"$project_config/.kit-update-error" || status=$?
 if [ "$status" -ne 0 ]; then
-  if [ "$status" -eq 3 ] && [ -x "$script_dir/sync-workspace-kit.sh" ]; then bash "$script_dir/sync-workspace-kit.sh"; status=0; verification_mode=remote-updated
-  elif [ "$status" -eq 2 ]; then echo "KIT-SESSION: source distante indisponible; utilisation contrôlée du kit local" >&2; status=0; verification_mode=local-fallback
-  else echo "KIT-SESSION: mise à jour requise ou vérification distante impossible" >&2; exit 1; fi
+  if [ "$status" -eq 3 ] && [ -x "$script_dir/sync-workspace-kit.sh" ]; then
+    sync_attempt="$project_config/.sync-attempted"
+    sync_timeout_seconds="${KIT_SYNC_TIMEOUT_SECONDS:-30}"
+    if [ -f "$sync_attempt" ] && [ "$(cat "$sync_attempt" 2>/dev/null || true)" = "failed" ]; then
+      echo "KIT-SESSION: synchronisation déjà échouée dans cette session; utilisation du kit local" >&2
+      status=2
+    else
+      printf 'running\n' > "$sync_attempt"
+      bash "$script_dir/sync-workspace-kit.sh" >> "$project_config/.kit-update-error" 2>&1 &
+      sync_pid=$!
+      sync_elapsed=0
+      while kill -0 "$sync_pid" 2>/dev/null && [ "$sync_elapsed" -lt "$sync_timeout_seconds" ]; do
+        sleep 1
+        sync_elapsed=$((sync_elapsed + 1))
+      done
+      if kill -0 "$sync_pid" 2>/dev/null; then
+        kill "$sync_pid" 2>/dev/null || true
+        wait "$sync_pid" 2>/dev/null || true
+        printf 'failed\n' > "$sync_attempt"
+        echo "KIT-SESSION: synchronisation interrompue après ${sync_timeout_seconds}s; utilisation du kit local" >&2
+        status=2
+      elif wait "$sync_pid"; then
+        rm -f "$sync_attempt"
+        status=0
+        verification_mode=remote-updated
+      else
+        printf 'failed\n' > "$sync_attempt"
+        status=2
+      fi
+    fi
+  fi
+  if [ "$status" -eq 2 ]; then
+    echo "KIT-SESSION: source distante indisponible ou synchronisation interrompue; utilisation contrôlée du kit local" >&2
+    status=0
+    verification_mode=local-fallback
+  elif [ "$status" -ne 0 ]; then
+    echo "KIT-SESSION: mise à jour requise ou vérification distante impossible" >&2
+    exit 1
+  fi
 fi
 if [ -x "$script_dir/auto-repair-runtime.sh" ]; then
   bash "$script_dir/auto-repair-runtime.sh" >/dev/null
