@@ -6,7 +6,11 @@ Ce document est la référence synthétique du comportement livré par les kits.
 
 | Élément | État | Preuve |
 |---|---|---|
-| Version actuelle | `2.0.33` | `VERSION`, `starter-kit-codex/.codex/KIT.toml`, `starter-kit-claude/.claude/KIT.toml` |
+| Version actuelle | `2.0.34` | `VERSION`, `starter-kit-codex/.codex/KIT.toml`, `starter-kit-claude/.claude/KIT.toml` |
+
+## Version 2.0.34
+
+Le garde de démarrage limite la synchronisation à 30 secondes par défaut avec `KIT_SYNC_TIMEOUT_SECONDS` comme réglage optionnel. Après un échec ou un dépassement, le kit local est utilisé et `.sync-attempted` empêche de relancer la même synchronisation dans la session. Une nouvelle session peut retenter la mise à jour.
 
 ## Version 2.0.33
 
