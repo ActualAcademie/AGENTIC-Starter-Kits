@@ -1,5 +1,6 @@
 # Historique des versions
 
+| 2.0.34 | 2026-11-27 | Empêche les boucles de démarrage liées à une synchronisation lente ou répétée. |
 | 2.0.33 | 2026-11-27 | Corrige la sauvegarde récursive `rsync`, sécurise le verrou shared et corrige la cible imbriquée Claude. |
 
 | 2.0.32 | 2026-11-26 | Fiabilise la persistance, la validation et la reprise idempotente des questions interactives Codex et Claude. |
