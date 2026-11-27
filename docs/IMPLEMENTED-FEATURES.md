@@ -6,7 +6,14 @@ Ce document est la référence synthétique du comportement livré par les kits.
 
 | Élément | État | Preuve |
 |---|---|---|
-| Version actuelle | `2.0.32` | `VERSION`, `starter-kit-codex/.codex/KIT.toml`, `starter-kit-claude/.claude/KIT.toml` |
+| Version actuelle | `2.0.33` | `VERSION`, `starter-kit-codex/.codex/KIT.toml`, `starter-kit-claude/.claude/KIT.toml` |
+
+## Version 2.0.33
+
+- Place les sauvegardes de synchronisation hors du dossier source du kit.
+- Empêche `rsync` de recopier une sauvegarde dans sa propre source.
+- Libère toujours le verrou shared après une erreur.
+- Corrige la cible Claude pour éviter un dossier `.claude/.claude` imbriqué.
 
 ## Version 2.0.32
 
