@@ -47,12 +47,13 @@ fi
 [ -n "$latest" ] || { echo "KIT_SYNC_BLOCKED: aucune voie de version GitHub vérifiable (raw DNS/API gh/connecteur)." >&2; echo "KIT_SYNC_ACTION: conserver le kit installé et réessayer automatiquement à la prochaine session." >&2; exit 20; }
 installed="$(sed -n 's/^kit_version = "\(.*\)"/\1/p' "$manifest")"
 [ "$installed" = "$latest" ] && { echo "Kit Claude déjà à jour : $installed (source: $remote_channel)"; exit 0; }
-backup_root="$project_root/.claude/backups/kit-$installed-$(date +%Y%m%d-%H%M%S)"
+backup_parent="$(mktemp -d "${TMPDIR:-/tmp}/agentic-kit-backup.XXXXXX")"
+backup_root="$backup_parent/kit-$installed-$(date +%Y%m%d-%H%M%S)"
 mkdir -p "$backup_root"
 printf 'prepared\n' > "$backup_root/operation.phase"
 mkdir -p "$backup_root/claude-before-update"; rsync -a --exclude backups/ "$kit_root/" "$backup_root/claude-before-update/"
 cp "$manifest" "$backup_root/workspace.toml.before-update"
-tmp_dir="$(mktemp -d)"
+tmp_dir=""
 rollback_dir="$backup_root/claude-before-update"
 cleanup() {
   status="$?"
@@ -61,10 +62,12 @@ cleanup() {
     rsync -a --delete --exclude backups/ "$rollback_dir/" "$kit_root/"
     cp "$backup_root/workspace.toml.before-update" "$manifest"
   fi
-  rm -rf "$tmp_dir"
+  [ -z "$tmp_dir" ] || rm -rf "$tmp_dir"
+  rmdir "$lock_dir" 2>/dev/null || true
   exit "$status"
 }
 trap cleanup EXIT
+tmp_dir="$(mktemp -d)"
 archive="$tmp_dir/kit.tar.gz"
 if ! curl -fsSL --connect-timeout 5 --max-time 30 -L "${source_url%/}/archive/refs/tags/v${latest}.tar.gz" -o "$archive"; then
   echo "KIT_SYNC_BLOCKED: version distante $latest détectée via $remote_channel, mais l'archive GitHub est inaccessible." >&2
@@ -74,7 +77,7 @@ fi
 tar -xzf "$archive" -C "$tmp_dir"
 source_kit="$(find "$tmp_dir" -mindepth 2 -maxdepth 2 -type d -name starter-kit-claude | head -n 1)"
 [ -n "$source_kit" ] || { echo "Kit Claude absent de l'archive." >&2; exit 1; }
-rsync -a --delete --exclude 'backups/' --exclude 'PROJECT-BRIEF.md' --exclude 'project-profile.toml' --exclude 'project-inventory.md' --exclude 'RUNTIME-STATE.md' --exclude 'decisions/' --exclude 'work-items/' --exclude 'reports/' --exclude 'metrics/' --exclude 'evaluations/' "$source_kit/.claude/" "$kit_root/.claude/"
+rsync -a --delete --exclude 'backups/' --exclude 'PROJECT-BRIEF.md' --exclude 'project-profile.toml' --exclude 'project-inventory.md' --exclude 'RUNTIME-STATE.md' --exclude 'decisions/' --exclude 'work-items/' --exclude 'reports/' --exclude 'metrics/' --exclude 'evaluations/' "$source_kit/.claude/" "$kit_root/"
 printf 'applied\n' > "$backup_root/operation.phase"
 cp "$source_kit/CLAUDE.md" "$kit_root/CLAUDE.md"
 for local_file in PROJECT-BRIEF.md project-profile.toml RUNTIME-STATE.md; do
